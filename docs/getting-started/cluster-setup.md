@@ -34,7 +34,7 @@ QuickStack allows you to scale your applications and improve availability by set
 3. **Get the Join Command:**
     You will see a card with the headline "Add Cluster Node". Inside the card you'll find a command that looks something like this:
    ```bash
-    curl -sfL https://get.quickstack.dev/setup-worker.sh | K3S_URL=https://MASTER-IP:6443 JOIN_TOKEN=fer239rhnfear9f98u123nwed sh
+    curl -sfL https://get.quickstack.dev/setup-worker.sh | K3S_URL=https://<MASTER-IP>:6443 JOIN_TOKEN=<YOUR_JOIN_TOKEN> sh
    ```
    This command is generated for your specific QuickStack setup.
    * **Important:** Keep this command handy, you will need it in the next step. This command contains your server's IP address and a special "key" that allows additional servers to join your cluster.
@@ -50,11 +50,6 @@ QuickStack allows you to scale your applications and improve availability by set
 2.  **Execute the Join Command:**
     Copy the command that you previously obtained from QuickStack and paste it into the terminal of the server you want to add and execute it.
 
-     * **Example:**
-     ```bash
-     curl -sfL https://get.quickstack.dev/setup-worker.sh | K3S_URL=https://12.34.56.78:6443 JOIN_TOKEN=fer239rhnfear9f98u123nwed sh
-     ```
-      * **Replace `12.34.56.78` with your actual master node IP and `fer239rhnfear9f98u123nwed` with your actual join token.**
 3.  **Repeat for Each Additional Node:**
      Repeat steps 1 and 2 for every additional server you want to join the cluster. Each server will be configured as a **worker node**, and the master node will orchestrate everything between them.
 
@@ -81,14 +76,3 @@ If you encounter any issues, here are some tips:
     * Verify the required ports (like 6443) are open on all servers.
 * **In QuickStack, the new Node is not showing up**
     * Ensure that you waited a few minutes after running the installation script.
-    * Check that all Pods in the Kubernetes cluster are online by running `kubectl get pods -A`.
-
-## Key Points About Cluster Nodes
-
-*   **Master Node:** The primary server that manages the cluster. It's where QuickStack is initially installed.
-*   **Worker Nodes:** Additional servers that join the cluster to expand resources. They help to handle more load and provide redundancy.
-
-## Next Steps
-
-*   **[Deploying Your First App](./first-app.md):** Now that you have a cluster, you can deploy your first application!
-*   **[Managing Apps](./managing-apps/creating-apps.md):** Learn how to manage applications on your cluster.
