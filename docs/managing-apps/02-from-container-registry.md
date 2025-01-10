@@ -1,9 +1,11 @@
 ---
 sidebar_position: 2
-title: from Docker Image
+title: Creating App from Docker Image
+description: This guide will walk you through deploying a Docker Image from Dockerhub or any other container registry.
+keywords: ["QuickStack Docker Image Deployment", "QuickStack Docker Image Source", "QuickStack Docker Image Deployment Guide"]
 ---
 
-# Dokcerhub App Deployment
+# Docker Image App Deployment
 
 This guide will walk you through deploying a Docker Image from Dockerhub or any other container registry. We'll cover the basic steps, from adding a project to deploying.
 
@@ -22,11 +24,25 @@ Before you begin, ensure that you have:
     *   Click on the "+ Create Project" or similar button.
     *   Navigate to Project by clicking on the project name.
 2.  **Add New App:** Click on the "+ Create App" button and give your app a name.
+
+<img  src="/img/docs/managing-apps/creating-apps/create-app-dialog.png" alt="QuickStack Logo" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px'
+}} />
+
 3.  **Configure Container Source:**
     *   Choose "Docker Image" as the source type.
-    *   **Docker Image Name:** Enter the full name of your Docker image, including the tag (e.g., `your-username/your-image:latest`).
-        *   *Example:* `your-docker-hub-username/my-app:v1.2.3`
-4.  **Save App:** Click the "Save" button to save the application settings.
+    *   **Docker Image Name:** Enter the full name of your Docker image, including the tag.
+        *   *Example:* `username/app-name:latest` or `image-name:latest`
+   
+<img  src="/img/docs/managing-apps/creating-apps/enter-docker-image.png" alt="QuickStack Logo" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px'
+}} />
+
+1.  **Save App:** Click the "Save" button to save the application settings.
 
 ## Step 2: Deploying Your Application
 
@@ -42,16 +58,34 @@ Changes to the App configuration won't trigger a new deployment. You need to cli
 ## Step 3: Checking the Deployment Status
 
 1.  **Deployment Logs:**
-    *   After initiating the deployment, check the deployment status on your application overview page.
-    *   You can view the deployment progress and status in the 'Overview' tab.
-    *  In the same view, you have the option to check the application logs or the deployment logs.
-2.  **Application Status:** The status indicator on the overview page indicates the current deployment status.
+    *   After initiating the deployment, check the deployment status on your application overview page. You can view the deployment progress and status in the 'Overview' tab.
+  
+<img  src="/img/docs/managing-apps/creating-apps/deployment-overview.png" alt="QuickStack Logo" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px'
+}} />
 
+    *  In the same view, you have the option to check the application logs or the deployment logs.
+
+<img  src="/img/docs/managing-apps/creating-apps/deployment-logs.png" alt="QuickStack Logo" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px'
+}} />
+
+2.  **Application Status:** The status indicator on the overview page indicates the current deployment status.
 
 ## Step 4: Accessing Your Application
 
 1.  **Access Your App:**
     * If your app has a domain configured in the `Domains` tab, you can access the app via the assigned domain.
+
+<img  src="/img/docs/managing-apps/creating-apps/domains-overview.png" alt="QuickStack Logo" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px'
+}} />
 
 ## Troubleshooting
 
