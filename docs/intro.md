@@ -7,7 +7,7 @@ keywords: ["QuickStack", "QuickStack Introduction", "QuickStack Overview", "Quic
 
 # Welcome to QuickStack!
 
-QuickStack is a simple Web UI to manage your Linux server and deploy your applications. 
+QuickStack is a simple Web UI to manage your Linux server and deploy your containerized applications. 
 Think of QuickStack as your personal cloud platform, built to run on your servers! It takes care of all of the backend complexity allowing you to focus on your applications.
 
 <img  src="/img/quick-stack-logo-light.png" alt="QuickStack Logo" width="300" style={{

@@ -6,16 +6,41 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
+import { JSX } from 'react';
+import { MDXProvider } from '@mdx-js/react';
+import MDXContent from '@theme/MDXContent';
+
+
+function CodeBlock({ language, children }: { language: string; children: string }) {
+  return (
+    <pre>
+      <code className={`language-${language}`}>{children}</code>
+    </pre>
+  );
+}
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={clsx('hero min-h-[70vh]', styles.heroBanner)}>
       <div className="container">
+
+        <img src="/img/quickstack-icon-dark-v1.svg" alt="QuickStack Logo" className="w-32" />
+
+
         <Heading as="h1" className="hero__title">
-          The quick way to deploy your app
+          The <span style={{
+            color: '#25c2a0'
+          }}>quick</span> way to <br />manage your containers
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">Build, run and monitor containers on your own servers.</p>
+
+        <div className="flex items-center justify-center pb-3">
+          <div className='w-fit'>
+            <CodeBlock language="bash">curl -sfL https://get.quickstack.dev/setup.sh | sh -</CodeBlock>
+          </div>
+        </div>
+
         <div className={styles.buttons + ' gap-4'}>
           <Link
             className="button button--secondary button--lg"
@@ -37,8 +62,8 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`${siteConfig.title}`}
+      description="QuickStack is a container management system for your own servers.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
