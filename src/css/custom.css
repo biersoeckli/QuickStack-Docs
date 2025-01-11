@@ -54,3 +54,7 @@
 }
 
 
+.max-w-8xl {
+  @apply max-w-[90rem];
+}
+
