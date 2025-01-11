@@ -44,7 +44,7 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           // editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: {
+        /*blog: {
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
@@ -57,7 +57,7 @@ const config: Config = {
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
-        },
+        },*/
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -82,7 +82,7 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        //{ to: '/blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/biersoeckli/QuickStack',
           label: 'GitHub',
@@ -102,8 +102,8 @@ const config: Config = {
             },
           ],
         },
-        {
-          title: 'Community',
+       /*{
+         title: 'Community',
           items: [
             {
               label: 'Discord',
@@ -114,7 +114,7 @@ const config: Config = {
               href: 'https://x.com/docusaurus',
             },
           ],
-        },
+        },*/
         {
           title: 'More',
           items: [
