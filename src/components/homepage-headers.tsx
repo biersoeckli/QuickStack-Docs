@@ -41,7 +41,7 @@ function CodeBlock({ language, children }: { language: string; children: string 
               color: '#25c2a0'
             }}>quick</span> way to <br />deploy your applications
           </Heading>
-          <p className="hero__subtitle">Build, run and monitor your contianers on any server from a single, easy-to-use UI.</p>
+          <p className="hero__subtitle">Build, run and monitor your apps on any server from a single, easy-to-use UI.</p>
   
           <div className="flex items-center justify-center pb-3">
             <div className='w-fit'>
