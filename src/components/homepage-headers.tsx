@@ -39,9 +39,9 @@ function CodeBlock({ language, children }: { language: string; children: string 
           <Heading as="h1" className="hero__title">
             The <span style={{
               color: '#25c2a0'
-            }}>quick</span> way to <br />manage your containers
+            }}>quick</span> way to <br />deploy your containers
           </Heading>
-          <p className="hero__subtitle">Build, run and monitor containers on your own servers.</p>
+          <p className="hero__subtitle">Build, run and monitor your apps on any server from a single, easy-to-use UI.</p>
   
           <div className="flex items-center justify-center pb-3">
             <div className='w-fit'>
