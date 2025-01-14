@@ -7,6 +7,7 @@ import SectionWrapper from '../components/sections-wrapper';
 import TechnologyHighlight from '../components/technologies';
 import Testimonials from '../components/testimonilals';
 import { HomepageHeader } from '../components/homepage-headers';
+import { AppScreenshots } from '../components/app-screenshots';
 
 
 
@@ -17,9 +18,13 @@ export default function Home(): JSX.Element {
       title={`${siteConfig.title}`}
       description="QuickStack is a container management system for your own servers.">
       <HomepageHeader />
-      <main>
+      <main className='space-y-16'>
         <SectionWrapper>
           <KeyFeature />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <AppScreenshots />
         </SectionWrapper>
 
         <SectionWrapper className="pb-20">
