@@ -22,7 +22,7 @@ export function AppScreenshots() {
                 </TabItem>
             </Tabs>
 
-            <h2 className="text-center text-2xl font-bold  mt-8 py-6">Debugging and Monitoring</h2>
+            <h2 className="text-center text-2xl font-bold  mt-12 py-6">Debugging and Monitoring</h2>
             <Tabs>
                 <TabItem value="appLogs" label="App Logs">
                     <img className='w-full max-w-[70rem]' src="/img/app-screenshots/2.png" alt="App Logs" />
