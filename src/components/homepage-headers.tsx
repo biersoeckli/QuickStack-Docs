@@ -6,14 +6,7 @@ import Heading from '@theme/Heading';
 import styles from './index.module.css';
 import { useColorMode } from '@docusaurus/theme-common';
 import { useWindowSize } from '@docusaurus/theme-common';
-
-function CodeBlock({ language, children }: { language: string; children: string }) {
-  return (
-    <pre>
-      <code className={`language-${language}`}>{children}</code>
-    </pre>
-  );
-}
+import CodeBlock from '@theme/CodeBlock';
 
 export function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -36,11 +29,12 @@ export function HomepageHeader() {
           Build, run and monitor your apps on any server from a single, easy-to-use UI.
         </p>
 
-        <div className="flex items-center justify-center pb-3">
+        {windowSize !== 'mobile' ? <div className="flex items-center justify-center pb-3">
           <div className='w-fit'>
             <CodeBlock language="bash">curl -sfL https://get.quickstack.dev/setup.sh | sh -</CodeBlock>
+            <div className='-mt-4 pb-4 text-xs lg:text-sm text-slate-400'>Paste this into the terminal on a fresh server.</div>
           </div>
-        </div>
+        </div> : <></>}
 
         <div className={styles.buttons + ' gap-4'}>
           <Link

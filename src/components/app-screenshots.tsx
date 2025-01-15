@@ -8,26 +8,30 @@ export function AppScreenshots() {
 
     if (windowSize === 'mobile') {
         return <div className='flex flex-col items-center'>
+            
+            <h2 className="text-center text-2xl font-bold py-6">QuickStack in Action</h2>
             <Tabs>
                 <TabItem value="gitDeployment" label="Git Deployment" default>
                     <img className='w-full max-w-[70rem]' src="/img/app-screenshots/1.png" alt="Git Deployment" />
                 </TabItem>
+                <TabItem value="databaseDeployment" label="Database Deployment">
+                    <img className='w-full max-w-[70rem]' src="/img/app-screenshots/4.png" alt="Database Deployment" />
+                </TabItem>
+                <TabItem value="backups" label="Backups">
+                    <img className='w-full max-w-[70rem]' src="/img/app-screenshots/6.png" alt="Backups" />
+                </TabItem>
+            </Tabs>
+
+            <h2 className="text-center text-2xl font-bold  mt-8 py-6">Debugging and Monitoring</h2>
+            <Tabs>
                 <TabItem value="appLogs" label="App Logs">
                     <img className='w-full max-w-[70rem]' src="/img/app-screenshots/2.png" alt="App Logs" />
                 </TabItem>
                 <TabItem value="integratedWebTerminal" label="Integrated Web Terminal">
                     <img className='w-full max-w-[70rem]' src="/img/app-screenshots/3.png" alt="Integrated Web Terminal" />
                 </TabItem>
-            </Tabs>
-            <Tabs>
-                <TabItem value="databaseDeployment" label="Database Deployment">
-                    <img className='w-full max-w-[70rem]' src="/img/app-screenshots/4.png" alt="Database Deployment" />
-                </TabItem>
                 <TabItem value="serverMonitoring" label="Server Monitoring">
                     <img className='w-full max-w-[70rem]' src="/img/app-screenshots/5.png" alt="Server Monitoring" />
-                </TabItem>
-                <TabItem value="backups" label="Backups">
-                    <img className='w-full max-w-[70rem]' src="/img/app-screenshots/6.png" alt="Server Monitoring" />
                 </TabItem>
             </Tabs>
         </div>
