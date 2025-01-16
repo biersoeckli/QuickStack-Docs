@@ -24,7 +24,7 @@ At its core, QuickStack is a tool that automates the process of:
 *  **Managing Applications:** QuickStack provides a centralized web interface to monitor, backup and manage the different aspects of your applications.
 
 It's designed to empower developers and system administrators with an easy and efficient way to bring their applications to life.
-QuickStack was created by two students at the Eastern Switzerland University of Applied Sciences (OST) as part of a semester project.
+QuickStack was created by the two students [glueh-wyy-huet](https://github.com/glueh-wyy-huet) and [biersoeckli](https://github.com/biersoeckli) at the [Eastern Switzerland University of Applied Sciences](https://ost.ch/) as part of a semester project.
 
 ## Why Use QuickStack?
 
