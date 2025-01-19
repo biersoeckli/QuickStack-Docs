@@ -67,7 +67,10 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/quickstack-social-card.png',
+    metadata: [
+      { name: 'keywords', content: 'QuickStack, self-hosting, deployment, server, monitoring, debugging, git, database, backups' },
+    ],
     navbar: {
       title: 'QuickStack',
       logo: {
@@ -102,19 +105,19 @@ const config: Config = {
             },
           ],
         },
-       /*{
-         title: 'Community',
-          items: [
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
-          ],
-        },*/
+        /*{
+          title: 'Community',
+           items: [
+             {
+               label: 'Discord',
+               href: 'https://discordapp.com/invite/docusaurus',
+             },
+             {
+               label: 'X',
+               href: 'https://x.com/docusaurus',
+             },
+           ],
+         },*/
         {
           title: 'More',
           items: [

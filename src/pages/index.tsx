@@ -15,8 +15,8 @@ export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
-      title={`${siteConfig.title}`}
-      description="QuickStack is a container management system for your own servers.">
+      title={`Deploy Apps on any Server`}
+      description="QuickStack is a container management system for your own servers. Install QuickStack with a single command and deploy your apps in seconds.">
       <HomepageHeader />
       <main className='space-y-16'>
         <SectionWrapper>
