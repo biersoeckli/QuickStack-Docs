@@ -87,6 +87,11 @@ const config: Config = {
         },
         //{ to: '/blog', label: 'Blog', position: 'left' },
         {
+          href: 'https://x.com/quickstack_dev',
+          label: 'X',
+          position: 'right',
+        },
+        {
           href: 'https://github.com/biersoeckli/QuickStack',
           label: 'GitHub',
           position: 'right',
@@ -125,6 +130,10 @@ const config: Config = {
               label: 'GitHub',
               href: 'https://github.com/biersoeckli/QuickStack',
             },
+            {
+              label: 'X',
+              href: 'https://x.com/quickstack_dev',
+            }
           ],
         },
       ],
