@@ -8,6 +8,7 @@ import TechnologyHighlight from '../components/technologies';
 import Testimonials from '../components/testimonilals';
 import { HomepageHeader } from '../components/homepage-headers';
 import { AppScreenshots } from '../components/app-screenshots';
+import SetupVideo from '../components/setup-video';
 
 
 
@@ -21,6 +22,10 @@ export default function Home(): JSX.Element {
       <main className='space-y-16'>
         <SectionWrapper>
           <KeyFeature />
+        </SectionWrapper>
+
+        <SectionWrapper>
+          <SetupVideo />
         </SectionWrapper>
 
         <SectionWrapper>
