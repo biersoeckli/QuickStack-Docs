@@ -38,6 +38,10 @@ const config: Config = {
     [
       'classic',
       {
+        gtag: {
+          trackingID: 'G-EGDCMV3PQS',
+          anonymizeIP: true,
+        },
         docs: {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
