@@ -44,7 +44,8 @@ Before you begin, make sure you have:
 <img  src="/img/docs/managing-apps/creating-apps/enter-git-credentials.png" alt="QuickStack Logo" style={{
     marginBottom: '20px',
     marginLeft: '30px',
-    maxWidth: '600px'
+    maxWidth: '600px',
+    width: '90%'
 }} />
 
 2.  **Save App:** Click the "Save" button to save the application settings.
@@ -71,7 +72,8 @@ Changes to the App configuration won't trigger a new deployment. You need to cli
 <img  src="/img/docs/managing-apps/creating-apps/deployment-overview.png" alt="QuickStack Logo" style={{
     marginBottom: '20px',
     marginLeft: '30px',
-    maxWidth: '600px'
+    maxWidth: '600px',
+    width: '90%'
 }} />
 
     *   You can click on the button "Show Logs" of the current deployment to view the progress of the build and deployment in real time.
@@ -79,7 +81,8 @@ Changes to the App configuration won't trigger a new deployment. You need to cli
 <img  src="/img/docs/managing-apps/creating-apps/deployment-logs.png" alt="QuickStack Logo" style={{
     marginBottom: '20px',
     marginLeft: '30px',
-    maxWidth: '600px'
+    maxWidth: '600px',
+    width: '90%'
 }} />
 
 ## Step 5: Accessing Your Application
@@ -90,7 +93,8 @@ Changes to the App configuration won't trigger a new deployment. You need to cli
 <img  src="/img/docs/managing-apps/creating-apps/domains-overview.png" alt="QuickStack Logo" style={{
     marginBottom: '20px',
     marginLeft: '30px',
-    maxWidth: '600px'
+    maxWidth: '600px',
+    width: '90%'
 }} />
 
 ## Troubleshooting

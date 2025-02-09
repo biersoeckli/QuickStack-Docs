@@ -24,6 +24,18 @@ Before you begin, ensure you have the following:
 
 > **_NOTE:_**  QuickStack was tested on Hetzner and Azure. If you have any issues with other providers, please create an issue on our [GitHub repository](https://github.com/biersoeckli/QuickStack).
 
+## Installation Demo
+
+This video demonstrates the installation process of QuickStack on a fresh Ubuntu server.
+
+<iframe width="560" height="315"
+                    src="https://www.youtube.com/embed/koqGZ2ChHvw?si=44prf579KAtnBlpO" title="QuickStack Installation Demo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen></iframe>
+        
+
+
 ## Step-by-Step Guide
 
 Follow these steps to install QuickStack:

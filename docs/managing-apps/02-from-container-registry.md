@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: Creating App from Docker Image
 description: This guide will walk you through deploying a Docker Image from Dockerhub or any other container registry.
-keywords: ["QuickStack Docker Image Deployment", "QuickStack Docker Image Source", "QuickStack Docker Image Deployment Guide"]
+keywords: ["QuickStack Docker Image Deployment", "QuickStack Docker Image Source", "QuickStack Docker Image Deployment Guide", "Docker image deployment"]
 ---
 
 # Docker Image App Deployment
@@ -28,7 +28,8 @@ Before you begin, ensure that you have:
 <img  src="/img/docs/managing-apps/creating-apps/create-app-dialog.png" alt="QuickStack Logo" style={{
     marginBottom: '20px',
     marginLeft: '30px',
-    maxWidth: '600px'
+    maxWidth: '600px',
+    width: '90%'
 }} />
 
 3.  **Configure Container Source:**
@@ -39,7 +40,8 @@ Before you begin, ensure that you have:
 <img  src="/img/docs/managing-apps/creating-apps/enter-docker-image.png" alt="QuickStack Logo" style={{
     marginBottom: '20px',
     marginLeft: '30px',
-    maxWidth: '600px'
+    maxWidth: '600px',
+    width: '90%'
 }} />
 
 1.  **Save App:** Click the "Save" button to save the application settings.
@@ -63,7 +65,8 @@ Changes to the App configuration won't trigger a new deployment. You need to cli
 <img  src="/img/docs/managing-apps/creating-apps/deployment-overview.png" alt="QuickStack Logo" style={{
     marginBottom: '20px',
     marginLeft: '30px',
-    maxWidth: '600px'
+    maxWidth: '600px',
+    width: '90%'
 }} />
 
     *  In the same view, you have the option to check the application logs or the deployment logs.
@@ -71,7 +74,8 @@ Changes to the App configuration won't trigger a new deployment. You need to cli
 <img  src="/img/docs/managing-apps/creating-apps/deployment-logs.png" alt="QuickStack Logo" style={{
     marginBottom: '20px',
     marginLeft: '30px',
-    maxWidth: '600px'
+    maxWidth: '600px',
+    width: '90%'
 }} />
 
 2.  **Application Status:** The status indicator on the overview page indicates the current deployment status.
@@ -84,7 +88,8 @@ Changes to the App configuration won't trigger a new deployment. You need to cli
 <img  src="/img/docs/managing-apps/creating-apps/domains-overview.png" alt="QuickStack Logo" style={{
     marginBottom: '20px',
     marginLeft: '30px',
-    maxWidth: '600px'
+    maxWidth: '600px',
+    width: '90%'
 }} />
 
 ## Troubleshooting
