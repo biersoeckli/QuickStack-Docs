@@ -5,6 +5,60 @@ description: This guide will walk you through deploying an application from a Gi
 keywords: ["QuickStack Git Deployment", "QuickStack Git Source", "QuickStack Git Deployment Guide"]
 ---
 
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="HowTo"
+  title="Deploying Applications from Git Source with QuickStack"
+  description="A comprehensive guide to deploying applications directly from Git repositories using QuickStack's web interface."
+  keywords="QuickStack Git Deployment, QuickStack Git Source, QuickStack Git Deployment Guide, containerized applications, Docker deployment"
+  datePublished="2025-06-17"
+  dateModified="2025-06-17"
+  inLanguage="en"
+  step={[
+    {
+      "@type": "HowToStep",
+      "name": "Creating a New Project and Application",
+      "text": "Create a new project in QuickStack and add a new application to it",
+      "url": "https://quickstack.dev/docs/managing-apps/01-from-git-source#step-1-creating-a-new-project-and-application"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Configure Git Source",
+      "text": "Configure the Git repository URL, branch, and Dockerfile path for your application",
+      "url": "https://quickstack.dev/docs/managing-apps/01-from-git-source#step-1-creating-a-new-project-and-application"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Deploy Your Application",
+      "text": "Initiate the build and deployment process for your application",
+      "url": "https://quickstack.dev/docs/managing-apps/01-from-git-source#step-3-deploying-your-application"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Check Deployment Status",
+      "text": "Monitor the deployment status and view build logs in real-time",
+      "url": "https://quickstack.dev/docs/managing-apps/01-from-git-source#step-4-checking-the-deployment-status"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Access Your Application",
+      "text": "Access your deployed application via the assigned domain",
+      "url": "https://quickstack.dev/docs/managing-apps/01-from-git-source#step-5-accessing-your-application"
+    }
+  ]}
+  tool={["QuickStack", "Git Repository", "Dockerfile"]}
+  supply={["QuickStack installed on VPS", "Git repository with application code", "Dockerfile in repository"]}
+  proficiencyLevel="Beginner"
+  applicationCategory="DeveloperApplication"
+  operatingSystem="Linux"
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
 # Git App Deployment
 
 This guide will walk you through deploying an application from a Git repository. We'll cover the basic steps, from adding a project to deploying.

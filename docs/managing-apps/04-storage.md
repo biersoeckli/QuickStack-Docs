@@ -5,6 +5,30 @@ description: "Learn how to configure persistent storage for your QuickStack appl
 keywords: ["QuickStack", "volumes", "persistent storage", "storage", "mount path"]
 ---
 
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Configuring Persistent Storage (Volumes) for QuickStack Applications"
+  description="A comprehensive guide to setting up and managing persistent storage volumes for your applications in QuickStack."
+  keywords="QuickStack, volumes, persistent storage, storage, mount path, container storage, Longhorn, data persistence"
+  datePublished="2025-06-17"
+  dateModified="2025-06-17"
+  articleSection="Managing Apps"
+  educationalUse="Documentation"
+  inLanguage="en"
+  proficiencyLevel="Intermediate"
+  dependencies="Longhorn"
+  operatingSystem="Linux"
+  mainEntityOfPage="https://quickstack.dev/docs/managing-apps/04-storage"
+  about={["Container Storage", "Kubernetes Volumes", "Data Persistence", "Storage Management"]}
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
 # Configuring Storage (Volumes)
 
 Persistent storage is critical for applications that need to retain data across deployments or restarts. QuickStack simplifies managing this storage using **volumes**. This guide will walk you through adding, configuring, and managing volumes for your QuickStack applications.

@@ -5,6 +5,54 @@ description: This guide will walk you through deploying a Docker Image from Dock
 keywords: ["QuickStack Docker Image Deployment", "QuickStack Docker Image Source", "QuickStack Docker Image Deployment Guide", "Docker image deployment"]
 ---
 
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="HowTo"
+  title="Deploying Docker Images with QuickStack"
+  description="A step-by-step guide to deploying Docker images from Dockerhub or other container registries using QuickStack."
+  keywords="QuickStack Docker Image Deployment, QuickStack Docker Image Source, QuickStack Docker Image Deployment Guide, Docker image deployment, container registry"
+  datePublished="2025-06-17"
+  dateModified="2025-06-17"
+  inLanguage="en"
+  step={[
+    {
+      "@type": "HowToStep",
+      "name": "Creating a New Project and Application",
+      "text": "Create a new project in QuickStack and add a new application configured for Docker image deployment",
+      "url": "https://quickstack.dev/docs/managing-apps/02-from-container-registry#step-1-creating-a-new-project-and-application"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Deploy Your Application",
+      "text": "Initiate the deployment process to pull and run the Docker image",
+      "url": "https://quickstack.dev/docs/managing-apps/02-from-container-registry#step-2-deploying-your-application"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Check Deployment Status",
+      "text": "Monitor the deployment status and view logs to ensure successful deployment",
+      "url": "https://quickstack.dev/docs/managing-apps/02-from-container-registry#step-3-checking-the-deployment-status"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Access Your Application",
+      "text": "Access your deployed Docker container via the assigned domain",
+      "url": "https://quickstack.dev/docs/managing-apps/02-from-container-registry#step-4-accessing-your-application"
+    }
+  ]}
+  tool={["QuickStack", "Docker", "Container Registry"]}
+  supply={["QuickStack installed on VPS", "Docker image in a container registry"]}
+  proficiencyLevel="Beginner"
+  applicationCategory="DeveloperApplication"
+  operatingSystem="Linux"
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
 # Docker Image App Deployment
 
 This guide will walk you through deploying a Docker Image from Dockerhub or any other container registry. We'll cover the basic steps, from adding a project to deploying.

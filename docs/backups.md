@@ -5,6 +5,49 @@ description: "Learn how to configure and manage backups for your applications in
 keywords: ["QuickStack", "backups", "data protection", "S3", "scheduled backups", "restore"]
 ---
 
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="HowTo"
+  title="Configuring and Managing Backups in QuickStack"
+  description="A comprehensive guide to setting up, scheduling, and managing automated backups for your QuickStack applications using S3-compatible storage."
+  keywords="QuickStack, backups, data protection, S3, scheduled backups, restore, data recovery, cloud storage, cron schedule"
+  datePublished="2025-06-17"
+  dateModified="2025-06-17"
+  inLanguage="en"
+  step={[
+    {
+      "@type": "HowToStep",
+      "name": "Configure S3 Target",
+      "text": "Set up an S3-compatible storage target to store your backups",
+      "url": "https://quickstack.dev/docs/backups#step-1-configuring-s3-target"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Configure Volume Backups",
+      "text": "Set up scheduled backups for your application volumes",
+      "url": "https://quickstack.dev/docs/backups#step-2-configuring-volume-backups"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Define Backup Schedule",
+      "text": "Set up the cron schedule and retention policy for your backups",
+      "url": "https://quickstack.dev/docs/backups#step-2-configuring-volume-backups"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Manage Backups",
+      "text": "View and manage your existing backups",
+      "url": "https://quickstack.dev/docs/backups#managing-backups"
+    }
+  ]}
+  tool={["QuickStack", "S3-Compatible Storage"]}
+  supply={["QuickStack application with persistent storage volumes", "S3-compatible bucket"]}
+  proficiencyLevel="Intermediate"
+  applicationCategory="DataStorage"
+  operatingSystem="Linux"
+/>
+
 # Backups
 
 Protecting your application data is crucial. QuickStack provides a simple way to create and manage backups of your application volumes. This guide will cover configuring scheduled backups, managing your backups on S3 storage, and restoring data when needed.

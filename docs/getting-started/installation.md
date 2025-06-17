@@ -5,6 +5,25 @@ description: "This guide will walk you through installing QuickStack on your VPS
 keywords: ["QuickStack Installation", "QuickStack Setup", "QuickStack Installation Guide"]
 ---
 
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="QuickStack Installation Guide"
+  description="This guide will walk you through installing QuickStack on your VPS or Linux server."
+  image="https://quickstack.dev/img/quickstack-social-card.png"
+  keywords="QuickStack Installation, QuickStack Setup, QuickStack Installation Guide, self-hosting, Linux server, VPS"
+  datePublished="2025-06-17"
+  dateModified="2025-06-17"
+  articleSection="Getting Started"
+  educationalUse="Documentation"
+  inLanguage="en"
+  operatingSystem="Linux"
+  dependencies="Ubuntu"
+  proficiencyLevel="Beginner"
+  requirements="Linux Server with 2 CPU cores and 4 GB of RAM, SSH access with sudo privileges"
+/>
+
 # QuickStack Installation
 
 Welcome! This guide will walk you through installing QuickStack on your Linux server. QuickStack simplifies the process of deploying and managing applications on your own server infrastructure.

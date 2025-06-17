@@ -5,6 +5,24 @@ description: "Learn how to set up a QuickStack cluster across multiple servers."
 keywords: ["QuickStack Cluster", "QuickStack Multi Node Cluster", "QuickStack Cluster Setup"]
 ---
 
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Setting up a QuickStack Cluster"
+  description="Learn how to set up a QuickStack cluster across multiple servers for improved scalability and availability."
+  keywords="QuickStack Cluster, QuickStack Multi Node Cluster, QuickStack Cluster Setup, high availability, server scaling"
+  datePublished="2025-06-17"
+  dateModified="2025-06-17"
+  articleSection="Getting Started"
+  educationalUse="Documentation"
+  inLanguage="en"
+  operatingSystem="Linux"
+  dependencies="Ubuntu, K3s"
+  proficiencyLevel="Intermediate"
+  requirements="Existing QuickStack installation, Additional VPS, SSH access to each VPS, Network connectivity between servers"
+/>
+
 # Setting up a QuickStack Cluster
 
 QuickStack allows you to scale your applications and improve availability by setting up a cluster across multiple Virtual Private Servers (VPS). This guide walks you through the process of connecting additional servers to your primary QuickStack installation.

@@ -5,6 +5,39 @@ description: "QuickStack is a simple Web UI to manage your Linux server and depl
 keywords: ["QuickStack", "QuickStack Introduction", "QuickStack Overview", "QuickStack Features"]
 ---
 
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="WebPage"
+  title="Welcome to QuickStack"
+  description="QuickStack is a simple Web UI to manage your Linux server and deploy your containerized applications. Your personal cloud platform built to run on your own servers."
+  keywords="QuickStack, QuickStack Introduction, QuickStack Overview, QuickStack Features, personal cloud platform, self-hosting, PaaS, self-hosted PaaS, containerized applications"
+  datePublished="2025-06-17"
+  dateModified="2025-06-17"
+  about={{
+    "@type": "SoftwareApplication",
+    "name": "QuickStack",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Linux",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+        "@type": "Person",
+        "name": "biersoeckli",
+        "sameAs": "https://github.com/biersoeckli"
+    }
+  }}
+  mainEntityOfPage="https://quickstack.dev/docs/intro"
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
 # Welcome to QuickStack!
 
 QuickStack is a simple Web UI to manage your Linux server and deploy your containerized applications. 

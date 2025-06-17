@@ -7,7 +7,7 @@ import tailwindPlugin from "./plugins/tailwind-config.cjs"; // add this
 
 const config: Config = {
   title: 'QuickStack',
-  tagline: 'Self hosting was never easier',
+  tagline: 'Self hosting your apps was never easier',
   favicon: 'img/quickstack-icon-dark.png',
 
   // Set the production url of your site here

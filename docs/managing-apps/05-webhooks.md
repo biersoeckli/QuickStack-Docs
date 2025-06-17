@@ -5,6 +5,29 @@ description: "Learn how to configure webhooks for your QuickStack applications t
 keywords: ["QuickStack", "webhooks", "automated deployment", "GitHub Actions", "GitLab CI/CD"]
 ---
 
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Automating Deployments with Webhooks in QuickStack"
+  description="A comprehensive guide to setting up and using webhooks to automate application deployments in QuickStack, with examples for GitHub and GitLab integration."
+  keywords="QuickStack, webhooks, automated deployment, GitHub Actions, GitLab CI/CD, continuous deployment, CI/CD, continuous integration"
+  datePublished="2025-06-17"
+  dateModified="2025-06-17"
+  articleSection="Managing Apps"
+  educationalUse="Documentation"
+  inLanguage="en"
+  proficiencyLevel="Intermediate"
+  operatingSystem="Linux"
+  mainEntityOfPage="https://quickstack.dev/docs/managing-apps/05-webhooks"
+  about={["Continuous Integration", "Continuous Deployment", "GitHub Webhooks", "GitLab Webhooks", "Automation"]}
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
 # Automated App Deployments using Webhooks
 
 Webhooks provide a way to automate deployments of your applications in QuickStack. This is especially useful for CI/CD (Continuous Integration/Continuous Deployment) pipelines, allowing you to trigger a new deployment whenever changes are pushed to your Git repository. This guide covers how to configure and use webhooks in QuickStack.

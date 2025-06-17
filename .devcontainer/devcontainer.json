@@ -9,7 +9,8 @@
 			"extensions": [
 				"GitHub.copilot",
 				"GitHub.copilot-chat",
-				"yzhang.markdown-all-in-one"
+				"yzhang.markdown-all-in-one",
+				"unifiedjs.vscode-mdx"
 			]
 		}
 	}

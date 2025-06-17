@@ -5,6 +5,31 @@ description: "Manage domains for your QuickStack applications to make them acces
 keywords: ["QuickStack", "domains", "SSL", "HTTPS", "subdomains", "reverse proxy"]
 ---
 
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Managing Domains for QuickStack Applications"
+  description="Learn how to configure and manage domains, subdomains, and SSL certificates for your QuickStack applications to make them accessible over the internet."
+  keywords="QuickStack, domains, SSL, HTTPS, subdomains, reverse proxy, DNS configuration, Traefik"
+  datePublished="2025-06-17"
+  dateModified="2025-06-17"
+  articleSection="Managing Apps"
+  educationalUse="Documentation"
+  inLanguage="en"
+  proficiencyLevel="Beginner"
+  dependencies="Domain Registrar, DNS Provider"
+  operatingSystem="Linux"
+  interactionCount="UserComments:0"
+  mainEntityOfPage="https://quickstack.dev/docs/managing-apps/03-domains"
+  about={["Domain Name System", "SSL Certificates", "Reverse Proxy", "Web Applications"]}
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
 # Domains
 
 A **domain** is the unique name (e.g., `example.com`) used to identify a website on the internet. In QuickStack, domains are essential for making your applications accessible to the public. This guide will walk you through adding, configuring, and managing domains for your QuickStack applications.
