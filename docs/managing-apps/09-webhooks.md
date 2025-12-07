@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 9
 title: "Automated App Deployments (Webhooks)"
 description: "Learn how to configure webhooks for your QuickStack applications to automate deployments."
 keywords: ["QuickStack", "webhooks", "automated deployment", "GitHub Actions", "GitLab CI/CD"]

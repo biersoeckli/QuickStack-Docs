@@ -48,6 +48,10 @@ Make sure to configure your DNS settings correctly before adding a domain to you
 Point your domain or subdomain to the IP address of your QuickStack server by creating an `A record` in your DNS settings. You need to perform these changes at the DNS provider of your domain. Common DNS providers are Cloudflare, GoDaddy, and Namecheap.
 :::
 
+:::tip QuickStack.me Domain
+Don't have a custom domain yet? You can use the built-in **[QuickStack.me Domain](./06-quickstack-me.md)** feature to instantly get a working HTTPS domain for your application without any DNS configuration.
+:::
+
 1.  **Navigate to Application Settings:**
     *   Select the App you want to configure by clicking the application name.
     *   Select the "Domains" tab.

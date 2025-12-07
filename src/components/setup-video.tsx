@@ -8,7 +8,8 @@ export default function SetupVideo(): JSX.Element {
         <div className="text-center space-y-2 pb-5">
             <h2 className="text-2xl font-bold mb-1 pt-6">Installation Demo</h2>
             <p className="text-slate-700 dark:text-slate-300 pb-6">
-                This video shows the QuickStack installation process and the deployment of a sample application.</p>
+                Watch our demo to see the QuickStack installation process and a sample application deployment. Learn how QuickStack simplifies server management and app deployment in minutes.
+            </p>
             <div className="flex justify-center">
                 <iframe width="560"
                     height="315"

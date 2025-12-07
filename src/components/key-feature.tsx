@@ -6,32 +6,32 @@ const features = [
     {
         icon: Terminal,
         title: 'One-Command Installation',
-        description: 'Get up and running quickly with a single command to deploy QuickStack on your Server(s).',
+        description: 'Deploy QuickStack on your server with a single command, making setup quick and easy.',
     },
     {
         icon: GitBranch,
         title: 'Seamless Git Integration',
-        description: 'Easily deploy applications directly from your Git repositories, both public and private.',
+        description: 'Seamlessly deploy applications directly from public and private Git repositories, streamlining your workflow.',
     },
     {
         icon: SquareActivity ,
         title: 'Real-time App Monitoring',
-        description: 'Monitor your running containers with CPU, RAM and storage usage as well as real-time logs and an integrated web terminal.',
+        description: 'Keep a close eye on your running containers with detailed metrics, including CPU, RAM, and storage usage. Benefit from real-time logs and an integrated web terminal for immediate insights and troubleshooting.',
     },
     {
         icon: ShieldCheck,
         title: 'Automatic SSL Certificates',
-        description: "Secure your applications with automatic SSL certificate generation using Let's Encrypt.",
+        description: "Automatic SSL Certificates: Secure your applications effortlessly with automatic SSL certificate generation using Let's Encrypt, ensuring your deployments are secure and trusted.",
     },
     {
         icon: Database,
         title: 'Persistent Data Storage',
-        description: 'Use cluster-wide persistent storage volumes via Longhorn for data persistence across your deployments.',
+        description: 'Ensure data persistence across all your deployments with cluster-wide persistent storage volumes via Longhorn, protecting your critical data.',
     },
     {
         icon: Server,
         title: 'Scalable Cluster Support',
-        description: 'Easily scale applications across multiple server nodes with persistent data storage on all nodes and automatic load balancing.',
+        description: 'Easily scale applications across multiple server nodes while maintaining persistent data storage on all nodes and benefiting from automatic load balancing for optimal performance.',
     }
 ];
 
