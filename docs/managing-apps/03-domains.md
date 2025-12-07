@@ -49,7 +49,7 @@ Point your domain or subdomain to the IP address of your QuickStack server by cr
 :::
 
 :::tip QuickStack.me Domain
-Don't have a custom domain yet? You can use the built-in **[QuickStack.me Domain](./06-quickstack-me.md)** feature to instantly get a working HTTPS domain for your application without any DNS configuration.
+Don't have a custom domain yet? You can use the built-in **[QuickStack.me Domain](./04-quickstack-me.md)** feature to instantly get a working HTTPS domain for your application without any DNS configuration.
 :::
 
 1.  **Navigate to Application Settings:**

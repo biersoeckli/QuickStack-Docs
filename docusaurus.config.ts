@@ -32,7 +32,9 @@ const config: Config = {
     locales: ['en'],
   },
 
-  plugins: [tailwindPlugin],
+  plugins: [
+    tailwindPlugin,
+  ],
 
   presets: [
     [
@@ -62,6 +64,12 @@ const config: Config = {
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
         },*/
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**', '/archive/**', '/404/**'],
+          filename: 'sitemap.xml',
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -73,7 +81,86 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/quickstack-social-card.png',
     metadata: [
-      { name: 'keywords', content: 'QuickStack, self-hosting, deployment, server, monitoring, debugging, git, database, backups' },
+      { name: 'keywords', content: 'QuickStack, self-hosting, deployment, server, monitoring, debugging, git, database, backups, containerized applications, PaaS, personal cloud platform' },
+      { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
+      { name: 'description', content: 'QuickStack - Your personal cloud platform. Self-host applications with ease. Complete documentation for deployment, management, and monitoring.' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: 'QuickStack - Self-Hosting Made Easy' },
+      { property: 'og:description', content: 'QuickStack is a simple Web UI to manage your Linux server and deploy your containerized applications. Your personal cloud platform built to run on your own servers.' },
+      { property: 'og:image', content: 'https://quickstack.dev/img/quickstack-social-card.png' },
+      { property: 'og:url', content: 'https://quickstack.dev' },
+      { property: 'twitter:card', content: 'summary_large_image' },
+      { property: 'twitter:title', content: 'QuickStack - Self-Hosting Made Easy' },
+      { property: 'twitter:description', content: 'Deploy and manage containerized applications on your own servers. Simple, powerful, open-source.' },
+      { property: 'twitter:image', content: 'https://quickstack.dev/img/quickstack-social-card.png' },
+      { name: 'theme-color', content: '#1f2937' },
+    ],
+    headTags: [
+      {
+        tagName: 'link',
+        attributes: {
+          rel: 'canonical',
+          href: 'https://quickstack.dev',
+        },
+      },
+      {
+        tagName: 'meta',
+        attributes: {
+          httpEquiv: 'x-ua-compatible',
+          content: 'ie=edge',
+        },
+      },
+      {
+        tagName: 'script',
+        attributes: {
+          type: 'application/ld+json',
+        },
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: 'QuickStack',
+          url: 'https://quickstack.dev',
+          logo: 'https://quickstack.dev/img/quick-stack-logo-light.png',
+          description: 'QuickStack is a simple Web UI to manage your Linux server and deploy your applications.',
+          applicationCategory: 'DeveloperApplication',
+          operatingSystem: 'Linux',
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+          sameAs: [
+            'https://github.com/biersoeckli/QuickStack',
+            'https://x.com/quickstack_dev',
+          ],
+          contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'Customer Service',
+            url: 'https://github.com/biersoeckli/QuickStack/issues',
+          },
+        }),
+      },
+      {
+        tagName: 'script',
+        attributes: {
+          type: 'application/ld+json',
+        },
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          url: 'https://quickstack.dev',
+          name: 'QuickStack Documentation',
+          description: 'QuickStack - Your personal cloud platform. Self-host applications with ease.',
+          publisher: {
+            '@type': 'Organization',
+            name: 'QuickStack',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://quickstack.dev/img/quick-stack-logo-light.png',
+            },
+          },
+        }),
+      },
     ],
     navbar: {
       title: 'QuickStack',
@@ -114,19 +201,6 @@ const config: Config = {
             },
           ],
         },
-        /*{
-          title: 'Community',
-           items: [
-             {
-               label: 'Discord',
-               href: 'https://discordapp.com/invite/docusaurus',
-             },
-             {
-               label: 'X',
-               href: 'https://x.com/docusaurus',
-             },
-           ],
-         },*/
         {
           title: 'More',
           items: [

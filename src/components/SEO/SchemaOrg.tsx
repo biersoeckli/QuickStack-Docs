@@ -7,6 +7,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 /**
  * Component to add JSON-LD schema to document pages
  * Extended to accept custom schema attributes for use directly in MDX files
+ * Supports TechArticle, HowTo, WebPage types and BreadcrumbList generation
  */
 export default function SchemaOrg(props: {
     title?: string;
@@ -27,6 +28,9 @@ export default function SchemaOrg(props: {
     supply?: string[];
     tool?: string[];
     step?: any[];
+    // BreadcrumbList support
+    breadcrumbs?: Array<{ name: string; url: string }>;
+    includeBreadcrumb?: boolean;
     // Allow any custom attributes
     [key: string]: any;
 }): React.ReactElement {
@@ -181,6 +185,53 @@ export default function SchemaOrg(props: {
 
     const schema = formatSchema();
 
+    // Generate breadcrumb schema if enabled (default true for nested pages)
+    const shouldIncludeBreadcrumb = props.includeBreadcrumb !== false && pathname !== '/' && pathname !== '/docs/intro';
+    
+    const generateBreadcrumbs = () => {
+        if (props?.breadcrumbs) {
+            return props.breadcrumbs;
+        }
+
+        const parts = pathname.split('/').filter(p => p && p !== 'docs' && p !== 'intro');
+        const breadcrumbs = [
+            { name: 'Home', url: '/' }
+        ];
+
+        if (pathname.includes('/docs')) {
+            breadcrumbs.push({ name: 'Documentation', url: '/docs/intro' });
+        }
+
+        let currentPath = '';
+        parts.forEach((part) => {
+            currentPath += '/' + part;
+            const displayName = part
+                .replace(/^\d+-/, '') // Remove leading numbers
+                .replace(/-/g, ' ') // Replace hyphens with spaces
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+            
+            breadcrumbs.push({
+                name: displayName,
+                url: currentPath
+            });
+        });
+
+        return breadcrumbs;
+    };
+
+    const breadcrumbSchema = shouldIncludeBreadcrumb ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: generateBreadcrumbs().map((crumb, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: crumb.name,
+            item: `${siteUrl}${crumb.url}`
+        }))
+    } : null;
+
     return (
         <Head>
             <script type="application/ld+json">
@@ -189,6 +240,11 @@ export default function SchemaOrg(props: {
             <script type="application/ld+json">
                 {JSON.stringify(organizationSchema)}
             </script>
+            {breadcrumbSchema && (
+                <script type="application/ld+json">
+                    {JSON.stringify(breadcrumbSchema)}
+                </script>
+            )}
         </Head>
     );
 }

@@ -1,6 +1,8 @@
 ---
 sidebar_position: 1000
 title: "Glossary"
+description: "Glossary of QuickStack terms and concepts. Learn about applications, clusters, deployments, domains, nodes, scaling, volumes, and monitoring."
+keywords: ["QuickStack Glossary", "terminology", "application", "cluster", "deployment", "domain", "node", "scaling", "volume", "monitoring"]
 ---
 
 # Glossary
