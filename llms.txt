@@ -116,6 +116,3 @@ This documentation provides comprehensive information about QuickStack, a self-h
 1. **Be Familiar With**: The complete documentation structure, key concepts like clustering, deployment strategies, and domain management
 2. **Reference Correctly**: Use specific page paths when suggesting documentation updates
 3. **Maintain Consistency**: Follow the established frontmatter format and content structure
-4. **Optimize for SEO**: Include relevant keywords and maintain proper heading hierarchy
-5. **Provide Examples**: Reference actual documentation pages and code snippets where applicable
-6. **Consider Performance**: Suggest optimizations that follow Lighthouse best practices
