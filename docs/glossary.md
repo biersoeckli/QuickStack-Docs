@@ -41,8 +41,8 @@ A repository that contains the source code for an application, typically hosted 
 ## Docker Image
 A lightweight, standalone, and executable software package that includes everything needed to run a piece of software, including the code, runtime, libraries, and dependencies.
 
-## Kaniko
-A tool to build container images from a Dockerfile inside a container or Kubernetes cluster.
+## Buildkit
+A toolkit for converting source code into Docker images, providing advanced features for building container images efficiently.
 
 ## Traefik
 A reverse proxy and load balancer for microservices.

@@ -17,8 +17,8 @@ export default function TechnologyHighlight() {
                     <Link to="https://longhorn.io/">
                          <img alt="Longhorn Logo" src={isDarkMode ? "/img/tech-stack/longhorn-logo-light.png" : "/img/tech-stack/longhorn-logo.png"} className="h-12" />
                     </Link>
-                    <Link to="https://github.com/GoogleContainerTools/kaniko">
-                         <img alt="Kaniko Logo" src="/img/tech-stack/kaniko-logo.png" className="h-14" />
+                    <Link to="https://github.com/moby/buildkit">
+                         <img alt="Buildkit Logo" src="/img/tech-stack/buildkit-logo.png" className="h-14" />
                     </Link>
                     <Link to="https://github.com/distribution/distribution">
                          <img alt="registry Logo" src="/img/tech-stack/registry-logo.png" className="h-16" />

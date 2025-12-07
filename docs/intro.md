@@ -83,7 +83,7 @@ QuickStack is ideal for:
 * **[Traefik](https://traefik.io/)**: Reverse Proxy and Load Balancer
 * **[Longhorn](https://longhorn.io/)**: Distributed Block Storage
 * **[registry](https://hub.docker.com/_/registry)**: Docker Registry
-* **[kaniko](https://github.com/GoogleContainerTools/kaniko)**: Build Container Images In Kubernetes
+* **[buildkit](https://github.com/moby/buildkit)**: Container Image Building Toolkit
 
 ## Getting Started
 
