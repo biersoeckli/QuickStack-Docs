@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: "Backups"
+title: "Manage Backups for Apps & DBs"
 description: "Learn how to configure and manage backups for your applications in QuickStack to protect your data."
 keywords: ["QuickStack", "backups", "data protection", "S3", "scheduled backups", "restore"]
 ---
@@ -79,6 +79,10 @@ Store your Access Key ID and Secret Key safely! Make sure to configure access pe
 
 ## Step 2: Configuring Volume Backups
 
+QuickStack supports automated backups for both application volumes and managed databases. The backup system uses dedicated backup jobs for databases that run in isolated containers, ensuring consistent and reliable backups.
+
+### Application Volume Backups
+
 1.  **Navigate to App Settings:**
     Select the app you want to configure a backup for by clicking the application name.
 
@@ -130,6 +134,36 @@ Store your Access Key ID and Secret Key safely! Make sure to configure access pe
 To test the backup schedule, you can manually trigger a backup by clicking the `play-icon` button in the backup schedule table.
 :::
 
+### Database Backups
+
+QuickStack provides specialized backup jobs for managed databases (MariaDB, PostgreSQL, MongoDB) that create consistent database dumps.
+
+1.  **Navigate to Database Settings:**
+    Go to your project and select the database you want to backup.
+
+2.  **Configure Database Backup:**
+    Navigate to the **Storage** tab and click **Add Backup Schedule**.
+
+3.  **Backup Configuration:**
+    *   **Cron Expression:** Define the backup schedule (e.g., `0 2 * * *` for daily at 2 AM).
+    *   **Retention:** Number of backups to keep before deleting old ones.
+    *   **Backup Location:** Select your configured S3 target.
+
+:::tip Database-Specific Features
+- **MariaDB/PostgreSQL**: Uses native dump tools (`mariadb-dump`, `pg_dump`) for consistent backups
+- **MongoDB**: Uses `mongodump` with archive format
+- Backups are compressed using `tar.gz` 
+:::
+
+:::warning Database Backup Behavior
+Database backup jobs create a separate backup container that connects to your database and creates a dump. The backup process:
+1. Spawns a dedicated backup pod in the project namespace
+2. Connects to the database using internal networking
+3. Creates a compressed database dump
+4. Uploads the dump to S3 storage
+5. Cleans up the backup pod after completion
+:::
+
 ## Managing Backups
 
 You can view and manage your current backups from within QuickStack:
@@ -138,7 +172,11 @@ You can view and manage your current backups from within QuickStack:
     Navigate to the "Backups" page in the main QuickStack navigation.
 
 2.  **View Backup Information:**
-   You'll find a comprehensive overview of all your backups.
+   You'll find a comprehensive overview of all your backups including:
+   - Backup status and last run time
+   - Size and storage location
+   - Success/failure indicators
+   - Manual trigger options
 
 <img  src="/img/docs/backups/backups-overview.png" alt="QuickStack Add Backup Schedule" style={{
     marginBottom: '20px',
@@ -147,8 +185,12 @@ You can view and manage your current backups from within QuickStack:
     width: '90%'
 }} />
 
+## System Backups
+
+QuickStack also supports uploading and restoring complete QuickStack system configuration for disaster recovery. For more information, refer to the [System Backup Guide](./manage-quickstack-cluster/quickstack-system-backup.md).
+
 
 ## Troubleshooting
 
 *   **Backup Schedules not working:** Check the cron expression and the server time.
-*   **Backups Fail to Upload:** Ensure that the provided s3 target is working and QuickStack is correctly configured to access the bucket. You should also verify that there is enough space available in your object storage bucket. 
+*   **Backups Fail to Upload:** Ensure that the provided s3 target is working and QuickStack is correctly configured to access the bucket. You should also verify that there is enough space available in your object storage bucket.

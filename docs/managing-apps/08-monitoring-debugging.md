@@ -32,7 +32,18 @@ import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
 
 # Monitoring & Debugging
 
-QuickStack provides powerful built-in tools to help you monitor the health of your applications and debug issues in real-time. You can access live logs and even open an interactive shell session directly from your browser.
+QuickStack provides powerful built-in tools to help you monitor the health of your applications and debug issues in real-time. You can access live logs, view real-time status updates, and even open an interactive shell session directly from your browser.
+
+## Application Status Indicators
+
+QuickStack displays real-time status information for all your applications. Status updates appear immediately when pod states change, without requiring page refreshes. The status of your applications are visible in the projects overview, project detail or app detail pages.
+
+<img  src="/img/docs/managing-apps/monitoring-and-debugging/app-monitoring.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '700px',
+    width: '90%'
+}} />
 
 ## Live Application Logs
 

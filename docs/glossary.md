@@ -49,6 +49,15 @@ A toolkit for converting source code into Docker images, providing advanced feat
 ## Traefik
 A reverse proxy and load balancer for microservices.
 
+## Network Policy
+A Kubernetes resource that controls traffic flow between pods and external services, providing network-level security and isolation.
+
+## Storage Class
+A Kubernetes resource that defines different types of storage available in the cluster (e.g., Longhorn, local-path).
+
+## System Backup
+A complete snapshot of the QuickStack database containing all configuration, projects, users, and settings.
+
 ## Longhorn
 A distributed block storage system for Kubernetes.
 

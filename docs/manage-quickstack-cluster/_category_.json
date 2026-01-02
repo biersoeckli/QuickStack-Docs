@@ -1,0 +1,8 @@
+{
+  "label": "Manage QuickStack Cluster",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure and customize your QuickStack Cluster"
+  }
+}

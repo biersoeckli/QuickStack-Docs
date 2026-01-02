@@ -59,6 +59,11 @@ Persistent storage is critical for applications that need to retain data across 
 4.  **Configure the Volume:**
     *   **Mount Path Container:** Specify the path within your container where the volume should be mounted (e.g., `/data`, `/config`, `/app/uploads`).  This path is where your application will access the persistent storage.
     *   **Size in MB:** Enter the amount of storage you want to allocate to the volume in megabytes (MB).  Be generous, but be mindful of available disk space on your server.
+    *   **Storage Class:** Select the Kubernetes storage class to use for this volume. The available storage classes depend on your cluster configuration. If you have multiple server-nodes, it is recommended to use `longhorn`.
+    *   **Node Affinity (Optional):** Specify a node hostname to ensure the volume is created on a specific node. This is useful for:
+        - Local storage configurations
+        - Performance optimization (placing volume on the same node as the application)
+        - Hardware-specific storage requirements
     *   **Access Mode:** Choose the access mode for the volume:
         *   **ReadWriteOnce (RWO):**  The volume can be mounted by a single node for reading and writing. This is suitable for most single-instance applications (for example, databases).
         *   **ReadWriteMany (RWX):** The volume can be mounted by multiple nodes for reading and writing. This is necessary for applications with multiple replicas/instances that need to share the same storage (for example, file servers or a wordpress backend).
@@ -74,7 +79,7 @@ Persistent storage is critical for applications that need to retain data across 
 After creation the Access Mode of the Volume cannot be changed.
 :::
 
-5.  **Save Volume Settings:** Click the "Save" button to save the volume configuration. You can configure multiple volumes for one single application.
+1.  **Save Volume Settings:** Click the "Save" button to save the volume configuration. You can configure multiple volumes for one single application.
 
 <img  src="/img/docs/managing-apps/storage/storage-tab.png" alt="QuickStack App Settings" style={{
     marginBottom: '20px',
@@ -100,6 +105,8 @@ The "Storage" tab in the App settings area allows you to:
 *   **Data Location:**  Volumes are physically stored on the server's storage disk (managed via longhorn). The data will persist regardless of whether the container stops.
 *   **Performance:** Storage performance will depend on the speed of your server's disk.
 *   **Access Modes and Replicas:** If you are using multiple replicas for an application, ensure you use the "ReadWriteMany" (RWX) access mode for any shared volumes.
+*   **Storage Classes:** Only use storage class "local-path" on a single-node cluster. For multi-node clusters, use longhorn.
+*   **Node Affinity:** When using node affinity, ensure the specified node is available and has sufficient storage capacity. The volume will only be created on the designated node.
 *  **Backups:** Volumes are backed up by QuickStack. To configure a backup schedule, refer to the [Backups guide](./../backups.md).
 
 ## Troubleshooting
@@ -109,5 +116,3 @@ The "Storage" tab in the App settings area allows you to:
     *   Check the application's permissions within the container to ensure it has write access to the mount path.
 *   **Incorrect Volume Size:**  You can increase the size of existing volumes.
 *   **Access Mode Issues:** Make sure you have chosen the correct Access Mode for the desired replication of your app.
-*   **Still having problems?**
-    *   Create an issue on our [GitHub repository](https://github.com/biersoeckli/quickstack/issues)
