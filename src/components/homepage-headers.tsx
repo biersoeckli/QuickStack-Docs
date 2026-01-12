@@ -32,7 +32,7 @@ export function HomepageHeader() {
         {windowSize !== 'mobile' ? <div className="flex items-center justify-center pb-3">
           <div className='w-fit'>
             <CodeBlock language="bash">curl -sfL https://get.quickstack.dev/setup.sh | sh -</CodeBlock>
-            <div className='-mt-3 pb-4 text-xs lg:text-sm text-slate-400'>Paste this into the terminal on a fresh server.</div>
+            <div className='-mt-3 pb-4 text-xs lg:text-sm text-slate-400'>Paste this into the terminal on a fresh server. <br /><span className='text-xs'>Min: 2 CPU, 4 GB RAM, 40 GB disk.</span></div>
           </div>
         </div> : <></>}
 

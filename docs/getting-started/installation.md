@@ -33,13 +33,14 @@ Welcome! This guide will walk you through installing QuickStack on your Linux se
 Before you begin, ensure you have the following:
 
 *   **Linux Server:** You'll need a server with a fresh installation of Ubuntu and `ssh` access with `sudo` privileges.
-    * Your server needs at least **2 CPU** cores and **4 GB of RAM**.
+    * Your server needs at least **2 CPU** cores, **4 GB of RAM** and **40 GB** of disk space.
     * You can use any Server. If you wish to use a cloud provider, we recommend one of the following 
       * [Hetzner](https://hetzner.com) 
       * [DigitalOcean](https://digitalocean.com)
       * [Vultr](https://vultr.com)
       * [Linode](https://linode.com)
       * [Contabo](https://contabo.com)
+
 
 > **_NOTE:_**  QuickStack was tested on Hetzner and Azure. If you have any issues with other providers, please create an issue on our [GitHub repository](https://github.com/biersoeckli/QuickStack).
 
