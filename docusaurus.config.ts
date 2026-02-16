@@ -77,6 +77,15 @@ const config: Config = {
     ],
   ],
 
+  scripts: [
+    {
+      src: 'https://s.idevop.ch/api/script.js',
+      defer: true,
+      'data-site-id': '7f1ec7d4186c', // Replace with your actual Site ID
+    },
+    // You can add other scripts here if needed
+  ],
+  
   themeConfig: {
     // Replace with your project's social card
     image: 'img/quickstack-social-card.png',
