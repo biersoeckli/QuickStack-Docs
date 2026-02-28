@@ -1,0 +1,98 @@
+---
+sidebar_position: 2
+title: "Accessing & Debugging Databases"
+description: "Learn how to access your QuickStack databases using GUI tools like DbGate, pgAdmin, or phpMyAdmin."
+keywords: ["QuickStack", "database", "debugging", "DbGate", "pgAdmin", "phpMyAdmin", "GUI", "access"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Accessing and Debugging Databases in QuickStack"
+  description="Guide on deploying and configuring database management tools like DbGate and pgAdmin within QuickStack to access your databases."
+  keywords="QuickStack, database, debugging, DbGate, pgAdmin, phpMyAdmin, GUI, access, internal networking"
+  datePublished="2025-12-06"
+  dateModified="2025-12-06"
+  articleSection="Managing Databases"
+  educationalUse="Documentation"
+  inLanguage="en"
+  proficiencyLevel="Intermediate"
+  dependencies="Deployed Database"
+  operatingSystem="Linux"
+  interactionCount="UserComments:0"
+  mainEntityOfPage="https://quickstack.dev/docs/managing-databases/accessing-databases"
+  about={["Database Administration", "Docker", "Internal Networking"]}
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
+# Accessing & Debugging Databases
+
+QuickStack provides built-in support for popular database management tools like **DbGate**, **pgAdmin**, and **phpMyAdmin**. These tools can be enabled directly from your database application's dashboard, allowing you to securely access and debug your data without manual configuration.
+
+## Enabling Database Tools
+
+To access your database using a GUI tool:
+
+1.  **Navigate to the Database App:**
+    *   Open your project dashboard.
+    *   Click on your database application to open its details.
+
+2.  **Go to Credentials Tab:**
+    *   Select the **Credentials** tab in the navigation menu.
+
+<img  src="/img/docs/managing-databases/deploying-databases/database-credentials.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '700px',
+    width: '90%'
+}} />
+
+3.  **Enable a Tool:**
+    *   Locate the **Database Access** card.
+    *   Toggle the switch for the tool you want to use (e.g., **DbGate**).
+    *   Wait for the tool to be deployed (this may take a few moments).
+
+<img  src="/img/docs/managing-databases/accessing-database/activated-database-tool.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '700px',
+    width: '90%'
+}} />
+
+4.  **Open the Tool:**
+    *   Once deployed, click the **Open** button.
+    *   A dialog will appear showing the **Username** and **Password** required to log in.
+    *   Click **Open** again to launch the tool in a new browser tab.
+    *   Enter the provided credentials to access your database.
+
+<img  src="/img/docs/managing-databases/accessing-database/database-credentials.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '300px',
+    width: '90%'
+}} />
+
+## Available Tools
+
+The available tools depend on the type of database you have deployed:
+
+### DbGate
+*   **Supported Databases:** All (PostgreSQL, MySQL, MariaDB, MongoDB)
+*   A comprehensive, modern database manager that runs in your browser. It is the recommended tool for most users.
+
+### pgAdmin
+*   **Supported Databases:** PostgreSQL
+*   The most popular and feature-rich Open Source administration and development platform for PostgreSQL.
+
+### phpMyAdmin
+*   **Supported Databases:** MySQL, MariaDB
+*   A classic tool written in PHP, intended to handle the administration of MySQL over the Web.
+
+:::warning Security Note
+These tools are deployed as separate applications within your project. When you are finished debugging or managing your database, it is recommended to **disable** the tool using the toggle switch. This removes the deployment, saving resources and reducing the attack surface of your application.
+:::

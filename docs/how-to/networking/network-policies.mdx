@@ -1,0 +1,130 @@
+---
+sidebar_position: 4
+title: "Network Policies"
+description: "Learn how to configure network policies to control traffic between your QuickStack applications and external services."
+keywords: ["QuickStack", "network policies", "security", "firewall", "kubernetes", "traffic control", "isolation"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Network Policies in QuickStack"
+  description="Comprehensive guide on configuring network policies to secure and control traffic flow between applications in QuickStack."
+  keywords="QuickStack, network policies, security, firewall, kubernetes, traffic control, isolation, networking"
+  datePublished="2025-12-31"
+  dateModified="2025-12-31"
+  articleSection="Managing Apps"
+  educationalUse="Documentation"
+  inLanguage="en"
+  proficiencyLevel="Intermediate"
+  dependencies="Deployed App"
+  operatingSystem="Linux"
+  interactionCount="UserComments:0"
+  mainEntityOfPage="https://quickstack.dev/docs/managing-apps/network-policies"
+  about={["Network Security", "Traffic Control", "Application Isolation", "Kubernetes Networking"]}
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
+# Network Policies
+
+Network policies in QuickStack allow you to control traffic flow between applications within a project and regulate access to external services. This feature enhances security by implementing fine-grained network segmentation at the Kubernetes level.
+
+## Overview
+
+By default, all applications within a QuickStack project can communicate with each other and access external services. Network policies enable you to:
+
+- Restrict which applications can communicate with each other
+- Control outbound internet access
+- Isolate sensitive applications
+
+:::info Kubernetes Network Policies
+QuickStack network policies are implemented using Kubernetes NetworkPolicy resources. k3s uses kube-router as the network plugin to enforce these policies.
+:::
+
+## Network Policy Types
+
+QuickStack provides several pre-configured network policy templates:
+
+### Allow All (Default)
+- **Ingress:** Allows traffic from all sources within the project namespace and the internet (via domain)
+- **Egress:** Allows all outbound traffic to other apps in the project and internet
+- **Use case:** Development environments, applications that need unrestricted access
+
+### Internet Only
+- **Ingress:** Blocks traffic from other project applications. Allows traffic from the internet (via domain)
+- **Egress:** Allows only internet access (blocks internal app-to-app communication)
+- **Use case:** Applications that only need to reach external APIs/services
+
+### Project Apps Only
+- **Ingress:** Allows traffic from all sources within the project
+- **Egress:** Allows only traffic to other project applications (blocks internet access)
+- **Use case:** Internal services, databases, backend APIs
+
+### Deny All
+- **Ingress:** Blocks all incoming traffic
+- **Egress:** Blocks all outbound traffic
+- **Use case:** Highly sensitive applications, testing isolation, databases (for egress)
+
+## Configuring Network Policies
+
+### Enabling Network Policies for an Application
+
+1.  **Navigate to Your App:**
+    Open your project and select the application you want to configure.
+
+2.  **Access Network Settings:**
+    Click on the **Advanced** tab.
+
+3.  **Enable Network Policy:**
+    *   Toggle **Use Network Policy** to enable network policy management.
+    *   Select a policy type from the dropdown menu.
+
+4.  **Save and Redeploy:**
+    *   Click **Save** to apply the configuration.
+    *   Redeploy the application for changes to take effect.
+
+<img  src="/img/docs/managing-apps/network-policies/overview-network-policy-screenshot.png" alt="Network Policy Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '800px',
+    width: '90%'
+}} />
+
+:::warning Redeployment Required
+Network policy changes require a redeployment of the application to be applied. Existing connections may be terminated when policies are updated.
+:::
+
+
+## Tip: Network Graph Visualization
+
+To get a better overview of the network policies applied for a project, you can open the project overview "Network Graph" tab. Here you can see all apps and their network connections visually represented.
+
+<img  src="/img/docs/managing-apps/network-policies/project-network-graph.png" alt="Project Network Graph"
+ style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '800px',
+    width: '90%'
+}} />
+
+## Troubleshooting
+
+### Application Can't Connect to Database
+
+*   Check if the database app has a restrictive network policy (e.g., "Deny All").
+*   Ensure both apps are in the same project.
+*   Try setting the database policy to "Allow All" temporarily for testing.
+
+### Application Can't Access External APIs
+
+*   Your app may have "Project Apps Only" or "Deny All" egress policy.
+*   Switch to "Allow All" or "Internet Only" to allow external connections.
+
+### All Applications Lost Connectivity
+
+If network policies cause widespread issues, administrators can remove all policies via **Settings** → **QuickStack Server** → **Maintenance** → **Delete All Network Policies**. **Use with caution** as this will remove all restrictions and allow all traffic between applications until the next deployment of each app.

@@ -1,0 +1,66 @@
+---
+sidebar_position: 0
+slug: /
+title: "QuickStack Documentation"
+description: "QuickStack is a simple Web UI to manage your Linux server and deploy your applications."
+keywords: ["QuickStack", "QuickStack Introduction", "QuickStack Overview", "QuickStack Features"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="WebPage"
+  title="QuickStack Documentation"
+  description="QuickStack is a simple Web UI to manage your Linux server and deploy your containerized applications. Your personal cloud platform built to run on your own servers."
+  keywords="QuickStack, QuickStack Introduction, QuickStack Overview, QuickStack Features, personal cloud platform, self-hosting, PaaS, self-hosted PaaS, containerized applications"
+  datePublished="2025-06-17"
+  dateModified="2026-02-28"
+  mainEntityOfPage="https://quickstack.dev/docs"
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
+# QuickStack Documentation
+
+QuickStack is a simple Web UI to manage your Linux server and deploy your containerized applications.
+Think of QuickStack as your personal cloud platform, built to run on your servers.
+
+## Quick Navigation
+
+| | |
+|---|---|
+| **[Tutorials](/docs/tutorials/installation)** | Step-by-step guides to get started — install QuickStack, deploy your first app, expose it to the internet. |
+| **[How-to Guides](/docs/how-to/deployments/redeploy-and-rollbacks)** | Task-focused guides for day-to-day operations: deployments, networking, storage, databases, backups, and admin tasks. |
+| **[Reference](/docs/reference/glossary)** | UI navigation map, ports & endpoints, glossary of QuickStack-specific terms. |
+
+## What is QuickStack?
+
+At its core, QuickStack automates:
+
+- **Building & Deploying Applications:** Deploy from Git repositories or Docker images to one server or a cluster.
+- **Managing Applications:** Centralized web interface to monitor, backup, and manage your applications.
+
+## Under the Hood
+
+QuickStack uses these components:
+
+| Component | Role |
+|---|---|
+| **[k3s](https://k3s.io/)** | Lightweight Kubernetes |
+| **[Traefik](https://traefik.io/)** | Reverse proxy and load balancer |
+| **[Longhorn](https://longhorn.io/)** | Distributed block storage |
+| **[registry](https://hub.docker.com/_/registry)** | Docker registry |
+| **[buildkit](https://github.com/moby/buildkit)** | Container image builder |
+
+## Get Started
+
+1. **[Install QuickStack](/docs/tutorials/installation)** — run the install script on a fresh Linux server.
+2. **[Deploy your first app from Git](/docs/tutorials/first-app-from-git)** or **[from a Docker image](/docs/tutorials/first-app-from-image)**.
+3. **[Expose your app with a domain + HTTPS](/docs/tutorials/expose-app)**.
+
+## Community and Support
+
+Create an issue on our [GitHub](https://github.com/biersoeckli/QuickStack) repository for feedback or bug reports.

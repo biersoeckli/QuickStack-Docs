@@ -1,0 +1,36 @@
+---
+sidebar_position: 4
+title: "Database Backups"
+description: "Configure backup jobs for your QuickStack managed databases."
+keywords: ["QuickStack", "backups", "database", "PostgreSQL", "MySQL", "MongoDB"]
+---
+
+# Database Backups
+
+QuickStack provides specialized backup jobs for managed databases (MariaDB, PostgreSQL, MongoDB) that create consistent database dumps.
+
+1.  **Navigate to Database Settings:**
+    Go to your project and select the database you want to backup.
+
+2.  **Configure Database Backup:**
+    Navigate to the **Storage** tab and click **Add Backup Schedule**.
+
+3.  **Backup Configuration:**
+    *   **Cron Expression:** Define the backup schedule (e.g., `0 2 * * *` for daily at 2 AM).
+    *   **Retention:** Number of backups to keep before deleting old ones.
+    *   **Backup Location:** Select your configured S3 target.
+
+:::tip Database-Specific Features
+- **MariaDB/PostgreSQL**: Uses native dump tools (`mariadb-dump`, `pg_dump`) for consistent backups
+- **MongoDB**: Uses `mongodump` with archive format
+- Backups are compressed using `tar.gz` 
+:::
+
+:::warning Database Backup Behavior
+Database backup jobs create a separate backup container that connects to your database and creates a dump. The backup process:
+1. Spawns a dedicated backup pod in the project namespace
+2. Connects to the database using internal networking
+3. Creates a compressed database dump
+4. Uploads the dump to S3 storage
+5. Cleans up the backup pod after completion
+:::

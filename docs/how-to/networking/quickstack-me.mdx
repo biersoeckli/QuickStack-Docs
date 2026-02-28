@@ -1,0 +1,98 @@
+---
+sidebar_position: 2
+title: "QuickStack.me Domain"
+description: "Use the built-in quickstack.me domain service for instant HTTPS access without manual DNS configuration."
+keywords: ["QuickStack", "quickstack.me", "DNS", "magic domain", "SSL", "HTTPS", "automatic domain"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Using QuickStack.me Domains"
+  description="Learn how to use the built-in quickstack.me domain service to instantly access your applications with HTTPS without configuring external DNS records."
+  keywords="QuickStack, quickstack.me, DNS, magic domain, SSL, HTTPS, automatic domain"
+  datePublished="2025-12-06"
+  dateModified="2025-12-06"
+  articleSection="Managing Apps"
+  educationalUse="Documentation"
+  inLanguage="en"
+  proficiencyLevel="Beginner"
+  dependencies="Public IPv4 Address"
+  operatingSystem="Linux"
+  interactionCount="UserComments:0"
+  mainEntityOfPage="https://quickstack.dev/docs/managing-apps/quickstack-me"
+  about={["Domain Name System", "SSL Certificates", "Magic DNS", "Web Applications"]}
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
+# QuickStack.me Domain
+
+QuickStack includes a built-in "magic" domain service called **quickstack.me**. This feature allows you to instantly assign a valid, SSL-secured domain name to your applications without needing to purchase a domain or configure DNS records manually.
+
+## How it Works
+
+The `quickstack.me` service works by mapping a specially constructed hostname to your server's public IP address. It uses a hexadecimal representation of your IP address to create a unique base domain for your QuickStack instance.
+
+For example, if your server's public IP is `1.2.3.4`:
+1.  QuickStack converts it to a hexadecimal string: `01020304`.
+2.  Your instance's base domain becomes `01020304.quickstack.me`.
+3.  Any subdomain you create (e.g., `myapp.01020304.quickstack.me`) will automatically resolve to `1.2.3.4`.
+
+This allows QuickStack to automatically provision valid SSL certificates via Let's Encrypt for these domains, giving you HTTPS access out of the box.
+
+## Prerequisites
+
+To use the `quickstack.me` domain feature, your QuickStack instance must have its **Public IPv4 Address** configured.
+
+1.  Go to **Settings** in your QuickStack dashboard.
+2.  Ensure the **Public IPv4 Address** field is set to your server's reachable public IP.
+
+<img  src="/img/docs/managing-apps/quickstackme-domains/ipv4-settings.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '400px',
+    width: '90%'
+}} />
+
+## Using a QuickStack.me Domain
+
+You can assign a `quickstack.me` domain when adding or editing a domain for an application.
+
+1.  **Navigate to Application Settings:**
+    *   Open your application in the QuickStack dashboard.
+    *   Go to the **Domains** tab.
+
+2.  **Add a New Domain:**
+    *   Click **Add Domain**.
+    *   In the dialog, switch to the **quickstack.me Domain** tab.
+    *   **Domain Prefix:** Enter a unique prefix for your application (e.g., `my-app`, `blog`, `test`).
+    *   **App Port:** Specify the port your application is listening on (usually `80`).
+    *   **Use HTTPS:** This is enabled by default and recommended.
+    *   **Redirect HTTP to HTTPS:** Enable this to force secure connections.
+
+<img  src="/img/docs/managing-apps/quickstackme-domains/quickstack-me-domain-settings.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '400px',
+    width: '90%'
+}} />
+
+3.  **Save and Deploy:**
+    *   Click **Save**.
+    *   Click **Deploy** on the application dashboard to apply the changes.
+
+Your application will now be accessible at `https://<prefix>.<hex-ip>.quickstack.me`.
+
+## When to Use It
+
+The `quickstack.me` domain is perfect for:
+*   **Testing and Development:** Quickly exposing apps without setting up real domains.
+*   **Internal Tools:** Accessing management tools securely.
+*   **Initial Setup:** Verifying your deployment works before configuring a custom domain.
+
+For production workloads or public-facing brands, we recommend using a [Custom Domain](/docs/how-to/networking/domains) (e.g., `yourcompany.com`).

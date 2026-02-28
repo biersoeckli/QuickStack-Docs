@@ -1,0 +1,120 @@
+---
+sidebar_position: 1
+title: "Deploying Databases"
+description: "Learn how to deploy pre-configured databases like PostgreSQL, MySQL, and MongoDB from templates."
+keywords: ["QuickStack", "database", "template", "PostgreSQL", "MySQL", "MongoDB", "MariaDB", "deploy"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Deploying Databases in QuickStack"
+  description="Step-by-step guide on how to deploy managed databases like PostgreSQL, MySQL, and MongoDB using QuickStack templates."
+  keywords="QuickStack, database, template, PostgreSQL, MySQL, MongoDB, MariaDB, deploy, managed database"
+  datePublished="2025-12-06"
+  dateModified="2025-12-06"
+  articleSection="Managing Databases"
+  educationalUse="Documentation"
+  inLanguage="en"
+  proficiencyLevel="Beginner"
+  dependencies="Project"
+  operatingSystem="Linux"
+  interactionCount="UserComments:0"
+  mainEntityOfPage="https://quickstack.dev/docs/managing-databases/deploy-from-template"
+  about={["Database Management", "Cloud Deployment", "PostgreSQL", "MySQL"]}
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
+# Deploying Databases
+
+QuickStack makes it easy to deploy popular databases using pre-configured templates. These templates set up the database with persistent storage, secure defaults, and necessary environment variables.
+
+## Available Databases
+
+QuickStack currently supports the following database templates:
+
+*   **PostgreSQL**: The world's most advanced open source relational database.
+*   **MySQL**: The world's most popular open source database.
+*   **MariaDB**: An enhanced, drop-in replacement for MySQL.
+*   **MongoDB**: The most popular database for modern apps.
+
+## Deployment Steps
+
+Follow these steps to deploy a new database instance in your project.
+
+### 1. Initiate Creation
+
+Navigate to your project dashboard and click the **Create App** button in the top right corner. From the dropdown menu, select **Database**.
+
+<img  src="/img/docs/managing-databases/deploying-databases/create-database.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '900px',
+    width: '90%'
+}} />
+
+### 2. Select Database Type
+
+A dialog will appear showing the available database templates. Click on the database you wish to deploy (e.g., PostgreSQL).
+
+<img  src="/img/docs/managing-databases/deploying-databases/select-database-type.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '900px',
+    width: '90%'
+}} />
+
+### 3. Configure Settings
+
+After selecting a database, you will be prompted to configure the instance. The available settings may vary slightly depending on the database, but typically include:
+
+*   **App Name**: A unique name for your database application (e.g., `my-postgres-db`).
+*   **Password**: A secure password for the default user (usually `postgres` or `root`). You can use the generate button to create a strong random password.
+*   **Volume Size**: The size of the persistent storage volume (e.g., `10Gi`).
+
+<img  src="/img/docs/managing-databases/deploying-databases/configure-settings.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '400px',
+    width: '90%'
+}} />
+
+
+### 4. Deploy
+
+Review your settings and click **Create**. QuickStack will now:
+1.  Provision the persistent volume.
+2.  Deploy the database container.
+3.  Configure the service and internal networking.
+
+Once the deployment is complete, your database will be available within your project's network.
+
+## Connecting to your Database
+
+### Internal Access
+Other applications within the same project can connect to the database using its **Service Name**.
+*   **Hostname**: `svc-<app-id>` (You can find the exact hostname in the app details --> Credentials).
+*   **Port**: The standard port for the database (e.g., `5432` for PostgreSQL).
+
+<img  src="/img/docs/managing-databases/deploying-databases/database-credentials.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '700px',
+    width: '90%'
+}} />
+
+:::info Information
+Copying the values from the credentials is only available if your QuickStack instance is served over HTTPS.
+:::
+
+### External Access (not recommended)
+By default, databases are not exposed to the public internet for security reasons. If you need to access the database from your local machine (e.g., for development), you can assign a public domain in the **Domains** tab of the database app settings.
+
+:::danger Security Warning
+Exposing databases to the public internet is a security risk. Only do this for testing purposes.
+:::

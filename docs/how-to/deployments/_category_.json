@@ -1,0 +1,8 @@
+{
+  "label": "Deployments",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Deploy and update your applications"
+  }
+}

@@ -1,0 +1,57 @@
+---
+sidebar_position: 4
+title: "Expose Your App: Domain + HTTPS"
+description: "Learn how to add a domain and HTTPS to your QuickStack application."
+keywords: ["QuickStack", "domain", "HTTPS", "SSL", "expose", "tutorial"]
+---
+
+# Expose Your App: Domain + HTTPS
+
+Once your app is deployed, expose it to the internet with a domain and automatic HTTPS.
+
+## Option A: QuickStack.me (No DNS setup required)
+
+The fastest way to get a working HTTPS URL without owning a domain.
+
+1. Open your app → **Domains** tab.
+2. Click **Add Domain** → switch to the **quickstack.me Domain** tab.
+3. Enter a unique prefix (e.g. `my-app`).
+4. Set **App Port** to the port your container listens on (default: `80`).
+5. Enable **Use HTTPS** and **Redirect HTTP to HTTPS**.
+6. Click **Save**.
+7. Click **Deploy** to apply the changes.
+
+Your app is now live at `https://<prefix>.<hex-ip>.quickstack.me`.
+
+→ [Full quickstack.me docs](/docs/how-to/networking/quickstack-me)
+
+## Option B: Custom Domain
+
+Requires a domain you own with DNS access.
+
+### 1. Point DNS to your server
+
+Create an `A record` at your DNS provider pointing your domain (or subdomain) to your server's public IP address.
+
+### 2. Add the domain in QuickStack
+
+1. Open your app → **Domains** tab.
+2. Click **Add Domain**.
+3. Enter your **Hostname** (e.g. `app.example.com`).
+4. Set **App Port** to the port your container listens on.
+5. Enable **Use HTTPS** (Let's Encrypt certificate provisioned automatically).
+6. Enable **Redirect HTTP to HTTPS**.
+7. Click **Save**.
+8. Click **Deploy** to apply the changes.
+
+:::info Deploy Required
+Configuration changes in QuickStack do not take effect until you click **Deploy**.
+:::
+
+→ [Full custom domain docs](/docs/how-to/networking/domains)
+
+## Troubleshooting
+
+- **SSL certificate validation fails:** DNS propagation can take a few minutes. Also ensure Let's Encrypt email is configured in **Settings → QuickStack Server → Networking / Traefik**.
+- **App not accessible:** Verify your DNS A record points to the correct server IP.
+- **Wrong port:** Check your container's listening port and update the App Port accordingly.

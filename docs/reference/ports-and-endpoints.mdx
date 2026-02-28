@@ -1,0 +1,47 @@
+---
+sidebar_position: 2
+title: "Ports & Endpoints"
+description: "Reference for QuickStack ports, webhook URL patterns, and internal hostnames."
+keywords: ["QuickStack", "ports", "endpoints", "webhook", "networking", "30000", "6443"]
+---
+
+# Ports & Endpoints
+
+## Required Open Ports
+
+| Port | Protocol | Purpose |
+|---|---|---|
+| **30000** | TCP | QuickStack Web UI |
+| **80** | TCP | HTTP traffic (Traefik ingress) |
+| **443** | TCP | HTTPS traffic (Traefik ingress) |
+| **6443** | TCP | k3s Kubernetes API (required for cluster nodes) |
+
+:::warning Firewall
+Ensure your firewall allows inbound traffic on ports **30000**, **80**, and **443**. Port 6443 is only required if you are setting up a multi-node cluster.
+:::
+
+## Webhook URL Pattern
+
+Auto-deploy webhooks follow this URL pattern:
+
+```
+https://<your-quickstack-domain>/api/webhook/<app-id>/<webhook-secret>
+```
+
+Find the full webhook URL in your app → **Webhooks** tab.
+
+## Internal Hostname Pattern
+
+Apps within the same QuickStack project can communicate using internal hostnames:
+
+```
+svc-<app-id>.<namespace>.svc.cluster.local
+```
+
+The short form (for same-namespace communication):
+
+```
+svc-<app-id>
+```
+
+Find the internal hostname in your app → **Domains** tab under "Internal Hostnames".

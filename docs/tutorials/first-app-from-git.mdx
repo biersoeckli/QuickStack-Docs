@@ -1,0 +1,170 @@
+---
+sidebar_position: 2
+title: Creating App from Git Source
+description: This guide will walk you through deploying an application from a Git repository.
+keywords: ["QuickStack Git Deployment", "QuickStack Git Source", "QuickStack Git Deployment Guide"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="HowTo"
+  title="Deploying Applications from Git Source with QuickStack"
+  description="A comprehensive guide to deploying applications directly from Git repositories using QuickStack's web interface."
+  keywords="QuickStack Git Deployment, QuickStack Git Source, QuickStack Git Deployment Guide, containerized applications, Docker deployment"
+  datePublished="2025-06-17"
+  dateModified="2025-06-17"
+  inLanguage="en"
+  step={[
+    {
+      "@type": "HowToStep",
+      "name": "Creating a New Project and Application",
+      "text": "Create a new project in QuickStack and add a new application to it",
+      "url": "https://quickstack.dev/docs/managing-apps/01-from-git-source#step-1-creating-a-new-project-and-application"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Configure Git Source",
+      "text": "Configure the Git repository URL, branch, and Dockerfile path for your application",
+      "url": "https://quickstack.dev/docs/managing-apps/01-from-git-source#step-1-creating-a-new-project-and-application"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Deploy Your Application",
+      "text": "Initiate the build and deployment process for your application",
+      "url": "https://quickstack.dev/docs/managing-apps/01-from-git-source#step-3-deploying-your-application"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Check Deployment Status",
+      "text": "Monitor the deployment status and view build logs in real-time",
+      "url": "https://quickstack.dev/docs/managing-apps/01-from-git-source#step-4-checking-the-deployment-status"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Access Your Application",
+      "text": "Access your deployed application via the assigned domain",
+      "url": "https://quickstack.dev/docs/managing-apps/01-from-git-source#step-5-accessing-your-application"
+    }
+  ]}
+  tool={["QuickStack", "Git Repository", "Dockerfile"]}
+  supply={["QuickStack installed on VPS", "Git repository with application code", "Dockerfile in repository"]}
+  proficiencyLevel="Beginner"
+  applicationCategory="DeveloperApplication"
+  operatingSystem="Linux"
+  isPartOf={{
+    "@type": "WebSite",
+    "name": "QuickStack Documentation",
+    "url": "https://quickstack.dev/docs"
+  }}
+/>
+
+# Git App Deployment
+
+This guide will walk you through deploying an application from a Git repository. We'll cover the basic steps, from adding a project to deploying.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+*   QuickStack installed on your virtual private server (VPS).
+*   A Git repository containing a simple application. This could be a sample application or one of your projects.
+*   Basic understanding of Git and container concepts.
+
+## Step 1: Creating a New Project and Application
+
+1.  **Create Project:**
+    *   On the dashboard, locate the "Projects" tab or section.
+    *   Click on the "+ Create Project" or similar button.
+    *   Navigate to Project by clicking on the project name.
+2.  **Add New App:** Click on the "+ Create App" and the "Empty App" button and give your app a name.
+
+<img  src="/img/docs/managing-apps/creating-apps/create-app-dialog.png" alt="QuickStack Logo" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px'
+}} />
+
+1.  **Configure Git Source:**
+    *   Go to the "General" tab of the app settings.
+    *   Select "Git Repository" as the source type.
+    *   **Git Repo URL**: Paste the URL of your Git repository.
+        *   *Example:* `https://github.com/your-username/your-repo.git`
+    *   **Git Branch:** Specify the branch to use (e.g., `main` or `master`).
+    *   **Dockerfile Path**:  Specify path to your Dockerfile (e.g. `./Dockerfile`).
+    *   **(Optional) Git Username and Token:** If your repository is private, provide a username and a Personal Access Token.
+
+
+<img  src="/img/docs/managing-apps/creating-apps/enter-git-credentials.png" alt="QuickStack Logo" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+2.  **Save App:** Click the "Save" button to save the application settings.
+
+:::info Dockerfile Requirement
+Your repository needs to have a Dockerfile at the specified path. The Dockerfile should be able to build your application.
+:::
+
+## Step 3: Deploying Your Application
+
+1.  **Deploy:**
+    *   You should see a button that says "Deploy" on top of the page. Click it.
+    *   This initiates the build process and deployment of your application.
+
+:::info Deployment Info
+Changes to the App configuration won't trigger a new deployment. You need to click "deploy" to apply the changes every time you make a change.
+:::
+
+## Step 4: Checking the Deployment Status
+
+1.  **Deployment Logs:**
+    *   After initiating the deployment, check the deployment status which is provided in the overview tab of your application settings.
+ 
+<img  src="/img/docs/managing-apps/creating-apps/deployment-overview.png" alt="QuickStack Logo" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+    *   You can click on the button "Show Logs" of the current deployment to view the progress of the build and deployment in real time.
+
+<img  src="/img/docs/managing-apps/creating-apps/deployment-logs.png" alt="QuickStack Logo" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+## Step 5: Accessing Your Application
+
+1.  **Access Your App:**
+    *   If your app has a domain configured in the `Domains` tab, you can access the app via the assigned domain.
+
+<img  src="/img/docs/managing-apps/creating-apps/domains-overview.png" alt="QuickStack Logo" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+## Troubleshooting
+
+*   **Deployment Fails:** Review the deployment logs for error messages. Ensure your Dockerfile is valid and accessible in your Git repository.
+*   **Application Not Accessible:**
+    *  Ensure your application has a domain configured.
+    *  Ensure that the domain is pointing to the correct IP address of your server.
+    *  Double-check if the application is running.
+
+## Congratulations
+
+You have successfully deployed your first application using QuickStack! Explore the documentation further to learn more about advanced settings and capabilities.
+
+## Next Steps
+
+- **[Configure a Domain](/docs/how-to/networking/domains):** Make your app accessible via a custom domain
+- **[Set Environment Variables](/docs/how-to/deployments/redeploy-and-rollbacks):** Configure your application with environment variables
+- **[Add Persistent Storage](/docs/how-to/storage/volumes):** Store data that persists across deployments

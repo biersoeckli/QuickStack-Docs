@@ -1,0 +1,28 @@
+---
+sidebar_position: 2
+title: "S3 Backup Targets"
+description: "Configure S3-compatible storage targets for QuickStack backups."
+keywords: ["QuickStack", "backups", "S3", "storage", "configuration"]
+---
+
+# S3 Backup Targets
+
+## Step 1: Configuring S3 Target
+
+Before setting up backups for your Apps, you need to configure a S3 Target.
+
+1.  **Navigate to S3 Targets:**
+    Click on "Settings" and then click on "S3 Targets".
+
+2.  **Add S3 Target:**
+    Click on "Add S3 Target" and the enter the requested informations.
+    *   **Name:** A friendly name to identify the S3 Target (can be anything).
+    *   **Bucket Name:** The name of your S3 bucket.
+    *   **Endpoint:**  The endpoint of your S3 storage provider (e.g., `s3.amazonaws.com`, `s3.us-east-2.amazonaws.com`, or the custom endpoint from your provider).
+    *   **Region:** The region where your bucket is located.
+    *   **Access Key ID:** Your Access Key ID.
+    *   **Secret Key:** Your Secret Access Key.
+
+:::danger Important
+Store your Access Key ID and Secret Key safely! Make sure to configure access permissions that allow QuickStack to read, write and delete to the specified bucket, but limit other access.
+:::

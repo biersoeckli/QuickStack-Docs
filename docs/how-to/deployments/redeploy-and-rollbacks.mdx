@@ -1,0 +1,73 @@
+---
+sidebar_position: 1
+title: "Redeploy & Configuration Changes"
+description: "Understand QuickStack deploy semantics, how to apply configuration changes, and common gotchas."
+keywords: ["QuickStack", "deploy", "redeploy", "configuration", "environment variables", "rollback"]
+---
+
+# Redeploy & Configuration Changes
+
+## The Deploy Button
+
+In QuickStack, **"Deploy" is always explicit**. Configuration changes (environment variables, ports, volumes, health checks, etc.) are saved but **do not take effect until you click Deploy**.
+
+This applies to:
+- Environment variable changes
+- Port changes
+- Volume additions or modifications
+- Health check configuration
+- Network policy changes
+- Basic Auth credentials
+- File mount changes
+
+:::warning Always Deploy After Changes
+After saving any configuration change, return to the **Overview** tab and click **Deploy** to apply it to your running application.
+:::
+
+## Environment Variables {#environment-variables}
+
+Environment variables are key-value pairs available to your application at runtime. They follow the [12-factor app](https://12factor.net/config) methodology.
+
+### Adding Environment Variables
+
+1. Open your app → **Environment** tab.
+2. Enter variables in the text area, one per line:
+   ```env
+   DATABASE_URL=postgres://user:pass@host:5432/db
+   API_KEY=secret-api-key-123
+   NODE_ENV=production
+   ```
+3. Click **Save**.
+4. Click **Deploy** to apply.
+
+:::info Database Apps
+For database applications deployed via templates, do not modify environment variables manually — this may break the pre-configured setup.
+:::
+
+### Referencing Other Apps
+
+To connect to another app in the same project, use its internal hostname:
+
+```env
+DATABASE_URL=postgres://user:pass@svc-app-xyz:5432/mydb
+```
+
+Find the internal hostname in the target app's **Domains** tab under "Internal Hostnames".
+
+## Rollbacks
+
+QuickStack keeps a history of recent deployments. To roll back:
+
+1. Open your app → **Overview** tab.
+2. In the deployment history, find the previous successful deployment.
+3. Click **Redeploy** on that entry.
+
+## Common Gotchas
+
+| Symptom | Likely Cause |
+|---|---|
+| Config change has no effect | You saved but didn't click **Deploy** |
+| App crashes after env var change | Typo or missing required variable |
+| Volume not mounted | Volume added but not deployed yet |
+| Health check keeps failing | Port or path mismatch in probe config |
+| Network policy blocks traffic | Policy applied but deploy not triggered |

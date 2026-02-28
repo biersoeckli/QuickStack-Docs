@@ -1,0 +1,43 @@
+---
+sidebar_position: 2
+title: "File Mounts"
+description: "Learn how to inject configuration files into your QuickStack application containers."
+keywords: ["QuickStack", "file mount", "ConfigMap", "configuration files", "container"]
+---
+
+## File Mounts
+
+File mounts allow you to inject configuration files directly into your containers. Unlike volumes (which provide persistent storage), file mounts are designed for small, text-based configuration files that your application needs at a specific path.
+
+:::info How it Works
+QuickStack stores the file content and mounts it as a read-only file at the specified path inside your container.
+:::
+
+File mounts are useful when:
+- Your application expects a configuration file at a specific path (e.g., `nginx.conf`, `config.json`)
+- You need to inject certificates or key files
+- You want to customize application behavior without rebuilding the image
+
+### Adding a File Mount
+
+1. **Go to Storage Tab:** Open your application and click on the **Storage** tab.
+2. **Locate File Mount Section:** Scroll to the **File Mount** card.
+3. **Add File Mount:** Click the **Add File Mount** button.
+4. **Configure the File:**
+   - **Mount Path:** The full path where the file should appear inside the container (e.g., `/etc/nginx/nginx.conf`)
+   - **File Content:** The content of the file
+5. **Save and Deploy:** Click **Save**, then redeploy the application for changes to take effect.
+
+:::warning Redeployment Required
+All changes to file mounts require a redeployment to take effect. Mounted files are read-only and cannot be modified by the running application.
+:::
+
+### File Mounts vs Volumes
+
+| Feature | File Mount | Volume |
+|---------|------------|--------|
+| **Purpose** | Configuration files | Persistent data storage |
+| **Size** | Small files (KB) | Large data (GB) |
+| **Persistence** | Stored in QuickStack DB | Stored on disk |
+| **Access** | Read-only | Read-write |
+| **Use Case** | Config files, certificates | Databases, uploads, logs |

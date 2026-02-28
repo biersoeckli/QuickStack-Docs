@@ -1,0 +1,8 @@
+{
+  "label": "Storage",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure persistent storage for your QuickStack applications"
+  }
+}

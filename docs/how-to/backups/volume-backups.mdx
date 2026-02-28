@@ -1,0 +1,61 @@
+---
+sidebar_position: 3
+title: "Volume Backups"
+description: "Configure scheduled backups for your QuickStack application volumes."
+keywords: ["QuickStack", "backups", "volumes", "scheduled", "S3"]
+---
+
+# Volume Backups
+
+### Application Volume Backups
+
+1.  **Navigate to App Settings:**
+    Select the app you want to configure a backup for by clicking the application name.
+
+2.  **Select the Storage Tab:**
+    Select the `Storage` tab in the application settings.
+
+<img  src="/img/docs/backups/storage-tab.png" alt="QuickStack App Settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+3.  **Configure Backup Schedule:**
+   Scroll to the "Backup Schedules" section and click the `Add Backup Schedule` Button.
+
+<img  src="/img/docs/backups/backup-schedules-table.png" alt="QuickStack Add Backup Schedule" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+4. **Define Backup Schedule:**
+   Enter the information to configure the backup schedule.
+    *   **Cron Expression:**  Define when the backup should be created. For example, `0 0 * * *` creates a backup every day at midnight. Use [crontab.guru](https://crontab.guru/) to generate cron expressions.
+    *   **Retention:**  Define the amount of backups you want to retain. If there are more backups, the oldest will be deleted.
+    *   **Volume to backup:**  Select the volume you want to backup.
+    *   **Backup Location:** Choose an S3 Target from the S3 Targets list. 
+
+<img  src="/img/docs/backups/edit-baclup-dialog.png" alt="QuickStack Add Backup Schedule" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+5.  **Save Backup Schedule**
+    To save the configuration press the `Save` button.
+
+<img  src="/img/docs/backups/backup-schedule-with-entry.png" alt="QuickStack Add Backup Schedule" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+:::info Testing Backup Schedule
+To test the backup schedule, you can manually trigger a backup by clicking the `play-icon` button in the backup schedule table.
+:::
