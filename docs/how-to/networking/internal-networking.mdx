@@ -1,0 +1,82 @@
+---
+sidebar_position: 3
+title: "Internal Networking"
+description: "Internal container ports and service-to-service communication between apps in the same QuickStack project."
+keywords: ["QuickStack networking", "internal port", "container port", "service communication", "internal hostname"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Internal Networking in QuickStack"
+  description="Internal container ports and service-to-service communication between apps in the same QuickStack project."
+  keywords="QuickStack, networking, internal port, container port, service communication, internal hostname"
+  datePublished="2025-12-06"
+  dateModified="2026-02-28"
+  articleSection="How-to / Networking"
+  inLanguage="en"
+  proficiencyLevel="Beginner"
+  operatingSystem="Linux"
+  mainEntityOfPage="https://quickstack.dev/docs/how-to/networking/internal-networking"
+/>
+
+# Internal Networking
+
+## Internal container port
+
+The internal container port is the port on which your application listens for incoming traffic inside the project. QuickStack uses this port for:
+- Routing external traffic from a domain to the correct container port.
+- Enabling service-to-service communication between apps in the same project.
+
+**Default:** Usually `80` or `3000` depending on the application image.
+
+### Changing the port
+
+1. Open your app and go to the **Domains** tab.
+2. Locate the **Internal Port** section.
+3. Click the edit icon and enter the new port number.
+4. Click **Save**, then **Deploy**.
+
+:::warning Redeployment required
+Changing the internal port requires a redeployment to take effect.
+:::
+
+## Service-to-service communication
+
+Apps within the same project communicate using internal hostnames. These hostnames are only routable within the project's network namespace — they are not publicly accessible unless you explicitly add a domain.
+
+### Finding internal hostnames
+
+Open the target app's **Domains** tab → scroll to **Internal Hostnames**. You'll see entries like:
+
+```
+svc-app-xyz
+```
+
+### Example connection strings
+
+```env
+# PostgreSQL
+DATABASE_URL=postgres://user:password@svc-app-xyz:5432/database
+
+# Redis
+REDIS_URL=redis://svc-app-abc:6379
+
+# Internal HTTP service
+API_BASE_URL=http://svc-app-def:3000
+```
+
+Set these as [environment variables](../deployments/redeploy-and-rollbacks.mdx#environment-variables) in your app, then deploy.
+
+## Common use cases
+
+- Connecting apps to databases (most common)
+- Microservice architectures — backend services that should not be publicly accessible
+- Sidecar apps (e.g. a proxy or cache layer)
+
+## Related
+
+- [Custom domains](./domains.mdx)
+- [Network policies](./network-policies.mdx)
+- [Ports & endpoints reference](../../reference/ports-and-endpoints.mdx)

@@ -1,0 +1,99 @@
+---
+sidebar_position: 1
+title: "Installation"
+description: "QuickStack installation: fastest path to a working UI, with ports, firewall, and first login guidance."
+keywords: ["QuickStack Installation", "QuickStack Setup", "QuickStack Installation Guide"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="HowTo"
+  title="QuickStack Installation"
+  description="QuickStack installation: fastest path to a working UI, with ports, firewall, and first login guidance."
+  keywords="QuickStack Installation, QuickStack Setup, QuickStack Installation Guide"
+  datePublished="2025-06-17"
+  dateModified="2026-02-28"
+  inLanguage="en"
+  step={[
+    {
+      "@type": "HowToStep",
+      "name": "Run the install script",
+      "text": "Connect to your server via SSH and run the one-line install command",
+      "url": "https://quickstack.dev/docs/tutorials/installation#install-one-command"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Access the UI",
+      "text": "Open your browser and navigate to http://your_server_ip:30000",
+      "url": "https://quickstack.dev/docs/tutorials/installation#access-the-ui"
+    }
+  ]}
+  tool={["Terminal", "SSH access"]}
+  supply={["Ubuntu 22.04+ server with public IPv4", "SSH with sudo privileges"]}
+  proficiencyLevel="Beginner"
+  operatingSystem="Linux"
+/>
+
+# QuickStack Installation
+
+This page guides you through installing QuickStack on a fresh Ubuntu server, accessing the UI, and configuring essential ports and security. After following these steps, you'll have a working QuickStack instance ready for first login and app deployment.
+
+## What you'll get
+A running QuickStack instance with web UI access, ready for app deployment. You'll know the required ports, firewall rules, and first login steps.
+
+## Requirements
+- OS: Ubuntu 22.04 or newer (other Linux distros not officially supported)
+- Specs: Minimum 2 CPU cores, 4 GB RAM, 40 GB disk
+- Access: SSH with sudo privileges
+- Any Ubuntu VPS works; should have public IPv4
+
+## Install (one command)
+Connect to your server via SSH and run:
+```bash
+curl -sfL https://get.quickstack.dev/setup.sh | sh -
+```
+
+## Choose network interface
+- Single-node: select the interface with the public IP.
+- Multi-node cluster: select the interface on your private network.
+See [Cluster Nodes](../how-to/admin/cluster-nodes.mdx) for details.
+
+## Access the UI
+After install, open your browser and go to:
+```
+http://your_server_ip:30000
+```
+
+## Ports & Firewall
+- Inbound: open TCP ports 30000 (UI), 80/443 (ingress)
+- Cluster: open TCP 6443 between nodes (if using cluster)
+
+## First login
+On first access, create the admin user. If you have a domain pointing to your server, enter it; otherwise, use the IP. You can set up a domain later.
+
+## After installation: verify health
+- UI is reachable at `:30000`
+- Settings page shows QuickStack version
+- No errors shown after install
+
+## Security baseline
+- Enable HTTPS for your UI domain (Settings → Domains)
+- Enable 2FA for the admin account ([see guide](../how-to/admin/two-factor-auth.mdx))
+
+## Troubleshooting
+- Web UI not reachable:
+  - Check firewall rules for ports 30000, 80, 443
+  - Confirm server IP and public accessibility
+- Script fails to download:
+  - Verify internet connectivity
+- Cluster nodes not joining:
+  - Ensure TCP 6443 is open between nodes
+- First login fails:
+  - Try resetting the install and check for error messages
+
+## Next steps
+
+- [Deploy your first app from Git](./first-app-from-git.mdx)
+- [Deploy your first app from a Docker image](./first-app-from-image.mdx)
+- [Add worker nodes to your cluster](../how-to/admin/cluster-nodes.mdx)

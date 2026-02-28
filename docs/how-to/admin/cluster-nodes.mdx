@@ -1,0 +1,151 @@
+---
+sidebar_position: 5
+title: "Cluster Nodes"
+description: "Add and remove worker nodes, manage scheduling, and monitor node health in your QuickStack cluster."
+keywords: ["QuickStack cluster nodes", "worker node", "k3s", "add node", "multi-node cluster"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Cluster Node Management in QuickStack"
+  description="Add and remove worker nodes, manage scheduling, and monitor node health in your QuickStack cluster."
+  keywords="QuickStack, cluster, nodes, worker, k3s, scaling, high availability"
+  datePublished="2026-01-31"
+  dateModified="2026-02-28"
+  articleSection="How-to / Admin"
+  inLanguage="en"
+  proficiencyLevel="Intermediate"
+  operatingSystem="Linux"
+  mainEntityOfPage="https://quickstack.dev/docs/how-to/admin/cluster-nodes"
+/>
+
+# Cluster Nodes
+
+QuickStack runs on a k3s cluster. The initial server is the **master node**; additional servers you join are **worker nodes**.
+
+## Viewing cluster nodes
+
+1. Go to **QuickStack Settings** → **Cluster**.
+2. All nodes and their status are listed.
+
+<img src="/img/docs/manage-quickstack-cluster/cluster-node-management/cluster-nodes-overview.png" alt="Cluster Nodes Overview" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '800px',
+    width: '90%'
+}} />
+
+Each node shows:
+- **Name** — hostname or identifier
+- **CPU / RAM / Disk** status — 🟢 normal / 🔴 pressure
+- **Schedulable** — whether new workloads can be placed here
+
+## Add a worker node {#add-a-worker-node}
+
+### Prerequisites
+
+- Supported Linux distribution (Ubuntu, Debian, etc.)
+- Network connectivity to the master node
+- Port **6443** (Kubernetes API) accessible from the new server
+- SSH access to the new server
+
+### Step 1: Get the join command
+
+1. Go to **QuickStack Settings** → **Cluster**.
+2. Click **Add Cluster Node**.
+3. Copy the displayed command.
+
+<img src="/img/docs/manage-quickstack-cluster/cluster-node-management/add-cluster-node-dialog.png" alt="Add Cluster Node Dialog" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+The command looks like:
+```bash
+curl -sfL https://get.quickstack.dev/setup-worker.sh | K3S_URL=https://MASTER_IP:6443 JOIN_TOKEN=K10... sh -
+```
+
+### Step 2: Configure the command
+
+Replace `MASTER_IP` with:
+- The **internal/private IP** for nodes in the same network (recommended)
+- The **public IP** for nodes across the internet
+
+### Step 3: Run on the new server
+
+```bash
+ssh root@new-worker-server
+curl -sfL https://get.quickstack.dev/setup-worker.sh | K3S_URL=https://192.168.1.100:6443 JOIN_TOKEN=K10... sh -
+```
+
+### Step 4: Verify
+
+Return to **QuickStack Settings** → **Cluster**. The new node appears within a few minutes. Verify all status indicators are green.
+
+:::tip Node token not showing?
+Retrieve it manually from the master node:
+```bash
+sudo cat /var/lib/rancher/k3s/server/node-token
+```
+:::
+
+## Manage node scheduling
+
+### Deactivate a node (cordon)
+
+Prevents new pods from being scheduled on this node. Existing workloads continue running.
+
+1. Find the node in the cluster overview.
+2. Click the node and select **Deactivate Node**.
+
+### Reactivate a node (uncordon)
+
+1. Find the deactivated node.
+2. Click **Activate Node**.
+
+:::warning
+Deactivating does not move existing workloads. To drain a node, deactivate it and then redeploy or use `kubectl drain`.
+:::
+
+## Remove a worker node
+
+### 1. Drain the node (on master)
+
+```bash
+kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
+```
+
+### 2. Delete the node (on master)
+
+```bash
+kubectl delete node <node-name>
+```
+
+### 3. Uninstall k3s (on the worker)
+
+```bash
+/usr/local/bin/k3s-agent-uninstall.sh
+```
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Node not joining | Verify port 6443 is open; check that `JOIN_TOKEN` is current |
+| Node appears but apps not scheduled there | Check node is marked Schedulable; verify it's on the same private network |
+| Red CPU indicator | Too many processes running; optimize workloads or add nodes |
+| Red RAM indicator | Memory pressure; review memory limits or add RAM |
+| Red Disk indicator | Disk space low; run [cleanup](./updates-and-maintenance.mdx#disk-space--cleanup) or expand disk |
+
+## Planning considerations
+
+:::tip
+- Use an **odd number of master nodes** (1, 3, 5) for HA quorum
+- Use **Longhorn** storage class for volumes that must survive node failure
+- Keep 20–30% capacity free for failover scenarios
+- Ensure all nodes can communicate on required k3s ports
+:::

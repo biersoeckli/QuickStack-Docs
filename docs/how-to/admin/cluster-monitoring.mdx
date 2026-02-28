@@ -1,0 +1,69 @@
+---
+sidebar_position: 3
+title: "Cluster Monitoring"
+description: "Monitor CPU, RAM, and disk usage across QuickStack cluster nodes."
+keywords: ["QuickStack cluster monitoring", "node health", "CPU", "memory", "disk usage"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Cluster Monitoring in QuickStack"
+  description="Monitor CPU, RAM, and disk usage across QuickStack cluster nodes."
+  keywords="QuickStack, monitoring, cluster, nodes, CPU, memory, disk usage"
+  datePublished="2026-01-02"
+  dateModified="2026-02-28"
+  articleSection="How-to / Admin"
+  inLanguage="en"
+  proficiencyLevel="Intermediate"
+  operatingSystem="Linux"
+  mainEntityOfPage="https://quickstack.dev/docs/how-to/admin/cluster-monitoring"
+/>
+
+# Cluster Monitoring
+
+## Accessing the monitoring view
+
+Go to **Settings** → **Monitoring** to see CPU, memory, and disk usage across all cluster nodes.
+
+<img  src="/img/docs/manage-quickstack-cluster/cluster-monitoring/cluster-monitoring-overview.png" alt="Cluster Monitoring Overview" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '700px'
+}} />
+
+## Understanding metrics
+
+### Color coding
+
+| Color | Threshold | Action |
+|-------|-----------|--------|
+| 🟢 Green | < 80% used | Healthy |
+| 🟡 Yellow | 80–90% used | Monitor closely |
+| 🔴 Red | > 90% used | Action needed |
+
+When usage exceeds 90%, you may see: failed deployments, backup failures, app crashes, or system instability.
+
+### Disk metrics
+
+Three disk metrics are shown per node:
+
+- **Used Disk Space** — currently in use
+- **Free but Unusable Disk Space** — free but reserved by the OS
+- **Available Disk Space** — usable by deployed applications
+
+Used + Free but Unusable = total "occupied" disk space on the node.
+
+## What to do when resources are high
+
+| Resource | Over 90% action |
+|----------|----------------|
+| **CPU** | Optimize workloads or add more nodes |
+| **RAM** | Review container memory limits; add RAM or nodes |
+| **Disk** | Run [disk cleanup](./updates-and-maintenance.mdx#disk-space--cleanup); expand disk or add nodes |
+
+## Related
+
+- [Cluster nodes](./cluster-nodes.mdx) — add/remove nodes
+- [Updates & maintenance](./updates-and-maintenance.mdx) — disk cleanup tools

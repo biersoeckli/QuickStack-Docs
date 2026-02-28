@@ -1,0 +1,88 @@
+---
+sidebar_position: 1
+title: "Redeploy & Rollbacks"
+description: "How deployment works in QuickStack: when changes take effect, environment variables, and common gotchas."
+keywords: ["QuickStack deploy", "redeploy", "rollback", "environment variables", "config change"]
+---
+
+# Redeploy & Rollbacks
+
+## How deployment works
+
+In QuickStack, **clicking Deploy is the only way to apply changes**. Configuration edits (env vars, storage, domains, Git source, image name) are staged in the database but do not affect the running container until you click **Deploy**.
+
+This is intentional: you can batch multiple config changes and apply them all at once.
+
+### What "Deploy" does
+
+1. For Git-source apps: pulls the latest commit from the configured branch, builds a new Docker image via BuildKit, pushes it to the internal registry.
+2. For Docker image apps: pulls the specified image tag from the configured registry.
+3. Applies all staged config changes (env vars, volumes, ports, network policies, health checks, etc.).
+4. Performs a rolling update: new pods are started, old pods are terminated once the new ones are healthy.
+
+:::info No zero-downtime guarantee without health checks
+Without a configured [health check](../observability/health-checks.mdx), Kubernetes marks pods ready as soon as they start, which may be before your app is actually serving requests. Configure a readiness probe for zero-downtime deploys.
+:::
+
+## Environment variables {#environment-variables}
+
+Environment variables are key-value pairs injected at runtime. They are stored in the QuickStack database and applied during the next deploy.
+
+### Editing env vars
+
+1. Open your app and go to the **Environment** tab.
+2. Edit variables in the text area, one `KEY=VALUE` per line.
+3. Click **Save**.
+4. Click **Deploy** for changes to take effect.
+
+```env
+DATABASE_URL=postgres://user:pass@svc-app-xyz:5432/db
+API_KEY=secret-api-key-123
+NODE_ENV=production
+PORT=3000
+```
+
+:::warning Redeployment required
+Changing env vars does not update the running container. You must **Deploy** again.
+:::
+
+:::info Database apps
+For database applications deployed via templates, do not manually change automatically generated env vars — this may break the pre-configured setup.
+:::
+
+### Referencing other apps (internal service discovery)
+
+To connect to another app in the same project, use its internal hostname:
+
+```env
+DATABASE_URL=postgres://user:pass@svc-app-xyz:5432/mydb
+REDIS_URL=redis://svc-app-abc:6379
+```
+
+Find the internal hostname in the **Domains** tab → **Internal Hostnames** section of the target app.
+
+## Rollbacks
+
+QuickStack keeps a history of deployments. To roll back:
+
+1. Open the app and go to the **Overview** tab.
+2. In the deployment history list, find the deployment you want to restore.
+3. Click **Redeploy** on that entry.
+
+This re-applies the exact image and configuration from that deployment.
+
+## Common gotchas
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Config change has no effect | Deploy was not clicked after saving | Click **Deploy** |
+| App crashes after deploy | Bad env var value or missing secret | Check logs; fix the env var; redeploy |
+| Git build uses old code | Branch has unstaged commits / wrong branch | Verify branch setting; push commits |
+| Rolling update stuck | New pod failing health check | Check health check config; fix app startup |
+| Old pods not terminating | Kubernetes drain taking time | Wait or check for stuck finalizers via kubectl |
+
+## Advanced: force-pull latest image tag
+
+For Docker image apps using a mutable tag (e.g. `:latest`), clicking **Deploy** always pulls the latest version of that tag. There is no caching of mutable tags.
+
+For Git apps, Deploy always builds from the latest commit on the configured branch.

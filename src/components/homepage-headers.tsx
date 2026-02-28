@@ -39,7 +39,7 @@ export function HomepageHeader() {
         <div className={styles.buttons + ' gap-4'}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
+            to="/docs">
             Docs
           </Link>
           <Link
