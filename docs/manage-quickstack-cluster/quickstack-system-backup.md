@@ -55,8 +55,6 @@ QuickStack provides integrated tools for creating and restoring complete system 
     *   Choose a backup from the list.
     *   The backup file will be downloaded to your local machine.
 
-<!-- Placeholder for screenshot: System backup download interface -->
-
 ### Restoring a System Backup
 
 1.  **Access Backup Restore:**
@@ -71,8 +69,6 @@ QuickStack provides integrated tools for creating and restoring complete system 
     *   QuickStack will replace the current database with the uploaded backup.
     *   The system will restart automatically to apply the restored configuration.
     *   All current data will be replaced with the backup data.
-
-<!-- Placeholder for screenshot: System backup restore interface -->
 
 :::danger Critical Warning
 Restoring a system backup **replaces all current configuration data** including:

@@ -61,7 +61,6 @@ The user management system in QuickStack consists of:
     *   **Group:** Select a group to assign permissions
 3.  Click **Save** to create the user.
 
-<!-- TODO: Screenshot placeholder - create-user-dialog.png -->
 <img src="/img/docs/manage-quickstack-cluster/user-management/create-user.png" alt="Create User Dialog" style={{
     marginBottom: '20px',
     marginLeft: '30px',
@@ -101,7 +100,6 @@ QuickStack includes a built-in **Admin** group with full access to all features.
 3.  Configure project permissions (see below).
 4.  Click **Save**.
 
-<!-- TODO: Screenshot placeholder - create-group-dialog.png -->
 <img src="/img/docs/manage-quickstack-cluster/user-management/create-group-screenshot.png" alt="Create Group Dialog" style={{
     marginBottom: '20px',
     marginLeft: '30px',

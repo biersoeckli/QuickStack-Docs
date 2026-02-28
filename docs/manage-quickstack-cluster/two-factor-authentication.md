@@ -57,7 +57,6 @@ QuickStack supports **TOTP (Time-based One-Time Password)** authentication, whic
 1.  Locate the **2FA Settings** card.
 2.  Click the **Enable 2FA** button.
 
-<!-- TODO: Screenshot placeholder - 2fa-settings-card.png -->
 <img src="/img/docs/manage-quickstack-cluster/two-factor-authentication/2fa-step-1.png" alt="2FA Settings Card" style={{
     marginBottom: '20px',
     marginLeft: '30px',
@@ -72,7 +71,6 @@ QuickStack supports **TOTP (Time-based One-Time Password)** authentication, whic
 3.  Scan the QR code with your authenticator app.
 4.  The app will add a new entry for QuickStack.
 
-<!-- TODO: Screenshot placeholder - 2fa-qr-code-dialog.png -->
 <img src="/img/docs/manage-quickstack-cluster/two-factor-authentication/2fa-step-2.png" alt="2FA QR Code Dialog" style={{
     marginBottom: '20px',
     marginLeft: '30px',
