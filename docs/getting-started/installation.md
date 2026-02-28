@@ -80,10 +80,10 @@ Follow these steps to install QuickStack:
     maxWidth: '500px'
 }} />
 
-1. **Wait for the Installation:**
+4. **Wait for the Installation:**
     The installation script will now automatically install QuickStack and all necessary components on your Server. Please be patient as this process may take a few minutes. You'll see text scrolling in your terminal - this is normal.
 
-2. **Access the QuickStack Web UI:**
+5. **Access the QuickStack Web UI:**
    After the installation completes, open your web browser and navigate to the following URL. You must replace `your_server_ip` with the actual IP address of your Server.
     ```
     http://your_server_ip:30000
@@ -92,8 +92,8 @@ Follow these steps to install QuickStack:
 Make sure your firewall settings allow inbound traffic on port 30000, 80 and 443.
 :::
 
-1.  **Create a User Account**
-   You will be prompted to create a new user account when accessing the web UI for the first time. Complete the registration form by providing an email, a password and an optional quickstack domain.
+6.  **Create a User Account:**
+   You will be prompted to create a new user account when accessing the web UI for the first time. Complete the registration form by providing an email, a password and an optional QuickStack domain.
 
 :::info Hint
 If you already have a domain assigned to your QuickStacks Server IP, you can enter it in this field. This allows you to access the QuickStack UI through your domain. Leave it blank if you just want to use your IP address or want to configure it later.
@@ -123,4 +123,4 @@ If you encounter any issues during the installation process, here are some commo
     *   Verify that you have an active internet connection on your Server.
 * **Web UI not showing up**
     * Your firewall settings must allow traffic on port 80, 443 and 30000.
-    * Make sure the Quickstack installation was fully completed and that no errors were displayed on the Termina during the Installation Process.
+    * Make sure the QuickStack installation was fully completed and that no errors were displayed in the terminal during the installation process.

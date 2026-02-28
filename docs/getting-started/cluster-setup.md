@@ -99,7 +99,7 @@ style={{
    Replace `your_master_ip` with the actual IP or domain of your master node.
 
 2.  **Navigate to the Cluster Settings:**
-    Click on "Settings" and then click on "Cluster". You will see an overview of all your servers wich are part of the cluster.
+    Click on **Settings** → **QuickStack Server** → **Cluster** tab. You will see an overview of all servers that are part of the cluster.
 
 <img  src="/img/docs/getting-started/cluster/cluster-overview-one-node.png" alt="QuickStack Logo" style={{
     marginBottom: '20px',
@@ -157,6 +157,7 @@ If you encounter any issues, here are some tips:
 *   **Nodes Not Joining:**
     *  Check that the `JOIN_TOKEN` hasn't changed on the Master Node. If the token has changed you need to run the command `sudo cat /var/lib/rancher/k3s/server/node-token` on your master node to retrieve a new one.
     *   Ensure that your additional server has access to the internet.
+    *   Make sure you replaced `MASTER_IP` with the correct IP address in the jpin command.
 *   **No apps are scheduled on the new node:**
     * Ensure that the second node is connected to the same network as the master node.
     * Check the firewall settings on the second node.

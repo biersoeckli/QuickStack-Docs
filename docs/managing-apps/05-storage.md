@@ -1,17 +1,17 @@
 ---
 sidebar_position: 5
-title: "Configuring Storage (Volumes)"
-description: "Learn how to configure persistent storage for your QuickStack applications using volumes."
-keywords: ["QuickStack", "volumes", "persistent storage", "storage", "mount path"]
+title: "Storage: Volumes & File Mounts"
+description: "Learn how to configure persistent storage volumes and mount configuration files into your QuickStack applications."
+keywords: ["QuickStack", "volumes", "persistent storage", "storage", "mount path", "file mount", "ConfigMap", "config files"]
 ---
 
 import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
 
 <SchemaOrg 
   type="TechArticle"
-  title="Configuring Persistent Storage (Volumes) for QuickStack Applications"
-  description="A comprehensive guide to setting up and managing persistent storage volumes for your applications in QuickStack."
-  keywords="QuickStack, volumes, persistent storage, storage, mount path, container storage, Longhorn, data persistence"
+  title="Storage: Volumes & File Mounts in QuickStack"
+  description="A comprehensive guide to setting up persistent storage volumes and mounting configuration files into your QuickStack applications."
+  keywords="QuickStack, volumes, persistent storage, storage, mount path, container storage, Longhorn, data persistence, file mount, ConfigMap, config files"
   datePublished="2025-06-17"
   dateModified="2025-06-17"
   articleSection="Managing Apps"
@@ -29,9 +29,9 @@ import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
   }}
 />
 
-# Configuring Storage (Volumes)
+# Storage: Volumes & File Mounts
 
-Persistent storage is critical for applications that need to retain data across deployments or restarts. QuickStack simplifies managing this storage using **volumes**. This guide will walk you through adding, configuring, and managing volumes for your QuickStack applications.
+QuickStack provides two ways to handle storage needs in your applications: **Volumes** for persistent data storage, and **File Mounts** for injecting configuration files directly into containers.
 
 ## Understanding Volumes
 
@@ -116,3 +116,42 @@ The "Storage" tab in the App settings area allows you to:
     *   Check the application's permissions within the container to ensure it has write access to the mount path.
 *   **Incorrect Volume Size:**  You can increase the size of existing volumes.
 *   **Access Mode Issues:** Make sure you have chosen the correct Access Mode for the desired replication of your app.
+
+---
+
+## File Mounts
+
+File mounts allow you to inject configuration files directly into your containers. Unlike volumes (which provide persistent storage), file mounts are designed for small, text-based configuration files that your application needs at a specific path.
+
+:::info How it Works
+QuickStack stores the file content and mounts it as a read-only file at the specified path inside your container.
+:::
+
+File mounts are useful when:
+- Your application expects a configuration file at a specific path (e.g., `nginx.conf`, `config.json`)
+- You need to inject certificates or key files
+- You want to customize application behavior without rebuilding the image
+
+### Adding a File Mount
+
+1. **Go to Storage Tab:** Open your application and click on the **Storage** tab.
+2. **Locate File Mount Section:** Scroll to the **File Mount** card.
+3. **Add File Mount:** Click the **Add File Mount** button.
+4. **Configure the File:**
+   - **Mount Path:** The full path where the file should appear inside the container (e.g., `/etc/nginx/nginx.conf`)
+   - **File Content:** The content of the file
+5. **Save and Deploy:** Click **Save**, then redeploy the application for changes to take effect.
+
+:::warning Redeployment Required
+All changes to file mounts require a redeployment to take effect. Mounted files are read-only and cannot be modified by the running application.
+:::
+
+### File Mounts vs Volumes
+
+| Feature | File Mount | Volume |
+|---------|------------|--------|
+| **Purpose** | Configuration files | Persistent data storage |
+| **Size** | Small files (KB) | Large data (GB) |
+| **Persistence** | Stored in QuickStack DB | Stored on disk |
+| **Access** | Read-only | Read-write |
+| **Use Case** | Config files, certificates | Databases, uploads, logs |

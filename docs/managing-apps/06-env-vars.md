@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-title: "Env Vars"
+title: "Env Variables"
 description: "Learn how to manage environment variables for your QuickStack applications."
 keywords: ["QuickStack", "configuration", "environment variables", "env vars"]
 ---
@@ -59,3 +59,35 @@ Changing environment variables does not update the running application immediate
 :::info Database Apps
 For database applications deployed via templates, it is generally recommended **not** to modify environment variables manually, as this might break the pre-configured setup.
 :::
+
+## Common Use Cases
+
+### Application Configuration
+```env
+NODE_ENV=production
+PORT=3000
+LOG_LEVEL=info
+```
+
+### External Service Connections
+```env
+REDIS_URL=redis://redis-host:6379
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+```
+
+### Feature Flags
+```env
+FEATURE_NEW_UI=true
+ENABLE_ANALYTICS=false
+```
+
+## Referencing Other Apps
+
+To connect to another app within the same project (e.g., a database), use the internal hostname:
+
+```env
+DATABASE_URL=postgres://user:pass@svc-app-xyz:5432/mydb
+```
+
+You can find the internal hostname in the **Domains** tab of the target application.

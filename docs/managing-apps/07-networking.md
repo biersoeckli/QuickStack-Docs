@@ -60,3 +60,22 @@ To access the application from other apps within the same project, you find a li
 :::warning Redeployment Required
 Like environment variables, changing the internal port requires a **Redeployment** of the application to update the networking configuration.
 :::
+
+## Service-to-Service Communication
+
+Applications within the same project can communicate using internal hostnames. This is useful for:
+
+- Connecting applications to databases
+- Microservice architectures
+- Backend services that shouldn't be publicly accessible
+
+### Example Connection String
+
+If you have a PostgreSQL database named "my-db" in your project, you can connect from another app using:
+
+```
+postgres://user:password@svc-app-xyz:5432/database
+```
+
+Find the exact hostname in the database app's **Domains** tab under "Internal Hostnames".
+

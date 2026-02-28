@@ -192,5 +192,14 @@ QuickStack also supports uploading and restoring complete QuickStack system conf
 
 ## Troubleshooting
 
-*   **Backup Schedules not working:** Check the cron expression and the server time.
-*   **Backups Fail to Upload:** Ensure that the provided s3 target is working and QuickStack is correctly configured to access the bucket. You should also verify that there is enough space available in your object storage bucket.
+*   **Backup Schedules not working:** 
+    *   Check the cron expression syntax at [crontab.guru](https://crontab.guru/).
+    *   Verify server time is correct.
+    *   Check if the S3 target is properly configured.
+*   **Backups Fail to Upload:** 
+    *   Ensure that the provided S3 target is working and QuickStack is correctly configured to access the bucket.
+    *   Verify that there is enough space available in your object storage bucket.
+    *   Check S3 credentials and permissions (QuickStack needs read, write, and delete permissions).
+*   **Database Backup Fails:**
+    *   Ensure the database is running and accessible.
+    *   Check the backup pod logs in the Backups page for specific errors.

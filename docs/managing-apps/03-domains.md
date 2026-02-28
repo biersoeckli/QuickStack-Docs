@@ -95,10 +95,10 @@ Once the deployment process is finished, access your application by entering you
     *   Try using a different port for the App.
     *   Ensure that the DNS settings of the domain are correctly configured to point to the server IP address.
     *   Clear your browser cache.
-*   **SSL certificate validation fails**
+*   **SSL certificate validation fails:**
     *   It may take a few minutes for the DNS settings to propagate.
-*   **Node Port Configuration**
-    * Currently QuickStack doesn't support forwarding traffic from an other node port than 80 or 443 to your application.
+    *   Ensure Let's Encrypt email is configured in **Settings** → **QuickStack Server** → **Networking / Traefik**.
+*   **Node Port Configuration:**
+    *   Currently QuickStack doesn't support forwarding traffic from a port other than 80 or 443 to your application.
 *   **Still having problems?**
     *   Create an issue on our [GitHub repository](https://github.com/biersoeckli/quickstack/issues)
-

@@ -100,7 +100,7 @@ Network policy changes require a redeployment of the application to be applied. 
 :::
 
 
-## Tipp
+## Tip: Network Graph Visualization
 
 To get a better overview of the network policies applied for a project, you can open the project overview "Network Graph" tab. Here you can see all apps and their network connections visually represented.
 
@@ -111,3 +111,21 @@ To get a better overview of the network policies applied for a project, you can 
     maxWidth: '800px',
     width: '90%'
 }} />
+
+## Troubleshooting
+
+### Application Can't Connect to Database
+
+*   Check if the database app has a restrictive network policy (e.g., "Deny All").
+*   Ensure both apps are in the same project.
+*   Try setting the database policy to "Allow All" temporarily for testing.
+
+### Application Can't Access External APIs
+
+*   Your app may have "Project Apps Only" or "Deny All" egress policy.
+*   Switch to "Allow All" or "Internet Only" to allow external connections.
+
+### All Applications Lost Connectivity
+
+If network policies cause widespread issues, administrators can remove all policies via **Settings** → **QuickStack Server** → **Maintenance** → **Delete All Network Policies**. **Use with caution** as this will remove all restrictions and allow all traffic between applications until the next deployment of each app.
+

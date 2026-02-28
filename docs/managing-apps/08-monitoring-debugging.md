@@ -110,5 +110,5 @@ To end your session, click the **Disconnect Session** button or simply close the
 ## Limitations
 
 *   **Permissions:** The Terminal feature requires **Write** access to the project. Read-only users cannot execute commands in containers.
-*   **Container State:** You can only connect to containers that are in a `Running` state. If a container is crashing or restarting loop, you may not be able to establish a connection.
+*   **Container State:** You can only connect to containers that are in a `Running` state. If a container is crashing or in a restart loop, you may not be able to establish a connection.
 *   **Shell Availability:** The `bash` option requires the `bash` binary to be installed in your container image. If it fails, try using `sh` instead.

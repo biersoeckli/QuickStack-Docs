@@ -63,3 +63,48 @@ A distributed block storage system for Kubernetes.
 
 ## k3s
 A lightweight Kubernetes distribution designed for production workloads in unattended, resource-constrained, and remote locations.
+
+## Basic Authentication
+HTTP-level username/password protection implemented via Traefik middleware, adding a login prompt before accessing an application.
+
+## Two-Factor Authentication (2FA)
+An additional security layer requiring users to provide a time-based code from an authenticator app alongside their password.
+
+## TOTP
+Time-based One-Time Password - a standard algorithm used by authenticator apps to generate 6-digit codes that change every 30 seconds.
+
+## User Group
+A collection of permissions that can be assigned to users, defining what projects and applications they can access and modify.
+
+## Replica
+An instance of an application running in the cluster. Multiple replicas provide high availability and load distribution.
+
+## CPU Limit
+The maximum amount of CPU resources a container can use, measured in millicores (m). 1000m equals one full CPU core.
+
+## Memory Limit
+The maximum amount of RAM a container can use. Exceeding this limit causes the container to be terminated (OOMKilled).
+
+## Memory Reservation
+The guaranteed amount of memory allocated to a container that Kubernetes ensures is always available.
+
+## System Upgrade Controller
+A Kubernetes controller that manages automated upgrades of k3s cluster components.
+
+## Worker Node
+A server in the cluster that runs application workloads but does not manage the Kubernetes control plane.
+
+## Master Node
+The primary server in a k3s cluster that runs the control plane components and can optionally run workloads.
+
+## Cordon
+A Kubernetes operation that marks a node as unschedulable, preventing new pods from being placed on it.
+
+## Drain
+A Kubernetes operation that evicts all pods from a node, typically used before maintenance or removal.
+
+## Webhook
+An HTTP callback that triggers an action when a specific event occurs, commonly used to automate deployments from Git repositories.
+
+## Health Check
+A probe that monitors application health and automatically restarts unresponsive containers or removes them from load balancing.

@@ -113,4 +113,9 @@ Copying the values from the credentials is only available if your QuickStack ins
 :::
 
 ### External Access (not recommended)
-By default, databases are not exposed to the public internet for security reasons. If you need to access the database from your local machine (e.g., for development), you can assing a public domain in the **Domains** tab of the database app settings.
+By default, databases are not exposed to the public internet for security reasons. If you need to access the database from your local machine (e.g., for development), you can assign a public domain in the **Domains** tab of the database app settings.
+
+:::danger Security Warning
+Exposing databases to the public internet is a security risk. Only do this for testing purposes.
+:::
+

@@ -76,7 +76,7 @@ When CPU / RAM / Disk usage exceeds 80%, QuickStack displays a warning. Critical
 For the disk usage, three metrics are shown:
 - **Used Disk Space:** Amount of disk space currently in use on the node
 - **Free but unusable Disk Space:** Disk space that is free but cannot be used due to system reservations 
-- **Available Disk Space:** Remaining disk space available for use by deloyed applications
+- **Available Disk Space:** Remaining disk space available for use by deployed applications
 
 Used and Free but unusable disk space together represent the total "used" disk space on the node.
 :::

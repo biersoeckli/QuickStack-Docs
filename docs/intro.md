@@ -78,7 +78,8 @@ QuickStack is ideal for:
 *   **System administrators:** Who want to manage their infrastructure through a user friendly interface.
 *   **Anyone** wanting an easy way to deploy applications on their own servers.
 
-## Wich tools uses QuickStack under the hood?
+## Which Tools Does QuickStack Use Under the Hood?
+
 * **[k3s](https://k3s.io/)**: Lightweight Kubernetes
 * **[Traefik](https://traefik.io/)**: Reverse Proxy and Load Balancer
 * **[Longhorn](https://longhorn.io/)**: Distributed Block Storage
@@ -91,6 +92,7 @@ Ready to jump in? Here's what we recommend you do:
 
 1.  **[Installation](./getting-started/installation.md):** Start with installing QuickStack on your server, follow this guide for instructions.
 2.  **[Setting up a Cluster](./getting-started/cluster-setup.md):** Set up a cluster if you want to deploy applications across multiple servers.
+3.  **[Deploy Your First App](./managing-apps/01-from-git-source.md):** Deploy an application from a Git repository or Docker image.
 
 ## Community and Support
 

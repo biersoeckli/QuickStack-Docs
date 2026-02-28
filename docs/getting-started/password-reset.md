@@ -51,6 +51,10 @@ After applying the command, a generated password will be displayed in the termin
 
 <img  src="/img/docs/getting-started/password-reset/screenshot-password-change-script.png" alt="QuickStack admin password change" style={{
     marginBottom: '20px',
-    marginLeft: 'opx',
+    marginLeft: '0',
     maxWidth: '500px'
 }} />
+
+:::tip Change Password After Login
+After logging in with the generated password, navigate to **Settings** → **Profile** to change your password to something more memorable. You can also enable [Two-Factor Authentication](../manage-quickstack-cluster/two-factor-authentication.md) for additional security.
+:::
