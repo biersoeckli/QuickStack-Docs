@@ -154,4 +154,3 @@ You have successfully deployed an application using a Docker image source in Qui
 - **[Configure a Domain](./03-domains.md):** Make your app accessible via a custom domain
 - **[Set Environment Variables](./06-env-vars.md):** Configure your application with environment variables
 - **[Add Persistent Storage](./05-storage.md):** Store data that persists across deployments
-- **[Configure Resource Limits](./12-container-configuration.md):** Set CPU and memory limits for your container
