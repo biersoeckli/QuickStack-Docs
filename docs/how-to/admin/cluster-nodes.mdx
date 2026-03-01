@@ -23,14 +23,63 @@ import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
 
 # Cluster Nodes
 
-QuickStack runs on a k3s cluster. The initial server is the **master node**; additional servers you join are **worker nodes**.
+QuickStack allows you to scale your applications and improve availability by setting up a cluster across multiple Virtual Private Servers (VPS). This guide walks you through the process of connecting additional servers to your primary QuickStack installation. The initial server is the **master node**; additional servers you join are **worker nodes**.
+
+## Understanding the Concept of a Cluster
+
+* **What is a Cluster?**  A cluster is a group of computers (in this case, VPSs) that work together as a single system. By distributing your applications across multiple servers, you can handle more users, and you provide a more stable environment if one server has a problem.
+  * **Single Node Cluster:** A single node cluster is a QuickStack installation on a single server. This is the default setup when you install QuickStack for the first time.
+  * **Multi Node Cluster:** A multi-node cluster is a QuickStack installation that spans multiple servers. Each server in the cluster is responsible for running a part of the applications you deploy. It is recommended to use a private network for the communication between the servers.
+
+<table style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    width: '100%'
+}}>
+
+<tr>
+<td style={{
+    textAlign: 'center',
+    fontWeight: 'bold'
+}}>
+
+Single Node Cluster
+</td>
+<td style={{
+    textAlign: 'center',
+    fontWeight: 'bold'
+}}>
+
+Multi Node Cluster
+</td>
+</tr>
+
+<tr>
+<td>
+
+<img  src="/img/docs/getting-started/cluster/single-node.png" alt="Single Node Cluster"
+ style={{
+    maxWidth: '100%'
+}} />
+
+</td>
+<td>
+
+<img  src="/img/docs/getting-started/cluster/multi-node-cluster.png" alt="Multi Node Cluster"
+style={{
+    maxWidth: '100%'
+}} />
+
+</td>
+</tr>
+</table>
 
 ## Viewing cluster nodes
 
 1. Go to **QuickStack Settings** → **Cluster**.
 2. All nodes and their status are listed.
 
-<img src="/img/docs/manage-quickstack-cluster/cluster-node-management/cluster-nodes-overview.png" alt="Cluster Nodes Overview" style={{
+<img src="/img/docs/getting-started/cluster/cluster-overview-one-node.png" alt="Cluster Nodes Overview" style={{
     marginBottom: '20px',
     marginLeft: '30px',
     maxWidth: '800px',
@@ -57,7 +106,7 @@ Each node shows:
 2. Click **Add Cluster Node**.
 3. Copy the displayed command.
 
-<img src="/img/docs/manage-quickstack-cluster/cluster-node-management/add-cluster-node-dialog.png" alt="Add Cluster Node Dialog" style={{
+<img src="/img/docs/getting-started/cluster/cluster-add-node.png" alt="Add Cluster Node Dialog" style={{
     marginBottom: '20px',
     marginLeft: '30px',
     maxWidth: '600px',
@@ -68,6 +117,13 @@ The command looks like:
 ```bash
 curl -sfL https://get.quickstack.dev/setup-worker.sh | K3S_URL=https://MASTER_IP:6443 JOIN_TOKEN=K10... sh -
 ```
+
+:::tip Node token not showing?
+Retrieve it manually from the master node:
+```bash
+sudo cat /var/lib/rancher/k3s/server/node-token
+```
+:::
 
 ### Step 2: Configure the command
 
@@ -86,49 +142,31 @@ curl -sfL https://get.quickstack.dev/setup-worker.sh | K3S_URL=https://192.168.1
 
 Return to **QuickStack Settings** → **Cluster**. The new node appears within a few minutes. Verify all status indicators are green.
 
-:::tip Node token not showing?
-Retrieve it manually from the master node:
-```bash
-sudo cat /var/lib/rancher/k3s/server/node-token
-```
-:::
-
 ## Manage node scheduling
 
-### Deactivate a node (cordon)
+### Deactivate a node (drain)
 
 Prevents new pods from being scheduled on this node. Existing workloads continue running.
 
 1. Find the node in the cluster overview.
 2. Click the node and select **Deactivate Node**.
 
+:::warning
+Deactivating moves existing workloads (drain). 
+:::
+
 ### Reactivate a node (uncordon)
 
 1. Find the deactivated node.
 2. Click **Activate Node**.
 
-:::warning
-Deactivating does not move existing workloads. To drain a node, deactivate it and then redeploy or use `kubectl drain`.
-:::
-
 ## Remove a worker node
 
-### 1. Drain the node (on master)
-
-```bash
-kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
-```
-
-### 2. Delete the node (on master)
+- 1. Deactivate a node (drain)
+- 2. Delete the node (on master)
 
 ```bash
 kubectl delete node <node-name>
-```
-
-### 3. Uninstall k3s (on the worker)
-
-```bash
-/usr/local/bin/k3s-agent-uninstall.sh
 ```
 
 ## Troubleshooting
