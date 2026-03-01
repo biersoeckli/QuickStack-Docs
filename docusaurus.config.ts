@@ -111,10 +111,47 @@ const config: Config = {
           onUntruncatedBlogPosts: 'warn',
         },*/
         sitemap: {
-          changefreq: 'weekly',
-          priority: 0.5,
           ignorePatterns: ['/tags/**', '/archive/**', '/404/**'],
           filename: 'sitemap.xml',
+          createSitemapItems: async (params) => {
+            const { defaultCreateSitemapItems, ...rest } = params;
+            const items = await defaultCreateSitemapItems(rest);
+            return items.map((item) => {
+              const url = item.url;
+
+              // Homepage — highest priority
+              if (url === 'https://quickstack.dev/' || url === 'https://quickstack.dev') {
+                return { ...item, priority: 1.0, changefreq: 'weekly' };
+              }
+
+              // Docs root / landing page
+              if (url === 'https://quickstack.dev/docs' || url === 'https://quickstack.dev/docs/') {
+                return { ...item, priority: 0.95, changefreq: 'weekly' };
+              }
+
+              // Tutorials — high value onboarding content
+              if (url.includes('/docs/tutorials/')) {
+                return { ...item, priority: 0.85, changefreq: 'weekly' };
+              }
+
+              // How-to guides — frequently updated operational docs
+              if (url.includes('/docs/how-to/')) {
+                return { ...item, priority: 0.75, changefreq: 'weekly' };
+              }
+
+              // Reference pages — stable, lower churn
+              if (url.includes('/docs/reference/')) {
+                return { ...item, priority: 0.6, changefreq: 'weekly' };
+              }
+
+              // All other doc pages
+              if (url.includes('/docs/')) {
+                return { ...item, priority: 0.5, changefreq: 'weekly' };
+              }
+
+              return { ...item, priority: 0.4, changefreq: 'weekly' };
+            });
+          },
         },
         theme: {
           customCss: './src/css/custom.css',
