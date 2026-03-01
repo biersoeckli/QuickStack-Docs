@@ -36,20 +36,6 @@ QuickStack runs isolated backup containers that connect to your managed database
 | **PostgreSQL** | `pg_dump` | `.tar.gz` |
 | **MongoDB** | `mongodump` | `.tar.gz` |
 
-## Monitoring
-
-Navigate to **Backups** in the main menu. Click into any failed backup entry to view the backup pod logs.
-
-## Restoring a database dump
-
-QuickStack does not yet have a built-in restore UI. To restore:
-
-1. Download the backup archive from the **Backups** page.
-2. Extract and restore using native database tools against a running instance:
-   - **PostgreSQL:** `psql` or `pg_restore`
-   - **MariaDB/MySQL:** `mysql` CLI
-   - **MongoDB:** `mongorestore`
-
 ## Troubleshooting
 
 | Problem | Fix |
