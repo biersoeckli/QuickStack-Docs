@@ -48,7 +48,7 @@ export default function Home(): JSX.Element {
         {
           "@type": "ReadAction",
           "target": [
-            "https://quickstack.dev/docs/intro",
+            "https://quickstack.dev/docs",
             "https://quickstack.dev/docs/getting-started/installation",
             "https://quickstack.dev/docs/getting-started/cluster-setup",
             "https://quickstack.dev/docs/getting-started/password-reset",
@@ -66,7 +66,7 @@ export default function Home(): JSX.Element {
           "@type": "WebPage",
           "name": "Introduction to QuickStack",
           "description": "An overview of QuickStack and its features",
-          "url": "https://quickstack.dev/docs/intro"
+          "url": "https://quickstack.dev/docs"
         },
         {
           "@type": "WebPage",

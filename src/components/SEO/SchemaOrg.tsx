@@ -186,7 +186,7 @@ export default function SchemaOrg(props: {
     const schema = formatSchema();
 
     // Generate breadcrumb schema if enabled (default true for nested pages)
-    const shouldIncludeBreadcrumb = props.includeBreadcrumb !== false && pathname !== '/' && pathname !== '/docs/intro';
+    const shouldIncludeBreadcrumb = props.includeBreadcrumb !== false && pathname !== '/' && pathname !== '/docs';
     
     const generateBreadcrumbs = () => {
         if (props?.breadcrumbs) {
@@ -199,7 +199,7 @@ export default function SchemaOrg(props: {
         ];
 
         if (pathname.includes('/docs')) {
-            breadcrumbs.push({ name: 'Documentation', url: '/docs/intro' });
+            breadcrumbs.push({ name: 'Documentation', url: '/docs' });
         }
 
         let currentPath = '';

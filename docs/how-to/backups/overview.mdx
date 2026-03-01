@@ -1,0 +1,52 @@
+---
+sidebar_position: 1
+title: "Backups Overview"
+description: "Overview of QuickStack's backup model: what gets backed up, how backups work, and where to find them."
+keywords: ["QuickStack backups", "data protection", "backup overview", "S3"]
+---
+
+# Backups Overview
+
+QuickStack backs up two types of application data:
+
+| Type | What's included | Destination |
+|------|----------------|-------------|
+| **Volume backups** | Persistent storage volumes (file data) | S3-compatible bucket |
+| **Database backups** | MariaDB, PostgreSQL, MongoDB dumps | S3-compatible bucket |
+
+In addition, the QuickStack configuration itself (projects, users, app settings) can be backed up separately — see [System Backups](./system-backups.mdx).
+
+## How backups work
+
+All backup destinations are **S3-compatible buckets**. You configure one or more S3 targets once, then reference them from individual backup schedules.
+
+Backups run on a **cron schedule** you define per volume or database. QuickStack automatically keeps the most recent N backups (configurable retention) and deletes older ones when the limit is exceeded.
+
+## Where to find backups
+
+- Navigate to **Backups** in the main menu to see all configured schedules with:
+  - Last run time and status (success/failure)
+  - Backup size and storage location
+  - Manual trigger button
+
+<img  src="/img/docs/backups/backups-overview.png" alt="Backups Overview" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+## Setup checklist
+
+1. [Configure at least one S3 target](./s3-targets.mdx)
+2. [Set up volume backup schedules](./volume-backups.mdx) for each app with persistent storage
+3. [Set up database backup schedules](./database-backups.mdx) for managed databases
+4. [Configure system backups](./system-backups.mdx) for QuickStack configuration
+
+## Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| Backup not running | Verify cron expression syntax; check server time |
+| Upload fails | Confirm S3 credentials; verify bucket exists with read/write/delete permissions |
+| Database backup fails | Ensure database is running; check backup pod logs on the Backups page |

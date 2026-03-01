@@ -1,0 +1,75 @@
+---
+sidebar_position: 5
+title: "Basic Authentication"
+description: "Protect your QuickStack applications with HTTP Basic Authentication via Traefik middleware."
+keywords: ["QuickStack basic auth", "HTTP authentication", "password protection", "security", "Traefik middleware"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="TechArticle"
+  title="Basic Authentication in QuickStack"
+  description="Protect your QuickStack applications with HTTP Basic Authentication via Traefik middleware."
+  keywords="QuickStack, basic auth, HTTP authentication, password protection, security, Traefik middleware"
+  datePublished="2026-01-31"
+  dateModified="2026-02-28"
+  articleSection="How-to / Networking"
+  inLanguage="en"
+  proficiencyLevel="Beginner"
+  operatingSystem="Linux"
+  mainEntityOfPage="https://quickstack.dev/docs/how-to/networking/basic-auth"
+/>
+
+# Basic Authentication
+
+Basic Authentication adds a username/password prompt in front of your application at the ingress level. It is implemented via Traefik middleware — your application code needs no changes.
+
+:::info How it works
+Traefik intercepts all requests and prompts for credentials before forwarding to your container. Authentication is per-domain; unauthenticated requests receive `401 Unauthorized`.
+:::
+
+## Adding credentials
+
+1. Open the app and go to the **Advanced** tab.
+2. Scroll to the **Basic Authentication** card.
+3. Click **Add Auth Credential**.
+4. Enter a **Username** and **Password**.
+5. Click **Save**, then **Deploy**.
+
+:::warning Redeployment required
+All credential changes (add, edit, remove) require a redeployment to take effect.
+:::
+
+## Use cases
+
+- Protecting staging environments from public access
+- Adding an extra layer to admin panels
+- Temporary access for clients or testers (easy to revoke)
+
+## Security considerations
+
+:::danger Limitations
+- Basic Auth transmits credentials as Base64 on every request — **always use HTTPS**.
+- Not suitable as the sole authentication mechanism for sensitive data.
+- No session — browsers re-send credentials on each request.
+:::
+
+:::tip Recommendations
+- Use strong, random passwords.
+- Rotate credentials when access is no longer needed.
+- Combine with [network policies](./network-policies.mdx) for sensitive apps.
+:::
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Login prompt not appearing | Ensure app was redeployed after adding credentials |
+| Prompt appears but credentials rejected | Clear browser cache; try incognito window |
+| No credentials configured | Check that at least one credential is saved |
+
+## Related
+
+- [Network policies](./network-policies.mdx) — Kubernetes-level traffic control
+- [Two-factor auth](../../how-to/admin/two-factor-auth.mdx) — 2FA for QuickStack UI access

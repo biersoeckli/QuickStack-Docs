@@ -1,0 +1,133 @@
+---
+sidebar_position: 2
+title: "Deploy Your First App from Git"
+description: "Deploy an application directly from a Git repository using QuickStack."
+keywords: ["QuickStack Git Deployment", "QuickStack Git Source", "QuickStack Git Deployment Guide"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="HowTo"
+  title="Deploy Your First App from Git with QuickStack"
+  description="A step-by-step tutorial for deploying an application directly from a Git repository using QuickStack."
+  keywords="QuickStack Git Deployment, QuickStack Git Source, QuickStack Git Deployment Guide"
+  datePublished="2025-06-17"
+  dateModified="2026-02-28"
+  inLanguage="en"
+  step={[
+    {
+      "@type": "HowToStep",
+      "name": "Create project and app",
+      "text": "Create a new project in QuickStack and add an empty app",
+      "url": "https://quickstack.dev/docs/tutorials/first-app-from-git#step-1-create-project-and-app"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Configure Git source",
+      "text": "Set source type to Git Repository and fill in repo URL, branch, Dockerfile path",
+      "url": "https://quickstack.dev/docs/tutorials/first-app-from-git#step-2-configure-git-source"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Deploy",
+      "text": "Click the Deploy button to build and run the container",
+      "url": "https://quickstack.dev/docs/tutorials/first-app-from-git#step-3-deploy"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Verify",
+      "text": "Check the Overview tab for green status and inspect build logs",
+      "url": "https://quickstack.dev/docs/tutorials/first-app-from-git#step-4-verify"
+    }
+  ]}
+  tool={["QuickStack", "Git Repository", "Dockerfile"]}
+  supply={["QuickStack installed on VPS", "Git repository with a valid Dockerfile"]}
+  proficiencyLevel="Beginner"
+  operatingSystem="Linux"
+/>
+
+# Deploy Your First App from Git
+
+QuickStack clones your repo, builds the Docker image from your Dockerfile, and runs it as a container. Every time you click **Deploy**, the current configuration is applied — changes to settings do not take effect automatically.
+
+## Prerequisites
+
+- QuickStack installed ([installation guide](./installation.mdx))
+- A Git repository with a valid `Dockerfile`
+
+## Required inputs
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| Repo URL | Yes | **HTTPS** URL (e.g. `https://github.com/org/repo.git`) |
+| Branch | Yes | Branch to build from (e.g. `main`) |
+| Dockerfile path | Yes | Relative path from repo root (e.g. `./Dockerfile`) |
+| Git Username + Token | No | Required for private repositories |
+
+## Step 1: Create project and app
+
+1. On the dashboard, click **Create Project** and give it a name.
+2. Open the project, click **Create App** → **Empty App**, give your app a name.
+
+<img  src="/img/docs/managing-apps/creating-apps/create-app-dialog.png" alt="QuickStack Create App Dialog" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px'
+}} />
+
+## Step 2: Configure Git source
+
+1. Open the app and go to **App Settings** → **General** tab.
+2. Set **Source type** to **Git Repository**.
+3. Fill in: Repo URL, Branch, Dockerfile path.
+4. For private repos: add Git username and Personal Access Token.
+5. Click **Save**.
+
+<img  src="/img/docs/managing-apps/creating-apps/enter-git-credentials.png" alt="QuickStack Git Credentials" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+## Step 3: Deploy
+
+Click the **Deploy** button at the top of the page. This triggers a fresh build from your Git branch and deploys the resulting container.
+
+:::info Deploy applies changes
+Any configuration change — Git source, env vars, storage, domains — only takes effect after clicking **Deploy**.
+:::
+
+## Step 4: Verify
+
+1. Open the **Overview** tab — status turns green when the app is running.
+2. Click **Show Logs** on the current deployment to inspect build and startup output in real time.
+
+<img  src="/img/docs/managing-apps/creating-apps/deployment-overview.png" alt="QuickStack Deployment Overview" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px'
+}} />
+
+<img  src="/img/docs/managing-apps/creating-apps/deployment-logs.png" alt="QuickStack Deployment Logs" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Build fails | Check deployment logs for Dockerfile errors |
+| Dockerfile not found | Verify the path is relative to repo root (e.g. `./Dockerfile`) |
+| App not reachable after deploy | Add a domain in the **Domains** tab with the correct internal container port |
+
+## Next steps
+
+- [Expose the app on a domain with HTTPS](./expose-app.mdx)
+- [Set environment variables](../how-to/deployments/redeploy-and-rollbacks.mdx#environment-variables)
+- [Add a volume](../how-to/storage/volumes.mdx)
+- [Enable webhooks for auto-deploy](../how-to/deployments/webhooks-auto-deploy.mdx)

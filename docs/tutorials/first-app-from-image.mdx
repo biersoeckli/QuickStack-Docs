@@ -1,0 +1,116 @@
+---
+sidebar_position: 3
+title: "Deploy Your First App from a Docker Image"
+description: "Deploy a Docker image from Docker Hub or any container registry using QuickStack."
+keywords: ["QuickStack Docker Image Deployment", "QuickStack Docker Image Source", "QuickStack Docker Image Deployment Guide"]
+---
+
+import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
+
+<SchemaOrg 
+  type="HowTo"
+  title="Deploy Your First App from a Docker Image with QuickStack"
+  description="A step-by-step tutorial for deploying a Docker image from Dockerhub or any container registry using QuickStack."
+  keywords="QuickStack Docker Image Deployment, QuickStack Docker Image Source, QuickStack Docker Image Deployment Guide"
+  datePublished="2025-06-17"
+  dateModified="2026-02-28"
+  inLanguage="en"
+  step={[
+    {
+      "@type": "HowToStep",
+      "name": "Create project and app",
+      "text": "Create a new project and configure a Docker image source",
+      "url": "https://quickstack.dev/docs/tutorials/first-app-from-image#step-1-create-project-and-app"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Deploy",
+      "text": "Click Deploy to pull the image and start the container",
+      "url": "https://quickstack.dev/docs/tutorials/first-app-from-image#step-2-deploy"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Verify",
+      "text": "Check deployment status and logs",
+      "url": "https://quickstack.dev/docs/tutorials/first-app-from-image#step-3-verify"
+    }
+  ]}
+  tool={["QuickStack", "Docker", "Container Registry"]}
+  supply={["QuickStack installed on VPS", "Docker image in a registry"]}
+  proficiencyLevel="Beginner"
+  operatingSystem="Linux"
+/>
+
+# Deploy Your First App from a Docker Image
+
+This guide walks you through deploying a Docker image from Docker Hub or any other container registry.
+
+## Prerequisites
+
+- QuickStack installed ([installation guide](./installation.mdx))
+- A Docker image available in a registry (e.g. `nginx:latest`, `username/app:tag`)
+
+## Step 1: Create project and app
+
+1. On the dashboard, click **Create Project** and give it a name.
+2. Open the project, click **Create App** → **Empty App**, give your app a name.
+
+<img  src="/img/docs/managing-apps/creating-apps/create-app-dialog.png" alt="QuickStack Create App Dialog" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+3. In **App Settings** → **General**, set **Source type** to **Docker Image**.
+4. Enter the full image name including tag (e.g. `nginx:latest` or `username/app-name:v1.2`).
+
+<img  src="/img/docs/managing-apps/creating-apps/enter-docker-image.png" alt="QuickStack Docker Image settings" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+5. Click **Save**.
+
+## Step 2: Deploy
+
+Click the **Deploy** button at the top of the page. QuickStack pulls the specified Docker image and starts the container.
+
+:::info Deploy applies changes
+Changes to app configuration (image name, env vars, ports, storage) are not applied until you click **Deploy**.
+:::
+
+## Step 3: Verify
+
+1. Open the **Overview** tab — check that the status indicator is green.
+2. Click **Show Logs** to confirm the container started correctly.
+
+<img  src="/img/docs/managing-apps/creating-apps/deployment-overview.png" alt="QuickStack Deployment Overview" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+<img  src="/img/docs/managing-apps/creating-apps/deployment-logs.png" alt="QuickStack Deployment Logs" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Deploy fails | Check deployment logs; verify registry is reachable and image name/tag is correct |
+| Container not reachable | Ensure **App Port** in the Domains tab matches the port the container listens on |
+| Private registry auth fails | Confirm registry credentials are entered correctly in General settings |
+
+## Next steps
+
+- [Expose the app on a domain with HTTPS](./expose-app.mdx)
+- [Set environment variables](../how-to/deployments/redeploy-and-rollbacks.mdx#environment-variables)
+- [Add a volume](../how-to/storage/volumes.mdx)
