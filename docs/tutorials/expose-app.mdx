@@ -48,6 +48,13 @@ QuickStack provisions TLS certificates via Let's Encrypt. You need to give it a 
    - **Redirect HTTP to HTTPS** — enable (recommended)
 4. Click **Save**.
 
+<img  src="/img/docs/managing-apps/domains/edit-domains.png" alt="QuickStack Edit Domain Dialog" style={{
+    marginBottom: '20px',
+    marginLeft: '30px',
+    maxWidth: '600px',
+    width: '90%'
+}} />
+
 <img  src="/img/docs/managing-apps/creating-apps/domains-overview.png" alt="QuickStack Domains Tab" style={{
     marginBottom: '20px',
     marginLeft: '30px',
@@ -55,12 +62,6 @@ QuickStack provisions TLS certificates via Let's Encrypt. You need to give it a 
     width: '90%'
 }} />
 
-<img  src="/img/docs/managing-apps/domains/edit-domains.png" alt="QuickStack Edit Domain Dialog" style={{
-    marginBottom: '20px',
-    marginLeft: '30px',
-    maxWidth: '600px',
-    width: '90%'
-}} />
 
 ## Step 4: Deploy to apply
 
@@ -73,6 +74,10 @@ Click **Deploy** in the top-right corner of the app page.
 ## Verify
 
 Open `https://app.example.com` in your browser. You should see your app with a valid TLS certificate.
+
+:::info
+It can take a few seconds/minutes for Traefik to provision the certificate after deployment. If you see a security warning, wait a bit and refresh.
+:::
 
 ## Troubleshooting
 

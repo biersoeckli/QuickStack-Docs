@@ -1,19 +1,17 @@
 ---
 sidebar_position: 1
-title: "Redeploy & Rollbacks"
+title: "Redeploy"
 description: "How deployment works in QuickStack: when changes take effect, environment variables, and common gotchas."
-keywords: ["QuickStack deploy", "redeploy", "rollback", "environment variables", "config change"]
+keywords: ["QuickStack deploy", "redeploy", "environment variables", "config change"]
 ---
 
-# Redeploy & Rollbacks
-
-## How deployment works
+# How deployment works
 
 In QuickStack, **clicking Deploy is the only way to apply changes**. Configuration edits (env vars, storage, domains, Git source, image name) are staged in the database but do not affect the running container until you click **Deploy**.
 
 This is intentional: you can batch multiple config changes and apply them all at once.
 
-### What "Deploy" does
+## What "Deploy" does
 
 1. For Git-source apps: pulls the latest commit from the configured branch, builds a new Docker image via BuildKit, pushes it to the internal registry.
 2. For Docker image apps: pulls the specified image tag from the configured registry.
@@ -60,26 +58,6 @@ REDIS_URL=redis://svc-app-abc:6379
 ```
 
 Find the internal hostname in the **Domains** tab → **Internal Hostnames** section of the target app.
-
-## Rollbacks
-
-QuickStack keeps a history of deployments. To roll back:
-
-1. Open the app and go to the **Overview** tab.
-2. In the deployment history list, find the deployment you want to restore.
-3. Click **Redeploy** on that entry.
-
-This re-applies the exact image and configuration from that deployment.
-
-## Common gotchas
-
-| Symptom | Cause | Fix |
-|---------|-------|-----|
-| Config change has no effect | Deploy was not clicked after saving | Click **Deploy** |
-| App crashes after deploy | Bad env var value or missing secret | Check logs; fix the env var; redeploy |
-| Git build uses old code | Branch has unstaged commits / wrong branch | Verify branch setting; push commits |
-| Rolling update stuck | New pod failing health check | Check health check config; fix app startup |
-| Old pods not terminating | Kubernetes drain taking time | Wait or check for stuck finalizers via kubectl |
 
 ## Advanced: force-pull latest image tag
 

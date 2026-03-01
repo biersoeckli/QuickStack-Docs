@@ -25,7 +25,7 @@ import SchemaOrg from '@site/src/components/SEO/SchemaOrg';
 
 # QuickStack Docs
 
-QuickStack is a self-hosted PaaS: a web UI that deploys your containerized apps onto a k3s cluster, manages domains via Traefik, and provides backups, monitoring, and user access control — on your own servers.
+QuickStack is a self-hosted PaaS: a web UI that deploys your containerized apps onto a k3s cluster, manages domains via Traefik, and provides backups, monitoring, and user access control ***on your own servers***.
 
 **Under the hood:** [k3s](https://k3s.io/) · [Traefik](https://traefik.io/) · [Longhorn](https://longhorn.io/) · [BuildKit](https://github.com/moby/buildkit) · [registry](https://hub.docker.com/_/registry)
 
@@ -46,7 +46,7 @@ QuickStack is a self-hosted PaaS: a web UI that deploys your containerized apps 
 
 Task-focused docs for daily operations:
 
-- **Deployments** — [redeploy & rollbacks](./how-to/deployments/redeploy-and-rollbacks.mdx) · [webhooks / auto-deploy](./how-to/deployments/webhooks-auto-deploy.mdx)
+- **Deployments** — [redeploy](./how-to/deployments/redeploy-and-rollbacks.mdx) · [webhooks / auto-deploy](./how-to/deployments/webhooks-auto-deploy.mdx)
 - **Networking** — [custom domains](./how-to/networking/domains.mdx) · [quickstack.me](./how-to/networking/quickstack-me.mdx) · [internal networking](./how-to/networking/internal-networking.mdx) · [network policies](./how-to/networking/network-policies.mdx) · [basic auth](./how-to/networking/basic-auth.mdx)
 - **Storage** — [volumes](./how-to/storage/volumes.mdx) · [file mounts](./how-to/storage/file-mounts.mdx)
 - **Observability** — [logs & terminal](./how-to/observability/logs-and-terminal.mdx) · [health checks](./how-to/observability/health-checks.mdx)
@@ -56,14 +56,31 @@ Task-focused docs for daily operations:
 
 ---
 
-## Reference
-
-- [UI navigation map](./reference/ui-navigation-map.mdx) — where to find things in the UI
-- [Ports & endpoints](./reference/ports-and-endpoints.mdx) — ports, webhook URL pattern, internal hostnames
-- [Glossary](./reference/glossary.mdx) — QuickStack-specific terms
-
----
-
 ## Architecture in one paragraph
 
 QuickStack installs as a single pod on a k3s master node. It stores its state in a SQLite database (`data.db`). When you click **Deploy**, QuickStack uses BuildKit to build your image (for Git-source apps), pushes it to the built-in registry, then creates or updates a Kubernetes Deployment. Traefik handles ingress routing and automatic TLS via Let's Encrypt. Longhorn provides distributed block storage for multi-node clusters. Everything app-related (projects, envs, volumes, domains, users) lives in the SQLite DB and is backed up separately from your app volumes.
+
+---
+
+## History and Motivation
+
+QuickStack started as a semester project by two students — [glueh-wyy-huet](https://github.com/glueh-wyy-huet) and [biersoeckli](https://github.com/biersoeckli) — at the [Eastern Switzerland University of Applied Sciences](https://ost.ch/).
+
+The motivation was simple: deploying and managing applications on your own servers is harder than it should be. Existing self-hosted PaaS solutions were more focused on single node setups. We wanted something that felt as frictionless as a managed cloud platform, with the scaling and reliability of Kubernetes, but without the complexity of managing it all through the command line.
+
+What began as an academic exercise grew into a fully-featured tool. Today, QuickStack automates the full application lifecycle: building images from Git, deploying, SSL certificates, managing volumes and backups. All through a single web UI.
+
+The project remains open-source and community-driven. We believe that self-hosting should be accessible to everyone, not just those with deep DevOps knowledge.
+
+## Who is QuickStack For?
+
+*   **Developers:** Who want to quickly deploy and manage applications without having to worry about server administration.
+*   **Small Teams and Startups:** Seeking a cost-effective and easy-to-use deployment solution.
+*   **System administrators:** Who want to manage their infrastructure through a user friendly interface.
+*   **Anyone** wanting an easy way to deploy applications on their own servers.
+
+## Community and Support
+
+We are always looking for feedback and contributions. If you encounter a bug or have a feature request, please open an issue on our [GitHub repository](https://github.com/biersoeckli/QuickStack).
+
+Let's get started!
