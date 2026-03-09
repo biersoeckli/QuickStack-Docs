@@ -12,7 +12,7 @@ export function FooterSection({ theme }: FooterSectionProps) {
   const footerLinks = {
     product: [
       { label: 'Documentation', href: '/docs' },
-      { label: 'Getting Started', href: '/docs/getting-started' },
+      { label: 'Getting Started', href: '/docs/tutorials/installation' },
     ],
     resources: [
       { label: 'GitHub', href: 'https://github.com/biersoeckli/quickstack' },
@@ -21,7 +21,7 @@ export function FooterSection({ theme }: FooterSectionProps) {
     ],
     community: [
       { label: 'Contributing', href: 'https://github.com/biersoeckli/quickstack/blob/main/CONTRIBUTING.md' },
-      { label: 'Code of Conduct', href: 'https://github.com/biersoeckli/quickstack/blob/main/CODE_OF_CONDUCT.md' },
+     // { label: 'Code of Conduct', href: 'https://github.com/biersoeckli/quickstack/blob/main/CODE_OF_CONDUCT.md' },
       //{ label: 'Discord', href: '#' },
       { label: 'Twitter', href: 'https://x.com/quickstack_dev' },
     ],
