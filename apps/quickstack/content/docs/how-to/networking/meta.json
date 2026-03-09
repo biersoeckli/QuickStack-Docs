@@ -1,9 +1,0 @@
-{
-  "pages": [
-    "domains",
-    "quickstack-me",
-    "internal-networking",
-    "network-policies",
-    "basic-auth"
-  ]
-}
