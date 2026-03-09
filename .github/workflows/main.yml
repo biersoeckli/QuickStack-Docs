@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: quickstack-docs
+  IMAGE_NAME: biersoeckli/quickstack-docs
 
 jobs:
   build-and-push:
