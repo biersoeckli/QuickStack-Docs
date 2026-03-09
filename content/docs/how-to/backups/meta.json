@@ -1,0 +1,9 @@
+{
+  "pages": [
+    "overview",
+    "s3-targets",
+    "volume-backups",
+    "database-backups",
+    "system-backups"
+  ]
+}

@@ -1,0 +1,51 @@
+---
+sidebar_position: 2
+title: "QuickStack.me Domain"
+description: "Use the built-in quickstack.me domain service for instant HTTPS access without manual DNS configuration."
+keywords: ["QuickStack", "quickstack.me", "magic domain", "SSL", "HTTPS", "automatic domain"]
+---
+
+QuickStack includes a built-in "magic" domain service called **quickstack.me**. It assigns a valid, SSL-secured domain to your applications without purchasing a domain or configuring DNS records manually.
+
+## How it works
+
+The `quickstack.me` service maps a specially constructed hostname to your server's public IP address using a hexadecimal representation of that IP.
+
+For example, if your server's public IP is `1.2.3.4`:
+1. QuickStack converts it to hex: `01020304`.
+2. Your instance's base domain becomes `01020304.quickstack.me`.
+3. Any subdomain (e.g. `myapp.01020304.quickstack.me`) automatically resolves to `1.2.3.4`.
+4. Let's Encrypt certificates are provisioned automatically for these domains.
+
+## Prerequisite
+
+Your QuickStack instance must have its **Public IPv4 Address** configured:
+
+1. Go to **Settings**.
+2. Ensure the **Public IPv4 Address** field is set to your server's reachable public IP.
+
+<img  src="/img/docs/managing-apps/quickstackme-domains/ipv4-settings.png" alt="Public IPv4 settings" />
+
+## Using a QuickStack.me Domain
+
+1. Open your app and go to the **Domains** tab.
+2. Click **Add Domain**.
+3. Switch to the **quickstack.me Domain** tab.
+4. Fill in:
+   - **Domain Prefix** — a unique prefix for your app (e.g. `my-app`, `blog`)
+   - **App Port** — the port your container listens on
+   - **Use HTTPS** — enabled by default, recommended
+   - **Redirect HTTP to HTTPS** — recommended
+5. Click **Save**, then click **Deploy**.
+
+<img  src="/img/docs/managing-apps/quickstackme-domains/quickstack-me-domain-settings.png" alt="QuickStack.me domain settings" />
+
+Your application is now accessible at `https://<prefix>.<hex-ip>.quickstack.me`.
+
+## When to use it
+
+- Testing and development: quickly expose apps without DNS setup.
+- Internal tools: secure access without a registered domain.
+- Initial setup: verify deployment before configuring a custom domain.
+
+For production or public-facing apps, use a [Custom Domain](/docs/how-to/networking/domains) instead.

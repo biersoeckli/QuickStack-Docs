@@ -1,0 +1,65 @@
+---
+sidebar_position: 1
+title: "UI Navigation Map"
+description: "Where to find specific features in the QuickStack UI: tabs, settings routes, and common tasks."
+keywords: ["QuickStack UI", "navigation", "where to find", "settings", "UI map"]
+---
+
+Quick lookup for feature locations in the QuickStack UI.
+
+## Main navigation
+
+| Feature | Location |
+|---------|----------|
+| Project list / dashboard | Left sidebar → **Projects** |
+| Backups overview | Left sidebar → **Backups** |
+| Global settings | Left sidebar → **Settings** |
+| User profile & 2FA | Left sidebar → **Settings** → **Profile** |
+
+## App-level tabs
+
+When you open an app in a project, these tabs are available:
+
+| Tab | What's here |
+|-----|------------|
+| **Overview** | Deployment status, live logs, terminal, deployment history |
+| **General** | Source type (Git / Docker image), image name, Git URL, branch, Dockerfile path |
+| **Environment** | Environment variables (`KEY=VALUE` editor) |
+| **Domains** | External domains, QuickStack.me domains, internal hostnames, internal port |
+| **Storage** | Volumes, file mounts, backup schedules |
+| **Advanced** | Health checks, network policies, basic authentication, CPU/memory limits, replicas |
+| **Credentials** | (Database apps only) Connection credentials, DB GUI tools toggle |
+
+## Settings routes
+
+| Setting | Settings path |
+|---------|--------------|
+| S3 targets for backups | **Settings** → **S3 Targets** |
+| QuickStack version + updates | **Settings** → **Updates** |
+| Disk cleanup / maintenance | **Settings** → **Maintenance** |
+| Traefik / networking / Let's Encrypt email | **Settings** → **QuickStack Server** → **Networking / Traefik** |
+| Public IPv4 address (for quickstack.me) | **Settings** → **QuickStack Server** (main) |
+| System backup (SQLite DB) | **Settings** → **Storage & Backups** |
+| Cluster nodes | **Settings** → **Cluster** |
+| Cluster monitoring | **Settings** → **Monitoring** |
+| Users & groups | **Settings** → **Users & Groups** |
+
+## Common tasks quick-lookup
+
+| Task | Where to go |
+|------|------------|
+| Deploy an app | App → **Overview** → click **Deploy** |
+| View build/runtime logs | App → **Overview** → Logs card |
+| Open terminal in container | App → **Overview** → Logs card → **Terminal** button |
+| Add domain to app | App → **Domains** tab → **Add Domain** |
+| Set env vars | App → **Environment** tab |
+| Add a volume | App → **Storage** tab → **Add Volume** |
+| Mount a config file | App → **Storage** tab → scroll to File Mount → **Add File Mount** |
+| Enable webhook auto-deploy | App → **Overview** → **Enable Webhook Deployments** |
+| Configure health checks | App → **Advanced** tab → Health Check Settings |
+| Set network policy | App → **Advanced** tab → toggle **Use Network Policy** |
+| Enable basic auth | App → **Advanced** tab → Basic Authentication card |
+| Enable DB GUI tool (DbGate, etc.) | Database app → **Credentials** tab → Database Access card |
+| Schedule a volume backup | App → **Storage** tab → Backup Schedules → **Add Backup Schedule** |
+| Reset admin password | SSH into server, run reset script — see [Password Reset](/docs/how-to/admin/password-reset) |
+| Add cluster node | **Settings** → **Cluster** → **Add Cluster Node** |

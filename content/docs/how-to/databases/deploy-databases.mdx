@@ -1,0 +1,68 @@
+---
+sidebar_position: 1
+title: "Deploy Databases"
+description: "Deploy pre-configured databases (PostgreSQL, MySQL, MariaDB, MongoDB) from QuickStack templates."
+keywords: ["QuickStack database", "PostgreSQL", "MySQL", "MongoDB", "MariaDB", "deploy database"]
+---
+
+QuickStack provides pre-configured templates for popular databases. Templates set up persistent storage, secure defaults, and environment variables automatically.
+
+## Available templates
+
+- **PostgreSQL** — advanced open-source relational database
+- **MySQL** — popular open-source relational database
+- **MariaDB** — enhanced, drop-in replacement for MySQL
+- **MongoDB** — document database for modern apps
+- **Redis** — in-memory key-value store for caching and messaging
+
+## Deployment steps
+
+### 1. Create the database
+
+1. Open your project and click **Create App** → **Database**.
+
+<img  src="/img/docs/managing-databases/deploying-databases/create-database.png" alt="Create Database" />
+
+2. Select the database type.
+
+<img  src="/img/docs/managing-databases/deploying-databases/select-database-type.png" alt="Select Database Type" />
+
+3. Configure the instance:
+   - **App Name** — a unique name (e.g. `my-postgres-db`)
+   - **Password** — use the generate button for a strong random password
+
+<img  src="/img/docs/managing-databases/deploying-databases/configure-settings.png" alt="Configure Database settings" />
+
+4. Click **Create**. QuickStack provisions the volume, deploys the container, and configures internal networking.
+
+## Connecting to your database
+
+### Internal access (recommended)
+
+Other apps in the same project connect via the **service hostname**:
+
+- **Hostname:** `svc-<app-id>` (find the exact value in the app's **Credentials** tab)
+- **Port:** standard port for the engine (PostgreSQL: `5432`, MySQL/MariaDB: `3306`, MongoDB: `27017`)
+- **Credentials:** also shown in the **Credentials** tab
+
+<img  src="/img/docs/managing-databases/deploying-databases/database-credentials.png" alt="Database Credentials" />
+
+> **info Clipboard copy**
+> Copying credential values requires your QuickStack instance to be served over HTTPS.
+
+### External access (not recommended)
+
+By default, databases are not exposed to the internet. If you need local access for development, you can assign a public domain in the **Domains** tab.
+
+> **danger Security Warning**
+> Exposing databases to the public internet is a security risk. Only do this for testing purposes.
+
+## Environment variables in templates
+
+Database templates auto-configure environment variables (e.g. `POSTGRES_PASSWORD`, `MYSQL_ROOT_PASSWORD`). Do not modify these manually — it may break the pre-configured connection.
+
+## Related
+
+- [DB tools — DbGate, pgAdmin, phpMyAdmin](/docs/how-to/databases/db-tools)
+- [Database backup schedules](/docs/how-to/backups/database-backups)
+- [Internal networking](/docs/how-to/networking/internal-networking)
