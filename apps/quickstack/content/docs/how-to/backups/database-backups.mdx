@@ -1,0 +1,45 @@
+---
+sidebar_position: 4
+title: "Database Backups"
+description: "Schedule automated database dump backups for MariaDB, PostgreSQL, and MongoDB in QuickStack."
+keywords: ["QuickStack database backup", "PostgreSQL backup", "MySQL backup", "MongoDB backup", "pg_dump"]
+---
+
+# Database Backups
+
+QuickStack runs isolated backup containers that connect to your managed database and produce compressed dump files, then upload them to S3.
+
+## Prerequisites
+
+- At least one [S3 target](./s3-targets) configured
+- A [managed database](../databases/deploy-databases) running in your project
+
+## Configure a database backup schedule
+
+1. Open your database app.
+2. Go to the **Storage** tab and click **Add Backup Schedule**.
+3. Configure:
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| **Cron Expression** | When to run | `0 2 * * *` (daily at 2 AM) |
+| **Retention** | Number of dumps to keep; oldest deleted when exceeded | `7` |
+| **Backup Location** | Which S3 target to use | select from list |
+
+4. Click **Save**.
+
+## Dump formats
+
+| Engine | Tool used | Format |
+|--------|-----------|--------|
+| **MariaDB** | `mariadb-dump` | `.tar.gz` |
+| **PostgreSQL** | `pg_dump` | `.tar.gz` |
+| **MongoDB** | `mongodump` | `.tar.gz` |
+
+## Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| Backup fails | Check that the database is running; inspect backup pod logs in the Backups page |
+| Upload fails | Confirm S3 credentials and bucket permissions |
+| Dump is empty or corrupted | Verify database credentials are correct; check for database errors |

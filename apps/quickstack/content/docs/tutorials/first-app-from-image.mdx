@@ -1,0 +1,61 @@
+---
+sidebar_position: 3
+title: "Deploy Your First App from a Docker Image"
+description: "Deploy a Docker image from Docker Hub or any container registry using QuickStack."
+keywords: ["QuickStack Docker Image Deployment", "QuickStack Docker Image Source", "QuickStack Docker Image Deployment Guide"]
+---
+
+
+
+# Deploy Your First App from a Docker Image
+
+This guide walks you through deploying a Docker image from Docker Hub or any other container registry.
+
+## Prerequisites
+
+- QuickStack installed ([installation guide](./installation))
+- A Docker image available in a registry (e.g. `nginx:latest`, `username/app:tag`)
+
+## Step 1: Create project and app
+
+1. On the dashboard, click **Create Project** and give it a name.
+2. Open the project, click **Create App** → **Empty App**, give your app a name.
+
+<img  src="/img/docs/managing-apps/creating-apps/create-app-dialog.png" alt="QuickStack Create App Dialog" />
+
+3. In **App Settings** → **General**, set **Source type** to **Docker Image**.
+4. Enter the full image name including tag (e.g. `nginx:latest` or `username/app-name:v1.2`).
+
+<img  src="/img/docs/managing-apps/creating-apps/enter-docker-image.png" alt="QuickStack Docker Image settings" />
+
+5. Click **Save**.
+
+## Step 2: Deploy
+
+Click the **Deploy** button at the top of the page. QuickStack pulls the specified Docker image and starts the container.
+
+> **info Deploy applies changes**
+> Changes to app configuration (image name, env vars, ports, storage) are not applied until you click **Deploy**.
+
+## Step 3: Verify
+
+1. Open the **Overview** tab — check that the status indicator is green.
+2. Click **Show Logs** to confirm the container started correctly.
+
+<img  src="/img/docs/managing-apps/creating-apps/deployment-overview.png" alt="QuickStack Deployment Overview" />
+
+<img  src="/img/docs/managing-apps/creating-apps/deployment-logs.png" alt="QuickStack Deployment Logs" />
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Deploy fails | Check deployment logs; verify registry is reachable and image name/tag is correct |
+| Container not reachable | Ensure **App Port** in the Domains tab matches the port the container listens on |
+| Private registry auth fails | Confirm registry credentials are entered correctly in General settings |
+
+## Next steps
+
+- [Expose the app on a domain with HTTPS](./expose-app)
+- [Set environment variables](../how-to/deployments/redeploy-and-rollbacks.mdx#environment-variables)
+- [Add a volume](../how-to/storage/volumes)

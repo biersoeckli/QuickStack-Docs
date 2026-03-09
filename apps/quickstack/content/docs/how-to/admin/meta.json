@@ -1,0 +1,10 @@
+{
+  "pages": [
+    "two-factor-auth",
+    "users-and-groups",
+    "cluster-monitoring",
+    "updates-and-maintenance",
+    "cluster-nodes",
+    "password-reset"
+  ]
+}
