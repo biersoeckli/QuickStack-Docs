@@ -5,8 +5,6 @@ description: "Inject read-only configuration files into your QuickStack containe
 keywords: ["QuickStack file mount", "config files", "nginx.conf", "ConfigMap", "read-only"]
 ---
 
-# File Mounts
-
 File mounts inject a static file into your container at a specified path. The content is stored in the QuickStack database and mounted as **read-only**. The running container cannot modify it.
 
 **Typical use cases:** `nginx.conf`, `config.json`, TLS certificates, environment-specific config files of any kind.
