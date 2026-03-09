@@ -1,0 +1,93 @@
+---
+sidebar_position: 4
+title: "Updates & Maintenance"
+description: "Update QuickStack, manage disk space, and perform k3s cluster upgrades."
+keywords: ["QuickStack updates", "maintenance", "disk space", "cleanup", "k3s upgrade"]
+---
+
+
+
+# Updates & Maintenance
+
+## Updating QuickStack
+
+QuickStack checks for new versions automatically and allows in-UI updates without SSH access.
+
+### Check and install an update
+
+1. Go to **QuickStack Settings** → **Updates**.
+2. View your installed version and the latest available version.
+3. When an update is available, click **Update QuickStack**.
+4. QuickStack installs the new version and restarts. The dashboard is temporarily unavailable during restart.
+
+### Canary channel
+
+To test the latest features before they reach the stable channel, enable **Use Canary Channel for Updates**.
+
+> **warning**
+> Canary builds may be unstable. Not recommended for production.
+
+## Disk space & cleanup
+
+Docker images, build logs, and temp files accumulate over time. QuickStack provides cleanup tools:
+
+1. Go to **QuickStack Settings** → **Maintenance**.
+2. Available actions:
+
+| Action | What it does |
+|--------|-------------|
+| **Purge Images** | Deletes unused build images from the internal registry |
+| **Cleanup Old Build Jobs** | Removes containers from completed build jobs |
+| **Cleanup Temp Files** | Deletes temporary files from operations |
+| **Delete Old App Logs** | Clears historical application logs |
+| **Delete Orphaned Containers** | Removes pods no longer associated with active apps |
+
+> **info**
+> k3s and QuickStack manage old data/images automatically. Use these cleanup options only when experiencing disk space issues. Copies of pulled external images (e.g. MariaDB) are managed by k3s and cannot be removed through this interface.
+
+## K3s cluster upgrades
+
+Upgrade the underlying k3s Kubernetes distribution from the UI.
+
+### Install the System Upgrade Controller (first time)
+
+1. Go to **QuickStack Settings** → **Updates**.
+2. In **K3s Cluster Upgrades**, click **Install Controller** if not already installed.
+
+### Perform the upgrade
+
+1. View current and available k3s versions.
+2. Click **Start Upgrade** and confirm after reviewing warnings.
+
+The upgrade process:
+1. Upgrades master/control-plane nodes first
+2. Upgrades worker nodes one at a time (cordons + drains each node)
+3. Apps on a draining node are rescheduled to other nodes and may experience brief downtime
+
+> **warning Before upgrading k3s**
+> - Ensure system backups are enabled and recent
+> - Verify volume backups are configured
+> - Expect brief downtime during node restarts
+
+> **info k3s version channels**
+> QuickStack keeps you on a chosen minor-version channel (e.g. `v1.32`). Moving between minor versions requires manual action here.
+
+## Longhorn storage upgrades
+
+If using Longhorn for distributed storage:
+
+1. Go to **QuickStack Settings** → **Updates** → **Longhorn Storage Upgrades**.
+2. Review current and target versions.
+3. Click **Start Upgrade** and confirm.
+
+> **warning Before upgrading Longhorn**
+> - Ensure volume backups are recent
+> - Review Longhorn release notes for breaking changes
+
+## Troubleshooting QuickStack itself
+
+From **QuickStack Settings** → **Maintenance** (or Updates):
+
+- **Open QuickStack Logs** — view live logs of the QuickStack system container.
+- **Force Update Registry** — restarts the internal container registry if image builds are failing.
+- **Delete All Network Policies** — emergency action to remove all network policies if they cause connectivity issues. **Use with caution.**

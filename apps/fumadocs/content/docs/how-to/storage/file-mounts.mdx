@@ -1,0 +1,45 @@
+---
+sidebar_position: 2
+title: "File Mounts"
+description: "Inject read-only configuration files into your QuickStack containers using file mounts."
+keywords: ["QuickStack file mount", "config files", "nginx.conf", "ConfigMap", "read-only"]
+---
+
+# File Mounts
+
+File mounts inject a static file into your container at a specified path. The content is stored in the QuickStack database and mounted as **read-only**. The running container cannot modify it.
+
+**Typical use cases:** `nginx.conf`, `config.json`, TLS certificates, environment-specific config files of any kind.
+
+## Volume vs File Mount
+
+| | Volume | File Mount |
+|---|--------|------------|
+| **Use when** | Persistent app data (databases, uploads, logs) | Small config files, certificates |
+| **Size** | MBs to GBs | Small files (KB range) |
+| **Access** | Read-write | Read-only |
+| **Persistence** | Stored on disk | Stored in QuickStack DB |
+
+## Configure a file mount
+
+1. Open your app and go to the **Storage** tab.
+2. Scroll to the **File Mount** card and click **Add File Mount**.
+3. Fill in:
+   - **Mount Path** — full path inside the container (e.g. `/etc/nginx/nginx.conf`)
+   - **File Content** — the text content of the file
+4. Click **Save**, then **Deploy**.
+
+> **warning Redeploy required**
+> File mount changes only take effect after redeployment. Mounted files are read-only inside the container.
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| App sees old file content | Confirm you redeployed after saving the file mount |
+| App fails to start | Verify the mount path is correct; check that the file content is valid |
+| Can't write to the file from container | By design — file mounts are read-only; use a Volume if you need read-write access |
+
+## Related
+
+- [Volumes](./volumes)

@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "deployments",
+    "networking",
+    "storage",
+    "observability",
+    "databases",
+    "backups",
+    "admin"
+  ]
+}

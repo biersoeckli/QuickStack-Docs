@@ -1,0 +1,63 @@
+---
+sidebar_position: 1
+title: "Logs & Terminal"
+description: "Use the built-in log viewer and interactive terminal to monitor and debug running QuickStack applications."
+keywords: ["QuickStack logs", "terminal", "debugging", "monitoring", "live logs"]
+---
+
+
+
+# Logs & Terminal
+
+## Application status
+
+QuickStack displays real-time pod status for all your applications without page refreshes. Status indicators are visible in the project overview, project detail, and app detail pages.
+
+<img  src="/img/docs/managing-apps/monitoring-and-debugging/app-monitoring.png" alt="QuickStack App Status" />
+
+## Live logs
+
+The **Logs** viewer streams stdout and stderr from your running containers. Start here when troubleshooting.
+
+### Accessing logs
+
+1. Open your app.
+2. Go to the **Overview** tab.
+3. If your app runs multiple replicas, use the pod dropdown to select which pod to tail.
+
+<img  src="/img/docs/managing-apps/monitoring-and-debugging/logs-example.png" alt="QuickStack Log Viewer" />
+
+## Interactive terminal
+
+The **Terminal** opens a shell session directly inside a running container from your browser.
+
+### Opening a terminal session
+
+1. Open your app, go to the **Overview** tab.
+2. In the **Logs** card, click **Terminal** next to the pod selector.
+
+> **Note:** The Terminal button is only visible if you have **Write** permissions for the application.
+
+<img  src="/img/docs/managing-apps/monitoring-and-debugging/select-terminal.png" alt="Launch Terminal" />
+
+3. Choose your shell:
+   - **Start sh** — available on almost all Linux containers (including Alpine)
+   - **Start bash** — richer experience; requires `bash` to be installed in the image
+
+<img  src="/img/docs/managing-apps/monitoring-and-debugging/terminal-example.png" alt="Terminal Session" />
+
+4. To end the session, click **Disconnect Session** or close the dialog.
+
+## Limitations
+
+| Limitation | Detail |
+|------------|--------|
+| Permissions | Terminal requires **Write** access to the project |
+| Container state | You can only connect to **Running** containers; crashing containers can't be shelled into |
+| Shell availability | `bash` requires it to be installed in the image; fall back to `sh` if it fails |
+| Log retention | QuickStack streams live logs; historical logs may be limited. Use `Delete old App logs` in Maintenance to manage disk usage |
+
+## Related
+
+- [Health checks](./health-checks)
+- [Updates & maintenance](../admin/updates-and-maintenance) (cleanup old logs)
