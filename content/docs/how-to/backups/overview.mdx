@@ -12,7 +12,7 @@ QuickStack backs up two types of application data:
 | **Volume backups** | Persistent storage volumes (file data) | S3-compatible bucket |
 | **Database backups** | MariaDB, PostgreSQL, MongoDB dumps | S3-compatible bucket |
 
-In addition, the QuickStack configuration itself (projects, users, app settings) can be backed up separately — see [System Backups](./system-backups).
+In addition, the QuickStack configuration itself (projects, users, app settings) can be backed up separately — see [System Backups](/docs/how-to/backups/system-backups).
 
 ## How backups work
 
@@ -31,10 +31,10 @@ Backups run on a **cron schedule** you define per volume or database. QuickStack
 
 ## Setup checklist
 
-1. [Configure at least one S3 target](./s3-targets)
-2. [Set up volume backup schedules](./volume-backups) for each app with persistent storage
-3. [Set up database backup schedules](./database-backups) for managed databases
-4. [Configure system backups](./system-backups) for QuickStack configuration
+1. [Configure at least one S3 target](/docs/how-to/backups/s3-targets)
+2. [Set up volume backup schedules](/docs/how-to/backups/volume-backups) for each app with persistent storage
+3. [Set up database backup schedules](/docs/how-to/backups/database-backups) for managed databases
+4. [Configure system backups](/docs/how-to/backups/system-backups) for QuickStack configuration
 
 ## Troubleshooting
 

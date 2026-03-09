@@ -2,7 +2,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { GitBranch, SquareActivity, Server, Lock } from 'lucide-react';
 
-const pillars = [
+export const pillars = [
   {
     icon: GitBranch,
     title: 'Deploy',
@@ -58,7 +58,7 @@ export function FeaturesSection() {
     <section className="container mx-auto px-4 py-16 md:py-24 max-w-7xl">
       <div className="text-center space-y-3 mb-12 ">
         <Badge className="mb-4">Features</Badge>
-        <h2 className="text-3xl md:text-5xl font-bold ">Everything you need to run production apps on your own infrastructure</h2>
+        <h2 className="text-3xl md:px-18 md:text-5xl font-bold ">Everything you need to run production apps on your own infrastructure</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
           QuickStack covers the full lifecycle: from first deploy to day-to-day operations, team access, and cluster growth.
         </p>

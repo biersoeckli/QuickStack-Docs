@@ -2,7 +2,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
-const faqs = [
+export const faqs = [
   {
     question: 'Do I need Kubernetes knowledge to use QuickStack?',
     answer: 'No. QuickStack runs on k3s under the hood, but you interact entirely through a web UI. You do not write Kubernetes manifests or run kubectl commands for day-to-day operations.',

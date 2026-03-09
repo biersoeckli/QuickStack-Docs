@@ -40,6 +40,7 @@ export default function HomePage() {
       <UseCasesSection />
       <TechStackSection theme={theme} />
       <FaqSection />
+      <div className='h-12 md:h-28' />
       <FooterSection theme={theme} />
     </div>
   );

@@ -2,7 +2,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Code2, Users, Wrench } from 'lucide-react';
 
-const useCases = [
+export const useCases = [
   {
     icon: Code2,
     title: 'Indie developers and side projects',

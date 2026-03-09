@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
-const howItWorksSteps = [
+export const howItWorksSteps = [
   {
     number: '1',
     title: 'Install QuickStack on a fresh server',

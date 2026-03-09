@@ -17,7 +17,7 @@ This is intentional: you can batch multiple config changes and apply them all at
 4. Performs a rolling update: new pods are started, old pods are terminated once the new ones are healthy.
 
 > **info No zero-downtime guarantee without health checks**
-> Without a configured [health check](../observability/health-checks), Kubernetes marks pods ready as soon as they start, which may be before your app is actually serving requests. Configure a readiness probe for zero-downtime deploys.
+> Without a configured [health check](/docs/how-to/observability/health-checks), Kubernetes marks pods ready as soon as they start, which may be before your app is actually serving requests. Configure a readiness probe for zero-downtime deploys.
 
 ## Environment variables
 

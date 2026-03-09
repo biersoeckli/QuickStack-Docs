@@ -13,13 +13,13 @@ QuickStack-specific terms and the key underlying technologies.
 A container workload managed by QuickStack. An app belongs to a project and can be sourced from a Git repository (built with BuildKit) or a Docker image.
 
 ## Basic Authentication
-HTTP-level username/password protection implemented via a Traefik middleware. Authentication happens at the ingress level before requests reach the app container. See [Basic Auth](../how-to/networking/basic-auth).
+HTTP-level username/password protection implemented via a Traefik middleware. Authentication happens at the ingress level before requests reach the app container. See [Basic Auth](/docs/how-to/networking/basic-auth).
 
 ## BuildKit
 The container image building toolkit QuickStack uses to build Docker images from Git repositories. [GitHub](https://github.com/moby/buildkit)
 
 ## Cluster
-A group of servers (nodes) that work together as a single Kubernetes environment. See [Cluster Nodes](../how-to/admin/cluster-nodes).
+A group of servers (nodes) that work together as a single Kubernetes environment. See [Cluster Nodes](/docs/how-to/admin/cluster-nodes).
 
 ## Cordon
 Kubernetes operation that marks a node as non-schedulable — new pods are not placed there, but existing ones keep running.
@@ -28,16 +28,16 @@ Kubernetes operation that marks a node as non-schedulable — new pods are not p
 The maximum CPU a container can use, measured in millicores (m). 1000m = 1 full CPU core.
 
 ## Deploy
-In QuickStack, clicking **Deploy** applies all staged configuration changes to the running container. Config edits by themselves do not update the running app. See [Redeploy](../how-to/deployments/redeploy-and-rollbacks).
+In QuickStack, clicking **Deploy** applies all staged configuration changes to the running container. Config edits by themselves do not update the running app. See [Redeploy](/docs/how-to/deployments/redeploy-and-rollbacks).
 
 ## Domain
-A DNS hostname that routes public traffic to an app via Traefik. See [Custom Domains](../how-to/networking/domains).
+A DNS hostname that routes public traffic to an app via Traefik. See [Custom Domains](/docs/how-to/networking/domains).
 
 ## File Mount
-A read-only file injected into a container at a specified path. Content is stored in the QuickStack database. See [File Mounts](../how-to/storage/file-mounts).
+A read-only file injected into a container at a specified path. Content is stored in the QuickStack database. See [File Mounts](/docs/how-to/storage/file-mounts).
 
 ## Internal Hostname / Service Name
-The `svc-<app-id>` hostname used for service-to-service communication within a project. See [Internal Networking](../how-to/networking/internal-networking).
+The `svc-<app-id>` hostname used for service-to-service communication within a project. See [Internal Networking](/docs/how-to/networking/internal-networking).
 
 ## k3s
 A lightweight Kubernetes distribution. QuickStack runs on k3s. [k3s.io](https://k3s.io/)
@@ -58,13 +58,13 @@ The maximum RAM a container can use. Exceeding this causes the container to be t
 Guaranteed amount of RAM Kubernetes ensures is always available to a container.
 
 ## Network Policy
-A Kubernetes resource that controls ingress and egress traffic for a pod. QuickStack provides pre-configured templates. See [Network Policies](../how-to/networking/network-policies).
+A Kubernetes resource that controls ingress and egress traffic for a pod. QuickStack provides pre-configured templates. See [Network Policies](/docs/how-to/networking/network-policies).
 
 ## Project
 A logical grouping of apps and databases in QuickStack. All apps in a project share a network namespace and can communicate via internal hostnames.
 
 ## QuickStack.me Domain
-A built-in "magic" domain that automatically resolves to your server's public IP, providing instant HTTPS without DNS configuration. See [QuickStack.me](../how-to/networking/quickstack-me).
+A built-in "magic" domain that automatically resolves to your server's public IP, providing instant HTTPS without DNS configuration. See [QuickStack.me](/docs/how-to/networking/quickstack-me).
 
 ## Registry
 A Docker registry bundled with QuickStack for storing built images. Images built from Git repositories are pushed here before deployment. [Docker Hub registry image](https://hub.docker.com/_/registry)
@@ -73,7 +73,7 @@ A Docker registry bundled with QuickStack for storing built images. Images built
 An instance of an application running in the cluster. Multiple replicas provide horizontal scaling and availability.
 
 ## S3 Target
-An S3-compatible bucket configured in QuickStack as a backup destination. See [S3 Targets](../how-to/backups/s3-targets).
+An S3-compatible bucket configured in QuickStack as a backup destination. See [S3 Targets](/docs/how-to/backups/s3-targets).
 
 ## Storage Class
 A Kubernetes concept defining the type of storage. QuickStack uses:
@@ -81,7 +81,7 @@ A Kubernetes concept defining the type of storage. QuickStack uses:
 - `longhorn` — distributed, multi-node, with replication
 
 ## System Backup
-A snapshot of the QuickStack SQLite database (`data.db`) containing all configuration: projects, users, app definitions, secrets. See [System Backups](../how-to/backups/system-backups).
+A snapshot of the QuickStack SQLite database (`data.db`) containing all configuration: projects, users, app definitions, secrets. See [System Backups](/docs/how-to/backups/system-backups).
 
 ## System Upgrade Controller
 A Kubernetes controller that manages automated k3s upgrades across cluster nodes.
@@ -93,13 +93,13 @@ Time-based One-Time Password. A standard algorithm used by authenticator apps (G
 The reverse proxy and load balancer that handles all inbound HTTP/HTTPS traffic and routes it to the correct containers. Also manages Let's Encrypt TLS certificate provisioning. [traefik.io](https://traefik.io/)
 
 ## Two-Factor Authentication (2FA)
-An extra security layer requiring a TOTP code from an authenticator app in addition to the password. See [2FA setup](../how-to/admin/two-factor-auth).
+An extra security layer requiring a TOTP code from an authenticator app in addition to the password. See [2FA setup](/docs/how-to/admin/two-factor-auth).
 
 ## Volume
-Persistent storage mounted into a container. Data on a volume survives container restarts and redeployments. See [Volumes](../how-to/storage/volumes).
+Persistent storage mounted into a container. Data on a volume survives container restarts and redeployments. See [Volumes](/docs/how-to/storage/volumes).
 
 ## Webhook
-A URL that triggers a QuickStack deployment when called via HTTP POST. Used for CI/CD automation. See [Webhooks](../how-to/deployments/webhooks-auto-deploy).
+A URL that triggers a QuickStack deployment when called via HTTP POST. Used for CI/CD automation. See [Webhooks](/docs/how-to/deployments/webhooks-auto-deploy).
 
 ## Worker Node
 A server joined to the k3s cluster that runs application workloads. It does not run the Kubernetes control plane.
