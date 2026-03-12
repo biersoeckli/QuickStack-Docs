@@ -7,6 +7,15 @@ const config = {
   output: 'standalone',
   serverExternalPackages: ['@takumi-rs/image-response'],
   reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: '/docs/intro',
+        destination: '/docs',
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return [
       {
