@@ -1,0 +1,38 @@
+---
+sidebar_position: 3
+title: "Builds Overview"
+description: "Monitor and manage all active and recent build jobs across every project from a single page."
+keywords: ["QuickStack builds", "build overview", "build history", "build logs", "build status"]
+---
+
+The **Builds** page gives you a single place to see every image build that QuickStack has run or is currently running — across all projects and apps at once.
+
+## Accessing the builds page
+
+Click **Builds** in the left sidebar.
+
+## What the table shows
+
+| Column | Description |
+|--------|-------------|
+| **Status** | Current state of the build job (`PENDING`, `RUNNING`, `SUCCEEDED`, `FAILED`, etc.) |
+| **Project** | Project the app belongs to (with a link to the project) |
+| **App** | Name of the app being built (with a link to the app) |
+| **Build Job** | Internal Kubernetes job name |
+| **Started At** | Timestamp when the build started |
+| **Duration** | Elapsed time from start to completion (or current time if still running) |
+| **Git Commit** | Short commit SHA that triggered the build |
+| **Commit Message** | Git commit message associated with the build |
+
+The table automatically refreshes every 10 seconds while the page is open.
+
+## Viewing build logs
+
+Click **Show Logs** on any row (where a deployment ID is available) to open the build log overlay. This is the same log viewer available from within each app's **Overview** tab.
+
+## Stopping a running build
+
+For builds in `RUNNING` or `PENDING` state, a **Stop Build** button appears if you have **Write** access for that app. Stopping a build removes the underlying Kubernetes job immediately.
+
+> **info**
+> Only builds for apps you have read access to are visible. Admin users see all builds.
