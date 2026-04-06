@@ -16,6 +16,12 @@ This is intentional: you can batch multiple config changes and apply them all at
 3. Applies all staged config changes (env vars, volumes, ports, network policies, health checks, etc.).
 4. Performs a rolling update: new pods are started, old pods are terminated once the new ones are healthy.
 
+## Deployment history
+
+The **Overview** tab shows a history of recent deployments. For Git-source apps, each entry displays the **git commit message** of the commit that triggered the build, making it easy to track which code change corresponds to each deployment.
+
+Kubernetes events (pod scheduling, image pull, container start/stop) are streamed directly into the deployment log, providing richer context when diagnosing a failed or slow deployment.
+
 > **info No zero-downtime guarantee without health checks**
 > Without a configured [health check](/docs/how-to/observability/health-checks), Kubernetes marks pods ready as soon as they start, which may be before your app is actually serving requests. Configure a readiness probe for zero-downtime deploys.
 

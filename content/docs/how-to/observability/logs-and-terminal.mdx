@@ -11,6 +11,12 @@ QuickStack displays real-time pod status for all your applications without page 
 
 <img  src="/img/docs/managing-apps/monitoring-and-debugging/app-monitoring.png" alt="QuickStack App Status" />
 
+## Deployment logs
+
+When a deployment is triggered, QuickStack streams **Kubernetes events** (pod scheduling, image pulls, container starts and stops) directly into the deployment log alongside the build output. This provides additional context when a deployment is slow or fails — for example, you can see whether a pod is waiting for image pull or failing readiness probes.
+
+Access deployment logs from the **Overview** tab by clicking **Show Logs** next to a deployment entry, or from the global [Builds](/docs/how-to/deployments/builds-overview) page.
+
 ## Live logs
 
 The **Logs** viewer streams stdout and stderr from your running containers. Start here when troubleshooting.

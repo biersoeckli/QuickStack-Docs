@@ -1,0 +1,43 @@
+---
+sidebar_position: 3
+title: "Build Container Settings"
+description: "Configure global node placement and resource limits for QuickStack build containers."
+keywords: ["QuickStack build settings", "build node", "build container", "resource limits", "k3s native", "placement"]
+---
+
+Build Container Settings let you control where Docker image builds run in your cluster and how many resources each build container may use. These are global settings that apply to all apps built from Git source.
+
+## Accessing build settings
+
+Go to **Settings** → **QuickStack Server** → **Builds** tab.
+
+## Build Node
+
+The **Build Node** dropdown determines which cluster node schedules build containers.
+
+| Option | Behaviour |
+|--------|-----------|
+| **Auto** _(default)_ | QuickStack picks the node with the most available resources at build time. |
+| **k3s native** | Builds run as standard Kubernetes jobs without node affinity constraints. Resource limits and reservations become available when this option is selected. |
+| _Specific node name_ | Build containers are pinned to the selected node. Nodes marked as not schedulable are shown but cannot be selected. |
+
+> **tip Multi-node clusters**
+> Pinning builds to a dedicated node prevents build workloads from competing with production traffic on your application nodes.
+
+## Resource limits (k3s native only)
+
+When **Build Node** is set to **k3s native**, you can configure per-build-container resource constraints:
+
+| Field | Unit | Description |
+|-------|------|-------------|
+| **Memory Limit** | MB | Hard ceiling on memory. Build is killed if it exceeds this value. |
+| **Memory Reservation** | MB | Soft request used for scheduling. Helps Kubernetes find a node with enough headroom. |
+| **CPU Limit** | millicores (m) | Hard ceiling on CPU. `1000m` = 1 vCPU. |
+| **CPU Reservation** | millicores (m) | Soft request used for scheduling. |
+
+> **warning Set reservations for predictable scheduling**
+> If no CPU and/or memory reservation is configured, Kubernetes may schedule build containers on already-overloaded nodes. QuickStack shows an alert in the UI when reservations are missing.
+
+## Saving changes
+
+Click **Save** after adjusting settings. New builds will immediately use the updated configuration; builds already running are not affected.
