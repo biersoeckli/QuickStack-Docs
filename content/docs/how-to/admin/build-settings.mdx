@@ -1,0 +1,48 @@
+---
+sidebar_position: 7
+title: "Build Settings"
+description: "Configure global build container behaviour: concurrent build limit, resource limits, and node placement."
+keywords: ["QuickStack build settings", "concurrent builds", "build container", "resource limits", "node placement", "build configuration"]
+---
+
+The **Build Settings** panel in QuickStack Server settings controls how build jobs are scheduled and resourced across your cluster.
+
+## Opening Build Settings
+
+Go to **Settings** → **QuickStack Server** → **Builds**.
+
+## Concurrent builds
+
+The **Concurrent Builds** setting controls the maximum number of build jobs that may run simultaneously.
+
+- When the limit is reached, additional build jobs enter a **PENDING** state and are processed in FIFO order.
+- The default value is `1` (sequential builds).
+- Increase this value if you have spare CPU and memory on your build nodes and want faster throughput when many apps deploy at the same time.
+
+> **warning**
+> Running many concurrent builds is CPU- and memory-intensive. Set resource limits (see below) to prevent build containers from starving running apps.
+
+## Build container resource limits
+
+You can cap the CPU and memory available to each build container:
+
+| Field | Description |
+|-------|-------------|
+| **CPU Limit** | Maximum CPU cores allocated to a single build container (e.g. `2`) |
+| **Memory Limit** | Maximum RAM allocated to a single build container (e.g. `2Gi`) |
+
+Leave these fields empty to use no explicit limits (build containers share cluster resources freely).
+
+## Node placement for build containers
+
+By default QuickStack schedules build containers on any available node. You can restrict builds to specific nodes using label selectors — useful when you have dedicated build nodes.
+
+Configure node placement under the **Node Placement** section of Build Settings. Labels follow standard Kubernetes node-selector syntax (e.g. `node-role=build`).
+
+> **info**
+> Node placement rules set here apply only to build containers. App workloads are not affected.
+
+## Related
+
+- [Build Overview](/docs/how-to/deployments/build-overview) — monitor active and past build jobs
+- [Cluster Nodes](/docs/how-to/admin/cluster-nodes) — manage and label cluster nodes

@@ -1,0 +1,36 @@
+---
+sidebar_position: 3
+title: "Build Overview"
+description: "Monitor and manage all build jobs across your QuickStack apps from the global Builds page."
+keywords: ["QuickStack builds", "build queue", "build status", "build jobs", "concurrent builds"]
+---
+
+The **Builds** page provides a global view of all build jobs running across every project and app in your QuickStack instance.
+
+## Accessing the Builds page
+
+Click **Builds** in the left sidebar. The page lists all recent and active build jobs with their current status, the app they belong to, the source Git commit message (where applicable), and action buttons.
+
+## Build statuses
+
+| Status | Meaning |
+|--------|---------|
+| **PENDING** | Build is queued and waiting for a free build slot |
+| **RUNNING** | Build is actively executing |
+| **SUCCESS** | Build completed successfully |
+| **FAILED** | Build encountered an error |
+
+> **info Queued builds**
+> When the number of concurrent builds reaches the configured limit, new build jobs enter a **PENDING** state and are processed in FIFO order. See [Build Settings](/docs/how-to/admin/build-settings) to configure the concurrent build limit.
+
+## Build details and logs
+
+Click any build job in the list to open the associated app's **Overview** tab where you can view live build logs and deployment events.
+
+## Kubernetes deployment events
+
+During deployment, QuickStack captures Kubernetes events (e.g. pod scheduling, image pulling, container restarts) and displays them alongside the build log in the app's **Overview** → Logs card. This provides additional context when diagnosing failed or slow deployments.
+
+## Cancelling a build
+
+Use the action button next to a running or pending build job on the **Builds** page to cancel it.

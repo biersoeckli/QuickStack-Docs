@@ -5,6 +5,7 @@
     "cluster-monitoring",
     "updates-and-maintenance",
     "cluster-nodes",
-    "password-reset"
+    "password-reset",
+    "build-settings"
   ]
 }
