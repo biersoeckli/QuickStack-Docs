@@ -11,7 +11,7 @@ This is intentional: you can batch multiple config changes and apply them all at
 
 ## What "Deploy" does
 
-1. For Git-source apps: pulls the latest commit from the configured branch, builds a new Docker image via BuildKit, pushes it to the internal registry.
+1. For Git-source apps: pulls the latest commit from the configured branch, then builds a new Docker image using the configured [build method](/docs/how-to/deployments/build-methods) (Railpack or Dockerfile), and pushes it to the internal registry.
 2. For Docker image apps: pulls the specified image tag from the configured registry.
 3. Applies all staged config changes (env vars, volumes, ports, network policies, health checks, etc.).
 4. Performs a rolling update: new pods are started, old pods are terminated once the new ones are healthy.
