@@ -5,23 +5,17 @@ description: "Use the built-in log viewer and interactive terminal to monitor an
 keywords: ["QuickStack logs", "terminal", "debugging", "monitoring", "live logs"]
 ---
 
-## Application status
-
-QuickStack displays real-time pod status for all your applications without page refreshes. Status indicators are visible in the project overview, project detail, and app detail pages.
-
-<img  src="/img/docs/managing-apps/monitoring-and-debugging/app-monitoring.png" alt="QuickStack App Status" />
-
 ## Deployment logs
 
-When a deployment is triggered, QuickStack streams **Kubernetes events** (pod scheduling, image pulls, container starts and stops) directly into the deployment log alongside the build output. This provides additional context when a deployment is slow or fails — for example, you can see whether a pod is waiting for image pull or failing readiness probes.
+When a deployment is triggered, QuickStack streams **Kubernetes events** (pod scheduling, image pulls, container starts and stops) directly into the deployment log alongside the build output. This provides additional context when a deployment is slow or fails — for example, you can see whether a pod is waiting for image pull or failing readiness probes (health check).
+
+<img  src="/img/docs/observability/logs-and-terminal/qs-build-job.png" alt="QuickStack Log Viewer" />
 
 Access deployment logs from the **Overview** tab by clicking **Show Logs** next to a deployment entry, or from the global [Builds](/docs/how-to/deployments/builds-overview) page.
 
-## Live logs
+## Live App logs
 
-The **Logs** viewer streams stdout and stderr from your running containers. Start here when troubleshooting.
-
-### Accessing logs
+The **Logs** from running apps are streamed to the app page in QuickStack. Start here when troubleshooting.
 
 1. Open your app.
 2. Go to the **Overview** tab.
@@ -57,7 +51,6 @@ The **Terminal** opens a shell session directly inside a running container from 
 | Permissions | Terminal requires **Write** access to the project |
 | Container state | You can only connect to **Running** containers; crashing containers can't be shelled into |
 | Shell availability | `bash` requires it to be installed in the image; fall back to `sh` if it fails |
-| Log retention | QuickStack streams live logs; historical logs may be limited. Use `Delete old App logs` in Maintenance to manage disk usage |
 
 ## Related
 

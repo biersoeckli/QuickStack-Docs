@@ -1,7 +1,6 @@
 {
   "pages": [
     "redeploy-and-rollbacks",
-    "webhooks-auto-deploy",
-    "builds-overview"
+    "webhooks-auto-deploy"
   ]
 }

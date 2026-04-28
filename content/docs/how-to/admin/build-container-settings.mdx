@@ -21,12 +21,11 @@ The **Build Node** dropdown determines which cluster node schedules build contai
 | **k3s native** | Builds run as standard Kubernetes jobs without node affinity constraints. Resource limits and reservations become available when this option is selected. |
 | _Specific node name_ | Build containers are pinned to the selected node. Nodes marked as not schedulable are shown but cannot be selected. |
 
-> **tip Multi-node clusters**
-> Pinning builds to a dedicated node prevents build workloads from competing with production traffic on your application nodes.
-
 ## Resource limits (k3s native only)
 
 When **Build Node** is set to **k3s native**, you can configure per-build-container resource constraints:
+
+<img  src="/img/docs/admin/build-container-settings/qs-build-container-setting.png" alt="QuickStack Build Container Settings" />
 
 | Field | Unit | Description |
 |-------|------|-------------|
@@ -36,7 +35,7 @@ When **Build Node** is set to **k3s native**, you can configure per-build-contai
 | **CPU Reservation** | millicores (m) | Soft request used for scheduling. |
 
 > **warning Set reservations for predictable scheduling**
-> If no CPU and/or memory reservation is configured, Kubernetes may schedule build containers on already-overloaded nodes. QuickStack shows an alert in the UI when reservations are missing.
+> If no CPU and/or memory reservation is configured, Kubernetes may schedule build containers on already-overloaded nodes.
 
 ## Saving changes
 
