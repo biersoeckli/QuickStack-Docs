@@ -5,12 +5,16 @@ description: "Deploy an application directly from a Git repository using QuickSt
 keywords: ["QuickStack Git Deployment", "QuickStack Git Source", "QuickStack Git Deployment Guide"]
 ---
 
-QuickStack clones your repo, builds the Docker image from your Dockerfile, and runs it as a container. Every time you click **Deploy**, the current configuration is applied — changes to settings do not take effect automatically.
+QuickStack clones your repo, builds a Docker image, and runs it as a container. Every time you click **Deploy**, the current configuration is applied — changes to settings do not take effect automatically.
+
+QuickStack supports two [build methods](/docs/how-to/deployments/build-methods):
+- **Railpack** (default) — auto-detects your language and framework; no Dockerfile needed.
+- **Dockerfile** — uses a `Dockerfile` you provide in your repository.
 
 ## Prerequisites
 
 - QuickStack installed ([installation guide](/docs/tutorials/installation))
-- A Git repository with a valid `Dockerfile`
+- A Git repository (with a `Dockerfile` if using the Dockerfile build method)
 
 ## Required inputs
 
@@ -18,7 +22,8 @@ QuickStack clones your repo, builds the Docker image from your Dockerfile, and r
 |-------|----------|-------------|
 | Repo URL | Yes | **HTTPS** URL (e.g. `https://github.com/org/repo.git`) |
 | Branch | Yes | Branch to build from (e.g. `main`) |
-| Dockerfile path | Yes | Relative path from repo root (e.g. `./Dockerfile`) |
+| Build Method | Yes | `Railpack` (default) or `Dockerfile` |
+| Dockerfile path | Only for Dockerfile method | Relative path from repo root (e.g. `./Dockerfile`) |
 | Git Username + Token | No | Required for private repositories |
 
 ## Step 1: Create project and app
@@ -32,9 +37,12 @@ QuickStack clones your repo, builds the Docker image from your Dockerfile, and r
 
 1. Open the app and go to **App Settings** → **General** tab.
 2. Set **Source type** to **Git Repository**.
-3. Fill in: Repo URL, Branch, Dockerfile path.
-4. For private repos: add Git username and Personal Access Token.
-5. Click **Save**.
+3. Fill in: Repo URL and Branch.
+4. Choose a **Build Method**:
+   - **Railpack** (default) — no Dockerfile needed. Railpack auto-detects your stack.
+   - **Dockerfile** — enter the path to your Dockerfile (e.g. `./Dockerfile`).
+5. For private repos: add Git username and Personal Access Token.
+6. Click **Save**.
 
 <img  src="/img/docs/managing-apps/creating-apps/enter-git-credentials.png" alt="QuickStack Git Credentials" />
 
@@ -58,7 +66,8 @@ Click the **Deploy** button at the top of the page. This triggers a fresh build 
 
 | Symptom | Fix |
 |---------|-----|
-| Build fails | Check deployment logs for Dockerfile errors |
+| Build fails | Check deployment logs for build errors |
+| Railpack build fails | Verify your language/framework is [supported by Railpack](https://docs.railpack.io); switch to the Dockerfile method if needed |
 | Dockerfile not found | Verify the path is relative to repo root (e.g. `./Dockerfile`) |
 | App not reachable after deploy | Add a domain in the **Domains** tab with the correct internal container port |
 

@@ -1,0 +1,74 @@
+---
+sidebar_position: 3
+title: "Build Methods"
+description: "Choose between Railpack (zero-config, auto-detect) and Dockerfile build methods for Git-based apps in QuickStack."
+keywords: ["QuickStack build method", "Railpack", "Dockerfile", "buildpack", "auto-detect", "build configuration"]
+---
+
+When deploying an app from a Git repository, QuickStack supports two build methods:
+
+| Method | Requires Dockerfile | Best for |
+|--------|--------------------|-----------------------|
+| **Railpack** (default) | No | Apps in supported languages where you want zero-config builds |
+| **Dockerfile** | Yes | Full control over the build; custom base images; unsupported stacks |
+
+## Railpack
+
+Railpack is an open-source build tool by [Railway](https://railway.app) that automatically detects your language and framework, then produces an optimised Docker image — without any Dockerfile.
+
+### Supported stacks (non-exhaustive)
+
+- Node.js / Bun / Deno
+- Python (Django, Flask, FastAPI, …)
+- Go
+- Ruby (Rails, Sinatra, …)
+- PHP (Laravel, …)
+- Java / Kotlin (Spring Boot, …)
+- Rust
+- Static sites (HTML/CSS/JS)
+
+For the full list, see the [Railpack documentation](https://docs.railpack.io).
+
+### When to use Railpack
+
+- You don't want to maintain a Dockerfile.
+- Your app uses a common language/framework that Railpack detects automatically.
+- You want fast zero-config onboarding.
+
+> **info Default for new apps**
+> Railpack is the default build method for new Git-based apps. Existing apps created before this feature was introduced retain the **Dockerfile** method.
+
+## Dockerfile
+
+The Dockerfile method uses [BuildKit](https://docs.docker.com/build/buildkit/) to build your image from a `Dockerfile` you provide in your repository.
+
+### When to use Dockerfile
+
+- Your stack is not supported by Railpack.
+- You need a custom base image or multi-stage build.
+- You require precise control over the build environment.
+- You are migrating an existing app that already has a Dockerfile.
+
+## Configuring the build method
+
+1. Open your app and go to **App Settings** → **General** tab.
+2. Set **Source type** to **Git Repository**.
+3. Under the Git settings, select the **Build Method**:
+   - **Railpack** — no additional fields required.
+   - **Dockerfile** — enter the **Dockerfile path** (relative to repo root, e.g. `./Dockerfile`).
+4. Click **Save**, then **Deploy**.
+
+> **warning Redeployment required**
+> Changing the build method only takes effect after clicking **Deploy**.
+
+## Switching between methods
+
+You can switch build methods at any time by editing the app's General settings and redeploying. There is no data loss when switching — environment variables, volumes, and domains are unaffected.
+
+## Troubleshooting
+
+| Problem | Action |
+|---------|--------|
+| Railpack build fails with "unsupported" | Check whether your stack is listed at [docs.railpack.io](https://docs.railpack.io); switch to the Dockerfile method if not |
+| Dockerfile not found | Ensure the path is relative to repo root and the file exists on the configured branch |
+| Build succeeds but app crashes on startup | Check deployment logs; the Railpack auto-detected start command may need overriding via env vars (e.g. `RAILPACK_START_COMMAND`) |
