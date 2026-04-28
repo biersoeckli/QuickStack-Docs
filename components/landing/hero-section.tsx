@@ -17,6 +17,24 @@ const trustItems = [
   'Cluster Ready',
 ];
 
+const githubBadges = [
+  {
+    href: 'https://github.com/biersoeckli/QuickStack/stargazers',
+    src: 'https://img.shields.io/github/stars/biersoeckli/QuickStack?style=social',
+    alt: 'GitHub stars',
+  },
+  {
+    href: 'https://github.com/biersoeckli/QuickStack/blob/main/LICENSE',
+    src: 'https://img.shields.io/github/license/biersoeckli/QuickStack?color=22c55e',
+    alt: 'GitHub license',
+  },
+  {
+    href: 'https://github.com/biersoeckli/QuickStack/releases',
+    src: 'https://img.shields.io/github/v/release/biersoeckli/QuickStack?color=22c55e',
+    alt: 'GitHub release',
+  },
+];
+
 interface HeroSectionProps {
   theme: 'light' | 'dark';
 }
@@ -97,6 +115,14 @@ export function HeroSection({ theme }: HeroSectionProps) {
               View on GitHub
             </Button>
           </Link>
+        </div>
+
+        <div className="hidden lg:flex flex-wrap justify-center items-center gap-2">
+          {githubBadges.map((badge) => (
+            <Link key={badge.alt} href={badge.href} target="_blank" rel="noreferrer">
+              <img src={badge.src} alt={badge.alt} className="h-5 w-auto" loading="lazy" />
+            </Link>
+          ))}
         </div>
 
         {/* Trust Indicators */}

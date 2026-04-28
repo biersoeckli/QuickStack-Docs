@@ -35,7 +35,37 @@ export const metadata: Metadata = {
     { rel: "icon", url: "/img/quickstack-icon-dark.png" },
     //{ rel: "apple-touch-icon", url: "/apple-touch-icon.png" }
   ],
-  keywords: ['self-hosting', 'PaaS', 'platform as a service', 'kubernetes', 'devops', 'cloud alternatives', 'web app hosting', 'database hosting', 'infrastructure management', 'deployment', 'server', 'monitoring', 'debugging', 'git', 'backups', 'containerized applications', 'personal cloud platform'],
+  keywords: [
+    'self-hosting',
+    'PaaS',
+    'platform as a service',
+    'kubernetes',
+    'devops',
+    'cloud alternatives',
+    'web app hosting',
+    'database hosting',
+    'infrastructure management',
+    'deployment',
+    'server',
+    'monitoring',
+    'debugging',
+    'git',
+    'backups',
+    'containerized applications',
+    'personal cloud platform',
+    'vercel alternative',
+    'alternative for vercel',
+    'netlify alternative',
+    'alternative for netlify',
+    'railway alternative',
+    'alternative for railway',
+    'alternative for tailway',
+    'heroku alternative',
+    'alternative for heroku',
+    'self hosted vercel alternative',
+    'self hosted netlify alternative',
+    'self hosted heroku alternative'
+  ],
   other: {
     "llms": "/llms.txt" // LLM discovery hint
   }
