@@ -25,6 +25,9 @@ Kubernetes events (pod scheduling, image pull, container start/stop) are streame
 > **info No zero-downtime guarantee without health checks**
 > Without a configured [health check](/docs/how-to/observability/health-checks), Kubernetes marks pods ready as soon as they start, which may be before your app is actually serving requests. Configure a readiness probe for zero-downtime deploys.
 
+> **info Running multiple builds**
+> If multiple builds are triggered at the same time, they will enter a **PENDING** state and execute in FIFO order as build slots become available. 
+
 ## Environment variables
 
 Environment variables are key-value pairs injected at runtime. They are stored in the QuickStack database and applied during the next deploy.
