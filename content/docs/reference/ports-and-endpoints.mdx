@@ -13,6 +13,7 @@ keywords: ["QuickStack ports", "port 30000", "webhook URL", "internal hostname",
 | **80** | TCP | HTTP ingress (Traefik) |
 | **443** | TCP | HTTPS ingress (Traefik) |
 | **6443** | TCP | Kubernetes API — required between nodes in a multi-node cluster |
+| **30001–32767** | TCP/UDP | NodePort range — open individual ports as needed when using [Node Ports](/docs/how-to/networking/node-ports) |
 
 Open these on your firewall/security group. For single-node installations, port 6443 only needs to be reachable from future worker nodes.
 

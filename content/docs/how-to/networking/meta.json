@@ -4,6 +4,7 @@
     "quickstack-me",
     "internal-networking",
     "network-policies",
-    "basic-auth"
+    "basic-auth",
+    "node-ports"
   ]
 }

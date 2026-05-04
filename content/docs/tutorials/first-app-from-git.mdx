@@ -2,7 +2,7 @@
 sidebar_position: 2
 title: "Deploy Your First App from Git"
 description: "Deploy an application directly from a Git repository using QuickStack."
-keywords: ["QuickStack Git Deployment", "QuickStack Git Source", "QuickStack Git Deployment Guide"]
+keywords: ["QuickStack Git Deployment", "QuickStack Git Source", "QuickStack Git Deployment Guide", "SSH deploy key", "Git SSH"]
 ---
 
 QuickStack clones your repo, builds a Docker image, and runs it as a container. Every time you click **Deploy**, the current configuration is applied.
@@ -14,7 +14,7 @@ QuickStack supports two [build methods](/docs/how-to/deployments/build-methods):
 ## Prerequisites
 
 - QuickStack installed ([installation guide](/docs/tutorials/installation))
-- A Git repository (with a `Dockerfile` if using the Dockerfile build method)
+- A Git repository with a valid `Dockerfile`
 
 ## Step 1: Create project and app
 
@@ -23,18 +23,37 @@ QuickStack supports two [build methods](/docs/how-to/deployments/build-methods):
 
 <img  src="/img/docs/managing-apps/creating-apps/create-app-dialog.png" alt="QuickStack Create App Dialog" />
 
-## Step 2: Configure Git source
+## Step 2: Configure the app source
 
-1. Open the app and go to **App Settings** → **General** tab.
-2. Set **Source type** to **Git Repository**.
-3. Fill in: Repo URL and Branch.
-4. Choose a **Build Method**:
-   - **Railpack** — no Dockerfile needed. Railpack auto-detects your stack.
-   - **Dockerfile** — enter the path to your Dockerfile (e.g. `./Dockerfile`).
-5. For private repos: add Git username and Personal Access Token.
-6. Click **Save**.
+1. Open the app and go to the **General** tab.
+2. Click **Change Source** to open the source configuration wizard.
+3. On the first step, select your source type:
 
-<img  src="/img/docs/managing-apps/creating-apps/enter-git-credentials.png" alt="QuickStack Git Credentials" />
+| Source type | When to use |
+|-------------|-------------|
+| **Git HTTPS** | Public repos, or private repos authenticated with a username + Personal Access Token |
+| **Git SSH** | Private repos using an SSH deploy key (no username/password needed) |
+| **Docker Container Image** | Deploy a pre-built image from a registry |
+
+### Option A — Git HTTPS
+
+4. Enter the HTTPS clone URL (e.g. `https://github.com/org/repo.git`).
+5. QuickStack attempts to load the available branches. Select a branch from the dropdown, or type one manually.
+6. For private repos, enter your **Git Username** and a **Personal Access Token** with `read` access.
+7. QuickStack auto-detects the Dockerfile location. Confirm or adjust the **Dockerfile Path** if needed (relative to repo root, e.g. `./Dockerfile`).
+
+### Option B — Git SSH
+
+4. Enter the SSH clone URL (e.g. `git@github.com:user/repo.git`).
+5. QuickStack generates a **Public Deploy Key** for this app. Copy it using the **Copy** button.
+6. Add the deploy key to your repository with **read-only** access:
+   - **GitHub:** Repository → Settings → Deploy keys → Add deploy key
+   - **GitLab:** Repository → Settings → Repository → Deploy keys
+   - **Bitbucket:** Repository → Repository settings → Access keys
+7. Select the branch and confirm the Dockerfile path (same as HTTPS).
+
+> **info Regenerating the deploy key**
+> If you need to rotate credentials, click **Regenerate key** in the wizard. Update the old deploy key in your Git provider immediately after.
 
 ## Step 3: Deploy
 
@@ -59,6 +78,8 @@ Click the **Deploy** button at the top of the page. This triggers a fresh build 
 | Build fails | Check deployment logs for build errors |
 | Railpack build fails | Verify your language/framework is [supported by Railpack](https://railpack.io); switch to the Dockerfile method if needed |
 | Dockerfile not found | Verify the path is relative to repo root (e.g. `./Dockerfile`) |
+| SSH clone fails | Confirm the deploy key is added to the repository with read access |
+| Branches not loading | Verify the URL is correct; for private repos check credentials or deploy key |
 | App not reachable after deploy | Add a domain in the **Domains** tab with the correct internal container port |
 
 ## Next steps
