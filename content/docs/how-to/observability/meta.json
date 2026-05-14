@@ -1,6 +1,7 @@
 {
   "pages": [
     "logs-and-terminal",
+    "builds-overview",
     "health-checks"
   ]
 }
