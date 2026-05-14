@@ -1,0 +1,46 @@
+---
+sidebar_position: 3
+title: "Build Methods"
+description: "Choose between Railpack (zero-config, auto-detect) and Dockerfile build methods for Git-based apps in QuickStack."
+keywords: ["QuickStack build method", "Railpack", "Dockerfile", "buildpack", "auto-detect", "build configuration"]
+---
+
+When deploying an app from a Git repository, QuickStack supports two build methods:
+
+| Method | Requires Dockerfile | Best for |
+|--------|--------------------|-----------------------|
+| **Railpack** | No | Apps in supported languages where you want zero-config builds |
+| **Dockerfile** | Yes | Full control over the build; custom base images; unsupported stacks |
+
+## Railpack
+
+Railpack is an open-source build tool by [Railway](https://railway.app) that automatically detects your language and framework, then produces an optimised Docker image without any Dockerfile.
+Currently, Railpack supports 10+ languages and frameworks. For a full list, see the [Railpack documentation](https://railpack.com/).
+
+### When to use Railpack
+
+- You don't want to maintain a Dockerfile.
+- Your app uses a common language/framework that Railpack detects automatically.
+- You want fast zero-config onboarding.
+
+## Dockerfile
+
+The Dockerfile method uses [BuildKit](https://docs.docker.com/build/buildkit/) to build your image from a `Dockerfile` you provide in your repository.
+
+### When to use Dockerfile
+
+- Your stack is not supported by Railpack.
+- You need a custom base image or multi-stage build.
+- You require precise control over the build environment.
+- You are migrating an existing app that already has a Dockerfile.
+
+## Switching between methods
+
+You can switch build methods at any time by editing the app's General settings and redeploying. There is no data loss when switching — environment variables, volumes, and domains are unaffected.
+
+## Troubleshooting
+
+| Problem | Action |
+|---------|--------|
+| Railpack build fails with "unsupported" | Check whether your stack is listed at [docs.railpack.io](https://docs.railpack.io); switch to the Dockerfile method if not |
+| Dockerfile not found | Ensure the path is relative to repo root and the file exists on the configured branch |
