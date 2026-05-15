@@ -28,21 +28,27 @@ For injecting read-only config files, see [File Mounts](/docs/how-to/storage/fil
 
 <img  src="/img/docs/managing-apps/storage/create-volume.png" alt="Create Volume Dialog" />
 
-> **info Deploy required**
-> Click **Deploy** after adding or modifying a volume for changes to take effect.
+<Callout>
+**Deploy required**
+Click **Deploy** after adding or modifying a volume for changes to take effect.
+</Callout>
 
 ## Access modes
 
-> **warning Access Mode is permanent**
-> The Access Mode **cannot be changed** after the volume is created. Plan before deploying.
+<Callout type="warn">
+**Access Mode is permanent**
+The Access Mode **cannot be changed** after the volume is created. Plan before deploying.
+</Callout>
 
 | Mode | What it means | When to use |
 |------|--------------|-------------|
 | **ReadWriteOnce (RWO)** | Mounted by a single node at a time | Single-instance apps, databases |
 | **ReadWriteMany (RWX)** | Mounted by multiple nodes simultaneously | Apps with replicas > 1 sharing writes |
 
-> **caution Replication rule**
-> If your app runs with more than one replica **and** instances write to a shared path, you **must** use **RWX**. RWO with multiple replicas will cause mount conflicts.
+<Callout>
+**Replication rule**
+If your app runs with more than one replica **and** instances write to a shared path, you **must** use **RWX**. RWO with multiple replicas will cause mount conflicts.
+</Callout>
 
 ## Storage classes
 

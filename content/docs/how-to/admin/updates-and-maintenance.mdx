@@ -20,8 +20,9 @@ QuickStack checks for new versions automatically and allows in-UI updates withou
 
 To test the latest features before they reach the stable channel, enable **Use Canary Channel for Updates**.
 
-> **warning**
-> Canary builds may be unstable. Not recommended for production.
+<Callout type="warn">
+Canary builds may be unstable. Not recommended for production.
+</Callout>
 
 ## Disk space & cleanup
 
@@ -38,8 +39,9 @@ Docker images, build logs, and temp files accumulate over time. QuickStack provi
 | **Delete Old App Logs** | Clears historical application logs |
 | **Delete Orphaned Containers** | Removes pods no longer associated with active apps |
 
-> **info**
-> k3s and QuickStack manage old data/images automatically. Use these cleanup options only when experiencing disk space issues. Copies of pulled external images (e.g. MariaDB) are managed by k3s and cannot be removed through this interface.
+<Callout>
+k3s and QuickStack manage old data/images automatically. Use these cleanup options only when experiencing disk space issues. Copies of pulled external images (e.g. MariaDB) are managed by k3s and cannot be removed through this interface.
+</Callout>
 
 ## K3s cluster upgrades
 
@@ -60,13 +62,17 @@ The upgrade process:
 2. Upgrades worker nodes one at a time (cordons + drains each node)
 3. Apps on a draining node are rescheduled to other nodes and may experience brief downtime
 
-> **warning Before upgrading k3s**
-> - Ensure system backups are enabled and recent
-> - Verify volume backups are configured
-> - Expect brief downtime during node restarts
+<Callout type="warn">
+**Before upgrading k3s**
+- Ensure system backups are enabled and recent
+- Verify volume backups are configured
+- Expect brief downtime during node restarts
+</Callout>
 
-> **info k3s version channels**
-> QuickStack keeps you on a chosen minor-version channel (e.g. `v1.32`). Moving between minor versions requires manual action here.
+<Callout>
+**k3s version channels**
+QuickStack keeps you on a chosen minor-version channel (e.g. `v1.32`). Moving between minor versions requires manual action here.
+</Callout>
 
 ## Longhorn storage upgrades
 
@@ -76,9 +82,11 @@ If using Longhorn for distributed storage:
 2. Review current and target versions.
 3. Click **Start Upgrade** and confirm.
 
-> **warning Before upgrading Longhorn**
-> - Ensure volume backups are recent
-> - Review Longhorn release notes for breaking changes
+<Callout type="warn">
+**Before upgrading Longhorn**
+- Ensure volume backups are recent
+- Review Longhorn release notes for breaking changes
+</Callout>
 
 ## Troubleshooting QuickStack itself
 

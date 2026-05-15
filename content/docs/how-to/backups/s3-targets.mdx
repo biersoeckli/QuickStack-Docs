@@ -23,8 +23,10 @@ All QuickStack backup destinations are S3-compatible buckets. Configure at least
 
 3. Click **Save**.
 
-> **danger Credentials**
-> Store Access Key and Secret Key securely. Rotate credentials regularly. The IAM policy needs: `s3:PutObject`, `s3:GetObject`, `s3:DeleteObject`, `s3:ListBucket`.
+<Callout type="error">
+**Credentials**
+Store Access Key and Secret Key securely. Rotate credentials regularly. The IAM policy needs: `s3:PutObject`, `s3:GetObject`, `s3:DeleteObject`, `s3:ListBucket`.
+</Callout>
 
 ## Compatible providers
 

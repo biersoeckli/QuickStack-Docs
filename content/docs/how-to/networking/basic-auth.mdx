@@ -7,8 +7,10 @@ keywords: ["QuickStack basic auth", "HTTP authentication", "password protection"
 
 Basic Authentication adds a username/password prompt in front of your application at the ingress level. It is implemented via Traefik middleware — your application code needs no changes.
 
-> **info How it works**
-> Traefik intercepts all requests and prompts for credentials before forwarding to your container. Authentication is per-domain; unauthenticated requests receive `401 Unauthorized`.
+<Callout>
+**How it works**
+Traefik intercepts all requests and prompts for credentials before forwarding to your container. Authentication is per-domain; unauthenticated requests receive `401 Unauthorized`.
+</Callout>
 
 ## Adding credentials
 
@@ -18,8 +20,10 @@ Basic Authentication adds a username/password prompt in front of your applicatio
 4. Enter a **Username** and **Password**.
 5. Click **Save**, then **Deploy**.
 
-> **warning Redeployment required**
-> All credential changes (add, edit, remove) require a redeployment to take effect.
+<Callout type="warn">
+**Redeployment required**
+All credential changes (add, edit, remove) require a redeployment to take effect.
+</Callout>
 
 ## Use cases
 
@@ -29,15 +33,18 @@ Basic Authentication adds a username/password prompt in front of your applicatio
 
 ## Security considerations
 
-> **danger Limitations**
-> - Basic Auth transmits credentials as Base64 on every request — **always use HTTPS**.
-> - Not suitable as the sole authentication mechanism for sensitive data.
-> - No session — browsers re-send credentials on each request.
+<Callout type="error">
+**Limitations**
+- Basic Auth transmits credentials as Base64 on every request — **always use HTTPS**.
+- Not suitable as the sole authentication mechanism for sensitive data.
+- No session — browsers re-send credentials on each request.
+</Callout>
 
-> **tip Recommendations**
-> - Use strong, random passwords.
-> - Rotate credentials when access is no longer needed.
-> - Combine with [network policies](/docs/how-to/networking/network-policies) for sensitive apps.
+<Callout>
+**Recommendations**
+- Use strong, random passwords.
+- Rotate credentials when access is no longer needed.
+</Callout>
 
 ## Troubleshooting
 

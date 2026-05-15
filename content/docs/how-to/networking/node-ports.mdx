@@ -9,8 +9,10 @@ Node Ports let you expose an application port directly on every cluster node at 
 
 **Typical use cases:** SFTP servers, game servers, TCP/UDP services, databases exposed externally, any protocol that is not HTTP/HTTPS.
 
-> **tip Standard HTTP/HTTPS apps**
-> For web applications, use [Custom Domains](/docs/how-to/networking/domains) or the [QuickStack.me Domain](/docs/how-to/networking/quickstack-me) instead. Node Ports bypass Traefik and do not get automatic TLS.
+<Callout>
+**Standard HTTP/HTTPS apps**
+For web applications, use [Custom Domains](/docs/how-to/networking/domains) or the [QuickStack.me Domain](/docs/how-to/networking/quickstack-me) instead. Node Ports bypass Traefik and do not get automatic TLS.
+</Callout>
 
 ## How it works
 
@@ -31,29 +33,25 @@ When a Node Port is configured, Kubernetes creates a `NodePort` service that map
 
 5. Click **Save**, then **Deploy**.
 
-> **warning Redeployment required**
-> Node Port changes only take effect after redeployment.
+<Callout type="warn">
+**Redeployment required**
+Node Port changes only take effect after redeployment.
+</Callout>
 
 ## Port range
 
-Kubernetes restricts NodePort values to the range **30001–32767**. Choose a port in this range that is not already in use on your cluster nodes.
+As a default Kubernetes configuration, Node Ports must be in the range **30001–32767**. Choose a port in this range that is not already in use on your cluster nodes.
 
-> **info Firewall rules**
-> Remember to open the chosen Node Port on your server's firewall / security group for inbound traffic.
-
-## Protocol support
-
-Both `TCP` and `UDP` are supported. Configure separate Node Port entries if you need to expose the same container port on both protocols.
-
-## Multiple Node Ports
-
-An app can have multiple Node Port entries. Each entry must use a unique Node Port number. You can mix TCP and UDP ports freely.
+<Callout>
+**Firewall rules**
+Remember to open the chosen Node Port on your server's firewall / security group for inbound traffic.
+</Callout>
 
 ## Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
-| Can't connect on the node port | Check firewall rules; confirm the app was redeployed after adding the port |
+| Can't connect on the node port | Check firewall rules of your server; confirm the app was redeployed after adding the port |
 | Port already in use | Choose a different Node Port number in the 30001–32767 range |
 | UDP not working | Verify the correct protocol was selected; some UDP services also need TCP |
 

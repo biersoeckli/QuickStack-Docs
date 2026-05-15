@@ -84,11 +84,13 @@ The command looks like:
 curl -sfL https://get.quickstack.dev/setup-worker.sh | K3S_URL=https://MASTER_IP:6443 JOIN_TOKEN=K10... sh -
 ```
 
-> **tip Node token not showing?**
-> Retrieve it manually from the master node:
-> ```bash
-> sudo cat /var/lib/rancher/k3s/server/node-token
-> ```
+<Callout>
+**Node token not showing?**
+Retrieve it manually from the master node:
+```bash
+sudo cat /var/lib/rancher/k3s/server/node-token
+```
+</Callout>
 
 ### Step 2: Configure the command
 
@@ -116,8 +118,9 @@ Prevents new pods from being scheduled on this node. Existing workloads continue
 1. Find the node in the cluster overview.
 2. Click the node and select **Deactivate Node**.
 
-> **warning**
-> Deactivating moves existing workloads (drain). 
+<Callout type="warn">
+Deactivating moves existing workloads (drain).
+</Callout>
 
 ### Reactivate a node (uncordon)
 
@@ -145,8 +148,9 @@ kubectl delete node <node-name>
 
 ## Planning considerations
 
-> **tip**
-> - Use an **odd number of master nodes** (1, 3, 5) for HA quorum
-> - Use **Longhorn** storage class for volumes that must survive node failure
-> - Keep 20–30% capacity free for failover scenarios
-> - Ensure all nodes can communicate on required k3s ports
+<Callout>
+- Use an **odd number of master nodes** (1, 3, 5) for HA quorum
+- Use **Longhorn** storage class for volumes that must survive node failure
+- Keep 20–30% capacity free for failover scenarios
+- Ensure all nodes can communicate on required k3s ports
+</Callout>
