@@ -25,22 +25,38 @@ QuickStack supports two [build methods](/docs/how-to/deployments/build-methods):
 
 ## Step 2: Configure the app source
 
-1. Open the app and go to the **General** tab.
-2. Click **Change Source** to open the source configuration wizard.
-3. On the first step, select your source type:
+1. Now you have to connect your app to an app source. To start, click on "Connect App Source".
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/choose-app-source.png" alt="QuickStack Choose App Source" />
+
+2. Next you have to choose the source type. QuickStack supports Git HTTPS, Git SSH, and Docker Container Image sources.
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/choose-git-source.png" alt="QuickStack Choose Git Source" />
+
+**Differences between source types:**
 
 | Source type | When to use |
 |-------------|-------------|
 | **Git HTTPS** | Public repos, or private repos authenticated with a username + Personal Access Token |
 | **Git SSH** | Private repos using an SSH deploy key (no username/password needed) |
-| **Docker Container Image** | Deploy a pre-built image from a registry |
+| **Docker Container Image** | Deploy a pre-built image from a registry ([Tutorial here](/docs/tutorials/first-app-from-image)) |
 
 ### Option A — Git HTTPS
 
-4. Enter the HTTPS clone URL (e.g. `https://github.com/org/repo.git`).
-5. QuickStack attempts to load the available branches. Select a branch from the dropdown, or type one manually.
-6. For private repos, enter your **Git Username** and a **Personal Access Token** with `read` access.
-7. QuickStack auto-detects the Dockerfile location. Confirm or adjust the **Dockerfile Path** if needed (relative to repo root, e.g. `./Dockerfile`).
+4. Enter the HTTPS clone URL (e.g. `https://github.com/org/repo.git`). For private repos, enter your **Git Username** and a **Personal Access Token** with `read` access on the repository.
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/enter-git-https-location.png" alt="QuickStack Enter Git HTTPS Location" />
+
+5. QuickStack attempts to load the available branches. Select a branch from the list.
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/choose-git-branch.png" alt="QuickStack Choose Git Branch" />
+
+6. Choose the build method:
+- **Railpack** — auto-detects your language and framework; no Dockerfile needed.
+- **Dockerfile** — uses a `Dockerfile` you provide in your repository. This is more flexible but requires a valid `Dockerfile` in the repo.
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/choose-build-method.png" alt="QuickStack Choose Build Method" />
+
+7. When Dockerfile is chosen, QuickStack auto-detects the Dockerfile location. Confirm or adjust the **Dockerfile Path** if needed (relative to repo root, e.g. `./Dockerfile`).
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/set-dockerfile-location.png" alt="QuickStack Set Dockerfile Location" />
+
+8. Review the summary and click **Save & Deploy** to start the deployment of your app.
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/git-https-summary.png" alt="QuickStack Git HTTPS Summary" />
 
 ### Option B — Git SSH
 
@@ -50,17 +66,33 @@ QuickStack supports two [build methods](/docs/how-to/deployments/build-methods):
    - **GitHub:** Repository → Settings → Deploy keys → Add deploy key
    - **GitLab:** Repository → Settings → Repository → Deploy keys
    - **Bitbucket:** Repository → Repository settings → Access keys
-7. Select the branch and confirm the Dockerfile path (same as HTTPS).
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/enter-git-ssh-location.png" alt="QuickStack Enter Git SSH Location" />
 
-> **info Regenerating the deploy key**
-> If you need to rotate credentials, click **Regenerate key** in the wizard. Update the old deploy key in your Git provider immediately after.
+5. QuickStack attempts to load the available branches. Select a branch from the list.
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/choose-git-branch.png" alt="QuickStack Choose Git Branch" />
 
-## Step 3: Deploy
+6. Choose the build method:
+- **Railpack** — auto-detects your language and framework; no Dockerfile needed.
+- **Dockerfile** — uses a `Dockerfile` you provide in your repository. This is more flexible but requires a valid `Dockerfile` in the repo.
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/choose-build-method.png" alt="QuickStack Choose Build Method" />
 
-Click the **Deploy** button at the top of the page. This triggers a fresh build from your Git branch and deploys the resulting container.
+7. When Dockerfile is chosen, QuickStack auto-detects the Dockerfile location. Confirm or adjust the **Dockerfile Path** if needed (relative to repo root, e.g. `./Dockerfile`).
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/set-dockerfile-location.png" alt="QuickStack Set Dockerfile Location" />
 
-> **info Deploy applies changes**
-> Any configuration change — Git source, env vars, storage, domains — only takes effect after clicking **Deploy**.
+8. Review the summary and click **Save & Deploy** to start the deployment of your app.
+<img className='max-w-2xl'  src="/img/docs/tutorials/first-app-from-git/git-ssh-summary.png" alt="QuickStack Git SSH Summary" />
+
+
+<Callout>
+**Regenerating the deploy key**
+If you need to rotate credentials, click **Regenerate key** in the wizard. Update the old deploy key in your Git provider immediately after.
+</Callout>
+
+<Callout>
+**Deploy applies changes**
+Any configuration change — Git source, env vars, storage, domains — only takes effect after clicking **Deploy**.
+</Callout>
+
 
 ## Step 4: Verify
 
