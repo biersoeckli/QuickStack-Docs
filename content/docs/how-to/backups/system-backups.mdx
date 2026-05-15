@@ -7,8 +7,10 @@ keywords: ["QuickStack system backup", "SQLite backup", "configuration backup", 
 
 QuickStack stores its configuration in a SQLite database at `storage/db/data.db` inside the QuickStack container. System backups capture the entire configuration state: projects, users, app definitions, environment variables, settings.
 
-> **info Not the same as volume/database backups**
-> System backups cover the QuickStack configuration only — **not** your application data volumes or database contents. Set up [volume backups](/docs/how-to/backups/volume-backups) and [database backups](/docs/how-to/backups/database-backups) separately.
+<Callout>
+**Not the same as volume/database backups**
+System backups cover the QuickStack configuration only — **not** your application data volumes or database contents. Set up [volume backups](/docs/how-to/backups/volume-backups) and [database backups](/docs/how-to/backups/database-backups) separately.
+</Callout>
 
 ## Creating a system backup
 
@@ -26,14 +28,16 @@ If an S3 target is configured, QuickStack also creates a backup automatically ev
 
 ## Restoring a system backup
 
-> **danger Critical Warning**
-> Restoring a system backup **replaces ALL current configuration data**:
-> - All projects and applications
-> - User accounts and permissions
-> - Environment variables and secrets
-> - App configurations and settings
->
-> **This action cannot be undone!** After restoring, clear your browser cache and log in again.
+<Callout type="error">
+**Critical Warning**
+Restoring a system backup **replaces ALL current configuration data**:
+- All projects and applications
+- User accounts and permissions
+- Environment variables and secrets
+- App configurations and settings
+
+**This action cannot be undone!** After restoring, clear your browser cache and log in again.
+</Callout>
 
 1. Go to **QuickStack Settings** → **Storage & Backups**.
 2. Click **View & Restore Backups**.

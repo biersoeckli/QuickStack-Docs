@@ -7,8 +7,10 @@ keywords: ["QuickStack domains", "QuickStack HTTPS", "expose app", "custom domai
 
 This tutorial shows the fastest path to making a deployed app publicly accessible on a domain with HTTPS.
 
-> **tip No domain yet?**
-> Use the built-in **[QuickStack.me domain](/docs/how-to/networking/quickstack-me)** for instant HTTPS — no DNS setup needed.
+<Callout>
+**No domain yet?**
+Use the built-in **[QuickStack.me domain](/docs/how-to/networking/quickstack-me)** for instant HTTPS — no DNS setup needed.
+</Callout>
 
 ## What you need
 
@@ -52,8 +54,9 @@ QuickStack provisions TLS certificates via Let's Encrypt. You need to give it a 
 
 ## Step 4: Deploy to apply
 
-> **info**
-> Domain changes are not active until you click **Deploy**. The app must be redeployed for the new domain to take effect.
+<Callout>
+Domain changes are not active until you click **Deploy**. The app must be redeployed for the new domain to take effect.
+</Callout>
 
 Click **Deploy** in the top-right corner of the app page.
 
@@ -61,8 +64,9 @@ Click **Deploy** in the top-right corner of the app page.
 
 Open `https://app.example.com` in your browser. You should see your app with a valid TLS certificate.
 
-> **info**
-> It can take a few seconds/minutes for Traefik to provision the certificate after deployment. If you see a security warning, wait a bit and refresh.
+<Callout>
+It can take a few seconds/minutes for Traefik to provision the certificate after deployment. If you see a security warning, wait a bit and refresh.
+</Callout>
 
 ## Troubleshooting
 

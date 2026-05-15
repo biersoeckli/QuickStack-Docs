@@ -1,0 +1,63 @@
+---
+sidebar_position: 6
+title: "Node Ports"
+description: "Expose non-HTTP application ports directly on cluster nodes using Kubernetes NodePorts for TCP/UDP workloads."
+keywords: ["QuickStack node ports", "NodePort", "TCP", "UDP", "SFTP", "game server", "non-HTTP", "expose port"]
+---
+
+Node Ports let you expose an application port directly on every cluster node at a fixed host port number, bypassing Traefik. This is useful for non-HTTP workloads that cannot be routed through the standard HTTP/HTTPS ingress.
+
+**Typical use cases:** SFTP servers, game servers, TCP/UDP services, databases exposed externally, any protocol that is not HTTP/HTTPS.
+
+<Callout>
+**Standard HTTP/HTTPS apps**
+For web applications, use [Custom Domains](/docs/how-to/networking/domains) or the [QuickStack.me Domain](/docs/how-to/networking/quickstack-me) instead. Node Ports bypass Traefik and do not get automatic TLS.
+</Callout>
+
+## How it works
+
+When a Node Port is configured, Kubernetes creates a `NodePort` service that maps a port on every cluster node to the specified container port. Traffic sent to `<node-ip>:<node-port>` is forwarded directly to the container — no ingress controller or TLS termination is involved.
+
+## Configuring a Node Port
+
+1. Open the app and go to the **Domains** tab.
+2. Scroll to the **Node Ports** card.
+3. Click **Add Node Port**.
+4. Fill in:
+
+| Field | Description |
+|-------|-------------|
+| **Container Port** | The port your container listens on (1–65535) |
+| **Node Port** | The host port exposed on every cluster node (30001–32767) |
+| **Protocol** | `TCP` or `UDP` |
+
+5. Click **Save**, then **Deploy**.
+
+<Callout type="warn">
+**Redeployment required**
+Node Port changes only take effect after redeployment.
+</Callout>
+
+## Port range
+
+As a default Kubernetes configuration, Node Ports must be in the range **30001–32767**. Choose a port in this range that is not already in use on your cluster nodes.
+
+<Callout>
+**Firewall rules**
+Remember to open the chosen Node Port on your server's firewall / security group for inbound traffic.
+</Callout>
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Can't connect on the node port | Check firewall rules of your server; confirm the app was redeployed after adding the port |
+| Port already in use | Choose a different Node Port number in the 30001–32767 range |
+| UDP not working | Verify the correct protocol was selected; some UDP services also need TCP |
+
+## Related
+
+- [Custom domains](/docs/how-to/networking/domains) — HTTP/HTTPS ingress via Traefik
+- [Internal networking](/docs/how-to/networking/internal-networking) — service-to-service communication
+- [Network policies](/docs/how-to/networking/network-policies) — traffic control between apps
+- [Ports & endpoints reference](/docs/reference/ports-and-endpoints)

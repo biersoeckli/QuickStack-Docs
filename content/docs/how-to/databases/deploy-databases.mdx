@@ -47,15 +47,19 @@ Other apps in the same project connect via the **service hostname**:
 
 <img  src="/img/docs/managing-databases/deploying-databases/database-credentials.png" alt="Database Credentials" />
 
-> **info Clipboard copy**
-> Copying credential values requires your QuickStack instance to be served over HTTPS.
+<Callout>
+**Clipboard copy**
+Copying credential values requires your QuickStack instance to be served over HTTPS.
+</Callout>
 
 ### External access (not recommended)
 
 By default, databases are not exposed to the internet. If you need local access for development, you can assign a public domain in the **Domains** tab.
 
-> **danger Security Warning**
-> Exposing databases to the public internet is a security risk. Only do this for testing purposes.
+<Callout type="error">
+**Security Warning**
+Exposing databases to the public internet is a security risk. Only do this for testing purposes.
+</Callout>
 
 ## Environment variables in templates
 

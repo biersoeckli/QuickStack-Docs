@@ -34,8 +34,10 @@ When **Build Node** is set to **k3s native**, you can configure per-build-contai
 | **CPU Limit** | millicores (m) | Hard ceiling on CPU. `1000m` = 1 vCPU. |
 | **CPU Reservation** | millicores (m) | Soft request used for scheduling. |
 
-> **warning Set reservations for predictable scheduling**
-> If no CPU and/or memory reservation is configured, Kubernetes may schedule build containers on already-overloaded nodes.
+<Callout type="warn">
+**Set reservations for predictable scheduling**
+If no CPU and/or memory reservation is configured, Kubernetes may schedule build containers on already-overloaded nodes.
+</Callout>
 
 ## Saving changes
 
