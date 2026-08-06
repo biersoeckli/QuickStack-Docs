@@ -1,0 +1,60 @@
+---
+sidebar_position: 2
+title: "Authentication"
+description: "Create and use REST API keys for the QuickStack API."
+keywords: ["QuickStack API key", "REST API authentication", "bearer token"]
+---
+
+Every REST API request requires a QuickStack REST API key sent in the `Authorization` header.
+
+## Create an API key
+
+1. In QuickStack, open **Settings** → **Profile**.
+2. In **REST API Keys**, click **Create REST API Key**.
+3. Enter a recognizable name and, optionally, an expiration date.
+4. Copy the key when it appears.
+
+<Callout type="warn">
+**Copy the key immediately.** QuickStack displays the raw key only once. Store it in a secret manager or another secure location.
+</Callout>
+
+## Administrator key management
+
+Administrators can manage API access for other users from **Settings** → **Users & Groups**. Select a user to create a REST API key for that user or delete one of their existing keys.
+
+Administrators can also create an **API only** user in **Users & Groups**. An API-only user cannot sign in to the QuickStack UI and is intended for programmatic access. Assign it the appropriate group and app permissions, then create an API key for it.
+
+## Send the bearer token
+
+Pass the key with the `Bearer` authentication scheme:
+
+```bash
+curl https://<your-quickstack-host>/api/v1/apps \
+  -H "Authorization: Bearer <api-key>"
+```
+
+## Permissions
+
+An API key acts as the QuickStack user who created it. It inherits that user's group and app permissions:
+
+- Read access allows listing and retrieving permitted apps, deployment history, and logs.
+- Write access allows creating or updating permitted apps and starting deployments.
+- Delete access allows deleting permitted apps.
+- An administrator key can access all app workloads.
+
+The API does not grant additional permissions. To change an API client's access, update the user's group or app permissions in **Settings** → **Users & Groups**.
+
+## Expire or revoke a key
+
+Set an optional expiration date when creating a key. To revoke a key before it expires, return to **Settings** → **Profile** and delete it from **REST API Keys**. Requests made with an expired or deleted key are rejected.
+
+## Error responses
+
+Errors use the `application/problem+json` content type and include a status, title, and sometimes a detail message.
+
+| Status | Meaning |
+|--------|---------|
+| `400` | Invalid request data or an operation QuickStack cannot perform |
+| `401` | Missing, malformed, expired, deleted, or invalid API key |
+| `404` | The requested app or deployment does not exist, or is not accessible |
+| `500` | An unexpected server error |

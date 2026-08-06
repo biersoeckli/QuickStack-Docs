@@ -1,0 +1,45 @@
+---
+sidebar_position: 1
+title: "REST API overview"
+description: "Use the QuickStack REST API to manage app workloads programmatically."
+keywords: ["QuickStack REST API", "QuickStack API", "app workloads", "OpenAPI"]
+---
+
+QuickStack offers a REST API for programmatically managing **projects** and **app workloads**. The API base path is:
+
+```
+https://<your-quickstack-host>/api/v1
+```
+
+## Before you begin
+
+Create a REST API key for a QuickStack user, then send it as a bearer token with every API request. See [Authentication](/docs/rest-api/authentication) for setup instructions.
+
+```bash
+curl https://<your-quickstack-host>/api/v1/apps \
+  -H "Authorization: Bearer <api-key>"
+```
+
+The key has the same permissions as its owner. It can only access apps that the owning user is allowed to read or manage.
+
+## OpenAPI documentation
+
+QuickStack can expose interactive API documentation and the OpenAPI specification on the instance:
+
+- [`/api/v1/openapi`](/api/v1/openapi) — interactive OpenAPI UI
+- [`/api/v1/openapi.json`](/api/v1/openapi.json) — OpenAPI JSON specification
+
+An administrator controls whether these endpoints are publicly exposed in **Settings** → **QuickStack Server** → **OpenAPI Endpoint**. If they are disabled, authenticate to access the API or ask an administrator to enable them.
+
+Use the OpenAPI JSON from the running QuickStack instance to generate a client tailored to your language, framework, or build tooling. For example, download the specification during development or CI:
+
+```bash
+curl "$QUICKSTACK_URL/api/v1/openapi.json" \
+  -o quickstack.openapi.json
+```
+
+Then pass `quickstack.openapi.json` to an OpenAPI-compatible generator of your choice. The generated client reflects the routes and schemas exposed by that QuickStack instance.
+
+<Callout type="info">
+For JavaScript and TypeScript, you can also use the official [QuickStack SDK](/docs/rest-api/javascript-typescript-sdk), which provides typed methods generated from the QuickStack API.
+</Callout>

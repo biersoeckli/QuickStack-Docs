@@ -1,0 +1,100 @@
+---
+sidebar_position: 3
+title: "JavaScript & TypeScript SDK"
+description: "Use the official QuickStack JavaScript and TypeScript SDK for app workloads."
+keywords: ["QuickStack SDK", "JavaScript", "TypeScript", "@quickstackdev/sdk"]
+---
+
+The official [QuickStack SDK](https://github.com/biersoeckli/QuickStack-sdk) is a typed JavaScript and TypeScript client for the QuickStack API. This guide covers its app-workload methods only.
+
+## Install
+
+```bash
+npm install @quickstackdev/sdk
+```
+
+## Configure a client
+
+Pass the QuickStack base URL and REST API key directly:
+
+```ts
+import { QuickStackClient } from "@quickstackdev/sdk";
+
+const client = QuickStackClient.create(
+  "https://your-quickstack-host",
+  "your-api-key",
+);
+```
+
+Or set `QUICKSTACK_BASE_URL` and `QUICKSTACK_API_TOKEN`, then create the client without arguments:
+
+```ts
+const client = QuickStackClient.create();
+```
+
+The SDK sends the key as a bearer token. Create and limit that key as described in [Authentication](/docs/rest-api/authentication).
+
+## Work with apps
+
+The SDK returns response data directly from its convenience methods.
+
+```ts
+const apps = await client.listApps({ projectId: "project-id" });
+
+const app = await client.getApp({ appId: "app-id" });
+
+const updatedApp = await client.saveApp({
+  id: app.id,
+  name: "renamed-app",
+  appType: "SERVICE",
+  projectId: app.projectId,
+  sourceType: "GIT",
+  buildMethod: "DOCKERFILE",
+  gitUrl: "https://github.com/acme/my-app",
+  gitBranch: "main",
+  dockerfilePath: "Dockerfile",
+  replicas: 1,
+  envVars: "{}",
+  ingressNetworkPolicy: "ALLOW_ALL",
+  egressNetworkPolicy: "ALLOW_ALL",
+  useNetworkPolicy: false,
+  healthCheckPeriodSeconds: 10,
+  healthCheckTimeoutSeconds: 5,
+  healthCheckFailureThreshold: 3,
+  appDomains: [],
+  appPorts: [],
+  appNodePorts: [],
+  appFileMounts: [],
+  appVolumes: [],
+  appBasicAuths: [],
+});
+
+await client.deleteApp({ id: updatedApp.id });
+```
+
+`saveApp` is an upsert: omit `id` when creating and include it when updating. Obtain the complete app request schema from your instance's [OpenAPI documentation](/docs/rest-api/overview#openapi-documentation).
+
+## Deployments and logs
+
+```ts
+const deployment = await client.deployApp({ appId: "app-id" });
+
+const history = await client.listAppDeployments({ appId: "app-id" });
+const details = await client.getAppDeployment({
+  appId: "app-id",
+  deployemtId: deployment.deploymentId,
+});
+
+const logs = await client.getAppLogs({ appId: "app-id", lines: 200 });
+const deploymentLogs = await client.getAppDeploymentLogs({
+  appId: "app-id",
+  deployemtId: details.deploymentId,
+  tailLines: 200,
+});
+```
+
+The generated SDK currently uses the API's `deployemtId` parameter spelling for deployment-detail and deployment-log methods.
+
+<Callout type="info">
+See the [SDK repository](https://github.com/biersoeckli/QuickStack-sdk) for source code, releases, and the complete generated client surface.
+</Callout>
