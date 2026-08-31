@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { GitBranch, SquareActivity, Server, Lock } from 'lucide-react';
 import { Eyebrow, StatusDot } from './shared';
+import { Reveal } from './reveal';
 
 export const pillars = [
   {
@@ -87,33 +88,33 @@ const members = [
   { name: 'dev@acme.io', role: 'Member', mfa: false },
 ];
 
-function CardShell({
-  className,
+function FeatureCard({
+  eyebrow,
+  title,
+  description,
   children,
+  className,
 }: {
-  className?: string;
+  eyebrow: string;
+  title: string;
+  description: string;
   children: ReactNode;
+  className?: string;
 }) {
   return (
     <div
-      className={`flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-none ${className ?? ''}`}
+      className={`group flex w-full flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-none transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/15 ${className ?? ''}`}
     >
-      {children}
-    </div>
-  );
-}
-
-function CardHead({ label, hint }: { label: string; hint?: string }) {
-  return (
-    <div className="flex items-center justify-between border-b border-border px-5 py-3">
-      <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
-        {label}
-      </span>
-      {hint && (
-        <span className="font-mono text-[11px] text-muted-foreground">
-          {hint}
-        </span>
-      )}
+      <div className="border-b border-border px-6 pt-6 pb-5">
+        <Eyebrow className="mb-2.5">{eyebrow}</Eyebrow>
+        <h3 className="text-lg font-medium tracking-tight text-foreground">
+          {title}
+        </h3>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+          {description}
+        </p>
+      </div>
+      <div className="flex flex-1 flex-col bg-muted/30">{children}</div>
     </div>
   );
 }
@@ -194,7 +195,7 @@ function MonitoringChart() {
         {bars.map((h, i) => (
           <div
             key={i}
-            className="flex-1 rounded-sm bg-muted"
+            className="flex-1 rounded-sm bg-muted transition-[height] duration-700 group-hover:bg-muted-foreground/30"
             style={{ height: `${(h / 100) * 48}px` }}
           />
         ))}
@@ -248,7 +249,7 @@ function DatabasesList() {
         {databases.map((db) => (
           <div
             key={db.name}
-            className="flex items-center justify-between rounded-lg border border-border px-3 py-2.5"
+            className="flex items-center justify-between rounded-lg border border-border px-3 py-2.5 transition-colors hover:bg-background"
           >
             <div className="flex items-center gap-2.5">
               <StatusDot className="text-emerald-500" />
@@ -293,7 +294,7 @@ function ClusterNodes() {
           </div>
           <div className="h-1.5 overflow-hidden rounded-full bg-muted">
             <div
-              className="h-full rounded-full bg-foreground"
+              className="h-full rounded-full bg-foreground transition-[width] duration-700 group-hover:bg-muted-foreground"
               style={{ width: `${node.load}%` }}
             />
           </div>
@@ -340,25 +341,6 @@ function TeamAccess() {
   );
 }
 
-const pillarSummary = [
-  {
-    key: 'Deploy',
-    tagline: 'Git push to a running app — no manual orchestration.',
-  },
-  {
-    key: 'Operate',
-    tagline: 'Logs, terminal and metrics without SSH gymnastics.',
-  },
-  {
-    key: 'Scale',
-    tagline: 'Grow from one VPS to a multi-node cluster.',
-  },
-  {
-    key: 'Secure',
-    tagline: 'Control access down to the project level.',
-  },
-];
-
 export function FeaturesSection() {
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
@@ -374,46 +356,65 @@ export function FeaturesSection() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
-        <CardShell className="md:col-span-7">
-          <CardHead label="Deploy" hint="pipeline" />
-          <DeployPipeline />
-        </CardShell>
+        <Reveal className="flex md:col-span-7 md:row-span-2">
+          <FeatureCard
+            eyebrow="Deploy"
+            title="Push to deploy"
+            description="Build from any Git repo or container registry. Webhooks trigger auto-deploys on every push, served behind automatic HTTPS."
+          >
+            <DeployPipeline />
+          </FeatureCard>
+        </Reveal>
 
-        <CardShell className="md:col-span-5">
-          <CardHead label="Operate" hint="monitoring" />
-          <MonitoringChart />
-        </CardShell>
+        <Reveal delay={80} className="flex md:col-span-5">
+          <FeatureCard
+            eyebrow="Operate"
+            title="Watch what's running"
+            description="Live CPU, RAM and disk metrics per app, with health checks and restart policies."
+          >
+            <MonitoringChart />
+          </FeatureCard>
+        </Reveal>
 
-        <CardShell className="md:col-span-5">
-          <CardHead label="Operate" hint="logs" />
-          <TerminalLogs />
-        </CardShell>
+        <Reveal delay={140} className="flex md:col-span-5">
+          <FeatureCard
+            eyebrow="Operate"
+            title="Logs and terminal"
+            description="Stream container logs in real time and drop into a web terminal — no SSH required."
+          >
+            <TerminalLogs />
+          </FeatureCard>
+        </Reveal>
 
-        <CardShell className="md:col-span-4">
-          <CardHead label="Databases" hint="one-click" />
-          <DatabasesList />
-        </CardShell>
+        <Reveal delay={80} className="flex md:col-span-4">
+          <FeatureCard
+            eyebrow="Databases"
+            title="One-click databases"
+            description="Spin up Postgres, MySQL or Redis from templates and connect them over internal networking."
+          >
+            <DatabasesList />
+          </FeatureCard>
+        </Reveal>
 
-        <CardShell className="md:col-span-4">
-          <CardHead label="Scale" hint="cluster" />
-          <ClusterNodes />
-        </CardShell>
+        <Reveal delay={140} className="flex md:col-span-4">
+          <FeatureCard
+            eyebrow="Scale"
+            title="Grow into a cluster"
+            description="Add nodes anytime. Longhorn provides shared storage and load balancing across the cluster."
+          >
+            <ClusterNodes />
+          </FeatureCard>
+        </Reveal>
 
-        <CardShell className="md:col-span-4">
-          <CardHead label="Secure" hint="access" />
-          <TeamAccess />
-        </CardShell>
-      </div>
-
-      <div className="mt-6 grid grid-cols-1 gap-4 border-t border-border pt-6 sm:grid-cols-2 lg:grid-cols-4">
-        {pillarSummary.map((pillar) => (
-          <div key={pillar.key}>
-            <p className="text-sm font-medium text-foreground">{pillar.key}</p>
-            <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">
-              {pillar.tagline}
-            </p>
-          </div>
-        ))}
+        <Reveal delay={200} className="flex md:col-span-4">
+          <FeatureCard
+            eyebrow="Secure"
+            title="Lock down access"
+            description="Per-project permissions, 2FA and network policies keep every app isolated."
+          >
+            <TeamAccess />
+          </FeatureCard>
+        </Reveal>
       </div>
     </section>
   );
