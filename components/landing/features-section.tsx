@@ -81,9 +81,22 @@ const nodes = [
 ];
 
 const members = [
-  { name: 'alex@acme.io', role: 'Owner', mfa: true },
-  { name: 'sam@acme.io', role: 'Admin', mfa: true },
-  { name: 'dev@acme.io', role: 'Member', mfa: false },
+  { name: 'alex@acme.io', role: 'Owner', auth: '2FA' },
+  { name: 'sam@acme.io', role: 'Admin', auth: 'SSO' },
+  { name: 'dev@acme.io', role: 'Member', auth: '—' },
+];
+
+const backups = [
+  { name: 'postgres', schedule: 'Daily · 02:00' },
+  { name: 'app-volume', schedule: 'Daily · 02:15' },
+  { name: 'redis', schedule: 'Daily · 02:30' },
+];
+
+const policies = [
+  { source: 'app', target: 'postgres', action: 'allow' },
+  { source: 'app', target: 'redis', action: 'allow' },
+  { source: 'external', target: 'app · :443', action: 'allow' },
+  { source: 'app', target: 'internet', action: 'deny' },
 ];
 
 function FeatureCard({
@@ -324,18 +337,83 @@ function TeamAccess() {
             </div>
             <span
               className={
-                m.mfa
+                m.auth !== '—'
                   ? 'rounded border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 font-mono text-[10px] text-emerald-600 dark:text-emerald-400'
                   : 'rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground'
               }
             >
-              {m.mfa ? '2FA' : '—'}
+              {m.auth}
             </span>
           </div>
         ))}
       </div>
       <p className="mt-auto border-t border-border pt-3 font-mono text-[11px] text-muted-foreground">
-        Granular permissions · 2FA · network policies
+        Granular permissions · 2FA · SSO
+      </p>
+    </div>
+  );
+}
+
+function BackupsList() {
+  return (
+    <div className="flex flex-1 flex-col px-4 py-4">
+      <div className="flex-1 space-y-2">
+        {backups.map((b) => (
+          <div
+            key={b.name}
+            className="flex items-center justify-between rounded-lg border border-border px-3 py-2.5 transition-colors hover:bg-background"
+          >
+            <div className="flex items-center gap-2.5">
+              <StatusDot className="text-emerald-500" />
+              <span className="font-mono text-[13px] text-foreground">
+                {b.name}
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-[11px] text-muted-foreground">
+                {b.schedule}
+              </span>
+              <span className="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">
+                OK
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <button className="mt-4 inline-flex h-8 items-center justify-center rounded-md border border-dashed border-border text-[12px] font-medium text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground">
+        + Create backup
+      </button>
+    </div>
+  );
+}
+
+function NetworkPolicies() {
+  return (
+    <div className="flex flex-1 flex-col px-4 py-4">
+      <div className="flex-1 space-y-2">
+        {policies.map((p) => (
+          <div
+            key={`${p.source}-${p.target}`}
+            className="flex items-center justify-between rounded-lg border border-border px-3 py-2.5"
+          >
+            <span className="font-mono text-[12px] text-foreground">
+              {p.source}{' '}
+              <span className="text-muted-foreground">→</span> {p.target}
+            </span>
+            <span
+              className={
+                p.action === 'allow'
+                  ? 'font-mono text-[11px] text-emerald-600 dark:text-emerald-400'
+                  : 'font-mono text-[11px] text-muted-foreground'
+              }
+            >
+              {p.action === 'allow' ? 'ALLOW' : 'DENY'}
+            </span>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 border-t border-border pt-3 font-mono text-[11px] text-muted-foreground">
+        Ingress / egress rules between services
       </p>
     </div>
   );
@@ -410,9 +488,29 @@ export function FeaturesSection() {
           <FeatureCard
             eyebrow="Secure"
             title="Lock down access"
-            description="Per-project permissions, 2FA and network policies keep every app isolated."
+            description="Per-project permissions, 2FA and SSO keep every app isolated."
           >
             <TeamAccess />
+          </FeatureCard>
+        </Reveal>
+
+        <Reveal delay={80} className="flex md:col-span-7">
+          <FeatureCard
+            eyebrow="Backups"
+            title="Restorable, scheduled backups"
+            description="Automated backups for volumes and databases, stored on S3-compatible object storage. Restore from any point directly in the UI."
+          >
+            <BackupsList />
+          </FeatureCard>
+        </Reveal>
+
+        <Reveal delay={140} className="flex md:col-span-5">
+          <FeatureCard
+            eyebrow="Networking"
+            title="Network policies"
+            description="Define ingress and egress rules to isolate services and control what can talk to what."
+          >
+            <NetworkPolicies />
           </FeatureCard>
         </Reveal>
       </div>
