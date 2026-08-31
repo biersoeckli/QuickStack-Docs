@@ -360,7 +360,7 @@ function BackupsList() {
 
       <div className="relative mt-8">
         <span className="absolute left-0 right-0 top-[4px] h-px bg-border" />
-        <div className="relative flex items-start justify-between">
+        <div className="relative flex items-start justify-between pb-4">
           {points.map((_, i) => (
             <span
               key={i}
@@ -430,12 +430,6 @@ function NetworkPolicies() {
         <NodeChip active>app</NodeChip>
         <FlowLink label="allow" />
         <NodeChip>postgres</NodeChip>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <NodeChip active>app</NodeChip>
-        <FlowLink label="allow" />
-        <NodeChip>redis</NodeChip>
       </div>
 
       <p className="font-mono text-[10px] text-muted-foreground">
