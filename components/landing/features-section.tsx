@@ -398,93 +398,48 @@ function BackupsList() {
   );
 }
 
+function NodeChip({ children, active = false }: { children: string; active?: boolean }) {
+  return (
+    <span
+      className={
+        active
+          ? 'rounded-md border border-foreground/25 bg-background px-2.5 py-1 font-mono text-[11px] text-foreground'
+          : 'rounded-md border border-border bg-background px-2.5 py-1 font-mono text-[11px] text-foreground'
+      }
+    >
+      {children}
+    </span>
+  );
+}
+
+function FlowLink({ label }: { label: string }) {
+  return (
+    <span className="flex items-center gap-1 font-mono text-[10px] text-emerald-600 dark:text-emerald-400">
+      <span className="h-px w-5 bg-emerald-500" />
+      {label}
+    </span>
+  );
+}
+
 function NetworkPolicies() {
   return (
-    <div className="flex flex-1 flex-col px-4 py-4">
-      <svg
-        viewBox="0 0 200 160"
-        className="w-full flex-1"
-        role="img"
-        aria-label="Network policies diagram"
-      >
-        <line x1="100" y1="86" x2="58" y2="118" className="stroke-emerald-500" strokeWidth="1.5" />
-        <line x1="100" y1="86" x2="142" y2="118" className="stroke-emerald-500" strokeWidth="1.5" />
-        <line x1="94" y1="46" x2="94" y2="62" className="stroke-emerald-500" strokeWidth="1.5" />
-        <line
-          x1="108"
-          y1="62"
-          x2="108"
-          y2="46"
-          className="stroke-muted-foreground"
-          strokeWidth="1.5"
-          strokeDasharray="4 4"
-        />
+    <div className="flex flex-1 flex-col items-center justify-center gap-4 px-4 py-4">
+      <div className="flex items-center gap-2">
+        <NodeChip>internet</NodeChip>
+        <FlowLink label=":443" />
+        <NodeChip active>app</NodeChip>
+        <FlowLink label="allow" />
+        <NodeChip>postgres</NodeChip>
+      </div>
 
-        <text x="78" y="56" className="fill-emerald-500" fontSize="8" fontFamily="monospace">
-          in :443
-        </text>
-        <text x="116" y="56" className="fill-muted-foreground" fontSize="8" fontFamily="monospace">
-          out deny
-        </text>
-        <text x="70" y="106" className="fill-emerald-500" fontSize="7" fontFamily="monospace">
-          allow
-        </text>
-        <text x="124" y="106" className="fill-emerald-500" fontSize="7" fontFamily="monospace">
-          allow
-        </text>
+      <div className="flex items-center gap-2">
+        <NodeChip active>app</NodeChip>
+        <FlowLink label="allow" />
+        <NodeChip>redis</NodeChip>
+      </div>
 
-        <circle cx="100" cy="82" r="17" className="fill-background stroke-border" strokeWidth="1.5" />
-        <circle cx="100" cy="24" r="24" className="fill-background stroke-border" strokeWidth="1.5" />
-        <circle cx="44" cy="132" r="27" className="fill-background stroke-border" strokeWidth="1.5" />
-        <circle cx="156" cy="132" r="21" className="fill-background stroke-border" strokeWidth="1.5" />
-
-        <text
-          x="100"
-          y="82"
-          textAnchor="middle"
-          dominantBaseline="central"
-          className="fill-foreground"
-          fontSize="8"
-          fontFamily="monospace"
-        >
-          app
-        </text>
-        <text
-          x="100"
-          y="24"
-          textAnchor="middle"
-          dominantBaseline="central"
-          className="fill-foreground"
-          fontSize="8"
-          fontFamily="monospace"
-        >
-          internet
-        </text>
-        <text
-          x="44"
-          y="132"
-          textAnchor="middle"
-          dominantBaseline="central"
-          className="fill-foreground"
-          fontSize="8"
-          fontFamily="monospace"
-        >
-          postgres
-        </text>
-        <text
-          x="156"
-          y="132"
-          textAnchor="middle"
-          dominantBaseline="central"
-          className="fill-foreground"
-          fontSize="8"
-          fontFamily="monospace"
-        >
-          redis
-        </text>
-      </svg>
-      <p className="mt-3 border-t border-border pt-3 font-mono text-[11px] text-muted-foreground">
-        Ingress allowed on :443 · egress denied by default
+      <p className="font-mono text-[10px] text-muted-foreground">
+        egress denied by default
       </p>
     </div>
   );
