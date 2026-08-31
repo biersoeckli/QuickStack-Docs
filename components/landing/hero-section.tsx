@@ -7,15 +7,6 @@ import { Eyebrow, StatusDot } from './shared';
 
 const installCommand = 'curl -sfL https://get.quickstack.dev/setup.sh | sh -';
 
-const trustItems = [
-  'Open source',
-  'Self-hosted',
-  'Git & registry deploy',
-  'Auto HTTPS',
-  'Backups',
-  'Team access',
-];
-
 interface HeroSectionProps {
   theme: 'light' | 'dark';
 }
@@ -42,7 +33,7 @@ export function HeroSection({ theme }: HeroSectionProps) {
         </Eyebrow>
 
         <h1 className="max-w-4xl text-5xl font-semibold leading-[0.98] tracking-tighter text-foreground sm:text-6xl md:text-7xl">
-          Run any app on your own servers.
+          Run <span className="text-primary">any app</span> on your own servers.
         </h1>
 
         <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
@@ -105,45 +96,6 @@ export function HeroSection({ theme }: HeroSectionProps) {
           <p className="mt-3 text-center font-mono text-[11px] text-muted-foreground">
             Fresh Linux server · Min 2 CPU · 4 GB RAM · 40 GB disk
           </p>
-        </div>
-
-        {/* Trust indicators + social proof */}
-        <div className="mt-10 flex flex-col items-center gap-6">
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-            {trustItems.map((item) => (
-              <span
-                key={item}
-                className="flex items-center gap-1.5 text-[13px] text-muted-foreground"
-              >
-                <Check className="h-3.5 w-3.5 text-emerald-500" />
-                {item}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-4 border-t border-border pt-6">
-            <Link
-              href="https://github.com/biersoeckli/QuickStack/stargazers"
-              target="_blank"
-              rel="noreferrer"
-              className="transition-opacity hover:opacity-70"
-            >
-              <img
-                src="https://img.shields.io/github/stars/biersoeckli/QuickStack?style=social"
-                alt="GitHub stars"
-                className="h-5 w-auto"
-                loading="lazy"
-              />
-            </Link>
-            <span className="h-4 w-px bg-border" />
-            <span className="font-mono text-[11px] text-muted-foreground">
-              GPL-3.0
-            </span>
-            <span className="h-4 w-px bg-border" />
-            <span className="font-mono text-[11px] text-muted-foreground">
-              Built on k3s · Traefik · Longhorn
-            </span>
-          </div>
         </div>
       </div>
     </section>
