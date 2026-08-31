@@ -86,19 +86,6 @@ const members = [
   { name: 'dev@acme.io', role: 'Member', auth: '—' },
 ];
 
-const backups = [
-  { name: 'postgres', schedule: 'Daily · 02:00' },
-  { name: 'app-volume', schedule: 'Daily · 02:15' },
-  { name: 'redis', schedule: 'Daily · 02:30' },
-];
-
-const policies = [
-  { source: 'app', target: 'postgres', action: 'allow' },
-  { source: 'app', target: 'redis', action: 'allow' },
-  { source: 'external', target: 'app · :443', action: 'allow' },
-  { source: 'app', target: 'internet', action: 'deny' },
-];
-
 function FeatureCard({
   eyebrow,
   title,
@@ -355,34 +342,58 @@ function TeamAccess() {
 }
 
 function BackupsList() {
+  const points = Array.from({ length: 8 });
+
   return (
     <div className="flex flex-1 flex-col px-4 py-4">
-      <div className="flex-1 space-y-2">
-        {backups.map((b) => (
-          <div
-            key={b.name}
-            className="flex items-center justify-between rounded-lg border border-border px-3 py-2.5 transition-colors hover:bg-background"
-          >
-            <div className="flex items-center gap-2.5">
-              <StatusDot className="text-emerald-500" />
-              <span className="font-mono text-[13px] text-foreground">
-                {b.name}
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-[11px] text-muted-foreground">
-                {b.schedule}
-              </span>
-              <span className="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">
-                OK
-              </span>
-            </div>
-          </div>
-        ))}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <StatusDot className="text-emerald-500" pulse />
+          <span className="font-mono text-[12px] text-foreground">
+            s3 · eu-central-1
+          </span>
+        </div>
+        <span className="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">
+          Healthy
+        </span>
       </div>
-      <button className="mt-4 inline-flex h-8 items-center justify-center rounded-md border border-dashed border-border text-[12px] font-medium text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground">
-        + Create backup
-      </button>
+
+      <div className="relative mt-8">
+        <span className="absolute left-0 right-0 top-[4px] h-px bg-border" />
+        <div className="relative flex items-start justify-between">
+          {points.map((_, i) => (
+            <span
+              key={i}
+              className={
+                i === points.length - 1
+                  ? 'size-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-500/15'
+                  : 'size-2 rounded-full bg-muted-foreground/40'
+              }
+            />
+          ))}
+        </div>
+        <div className="relative mt-2 flex justify-between font-mono text-[10px] text-muted-foreground">
+          <span>7d ago</span>
+          <span>now</span>
+        </div>
+      </div>
+
+      <div className="mt-auto flex items-center justify-between border-t border-border pt-3">
+        <div>
+          <p className="text-[13px] text-foreground">Last backup</p>
+          <p className="font-mono text-[11px] text-muted-foreground">
+            Today · 02:00 · 14 min
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-[11px] text-muted-foreground">
+            Daily
+          </span>
+          <button className="inline-flex h-8 items-center justify-center rounded-md border border-border bg-background px-3 text-[12px] font-medium text-foreground transition-colors hover:bg-muted">
+            Restore
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -390,30 +401,90 @@ function BackupsList() {
 function NetworkPolicies() {
   return (
     <div className="flex flex-1 flex-col px-4 py-4">
-      <div className="flex-1 space-y-2">
-        {policies.map((p) => (
-          <div
-            key={`${p.source}-${p.target}`}
-            className="flex items-center justify-between rounded-lg border border-border px-3 py-2.5"
-          >
-            <span className="font-mono text-[12px] text-foreground">
-              {p.source}{' '}
-              <span className="text-muted-foreground">→</span> {p.target}
-            </span>
-            <span
-              className={
-                p.action === 'allow'
-                  ? 'font-mono text-[11px] text-emerald-600 dark:text-emerald-400'
-                  : 'font-mono text-[11px] text-muted-foreground'
-              }
-            >
-              {p.action === 'allow' ? 'ALLOW' : 'DENY'}
-            </span>
-          </div>
-        ))}
-      </div>
-      <p className="mt-4 border-t border-border pt-3 font-mono text-[11px] text-muted-foreground">
-        Ingress / egress rules between services
+      <svg
+        viewBox="0 0 200 160"
+        className="w-full flex-1"
+        role="img"
+        aria-label="Network policies diagram"
+      >
+        <line x1="100" y1="86" x2="58" y2="118" className="stroke-emerald-500" strokeWidth="1.5" />
+        <line x1="100" y1="86" x2="142" y2="118" className="stroke-emerald-500" strokeWidth="1.5" />
+        <line x1="94" y1="46" x2="94" y2="62" className="stroke-emerald-500" strokeWidth="1.5" />
+        <line
+          x1="108"
+          y1="62"
+          x2="108"
+          y2="46"
+          className="stroke-muted-foreground"
+          strokeWidth="1.5"
+          strokeDasharray="4 4"
+        />
+
+        <text x="78" y="56" className="fill-emerald-500" fontSize="8" fontFamily="monospace">
+          in :443
+        </text>
+        <text x="116" y="56" className="fill-muted-foreground" fontSize="8" fontFamily="monospace">
+          out deny
+        </text>
+        <text x="70" y="106" className="fill-emerald-500" fontSize="7" fontFamily="monospace">
+          allow
+        </text>
+        <text x="124" y="106" className="fill-emerald-500" fontSize="7" fontFamily="monospace">
+          allow
+        </text>
+
+        <circle cx="100" cy="82" r="17" className="fill-background stroke-border" strokeWidth="1.5" />
+        <circle cx="100" cy="24" r="24" className="fill-background stroke-border" strokeWidth="1.5" />
+        <circle cx="44" cy="132" r="27" className="fill-background stroke-border" strokeWidth="1.5" />
+        <circle cx="156" cy="132" r="21" className="fill-background stroke-border" strokeWidth="1.5" />
+
+        <text
+          x="100"
+          y="82"
+          textAnchor="middle"
+          dominantBaseline="central"
+          className="fill-foreground"
+          fontSize="8"
+          fontFamily="monospace"
+        >
+          app
+        </text>
+        <text
+          x="100"
+          y="24"
+          textAnchor="middle"
+          dominantBaseline="central"
+          className="fill-foreground"
+          fontSize="8"
+          fontFamily="monospace"
+        >
+          internet
+        </text>
+        <text
+          x="44"
+          y="132"
+          textAnchor="middle"
+          dominantBaseline="central"
+          className="fill-foreground"
+          fontSize="8"
+          fontFamily="monospace"
+        >
+          postgres
+        </text>
+        <text
+          x="156"
+          y="132"
+          textAnchor="middle"
+          dominantBaseline="central"
+          className="fill-foreground"
+          fontSize="8"
+          fontFamily="monospace"
+        >
+          redis
+        </text>
+      </svg>
+      <p className="mt-3 border-t border-border pt-3 font-mono text-[11px] text-muted-foreground">
+        Ingress allowed on :443 · egress denied by default
       </p>
     </div>
   );
