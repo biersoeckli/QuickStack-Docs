@@ -57,9 +57,7 @@ export const pillars = [
 const deploySteps = [
   { label: 'git push', detail: 'source from any Git host' },
   { label: 'Build', detail: 'BuildKit · container image' },
-  { label: 'Registry', detail: 'built-in private registry' },
   { label: 'Deploy', detail: 'k3s rolling update' },
-  { label: 'HTTPS', detail: 'Traefik · Let’s Encrypt' },
   { label: 'Live', detail: 'routing + health checks', running: true },
 ];
 
@@ -114,20 +112,22 @@ function FeatureCard({
           {description}
         </p>
       </div>
-      <div className="flex flex-1 flex-col bg-muted/30">{children}</div>
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
+        <div className="flex flex-1 flex-col overflow-hidden rounded-lg bg-muted/30">
+          {children}
+        </div>
+      </div>
     </div>
   );
 }
 
 function DeployPipeline() {
   return (
-    <div className="flex flex-1 flex-col px-5 py-5">
-      <div className="space-y-0">
-        {deploySteps.map((step, i) => (
-          <div key={step.label} className="relative flex items-center gap-4 pb-5 last:pb-0">
-            {i < deploySteps.length - 1 && (
-              <span className="absolute left-[7px] top-5 h-full w-px bg-border" />
-            )}
+    <div className="flex flex-1 flex-col px-4 py-4">
+      <div className="relative flex flex-1 flex-col justify-between">
+        <span className="absolute bottom-5 left-[7px] top-5 w-px bg-border" />
+        {deploySteps.map((step) => (
+          <div key={step.label} className="relative flex items-center gap-4">
             <StatusDot
               className={
                 step.running
@@ -166,7 +166,7 @@ function MonitoringChart() {
     .join(' ');
 
   return (
-    <div className="flex flex-1 flex-col gap-5 px-5 py-5">
+    <div className="flex flex-1 flex-col gap-5 px-4 py-4">
       <div className="flex items-baseline justify-between">
         <div>
           <p className="text-2xl font-semibold tracking-tight text-foreground">
@@ -213,7 +213,7 @@ function MonitoringChart() {
 
 function TerminalLogs() {
   return (
-    <div className="flex flex-1 flex-col px-5 py-5">
+    <div className="flex flex-1 flex-col px-4 py-4">
       <div className="flex-1 space-y-1.5">
         {logLines.map((line) => (
           <div key={line.time} className="flex gap-3 font-mono text-[11.5px] leading-relaxed">
@@ -244,7 +244,7 @@ function TerminalLogs() {
 
 function DatabasesList() {
   return (
-    <div className="flex flex-1 flex-col px-5 py-5">
+    <div className="flex flex-1 flex-col px-4 py-4">
       <div className="flex-1 space-y-2">
         {databases.map((db) => (
           <div
@@ -275,7 +275,7 @@ function DatabasesList() {
 
 function ClusterNodes() {
   return (
-    <div className="flex flex-1 flex-col gap-4 px-5 py-5">
+    <div className="flex flex-1 flex-col gap-4 px-4 py-4">
       {nodes.map((node) => (
         <div key={node.name} className="space-y-1.5">
           <div className="flex items-center justify-between">
@@ -309,7 +309,7 @@ function ClusterNodes() {
 
 function TeamAccess() {
   return (
-    <div className="flex flex-1 flex-col px-5 py-5">
+    <div className="flex flex-1 flex-col px-4 py-4">
       <div className="flex-1 space-y-2">
         {members.map((m) => (
           <div
