@@ -14,7 +14,7 @@ export const howItWorksSteps = [
     number: '02',
     title: 'Connect a repo or image',
     description:
-      'Point QuickStack at any Git repository, or pull from Docker Hub and private registries. Pick a database template for one-click Postgres, MySQL or Redis.',
+      'Point QuickStack at any Git repository, or pull from Docker Hub and private registries. Pick a database template for one-click Postgres, MySQL, MongoDB, MariaDB or Redis.',
   },
   {
     number: '03',

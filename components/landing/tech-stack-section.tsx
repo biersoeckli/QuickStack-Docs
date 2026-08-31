@@ -36,7 +36,7 @@ export function TechStackSection({ theme }: TechStackSectionProps) {
                 key={tech.name}
                 href={tech.url}
                 target="_blank"
-                className="flex h-24 items-center justify-center bg-card p-6 transition-colors hover:bg-muted/40"
+                className="flex h-24 items-center justify-center bg-card p-6 grayscale hover:grayscale-0 transition-colors hover:bg-muted/40"
               >
                 <Image
                   src={
@@ -47,7 +47,7 @@ export function TechStackSection({ theme }: TechStackSectionProps) {
                   alt={`${tech.name} Logo`}
                   width={160}
                   height={48}
-                  className="max-h-9 w-auto object-contain opacity-80 grayscale transition-opacity hover:opacity-100"
+                  className="max-h-9 w-auto object-contain opacity-80  transition-opacity hover:opacity-100"
                 />
               </Link>
             ))}

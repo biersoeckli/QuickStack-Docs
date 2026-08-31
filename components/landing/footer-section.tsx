@@ -97,7 +97,7 @@ export function FooterSection({ theme }: FooterSectionProps) {
             © {currentYear} QuickStack. Open source under GPL-3.0 license.
           </p>
           <p className="font-mono text-[11px] text-muted-foreground">
-            Self-hosted PaaS · k3s · Traefik · Longhorn
+           
           </p>
         </div>
       </div>

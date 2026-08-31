@@ -5,13 +5,16 @@ description: "QuickStack installation: fastest path to a working QuickStack inst
 keywords: ["QuickStack Installation", "QuickStack Setup", "QuickStack Installation Guide"]
 ---
 
-## What you'll get
-A running QuickStack instance with web UI access, ready for app deployment. You'll know the required ports, firewall rules, and first login steps.
+## Install (one command)
+Connect to your server via SSH and run:
+```bash
+curl -sfL https://get.quickstack.dev/setup.sh | sh -
+```
 
 ## Requirements
 - **OS:** 
-  - Ubuntu 24.04 
-  - Debian 13
+  - Ubuntu 24.04 or higher
+  - Debian 13 or higher
   - other Linux distros not fully tested
 - **Specs:** Minimum 2 CPU cores, 4 GB RAM, 40 GB disk
 - **Access:** SSH with sudo privileges
@@ -24,13 +27,12 @@ A running QuickStack instance with web UI access, ready for app deployment. You'
       * [Linode](https://linode.com)
       * [DigitalOcean](https://digitalocean.com)
 
-## Install (one command)
-Connect to your server via SSH and run:
-```bash
-curl -sfL https://get.quickstack.dev/setup.sh | sh -
-```
+
 
 ## Choose network interface
+
+During the installation, you will be prompted to select the network interface for QuickStack. The choice depends on your setup:
+
 - Single-node: select the interface with the public IP.
 - Multi-node cluster: select the interface on your private network.
 See [Cluster Nodes](/docs/how-to/admin/cluster-nodes) for details.
@@ -42,15 +44,11 @@ http://your_server_ip:30000
 ```
 
 ## Ports & Firewall
+
+Make sure the following ports are open in your firewall:
+
 - Inbound: open TCP ports 30000 (UI), 80/443 (ingress)
 - Cluster: open TCP 6443 between nodes (if using cluster)
-
-## First login
-On first access, create the admin user. If you have a domain pointing to your server, enter it; otherwise, use the IP. You can set up a domain later.
-
-## Security baseline
-- Enable HTTPS for your UI domain (Settings → Domains)
-- Enable 2FA for the admin account ([see guide](/docs/how-to/admin/two-factor-auth))
 
 ## Troubleshooting
 - Web UI not reachable:
