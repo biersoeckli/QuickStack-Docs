@@ -467,7 +467,7 @@ export function FeaturesSection() {
         <Reveal delay={80} className="flex md:col-span-5">
           <FeatureCard
             eyebrow="Operate"
-            title="Watch what's running"
+            title="Montioring"
             description="Live CPU, RAM and disk metrics per app, with health checks and restart policies."
           >
             <MonitoringChart />
@@ -506,8 +506,8 @@ export function FeaturesSection() {
 
         <Reveal delay={200} className="flex md:col-span-6">
           <FeatureCard
-            eyebrow="Secure"
-            title="Lock down access"
+            eyebrow="Permissions"
+            title="Multi-user access"
             description="Per-project permissions, 2FA and SSO keep every app isolated."
           >
             <TeamAccess />
@@ -517,8 +517,8 @@ export function FeaturesSection() {
         <Reveal delay={80} className="flex md:col-span-7">
           <FeatureCard
             eyebrow="Backups"
-            title="Restorable, scheduled backups"
-            description="Automated backups for volumes and databases, stored on S3-compatible object storage. Restore from any point directly in the UI."
+            title="Scheduled backups"
+            description="Automated backups for volumes and databases, stored on S3-compatible object storage. "
           >
             <BackupsList />
           </FeatureCard>
