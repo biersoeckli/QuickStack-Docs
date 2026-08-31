@@ -1,6 +1,5 @@
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Eyebrow } from './shared';
 
 export const faqs = [
   {
@@ -39,30 +38,29 @@ export const faqs = [
 
 export function FaqSection() {
   return (
-    <section className="container mx-auto px-4 py-16 md:py-24 bg-muted/30">
-      <div className="text-center space-y-3 mb-12">
-        <Badge className="mb-4">FAQ</Badge>
-        <h2 className="text-3xl md:text-4xl font-bold">Frequently asked questions</h2>
-      </div>
-      
-      <div className="max-w-3xl mx-auto">
-        <Card className="border-border/50 p-0">
-          <CardContent className="p-0">
-            <Accordion className="w-full">
-              {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={index} className="border-b last:border-0 px-6">
-                  <AccordionTrigger className="text-left text-sm font-medium hover:no-underline py-4">
-                    {faq.question}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-sm text-muted-foreground leading-relaxed pb-4">
-                    {faq.answer}
-                  </AccordionContent>
-                  <p className='sr-only'>{faq.answer}</p>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </CardContent>
-        </Card>
+    <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
+        <div className="md:col-span-4">
+          <Eyebrow className="mb-5">FAQ</Eyebrow>
+          <h2 className="text-3xl font-semibold leading-tight tracking-tighter text-foreground md:text-4xl">
+            Frequently asked questions.
+          </h2>
+        </div>
+
+        <div className="md:col-span-8">
+          <Accordion className="w-full divide-y divide-border border-y border-border">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={index} className="border-0">
+                <AccordionTrigger className="py-5 text-[15px] font-medium text-foreground hover:no-underline">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   );

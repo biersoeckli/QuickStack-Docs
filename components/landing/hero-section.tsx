@@ -1,38 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Github, Check, Copy, CheckCheck } from 'lucide-react';
 import { useState } from 'react';
+import { Github, Copy, Check, ArrowRight } from 'lucide-react';
+import { Eyebrow, StatusDot } from './shared';
+
+const installCommand = 'curl -sfL https://get.quickstack.dev/setup.sh | sh -';
 
 const trustItems = [
-  'Open Source',
+  'Open source',
   'Self-hosted',
-  'Git & Registry Deploy',
+  'Git & registry deploy',
   'Auto HTTPS',
   'Backups',
-  'Team Access',
-  'Cluster Ready',
-];
-
-const githubBadges = [
-  {
-    href: 'https://github.com/biersoeckli/QuickStack/stargazers',
-    src: 'https://img.shields.io/github/stars/biersoeckli/QuickStack?style=social',
-    alt: 'GitHub stars',
-  },
-  {
-    href: 'https://github.com/biersoeckli/QuickStack/blob/main/LICENSE',
-    src: 'https://img.shields.io/github/license/biersoeckli/QuickStack?color=22c55e',
-    alt: 'GitHub license',
-  },
-  {
-    href: 'https://github.com/biersoeckli/QuickStack/releases',
-    src: 'https://img.shields.io/github/v/release/biersoeckli/QuickStack?color=22c55e',
-    alt: 'GitHub release',
-  },
+  'Team access',
 ];
 
 interface HeroSectionProps {
@@ -41,7 +22,6 @@ interface HeroSectionProps {
 
 export function HeroSection({ theme }: HeroSectionProps) {
   const [copied, setCopied] = useState(false);
-  const installCommand = 'curl -sfL https://get.quickstack.dev/setup.sh | sh -';
 
   const handleCopy = async () => {
     try {
@@ -54,85 +34,116 @@ export function HeroSection({ theme }: HeroSectionProps) {
   };
 
   return (
-    <section className="container mx-auto px-4 py-16 md:py-24 lg:py-26 relative">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      </div>
+    <section className="relative mx-auto w-full max-w-7xl px-4 pt-20 pb-24 md:pt-32 md:pb-32">
+      <div className="flex flex-col items-center text-center">
+        <Eyebrow className="mb-8 justify-center">
+          <StatusDot className="text-emerald-500" pulse />
+          Self-hosted PaaS · Open source
+        </Eyebrow>
 
-      <div className="flex flex-col items-center text-center space-y-8 max-w-3xl mx-auto">
-        <Image
-          src={theme === 'dark' ? '/img/quickstack-icon-light.svg' : '/img/quickstack-icon-dark.svg'}
-          alt="QuickStack Logo"
-          width={120}
-          height={120}
-          className="w-20 h-20 md:w-32 md:h-32"
-        />
-
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-          Self-host <span className="text-primary">any app</span> on your own servers
+        <h1 className="max-w-4xl text-5xl font-semibold leading-[0.98] tracking-tighter text-foreground sm:text-6xl md:text-7xl">
+          Run any app on your own servers.
         </h1>
 
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-          Deploy databases or apps from Git or Docker Hub on any server. QuickStack provides all you need from a single UI running on your own infrastructure.
+        <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
+          Deploy from Git or any container registry. QuickStack gives you
+          builds, domains, HTTPS, logs, metrics and backups — from one UI.
         </p>
 
-        {/* Installation Command */}
-        <div className="w-full max-w-xl">
-          <Card className="border-border/50 py-2">
-            <CardContent className="flex items-center justify-between gap-3">
-              <code className="text-xs md:text-sm font-mono block text-left break-all flex-1">
-                {installCommand}
-              </code>
+        <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
+          <Link
+            href="/docs/tutorials/installation"
+            className="inline-flex h-11 items-center gap-2 rounded-lg bg-foreground px-6 text-sm font-medium text-background transition-colors hover:bg-foreground/85"
+          >
+            Get Started
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            href="https://github.com/biersoeckli/QuickStack"
+            target="_blank"
+            className="inline-flex h-11 items-center gap-2 rounded-lg border border-border bg-background px-6 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+          >
+            <Github className="h-4 w-4" />
+            View on GitHub
+          </Link>
+        </div>
+
+        {/* Install terminal */}
+        <div className="mt-14 w-full max-w-xl text-left">
+          <div className="overflow-hidden rounded-xl border border-border bg-card shadow-none">
+            <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-2.5">
+              <div className="flex items-center gap-1.5">
+                <span className="size-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700" />
+                <span className="size-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700" />
+                <span className="size-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700" />
+              </div>
+              <span className="font-mono text-[11px] text-muted-foreground">
+                install.sh
+              </span>
               <button
                 onClick={handleCopy}
-                className="flex-shrink-0 p-2 rounded-md hover:bg-muted transition-colors"
+                className="flex items-center gap-1.5 rounded-md px-2 py-1 font-mono text-[11px] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 aria-label="Copy installation command"
               >
                 {copied ? (
-                  <CheckCheck className="h-4 w-4 text-primary" />
+                  <Check className="h-3.5 w-3.5 text-emerald-500" />
                 ) : (
-                  <Copy className="h-4 w-4 text-muted-foreground" />
+                  <Copy className="h-3.5 w-3.5" />
                 )}
+                {copied ? 'Copied' : 'Copy'}
               </button>
-            </CardContent>
-          </Card>
-          <p className="text-xs md:text-sm text-muted-foreground mt-3">
-            Run on a fresh Linux server. Min: 2 CPU · 4 GB RAM · 40 GB disk.
+            </div>
+            <div className="flex items-center gap-2 px-4 py-4">
+              <span className="select-none font-mono text-sm text-muted-foreground">
+                $
+              </span>
+              <code className="font-mono text-sm text-foreground break-all">
+                {installCommand}
+              </code>
+            </div>
+          </div>
+          <p className="mt-3 text-center font-mono text-[11px] text-muted-foreground">
+            Fresh Linux server · Min 2 CPU · 4 GB RAM · 40 GB disk
           </p>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 pt-4">
-          <Link href="/docs/tutorials/installation">
-            <Button size="lg">
-              Get Started
-            </Button>
-          </Link>
-          <Link href="https://github.com/biersoeckli/QuickStack" target="_blank">
-            <Button size="lg" variant="outline">
-              <Github className="mr-2 h-5 w-5" />
-              View on GitHub
-            </Button>
-          </Link>
-        </div>
+        {/* Trust indicators + social proof */}
+        <div className="mt-10 flex flex-col items-center gap-6">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {trustItems.map((item) => (
+              <span
+                key={item}
+                className="flex items-center gap-1.5 text-[13px] text-muted-foreground"
+              >
+                <Check className="h-3.5 w-3.5 text-emerald-500" />
+                {item}
+              </span>
+            ))}
+          </div>
 
-        <div className="hidden lg:flex flex-wrap justify-center items-center gap-2">
-          {githubBadges.map((badge) => (
-            <Link key={badge.alt} href={badge.href} target="_blank" rel="noreferrer">
-              <img src={badge.src} alt={badge.alt} className="h-5 w-auto" loading="lazy" />
+          <div className="flex items-center gap-4 border-t border-border pt-6">
+            <Link
+              href="https://github.com/biersoeckli/QuickStack/stargazers"
+              target="_blank"
+              rel="noreferrer"
+              className="transition-opacity hover:opacity-70"
+            >
+              <img
+                src="https://img.shields.io/github/stars/biersoeckli/QuickStack?style=social"
+                alt="GitHub stars"
+                className="h-5 w-auto"
+                loading="lazy"
+              />
             </Link>
-          ))}
-        </div>
-
-        {/* Trust Indicators */}
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-8 text-sm text-muted-foreground">
-          {trustItems.map((item, i) => (
-            <span key={i} className="flex items-center gap-1.5">
-              <Check className="h-4 w-4 text-primary" />
-              {item}
+            <span className="h-4 w-px bg-border" />
+            <span className="font-mono text-[11px] text-muted-foreground">
+              GPL-3.0
             </span>
-          ))}
+            <span className="h-4 w-px bg-border" />
+            <span className="font-mono text-[11px] text-muted-foreground">
+              Built on k3s · Traefik · Longhorn
+            </span>
+          </div>
         </div>
       </div>
     </section>

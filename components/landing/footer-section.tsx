@@ -21,119 +21,84 @@ export function FooterSection({ theme }: FooterSectionProps) {
     ],
     community: [
       { label: 'Contributing', href: 'https://github.com/biersoeckli/quickstack/blob/main/CONTRIBUTING.md' },
-     // { label: 'Code of Conduct', href: 'https://github.com/biersoeckli/quickstack/blob/main/CODE_OF_CONDUCT.md' },
-      //{ label: 'Discord', href: '#' },
       { label: 'Twitter', href: 'https://x.com/quickstack_dev' },
     ],
   };
 
   return (
-    <footer className="border-t bg-fd-card">
-      <div className="container mx-auto px-4 py-12 md:py-16">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5">
-          {/* Logo and Description */}
+    <footer className="border-t border-border">
+      <div className="mx-auto w-full max-w-7xl px-4 py-16 md:py-20">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-4">
+            <Link href="/" className="flex items-center gap-3">
               <Image
-                src={theme === 'light' ? '/img/quickstack-icon-dark.svg' : '/img/quickstack-icon-light.svg'}
+                src={
+                  theme === 'light'
+                    ? '/img/quickstack-icon-dark.svg'
+                    : '/img/quickstack-icon-light.svg'
+                }
                 alt="QuickStack"
-                width={40}
-                height={40}
-                className="h-10 w-10"
+                width={28}
+                height={28}
+                className="h-7 w-7"
               />
-              <span className="text-xl font-bold">QuickStack</span>
+              <span className="text-base font-semibold tracking-tight text-foreground">
+                QuickStack
+              </span>
             </Link>
-            <p className="text-fd-muted-foreground text-sm max-w-sm mb-4">
-              Deploy apps on your own infrastructure in minutes. Self-hosted, open-source, and built for developers who value simplicity.
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              Deploy apps on your own infrastructure in minutes. Self-hosted,
+              open-source, and built for developers who value simplicity.
             </p>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://github.com/biersoeckli/quickstack"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-fd-muted-foreground hover:text-fd-foreground transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
+            <a
+              href="https://github.com/biersoeckli/quickstack"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex text-muted-foreground transition-colors hover:text-foreground"
+              aria-label="GitHub"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+          </div>
+
+          {[
+            { title: 'Product', links: footerLinks.product },
+            { title: 'Resources', links: footerLinks.resources },
+            { title: 'Community', links: footerLinks.community },
+          ].map((col) => (
+            <div key={col.title}>
+              <h3 className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                {col.title}
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {col.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      target={link.href.startsWith('http') ? '_blank' : undefined}
+                      rel={
+                        link.href.startsWith('http')
+                          ? 'noopener noreferrer'
+                          : undefined
+                      }
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          {/* Product Links */}
-          <div>
-            <h3 className="font-semibold mb-4">Product</h3>
-            <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-fd-muted-foreground hover:text-fd-foreground transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources Links */}
-          <div>
-            <h3 className="font-semibold mb-4">Resources</h3>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-fd-muted-foreground hover:text-fd-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Community Links */}
-          <div>
-            <h3 className="font-semibold mb-4">Community</h3>
-            <ul className="space-y-3">
-              {footerLinks.community.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-fd-muted-foreground hover:text-fd-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          ))}
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-fd-muted-foreground">
+        <div className="mt-12 flex flex-col justify-between gap-4 border-t border-border pt-8 md:flex-row md:items-center">
+          <p className="text-sm text-muted-foreground">
             © {currentYear} QuickStack. Open source under GPL-3.0 license.
           </p>
-          <div className="flex items-center gap-6">
-            {/*<Link
-              href="/docs/privacy"
-              className="text-sm text-fd-muted-foreground hover:text-fd-foreground transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/docs/terms"
-              className="text-sm text-fd-muted-foreground hover:text-fd-foreground transition-colors"
-            >
-              Terms of Service
-            </Link>*/}
-          </div>
+          <p className="font-mono text-[11px] text-muted-foreground">
+            Self-hosted PaaS · k3s · Traefik · Longhorn
+          </p>
         </div>
       </div>
     </footer>

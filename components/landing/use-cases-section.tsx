@@ -1,61 +1,62 @@
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Code2, Users, Wrench } from 'lucide-react';
+import { Eyebrow } from './shared';
 
 export const useCases = [
   {
-    icon: Code2,
-    title: 'Indie developers and side projects',
-    description: 'You have a VPS and want to ship a side project without paying cloud PaaS prices or managing Kubernetes manually. QuickStack gives you the same deploy-from-Git workflow without the vendor lock-in or monthly bill.',
+    number: '01',
+    title: 'Indie developers & side projects',
+    description:
+      'You have a VPS and want to ship without cloud PaaS prices or managing Kubernetes by hand. QuickStack gives you deploy-from-Git without the lock-in or monthly bill.',
     tags: ['Single server', 'Git deploy', 'Low cost'],
   },
   {
-    icon: Users,
-    title: 'Small teams who want Heroku-like DX on their own infra',
-    description: 'Your team wants push-to-deploy, automatic HTTPS, environment variables, logs, and backups, but on infrastructure you control. QuickStack provides that without forcing anyone to learn cluster management.',
+    number: '02',
+    title: 'Small teams that want a Heroku-like DX',
+    description:
+      'Push-to-deploy, automatic HTTPS, env vars, logs and backups — on infrastructure you control, without anyone learning cluster management.',
     tags: ['Team access', 'Permissions', 'Backups'],
   },
   {
-    icon: Wrench,
-    title: 'DevOps and platform engineers who want more control',
-    description: 'You are comfortable with servers but tired of gluing together Traefik, Docker Compose, and shell scripts. QuickStack provides a structured platform you can extend — with cluster support when you need to scale.',
+    number: '03',
+    title: 'DevOps engineers who want control',
+    description:
+      'Comfortable with servers but tired of gluing together Traefik, Compose and shell scripts. QuickStack is a structured platform you can extend — with clusters when you scale.',
     tags: ['Multi-node cluster', 'Network policies', 'Registry support'],
   },
 ];
 
 export function UseCasesSection() {
   return (
-    <section className="container mx-auto px-4 py-16 md:py-24 bg-muted/30">
-      <div className="text-center space-y-3 mb-12">
-        <Badge className="mb-4">Who it&apos;s for</Badge>
-        <h2 className="text-3xl md:text-5xl font-bold">Who uses QuickStack</h2>
-        <p className="text-muted-foreground max-w-xl mx-auto">
-          QuickStack fits teams and individuals who want production-grade deployment tooling without handing control to a managed cloud platform.
-        </p>
+    <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
+      <div className="mb-16 max-w-xl">
+        <Eyebrow className="mb-5">Who it’s for</Eyebrow>
+        <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
+          Built for people who ship on their own terms.
+        </h2>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {useCases.map((uc, index) => (
-          <Card key={index} className="border-border/50 flex flex-col">
-            <CardHeader>
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-primary/10 text-primary mb-3">
-                <uc.icon className="h-5 w-5" />
-              </div>
-              <CardTitle className="text-base">{uc.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-1 flex flex-col justify-between gap-4">
-              <CardDescription className="text-sm leading-relaxed">
-                {uc.description}
-              </CardDescription>
-              <div className="flex flex-wrap gap-1.5 mt-auto">
-                {uc.tags.map((tag, i) => (
-                  <Badge key={i} variant="secondary" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+
+      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
+        {useCases.map((uc) => (
+          <div key={uc.number} className="flex flex-col bg-card p-7">
+            <span className="font-mono text-sm text-muted-foreground">
+              {uc.number}
+            </span>
+            <h3 className="mt-4 text-lg font-medium leading-snug text-foreground">
+              {uc.title}
+            </h3>
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+              {uc.description}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-1.5 border-t border-border pt-5">
+              {uc.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-md border border-border px-2 py-1 font-mono text-[11px] text-muted-foreground"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </section>

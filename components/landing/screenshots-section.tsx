@@ -1,111 +1,57 @@
 import Image from 'next/image';
-import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ScrollArea, ScrollBar } from '../ui/scroll-area';
+import { Eyebrow } from './shared';
+
+const tabs = [
+  { value: 'git', label: 'Git Deploy', src: '/img/app-screenshots/1.png', alt: 'Git Deployment' },
+  { value: 'logs', label: 'App Logs', src: '/img/app-screenshots/2.png', alt: 'App Logs' },
+  { value: 'terminal', label: 'Terminal', src: '/img/app-screenshots/3.png', alt: 'Integrated Web Terminal' },
+  { value: 'database', label: 'Database', src: '/img/app-screenshots/4.png', alt: 'Database Deployment' },
+  { value: 'monitoring', label: 'Monitoring', src: '/img/app-screenshots/5.png', alt: 'Server Monitoring' },
+  { value: 'backups', label: 'Backups', src: '/img/app-screenshots/6.png', alt: 'Backups' },
+];
 
 export function ScreenshotsSection() {
   return (
-    <section className="container mx-auto px-4 py-16 md:py-24">
-      <div className="text-center space-y-4 mb-12">
-        <h2 className="text-3xl md:text-5xl font-bold">QuickStack in Action</h2>
+    <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
+      <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div>
+          <Eyebrow className="mb-5">Interface</Eyebrow>
+          <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
+            QuickStack in action.
+          </h2>
+        </div>
       </div>
 
       <Tabs defaultValue="git" className="w-full">
-        <TabsList className="grid w-full max-w-4xl mx-auto grid-cols-3 lg:grid-cols-6 mb-8">
-          <TabsTrigger value="git">Git Deploy</TabsTrigger>
-          <TabsTrigger value="logs">App Logs</TabsTrigger>
-          <TabsTrigger value="terminal">Terminal</TabsTrigger>
-          <TabsTrigger value="database">Database</TabsTrigger>
-          <TabsTrigger value="monitoring">Monitoring</TabsTrigger>
-          <TabsTrigger value="backups">Backups</TabsTrigger>
+        <TabsList
+          variant="line"
+          className="mb-6 h-auto w-full max-w-none flex-wrap justify-start gap-1 rounded-none border-b border-border pb-0"
+        >
+          {tabs.map((tab) => (
+            <TabsTrigger
+              key={tab.value}
+              value={tab.value}
+              className="h-auto rounded-none px-3 py-2 font-mono text-xs uppercase tracking-[0.1em] data-active:text-foreground"
+            >
+              {tab.label}
+            </TabsTrigger>
+          ))}
         </TabsList>
-        <div className="flex justify-center">
-          <div className="w-full max-w-6xl">
-            <TabsContent value="git" className="mt-0">
-              <Card className="border-border/50">
-                <CardContent className="p-2">
-                  <Image
-                    src="/img/app-screenshots/1.png"
-                    alt="Git Deployment"
-                    width={1200}
-                    height={800}
-                    className="w-full rounded-md"
-                  />
-                </CardContent>
-              </Card>
-            </TabsContent>
 
-            <TabsContent value="logs" className="mt-0">
-              <Card className="border-border/50">
-                <CardContent className="p-2">
-                  <Image
-                    src="/img/app-screenshots/2.png"
-                    alt="App Logs"
-                    width={1200}
-                    height={800}
-                    className="w-full rounded-md"
-                  />
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="terminal" className="mt-0">
-              <Card className="border-border/50">
-                <CardContent className="p-2">
-                  <Image
-                    src="/img/app-screenshots/3.png"
-                    alt="Integrated Web Terminal"
-                    width={1200}
-                    height={800}
-                    className="w-full rounded-md"
-                  />
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="database" className="mt-0">
-              <Card className="border-border/50">
-                <CardContent className="p-2">
-                  <Image
-                    src="/img/app-screenshots/4.png"
-                    alt="Database Deployment"
-                    width={1200}
-                    height={800}
-                    className="w-full rounded-md"
-                  />
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="monitoring" className="mt-0">
-              <Card className="border-border/50">
-                <CardContent className="p-2">
-                  <Image
-                    src="/img/app-screenshots/5.png"
-                    alt="Server Monitoring"
-                    width={1200}
-                    height={800}
-                    className="w-full rounded-md"
-                  />
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="backups" className="mt-0">
-              <Card className="border-border/50">
-                <CardContent className="p-2">
-                  <Image
-                    src="/img/app-screenshots/6.png"
-                    alt="Backups"
-                    width={1200}
-                    height={800}
-                    className="w-full rounded-md"
-                  />
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </div>
-        </div>
+        {tabs.map((tab) => (
+          <TabsContent key={tab.value} value={tab.value} className="mt-0">
+            <div className="overflow-hidden rounded-2xl border border-border bg-card p-2">
+              <Image
+                src={tab.src}
+                alt={tab.alt}
+                width={1200}
+                height={800}
+                className="w-full rounded-lg"
+              />
+            </div>
+          </TabsContent>
+        ))}
       </Tabs>
     </section>
   );
