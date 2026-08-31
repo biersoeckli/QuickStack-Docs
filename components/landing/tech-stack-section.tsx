@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Eyebrow } from './shared';
 
 const techStack = [
   { name: 'k3s', logo: '/img/tech-stack/k3s-logo.svg', url: 'https://k3s.io/', darkMode: false },
@@ -14,28 +15,44 @@ interface TechStackSectionProps {
 
 export function TechStackSection({ theme }: TechStackSectionProps) {
   return (
-    <section className="container mx-auto px-4 py-16 md:py-24">
-      <div className="text-center space-y-4 mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold">Built With Powerful OpenSource Technologies</h2>
-      </div>
-      
-      <div className="flex justify-center items-center gap-8 md:gap-14 flex-wrap">
-        {techStack.map((tech) => (
-          <Link 
-            key={tech.name} 
-            href={tech.url} 
-            target="_blank"
-            className="transition-transform hover:scale-110"
-          >
-            <Image 
-              src={tech.darkMode && theme === 'dark' ? tech.logoDark! : tech.logo}
-              alt={`${tech.name} Logo`}
-              width={300}
-              height={300}
-              className={tech.name === 'Registry' ? 'h-16 md:h-20 w-auto' : 'h-12 md:h-14 w-auto'}
-            />
-          </Link>
-        ))}
+    <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
+      <div className="grid grid-cols-1 items-start gap-10 rounded-2xl border border-border bg-card p-8 md:grid-cols-12 md:p-12">
+        <div className="md:col-span-4">
+          <Eyebrow className="mb-5">Under the hood</Eyebrow>
+          <h2 className="text-2xl font-semibold leading-tight tracking-tight text-foreground">
+            Built on battle-tested open source.
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            QuickStack orchestrates Kubernetes primitives so you don’t have to.
+            It runs on k3s, routes with Traefik, stores volumes with Longhorn and
+            builds images with BuildKit.
+          </p>
+        </div>
+
+        <div className="md:col-span-8">
+          <div className="grid grid-cols-2 items-center gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
+            {techStack.map((tech) => (
+              <Link
+                key={tech.name}
+                href={tech.url}
+                target="_blank"
+                className="flex h-24 items-center justify-center bg-card p-6 grayscale hover:grayscale-0 transition-colors hover:bg-muted/40"
+              >
+                <Image
+                  src={
+                    tech.darkMode && theme === 'dark' && tech.logoDark
+                      ? tech.logoDark
+                      : tech.logo
+                  }
+                  alt={`${tech.name} Logo`}
+                  width={160}
+                  height={48}
+                  className="max-h-9 w-auto object-contain opacity-80  transition-opacity hover:opacity-100"
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

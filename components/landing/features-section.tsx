@@ -1,6 +1,7 @@
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import type { ReactNode } from 'react';
 import { GitBranch, SquareActivity, Server, Lock } from 'lucide-react';
+import { Eyebrow, StatusDot } from './shared';
+import { Reveal } from './reveal';
 
 export const pillars = [
   {
@@ -53,43 +54,485 @@ export const pillars = [
   },
 ];
 
-export function FeaturesSection() {
+const deploySteps = [
+  { label: 'git push', detail: 'source from any Git host' },
+  { label: 'Build', detail: 'BuildKit · container image' },
+  { label: 'Deploy', detail: 'k3s rolling update' },
+  { label: 'Live', detail: 'routing + health checks', running: true },
+];
+
+const logLines = [
+  { time: '12:01:04', level: 'INFO', text: 'Listening on :3000' },
+  { time: '12:01:06', level: 'INFO', text: 'Connected to postgres' },
+  { time: '12:01:11', level: 'WARN', text: 'Retrying webhook delivery' },
+  { time: '12:01:12', level: 'INFO', text: 'Deployment healthy' },
+];
+
+const databases = [
+  { name: 'postgres', version: '16', status: 'running' },
+  { name: 'redis', version: '7.4', status: 'running' },
+  { name: 'mysql', version: '8.4', status: 'running' },
+];
+
+const nodes = [
+  { name: 'master-1', role: 'control', load: 42 },
+  { name: 'worker-1', role: 'worker', load: 61 },
+  { name: 'worker-2', role: 'worker', load: 38 },
+];
+
+const members = [
+  { name: 'alex@acme.io', role: 'Owner', auth: '2FA' },
+  { name: 'sam@acme.io', role: 'Admin', auth: 'SSO' },
+  { name: 'dev@acme.io', role: 'Member', auth: '—' },
+];
+
+function FeatureCard({
+  eyebrow,
+  title,
+  description,
+  children,
+  className,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <section className="container mx-auto px-4 py-16 md:py-24 max-w-7xl">
-      <div className="text-center space-y-3 mb-12 ">
-        <Badge className="mb-4">Features</Badge>
-        <h2 className="text-3xl md:px-18 md:text-5xl font-bold ">Everything you need to run production apps on your own infrastructure</h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          QuickStack covers the full lifecycle: from first deploy to day-to-day operations, team access, and cluster growth.
+    <div
+      className={`group flex w-full flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-none transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/15 ${className ?? ''}`}
+    >
+      <div className="border-b border-border px-6 pt-6 pb-5">
+        <Eyebrow className="mb-2.5">{eyebrow}</Eyebrow>
+        <h3 className="text-lg font-medium tracking-tight text-foreground">
+          {title}
+        </h3>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+          {description}
         </p>
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {pillars.map((pillar, index) => (
-          <Card key={index} className="border-border/50">
-            <CardHeader>
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-primary/10 text-primary flex-shrink-0">
-                  <pillar.icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <CardTitle className="text-lg">{pillar.title}</CardTitle>
-                  <CardDescription className="mt-1">{pillar.tagline}</CardDescription>
-                </div>
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
+        <div className="flex flex-1 flex-col overflow-hidden rounded-lg bg-muted/30">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DeployPipeline() {
+  return (
+    <div className="flex flex-1 flex-col px-4 py-4">
+      <div className="relative flex flex-1 flex-col justify-between">
+        <span className="absolute bottom-5 left-[7px] top-5 w-px bg-border" />
+        {deploySteps.map((step) => (
+          <div key={step.label} className="relative flex items-center gap-4">
+            <StatusDot
+              className={
+                step.running
+                  ? 'text-emerald-500'
+                  : 'text-muted-foreground'
+              }
+            />
+            <div className="flex flex-1 items-center justify-between gap-4">
+              <div>
+                <p className="text-sm font-medium text-foreground">{step.label}</p>
+                <p className="font-mono text-[11px] text-muted-foreground">
+                  {step.detail}
+                </p>
               </div>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-2.5">
-                {pillar.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary mt-[7px] flex-shrink-0" />
-                    <span className="text-muted-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
+              {step.running && (
+                <span className="inline-flex items-center gap-1.5 rounded-md border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 font-mono text-[11px] text-emerald-600 dark:text-emerald-400">
+                  <StatusDot className="text-emerald-500" pulse />
+                  Running
+                </span>
+              )}
+            </div>
+          </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function MonitoringChart() {
+  const bars = [38, 52, 44, 61, 48, 72, 58, 66, 51, 74, 63, 55, 69, 60, 47, 71, 57, 64, 50, 68];
+  const spark = [12, 18, 15, 22, 19, 27, 24, 30, 26, 34, 29, 38, 33, 42, 36, 45, 40, 49, 44, 52];
+
+  const max = Math.max(...spark);
+  const points = spark
+    .map((v, i) => `${(i / (spark.length - 1)) * 100},${32 - (v / max) * 28}`)
+    .join(' ');
+
+  return (
+    <div className="flex flex-1 flex-col gap-5 px-4 py-4">
+      <div className="flex items-baseline justify-between">
+        <div>
+          <p className="text-2xl font-semibold tracking-tight text-foreground">
+            1.4 GB
+          </p>
+          <p className="font-mono text-[11px] text-muted-foreground">
+            RAM in use
+          </p>
+        </div>
+        <StatusDot className="text-emerald-500" pulse />
+      </div>
+
+      <svg viewBox="0 0 100 32" className="h-16 w-full" preserveAspectRatio="none">
+        <polyline
+          points={points}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          className="text-foreground"
+        />
+      </svg>
+
+      <div className="flex items-end gap-1">
+        {bars.map((h, i) => (
+          <div
+            key={i}
+            className="flex-1 rounded-sm bg-muted transition-[height] duration-700 group-hover:bg-muted-foreground/30"
+            style={{ height: `${(h / 100) * 48}px` }}
+          />
+        ))}
+      </div>
+
+      <div className="flex items-center justify-between border-t border-border pt-3">
+        <span className="font-mono text-[11px] text-muted-foreground">CPU</span>
+        <span className="font-mono text-[11px] text-muted-foreground">
+          last 24h
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function TerminalLogs() {
+  return (
+    <div className="flex flex-1 flex-col px-4 py-4">
+      <div className="flex-1 space-y-1.5">
+        {logLines.map((line) => (
+          <div key={line.time} className="flex gap-3 font-mono text-[11.5px] leading-relaxed">
+            <span className="shrink-0 text-muted-foreground">{line.time}</span>
+            <span
+              className={
+                line.level === 'WARN'
+                  ? 'shrink-0 text-amber-500'
+                  : 'shrink-0 text-emerald-500'
+              }
+            >
+              {line.level}
+            </span>
+            <span className="truncate text-foreground">{line.text}</span>
+          </div>
+        ))}
+        <div className="flex gap-3 font-mono text-[11.5px] leading-relaxed">
+          <span className="text-muted-foreground">12:01:13</span>
+          <span className="text-emerald-500">INFO</span>
+          <span className="text-foreground">
+            █<span className="animate-pulse text-muted-foreground">_</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DatabasesList() {
+  return (
+    <div className="flex flex-1 flex-col px-4 py-4">
+      <div className="flex-1 space-y-2">
+        {databases.map((db) => (
+          <div
+            key={db.name}
+            className="flex items-center justify-between rounded-lg border border-border px-3 py-2.5 transition-colors hover:bg-background"
+          >
+            <div className="flex items-center gap-2.5">
+              <StatusDot className="text-emerald-500" />
+              <span className="font-mono text-[13px] text-foreground">
+                {db.name}
+              </span>
+              <span className="font-mono text-[11px] text-muted-foreground">
+                v{db.version}
+              </span>
+            </div>
+            <span className="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">
+              {db.status}
+            </span>
+          </div>
+        ))}
+      </div>
+      <button className="mt-4 inline-flex h-8 items-center justify-center rounded-md border border-dashed border-border text-[12px] font-medium text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground">
+        + Deploy database
+      </button>
+    </div>
+  );
+}
+
+function ClusterNodes() {
+  return (
+    <div className="flex flex-1 flex-col gap-4 px-4 py-4">
+      {nodes.map((node) => (
+        <div key={node.name} className="space-y-1.5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <StatusDot className="text-emerald-500" />
+              <span className="font-mono text-[13px] text-foreground">
+                {node.name}
+              </span>
+              <span className="rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
+                {node.role}
+              </span>
+            </div>
+            <span className="font-mono text-[11px] text-muted-foreground">
+              {node.load}%
+            </span>
+          </div>
+          <div className="h-1.5 overflow-hidden rounded-full bg-muted">
+            <div
+              className="h-full rounded-full bg-foreground transition-[width] duration-700 group-hover:bg-muted-foreground"
+              style={{ width: `${node.load}%` }}
+            />
+          </div>
+        </div>
+      ))}
+      <p className="mt-auto border-t border-border pt-3 font-mono text-[11px] text-muted-foreground">
+        Auto load-balanced · Longhorn shared storage
+      </p>
+    </div>
+  );
+}
+
+function TeamAccess() {
+  return (
+    <div className="flex flex-1 flex-col px-4 py-4">
+      <div className="flex-1 space-y-2">
+        {members.map((m) => (
+          <div
+            key={m.name}
+            className="flex items-center justify-between py-1.5"
+          >
+            <div className="min-w-0">
+              <p className="truncate text-[13px] text-foreground">{m.name}</p>
+              <p className="font-mono text-[11px] text-muted-foreground">
+                {m.role} · per-project
+              </p>
+            </div>
+            <span
+              className={
+                m.auth !== '—'
+                  ? 'rounded border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 font-mono text-[10px] text-emerald-600 dark:text-emerald-400'
+                  : 'rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground'
+              }
+            >
+              {m.auth}
+            </span>
+          </div>
+        ))}
+      </div>
+      <p className="mt-auto border-t border-border pt-3 font-mono text-[11px] text-muted-foreground">
+        Granular permissions · 2FA · SSO
+      </p>
+    </div>
+  );
+}
+
+function BackupsList() {
+  const points = Array.from({ length: 8 });
+
+  return (
+    <div className="flex flex-1 flex-col px-4 py-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <StatusDot className="text-emerald-500" pulse />
+          <span className="font-mono text-[12px] text-foreground">
+            s3 · eu-central-1
+          </span>
+        </div>
+        <span className="font-mono text-[11px] text-emerald-600 dark:text-emerald-400">
+          Healthy
+        </span>
+      </div>
+
+      <div className="relative mt-8">
+        <span className="absolute left-0 right-0 top-[4px] h-px bg-border" />
+        <div className="relative flex items-start justify-between pb-4">
+          {points.map((_, i) => (
+            <span
+              key={i}
+              className={
+                i === points.length - 1
+                  ? 'size-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-500/15'
+                  : 'size-2 rounded-full bg-muted-foreground/40'
+              }
+            />
+          ))}
+        </div>
+        <div className="relative mt-2 flex justify-between font-mono text-[10px] text-muted-foreground">
+          <span>7d ago</span>
+          <span>now</span>
+        </div>
+      </div>
+
+      <div className="mt-auto flex items-center justify-between border-t border-border pt-3">
+        <div>
+          <p className="text-[13px] text-foreground">Last backup</p>
+          <p className="font-mono text-[11px] text-muted-foreground">
+            Today · 02:00 · 14 min
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="font-mono text-[11px] text-muted-foreground">
+            Daily
+          </span>
+          <button className="inline-flex h-8 items-center justify-center rounded-md border border-border bg-background px-3 text-[12px] font-medium text-foreground transition-colors hover:bg-muted">
+            Restore
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NodeChip({ children, active = false }: { children: string; active?: boolean }) {
+  return (
+    <span
+      className={
+        active
+          ? 'rounded-md border border-foreground/25 bg-background px-2.5 py-1 font-mono text-[11px] text-foreground'
+          : 'rounded-md border border-border bg-background px-2.5 py-1 font-mono text-[11px] text-foreground'
+      }
+    >
+      {children}
+    </span>
+  );
+}
+
+function FlowLink({ label }: { label: string }) {
+  return (
+    <span className="flex items-center gap-1 font-mono text-[10px] text-emerald-600 dark:text-emerald-400">
+      <span className="h-px w-5 bg-emerald-500" />
+      {label}
+    </span>
+  );
+}
+
+function NetworkPolicies() {
+  return (
+    <div className="flex flex-1 flex-col items-center justify-center gap-4 px-4 py-4">
+      <div className="flex items-center gap-2">
+        <NodeChip>internet</NodeChip>
+        <FlowLink label=":443" />
+        <NodeChip active>app</NodeChip>
+        <FlowLink label="allow" />
+        <NodeChip>postgres</NodeChip>
+      </div>
+
+      <p className="font-mono text-[10px] text-muted-foreground">
+        egress denied by default
+      </p>
+    </div>
+  );
+}
+
+export function FeaturesSection() {
+  return (
+    <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
+      <div className="mb-16 max-w-2xl">
+        <Eyebrow className="mb-5">Product</Eyebrow>
+        <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
+          Everything you need to run production apps.
+        </h2>
+        <p className="mt-5 text-muted-foreground">
+          QuickStack covers the full lifecycle — from first deploy to
+          day-to-day operations, team access and cluster growth.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
+        <Reveal className="flex md:col-span-7">
+          <FeatureCard
+            eyebrow="Deploy"
+            title="Push to deploy"
+            description="Build from any Git repo or container registry. Webhooks trigger auto-deploys on every push, served behind automatic HTTPS."
+          >
+            <DeployPipeline />
+          </FeatureCard>
+        </Reveal>
+
+        <Reveal delay={80} className="flex md:col-span-5">
+          <FeatureCard
+            eyebrow="Operate"
+            title="Montioring"
+            description="Live CPU, RAM and disk metrics per app, with health checks and restart policies."
+          >
+            <MonitoringChart />
+          </FeatureCard>
+        </Reveal>
+
+        <Reveal delay={140} className="flex md:col-span-5">
+          <FeatureCard
+            eyebrow="Operate"
+            title="Logs and terminal"
+            description="Stream container logs in real time and drop into a web terminal — no SSH required."
+          >
+            <TerminalLogs />
+          </FeatureCard>
+        </Reveal>
+
+        <Reveal delay={80} className="flex md:col-span-7">
+          <FeatureCard
+            eyebrow="Databases"
+            title="One-click databases"
+            description="Spin up Postgres, MySQL or Redis from templates and connect them over internal networking."
+          >
+            <DatabasesList />
+          </FeatureCard>
+        </Reveal>
+
+        <Reveal delay={140} className="flex md:col-span-6">
+          <FeatureCard
+            eyebrow="Scale"
+            title="Grow into a cluster"
+            description="Add nodes anytime. Longhorn provides shared storage and load balancing across the cluster."
+          >
+            <ClusterNodes />
+          </FeatureCard>
+        </Reveal>
+
+        <Reveal delay={200} className="flex md:col-span-6">
+          <FeatureCard
+            eyebrow="Permissions"
+            title="Multi-user access"
+            description="Per-project permissions, 2FA and SSO keep every app isolated."
+          >
+            <TeamAccess />
+          </FeatureCard>
+        </Reveal>
+
+        <Reveal delay={80} className="flex md:col-span-7">
+          <FeatureCard
+            eyebrow="Backups"
+            title="Scheduled backups"
+            description="Automated backups for volumes and databases, stored on S3-compatible object storage. "
+          >
+            <BackupsList />
+          </FeatureCard>
+        </Reveal>
+
+        <Reveal delay={140} className="flex md:col-span-5">
+          <FeatureCard
+            eyebrow="Networking"
+            title="Network policies"
+            description="Define ingress and egress rules to isolate services and control what can talk to what."
+          >
+            <NetworkPolicies />
+          </FeatureCard>
+        </Reveal>
       </div>
     </section>
   );

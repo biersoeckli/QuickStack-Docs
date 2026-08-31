@@ -32,7 +32,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-neutral-50 dark:bg-background">
       <HeroSection theme={theme} />
       <FeaturesSection />
       <HowItWorksSection />
@@ -40,7 +40,7 @@ export default function HomePage() {
       <UseCasesSection />
       <TechStackSection theme={theme} />
       <FaqSection />
-      <div className='h-12 md:h-28' />
+      <FinalCtaSection />
       <FooterSection theme={theme} />
     </div>
   );
