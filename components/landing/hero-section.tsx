@@ -36,9 +36,10 @@ export function HeroSection({ theme }: HeroSectionProps) {
           Run <span className="text-primary">any app</span> on your own servers.
         </h1>
 
-        <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-          Deploy from Git or any container registry. QuickStack gives you
-          builds, domains, HTTPS, logs, metrics and backups — from one UI.
+        <p className="mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">
+          Deploy databases or apps from Git or any container registry. QuickStack
+          provides all you need from a single UI running on your own
+          infrastructure.
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">

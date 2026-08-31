@@ -65,7 +65,7 @@ export function HowItWorksSection() {
       </div>
 
       {/* Video demo */}
-      <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-card">
+      <div className="mx-auto mt-6 max-w-[1000px] overflow-hidden rounded-2xl border border-border bg-card">
         <div className="flex items-center justify-between border-b border-border px-5 py-3">
           <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
             Demo
