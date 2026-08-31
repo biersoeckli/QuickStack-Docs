@@ -356,7 +356,7 @@ export function FeaturesSection() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
-        <Reveal className="flex md:col-span-7 md:row-span-2">
+        <Reveal className="flex md:col-span-7">
           <FeatureCard
             eyebrow="Deploy"
             title="Push to deploy"
@@ -386,7 +386,7 @@ export function FeaturesSection() {
           </FeatureCard>
         </Reveal>
 
-        <Reveal delay={80} className="flex md:col-span-4">
+        <Reveal delay={80} className="flex md:col-span-7">
           <FeatureCard
             eyebrow="Databases"
             title="One-click databases"
@@ -396,7 +396,7 @@ export function FeaturesSection() {
           </FeatureCard>
         </Reveal>
 
-        <Reveal delay={140} className="flex md:col-span-4">
+        <Reveal delay={140} className="flex md:col-span-6">
           <FeatureCard
             eyebrow="Scale"
             title="Grow into a cluster"
@@ -406,7 +406,7 @@ export function FeaturesSection() {
           </FeatureCard>
         </Reveal>
 
-        <Reveal delay={200} className="flex md:col-span-4">
+        <Reveal delay={200} className="flex md:col-span-6">
           <FeatureCard
             eyebrow="Secure"
             title="Lock down access"
