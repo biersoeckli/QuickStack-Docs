@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
-import { GitBranch, SquareActivity, Server, Lock } from 'lucide-react';
+import { GitBranch, SquareActivity, Server, Lock, ArrowDown } from 'lucide-react';
 import { Eyebrow, StatusDot } from './shared';
 import { Reveal } from './reveal';
+import { ScrollLink } from './scroll-link';
 
 export const pillars = [
   {
@@ -439,18 +440,34 @@ function NetworkPolicies() {
   );
 }
 
+function ViewAllFeatures() {
+  return (
+    <ScrollLink
+      href="#all-features"
+      className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-muted-foreground"
+    >
+      View all features
+      <ArrowDown className="h-4 w-4" />
+    </ScrollLink>
+  );
+}
+
 export function FeaturesSection() {
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
-      <div className="mb-16 max-w-2xl">
-        <Eyebrow className="mb-5">Product</Eyebrow>
-        <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
-          Everything you need to run production apps.
-        </h2>
-        <p className="mt-5 text-muted-foreground">
-          QuickStack covers the full lifecycle — from first deploy to
-          day-to-day operations, team access and cluster growth.
-        </p>
+      <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div className="max-w-2xl">
+          <Eyebrow className="mb-5">Product</Eyebrow>
+          <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
+            Everything you need to run production apps.
+          </h2>
+          <p className="mt-5 text-muted-foreground">
+            QuickStack covers the full lifecycle — from first deploy to
+            day-to-day operations, team access and cluster growth.
+          </p>
+        </div>
+
+        <ViewAllFeatures />
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
