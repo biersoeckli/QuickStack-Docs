@@ -3,24 +3,24 @@ import { Eyebrow } from './shared';
 export const useCases = [
   {
     number: '01',
-    title: 'Indie developers & side projects',
-    description:
-      'You have a VPS and want to ship without cloud PaaS prices or managing Kubernetes by hand. QuickStack gives you deploy-from-Git without the lock-in or monthly bill.',
-    tags: ['Single server', 'Git deploy', 'Low cost'],
-  },
-  {
-    number: '02',
     title: 'Small teams that want a Heroku-like DX',
     description:
       'Push-to-deploy, automatic HTTPS, env vars, logs and backups — on infrastructure you control, without anyone learning cluster management.',
     tags: ['Team access', 'Permissions', 'Backups'],
   },
   {
-    number: '03',
+    number: '02',
     title: 'DevOps engineers who want control',
     description:
       'Comfortable with servers but tired of gluing together Traefik, Compose and shell scripts. QuickStack is a structured platform you can extend — with clusters when you scale.',
     tags: ['Multi-node cluster', 'Network policies', 'Registry support'],
+  },
+  {
+    number: '03',
+    title: 'Indie developers & side projects',
+    description:
+      'You have a VPS and want to ship without cloud PaaS prices or managing Kubernetes by hand. QuickStack gives you deploy-from-Git without the lock-in or monthly bill.',
+    tags: ['Single server', 'Git deploy', 'Low cost'],
   },
 ];
 

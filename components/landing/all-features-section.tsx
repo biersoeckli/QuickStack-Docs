@@ -44,6 +44,11 @@ export const featureGroups: FeatureGroup[] = [
         description: 'Full control when you need it, custom path supported.',
       },
       {
+        title: 'Instant Rollback',
+        description:
+          'Revert to a previous version of your app with a single click.',
+      },
+      {
         title: 'Deploy via webhook or API',
         description:
           'Trigger deploys from CI, git providers, or your own scripts with a REST API key.',
@@ -218,7 +223,7 @@ export const featureGroups: FeatureGroup[] = [
   },
   {
     icon: Bot,
-    title: 'AI agent sandboxes',
+    title: 'AI agent sandboxes (experimental)',
     items: [
       {
         title: 'Isolated, long-lived agent sandboxes',
@@ -297,33 +302,35 @@ export function AllFeaturesSection() {
         </p>
       </div>
 
-      <div className="columns-1 gap-5 md:columns-2 xl:columns-3">
+      <div className="space-y-10 md:space-y-12">
         {featureGroups.map((group) => (
-          <div
-            key={group.title}
-            className="mb-5 break-inside-avoid rounded-2xl border border-border bg-card p-6 transition-colors hover:border-foreground/15"
-          >
-            <div className="flex items-center gap-2.5">
-              <span className="flex size-7 shrink-0 items-center justify-center rounded-md border border-border bg-muted/40">
-                <group.icon className="size-3.5 text-foreground" />
-              </span>
-              <h3 className="text-[15px] font-medium tracking-tight text-foreground">
-                {group.title}
-              </h3>
+          <div key={group.title} className="grid gap-5 lg:grid-cols-12 lg:gap-8">
+            <div className="lg:col-span-3">
+              <div className="flex items-center gap-3 lg:pt-4">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/40">
+                  <group.icon className="size-4 text-foreground" />
+                </span>
+                <h3 className="text-base font-medium tracking-tight text-foreground">
+                  {group.title}
+                </h3>
+              </div>
             </div>
 
-            <ul className="mt-5 space-y-3.5">
+            <div className="grid gap-3 sm:grid-cols-2 lg:col-span-9 xl:grid-cols-3">
               {group.items.map((item) => (
-                <li key={item.title}>
-                  <p className="text-[13px] font-medium leading-snug text-foreground">
+                <article
+                  key={item.title}
+                  className="rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/15"
+                >
+                  <h4 className="text-[13px] font-medium leading-snug text-foreground">
                     {item.title}
-                  </p>
-                  <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">
+                  </h4>
+                  <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
-                </li>
+                </article>
               ))}
-            </ul>
+            </div>
           </div>
         ))}
       </div>

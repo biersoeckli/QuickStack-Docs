@@ -455,19 +455,15 @@ function ViewAllFeatures() {
 export function FeaturesSection() {
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
-      <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <div className="max-w-2xl">
-          <Eyebrow className="mb-5">Product</Eyebrow>
-          <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
-            Everything you need to run production apps.
-          </h2>
-          <p className="mt-5 text-muted-foreground">
-            QuickStack covers the full lifecycle — from first deploy to
-            day-to-day operations, team access and cluster growth.
-          </p>
-        </div>
-
-        <ViewAllFeatures />
+      <div className="mb-16 max-w-2xl">
+        <Eyebrow className="mb-5">Product</Eyebrow>
+        <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
+          Everything you need to run production apps.
+        </h2>
+        <p className="mt-5 text-muted-foreground">
+          QuickStack covers the full lifecycle — from first deploy to
+          day-to-day operations, team access and cluster growth.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
@@ -550,6 +546,10 @@ export function FeaturesSection() {
             <NetworkPolicies />
           </FeatureCard>
         </Reveal>
+      </div>
+
+      <div className="mt-10 flex justify-center">
+        <ViewAllFeatures />
       </div>
     </section>
   );

@@ -12,11 +12,10 @@ export function FinalCtaSection() {
             Open source · Self-hosted · Free
           </Eyebrow>
           <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
-            Deploy on your own infrastructure.
+            Your server(s), running like a platform.
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Install QuickStack on your server in minutes. No managed cloud
-            required.
+            Free and open source. Install it in a few minutes and deploy your first app right after.
           </p>
         </div>
 
