@@ -1,11 +1,14 @@
 ---
-sidebar_position: 4
-title: "Network Policies"
-description: "Control exactly which workloads can reach a QuickStack app and which workloads an app can reach."
-keywords: ["QuickStack network policies", "security", "firewall", "traffic control", "isolation", "ingress", "egress"]
+sidebar_position: 3
+title: "Networking"
+description: "How apps and databases communicate inside a project, and how to control traffic with network policies."
+keywords: ["QuickStack networking", "internal hostname", "service discovery", "network policies", "ingress", "egress", "firewall", "isolation"]
 ---
 
-Network policies control traffic to and from an app. QuickStack implements them with Kubernetes `NetworkPolicy` resources (enforced by kube-router in k3s). Instead of choosing from fixed presets, you define explicit **ingress** and **egress** rules: who may access the app, and which apps and databases the app may access.
+QuickStack networking has two parts that work together:
+
+- **Internal service hostnames** — how apps and databases in a project find and reach each other.
+- **Network policies** — which traffic is actually allowed.
 
 <Callout>
 **By default, all apps in a project can communicate with each other and with the internet.** Network policies only change that behaviour once you enable them on an app.
@@ -22,6 +25,73 @@ Open the app and go to the **Domains & Networking** tab. The **Network Policy** 
 
 {/* SCREENSHOT: App page → Domains & Networking tab → Network Policy card | network-policy-card.png */}
 <img src="/img/docs/managing-apps/network-policies/network-policy-card.png" alt="Network Policy card on the Domains & Networking tab" />
+
+## Internal service hostnames
+
+Every app and database gets an internal DNS name that resolves only inside the cluster:
+
+```
+svc-<app-id>.<project-id>.svc.cluster.local
+```
+
+With a specific port:
+
+```
+svc-<app-id>.<project-id>.svc.cluster.local:5432
+```
+
+QuickStack builds the Kubernetes Service and its ports from the app's **Domains** and its **network policy rules** — there is no separate internal-port setting.
+
+## Open a port for internal traffic
+
+A port becomes reachable inside the cluster when an **ingress network policy rule** targets it on the receiving app.
+
+1. Open the **receiving** app and go to **Domains & Networking** → **Network Policy**.
+2. Enable **Network Policies** if it is off.
+3. Under **Ingress rules**, click **Add ingress rule**.
+4. Select the calling app as **Source** and enter the port the receiving app listens on.
+5. Click **Add rule**, then **Save & Apply Changes**.
+
+The service now exposes that port internally.
+
+<Callout>
+**You usually don't add both sides**
+Network policies are mirrored: adding an egress rule on the calling app creates the matching ingress rule on the target, and vice versa. The counterpart is only written when the other app has network policies enabled and you have write access to it. Review the result in the [network graph](/docs/how-to/networking/project-network-graph).
+</Callout>
+
+## Copy a connection string
+
+Instead of typing hostnames by hand, copy the exact internal URL from the rule:
+
+1. Open the app that holds the rule (either side of the connection).
+2. In the rule table, click the row's action menu → **Copy internal hostname**.
+3. Paste it into the consuming app's environment variables.
+
+{/* SCREENSHOT: Rule row action menu with Copy internal hostname | rule-row-actions.png */}
+<img src="/img/docs/managing-apps/network-policies/rule-row-actions.png" alt="Rule row action menu" />
+
+The copied value includes the protocol and port, for example:
+
+```
+http://svc-<app-id>.<project-id>.svc.cluster.local:5432
+```
+
+### Example connection strings
+
+```
+# PostgreSQL
+DATABASE_URL=postgres://user:password@svc-app-abc.<project-id>.svc.cluster.local:5432/database
+
+# Redis
+REDIS_URL=redis://svc-app-def.<project-id>.svc.cluster.local:6379
+
+# Internal HTTP service
+API_BASE_URL=http://svc-app-ghi.<project-id>.svc.cluster.local:3000
+```
+
+Set these as [environment variables](/docs/how-to/deployments/redeploy-and-rollbacks#environment-variables) in your app, then deploy.
+
+## Enable network policies
 
 1. Toggle **Network Policies** on. The rule editors appear.
 2. Add **Ingress rules** and **Egress rules** as needed (see below).
@@ -71,18 +141,6 @@ When the target is a managed database, QuickStack pre-fills the standard port an
 - **On** — the app may open outbound connections to public addresses.
 - **Off** — outbound traffic is restricted to the workloads you explicitly allow.
 
-## Copy an internal hostname
-
-To connect another app to a target, copy the target's internal service URL from its rule row:
-
-1. Open the rule that targets the app or database.
-2. Click the row's action menu → **Copy internal hostname**.
-
-{/* SCREENSHOT: Rule row action menu with Copy internal hostname | rule-row-actions.png */}
-<img src="/img/docs/managing-apps/network-policies/rule-row-actions.png" alt="Rule row action menu" />
-
-Paste the copied value into the consuming app's environment variables. See [Internal Networking](/docs/how-to/networking/internal-networking) for connection-string examples.
-
 ## Rules that QuickStack always adds
 
 Some traffic is always permitted so the platform keeps working. These rules are managed for you and are not shown in the editor:
@@ -107,6 +165,10 @@ The counterpart is only written when the other app has **Network Policies** enab
 Linking to an app you can only read fails with an authorization error, because QuickStack cannot add the mirrored rule on that app. Ask an administrator to grant write access to the referenced app.
 </Callout>
 
+## Cross-project access
+
+Internal hostnames are scoped to a project. To connect workloads across projects, pick the other project in the rule dialog when you add an ingress or egress rule. Cross-project targets appear as dashed edges in the network graph.
+
 ## View the connections as a graph
 
 The Network Policy card has a **Rules / Network Graph** toggle. The graph centers on the current app:
@@ -124,13 +186,21 @@ When an app has network policies enabled but no domain and no ingress rule, Quic
 {/* SCREENSHOT: No inbound traffic configured warning | no-inbound-warning.png */}
 <img src="/img/docs/managing-apps/network-policies/no-inbound-warning.png" alt="No inbound traffic configured warning" />
 
+## Common use cases
+
+- Connecting apps to databases (most common)
+- Microservice architectures — backend services that should not be publicly accessible
+- Sidecar apps (e.g. a proxy or cache layer)
+
 ## Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
-| App can't connect to a database | Add an egress rule on the app to the database, or check that the database allows ingress from the app |
+| Connection refused between apps | Confirm an ingress rule exists on the receiving app for the port it listens on |
+| App can't connect to a database | Add an egress rule on the app to the database, or an ingress rule on the database |
 | App can't reach the internet | Turn on **Internet Access** in the app's egress rules |
 | Another app can't reach this app | Add an ingress rule for that app, or a domain for external traffic |
+| Name does not resolve | Verify you copied the full hostname, including the project ID |
 | Policy doesn't seem to apply | Open the rule card and confirm there are no unsaved changes; then click **Save & Apply Changes** |
 | A rule can't be created | You need write access to the app or database you are referencing |
 
@@ -141,7 +211,8 @@ Older QuickStack versions used fixed policy templates (Allow All, Internet Only,
 
 ## Related
 
-- [Internal networking](/docs/how-to/networking/internal-networking)
 - [Project network graph](/docs/how-to/networking/project-network-graph)
 - [Custom domains](/docs/how-to/networking/domains)
+- [Node ports](/docs/how-to/networking/node-ports)
 - [Basic auth](/docs/how-to/networking/basic-auth)
+- [Ports & endpoints reference](/docs/reference/ports-and-endpoints)

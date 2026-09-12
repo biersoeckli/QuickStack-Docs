@@ -43,7 +43,7 @@ A DNS hostname that routes public traffic to an app via Traefik. See [Custom Dom
 A read-only file injected into a container at a specified path. Content is stored in the QuickStack database. See [File Mounts](/docs/how-to/storage/file-mounts).
 
 ## Internal Hostname / Service Name
-The `svc-<app-id>.<project-id>.svc.cluster.local` hostname used for service-to-service communication within a project. QuickStack builds the underlying service and its ports from the app's domains and network policy rules. See [Internal Networking](/docs/how-to/networking/internal-networking).
+The `svc-<app-id>.<project-id>.svc.cluster.local` hostname used for service-to-service communication within a project. QuickStack builds the underlying service and its ports from the app's domains and network policy rules. See [Networking](/docs/how-to/networking).
 
 ## k3s
 A lightweight Kubernetes distribution. QuickStack runs on k3s. [k3s.io](https://k3s.io/)
@@ -64,7 +64,7 @@ The maximum RAM a container can use. Exceeding this causes the container to be t
 Guaranteed amount of RAM Kubernetes ensures is always available to a container.
 
 ## Network Policy
-A Kubernetes resource that controls ingress and egress traffic for a pod. In QuickStack, policies are made of explicit per-app ingress and egress rules, plus an internet-access switch. See [Network Policies](/docs/how-to/networking/network-policies).
+A Kubernetes resource that controls ingress and egress traffic for a pod. In QuickStack, policies are made of explicit per-app ingress and egress rules, plus an internet-access switch. See [Networking](/docs/how-to/networking).
 
 ## Project
 A logical grouping of apps and databases in QuickStack. All apps in a project share a network namespace and can communicate via internal hostnames.
