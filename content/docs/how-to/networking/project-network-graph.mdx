@@ -1,0 +1,106 @@
+---
+sidebar_position: 5
+title: "Project Network Graph"
+description: "Visualize and edit the network connections between the apps and databases in a QuickStack project."
+keywords: ["QuickStack network graph", "project canvas", "connection", "ingress", "egress", "visualize", "react flow"]
+---
+
+The project **network graph** turns the apps and databases in a project into a canvas. It shows which workloads may talk to each other, and lets you create and remove those connections without switching between app pages. The graph is generated from each app's [network policies](/docs/how-to/networking/network-policies) and domains.
+
+## Opening the graph
+
+1. Open a project from the sidebar.
+2. On the **Apps** page, click the **Network graph** icon next to the **Table** icon in the page header.
+
+The selected view is stored in the URL (`?tab=graph`) and remembered in your browser, so you can bookmark or share a project in graph view.
+
+{/* SCREENSHOT: Project Apps page header with Table / Network graph toggle | project-graph-overview.png */}
+<img src="/img/docs/managing-apps/project-network-graph/project-graph-overview.png" alt="Project network graph overview" />
+
+## Reading the graph
+
+| Element | Meaning |
+|---------|---------|
+| **App node** | An application, with its live pod status |
+| **Database node** | A managed database (MariaDB, PostgreSQL, MongoDB, Redis) |
+| **Internet node** | Access to the public internet |
+| **Solid edge** | A complete, active connection |
+| **Dashed edge** | An incomplete or cross-project connection |
+| **Arrowheads** | The allowed direction of traffic |
+| **Edge label** | The port and protocol |
+
+The legend above the canvas explains the colors: connections within the project, connections to other projects, and internet access.
+
+## Creating a connection
+
+1. Hover the **source** app node. A connection handle appears on its right edge.
+2. Drag from that handle onto the **target** node's left handle.
+3. In the **Add egress rule** dialog, confirm the **Port** and **Protocol**, then click **Add rule**.
+4. When you are done, click **Save & Apply** and confirm.
+
+QuickStack creates the matching ingress rule on the target automatically.
+
+{/* SCREENSHOT: Dragging a connection between two app nodes | project-graph-create-connection.png */}
+<img src="/img/docs/managing-apps/project-network-graph/project-graph-create-connection.png" alt="Creating a connection in the project network graph" />
+
+<Callout>
+**Permissions**
+You can only start a connection from an app you have write access to, and only between apps in the same project. Cross-project targets can be selected inside the rule dialog.
+</Callout>
+
+## Removing a connection
+
+Right-click an edge and choose **Delete connection**. Removing a connection deletes the underlying network policy rules on both sides.
+
+{/* SCREENSHOT: Edge context menu with Delete connection | project-graph-edge-menu.png */}
+<img src="/img/docs/managing-apps/project-network-graph/project-graph-edge-menu.png" alt="Edge context menu" />
+
+## Node actions
+
+Right-click an app node to open its context menu:
+
+| Action | What it does |
+|--------|--------------|
+| **Enable / Disable Egress Internet Access** | Toggles outbound internet access for the app |
+| **Edit App Name** | Opens the rename dialog |
+| **Delete App** | Deletes the app after confirmation |
+
+## Node details
+
+Click any node to open the **details drawer** on the right. For an app it shows:
+
+- **Overview** — image, replicas, project, external URL, timestamps
+- **Network Policies** — the app's rules, with **Copy internal hostname**
+- **Logs**, **Deployments**, and **Stats** tabs
+- An action menu for **Deploy**, **Rebuild**, **Start**, and **Stop**
+
+If the app's source is not configured yet, the drawer shows the source configuration form instead.
+
+{/* SCREENSHOT: Node details drawer for an app | node-details-drawer.png */}
+<img src="/img/docs/managing-apps/project-network-graph/node-details-drawer.png" alt="Node details drawer" />
+
+## Arranging and saving the layout
+
+- **Drag a node** to move it. Positions are saved per project on the server, so the layout is shared across browsers and devices.
+- **Reset** restores the automatic layout.
+- Connection and internet changes are held as a draft. Use **Save & Apply** to apply them, or **Cancel** to discard all pending changes.
+
+<Callout type="warn">
+**Save & Apply takes effect immediately**
+Applying changes reconciles network policies for the affected apps right away. A confirmation dialog is shown before anything is applied.
+</Callout>
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Can't drag a connection | You need write access to the source app; verify the node is not read-only |
+| Connection disappears after refresh | Changes were not saved — click **Save & Apply** before leaving |
+| Node positions don't stick | You need project write access to save layout changes |
+| Graph is empty | No apps in the project, or none have network policies enabled yet |
+
+## Related
+
+- [Network policies](/docs/how-to/networking/network-policies)
+- [Internal networking](/docs/how-to/networking/internal-networking)
+- [Custom domains](/docs/how-to/networking/domains)

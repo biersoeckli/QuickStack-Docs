@@ -18,8 +18,14 @@ HTTP-level username/password protection implemented via a Traefik middleware. Au
 ## BuildKit
 The container image building toolkit QuickStack uses to build Docker images from Git repositories. [GitHub](https://github.com/moby/buildkit)
 
+## Cert-Manager
+A Kubernetes controller for automated TLS certificate management. Installable as a [cluster add-on](/docs/how-to/admin/cluster-add-ons) to enable HTTPS for apps in QuickStack. [cert-manager.io](https://cert-manager.io/)
+
 ## Cluster
 A group of servers (nodes) that work together as a single Kubernetes environment. See [Cluster Nodes](/docs/how-to/admin/cluster-nodes).
+
+## Cluster Add-on
+An optional cluster component that QuickStack can install, update, and in some cases remove, such as Longhorn or CertManager. See [Cluster Add-ons](/docs/how-to/admin/cluster-add-ons).
 
 ## Cordon
 Kubernetes operation that marks a node as non-schedulable — new pods are not placed there, but existing ones keep running.
@@ -37,7 +43,7 @@ A DNS hostname that routes public traffic to an app via Traefik. See [Custom Dom
 A read-only file injected into a container at a specified path. Content is stored in the QuickStack database. See [File Mounts](/docs/how-to/storage/file-mounts).
 
 ## Internal Hostname / Service Name
-The `svc-<app-id>` hostname used for service-to-service communication within a project. See [Internal Networking](/docs/how-to/networking/internal-networking).
+The `svc-<app-id>.<project-id>.svc.cluster.local` hostname used for service-to-service communication within a project. QuickStack builds the underlying service and its ports from the app's domains and network policy rules. See [Internal Networking](/docs/how-to/networking/internal-networking).
 
 ## k3s
 A lightweight Kubernetes distribution. QuickStack runs on k3s. [k3s.io](https://k3s.io/)
@@ -58,10 +64,13 @@ The maximum RAM a container can use. Exceeding this causes the container to be t
 Guaranteed amount of RAM Kubernetes ensures is always available to a container.
 
 ## Network Policy
-A Kubernetes resource that controls ingress and egress traffic for a pod. QuickStack provides pre-configured templates. See [Network Policies](/docs/how-to/networking/network-policies).
+A Kubernetes resource that controls ingress and egress traffic for a pod. In QuickStack, policies are made of explicit per-app ingress and egress rules, plus an internet-access switch. See [Network Policies](/docs/how-to/networking/network-policies).
 
 ## Project
 A logical grouping of apps and databases in QuickStack. All apps in a project share a network namespace and can communicate via internal hostnames.
+
+## Project Network Graph
+An interactive canvas on a project's **Apps** page that visualizes and edits the network connections between apps and databases. See [Project Network Graph](/docs/how-to/networking/project-network-graph).
 
 ## QuickStack.me Domain
 A built-in "magic" domain that automatically resolves to your server's public IP, providing instant HTTPS without DNS configuration. See [QuickStack.me](/docs/how-to/networking/quickstack-me).
@@ -72,8 +81,14 @@ A Docker registry bundled with QuickStack for storing built images. Images built
 ## Replica
 An instance of an application running in the cluster. Multiple replicas provide horizontal scaling and availability.
 
+## Rollback
+Redeploying a Git-source app from an earlier commit. QuickStack reuses the built image for that commit or rebuilds it. See [Deploy & Redeploy](/docs/how-to/deployments/redeploy-and-rollbacks#rollback-to-a-previous-deployment).
+
 ## S3 Target
 An S3-compatible bucket configured in QuickStack as a backup destination. See [S3 Targets](/docs/how-to/backups/s3-targets).
+
+## Single Sign-On (SSO)
+Authentication through an external identity provider such as OIDC, Google, Entra ID, or GitHub. Admins configure providers in **Settings** → **Users & Groups** → **SSO Providers**. See [Single Sign-On](/docs/how-to/admin/single-sign-on).
 
 ## Storage Class
 A Kubernetes concept defining the type of storage. QuickStack uses:

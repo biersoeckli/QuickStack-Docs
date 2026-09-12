@@ -41,11 +41,16 @@ QuickStack provides pre-configured templates for popular databases. Templates se
 
 Other apps in the same project connect via the **service hostname**:
 
-- **Hostname:** `svc-<app-id>` (find the exact value in the app's **Credentials** tab)
-- **Port:** standard port for the engine (PostgreSQL: `5432`, MySQL/MariaDB: `3306`, MongoDB: `27017`)
-- **Credentials:** also shown in the **Credentials** tab
+- **Hostname:** `svc-<app-id>.<project-id>.svc.cluster.local` (copy the exact value from the app's **Domains & Networking** → **Network Policy** rule actions → **Copy internal hostname**)
+- **Port:** standard port for the engine (PostgreSQL: `5432`, MySQL/MariaDB: `3306`, MongoDB: `27017`, Redis: `6379`)
+- **Credentials:** shown in the **Credentials** tab
 
 <img  src="/img/docs/managing-databases/deploying-databases/database-credentials.png" alt="Database Credentials" />
+
+<Callout>
+**Allow the connection first**
+Database templates restrict internet egress and use explicit network policy rules. Add an ingress rule for the calling app on the database's **Domains & Networking** tab (or an egress rule on the app) before connecting. See [Network Policies](/docs/how-to/networking/network-policies).
+</Callout>
 
 <Callout>
 **Clipboard copy**
@@ -54,7 +59,7 @@ Copying credential values requires your QuickStack instance to be served over HT
 
 ### External access (not recommended)
 
-By default, databases are not exposed to the internet. If you need local access for development, you can assign a public domain in the **Domains** tab.
+By default, databases are not exposed to the internet. If you need local access for development, you can assign a public domain in the **Domains & Networking** tab.
 
 <Callout type="error">
 **Security Warning**

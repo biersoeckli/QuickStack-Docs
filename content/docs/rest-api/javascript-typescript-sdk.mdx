@@ -55,14 +55,22 @@ const updatedApp = await client.saveApp({
   dockerfilePath: "Dockerfile",
   replicas: 1,
   envVars: "{}",
-  ingressNetworkPolicy: "ALLOW_ALL",
-  egressNetworkPolicy: "ALLOW_ALL",
-  useNetworkPolicy: false,
+  useNetworkPolicy: true,
+  appNetworkPolicy: {
+    allowInternetAccess: true,
+    rules: [
+      {
+        type: "EGRESS",
+        targetAppId: "target-app-id",
+        port: 5432,
+        protocol: "TCP",
+      },
+    ],
+  },
   healthCheckPeriodSeconds: 10,
   healthCheckTimeoutSeconds: 5,
   healthCheckFailureThreshold: 3,
   appDomains: [],
-  appPorts: [],
   appNodePorts: [],
   appFileMounts: [],
   appVolumes: [],
@@ -72,7 +80,12 @@ const updatedApp = await client.saveApp({
 await client.deleteApp({ id: updatedApp.id });
 ```
 
-`saveApp` is an upsert: omit `id` when creating and include it when updating. Obtain the complete app request schema from your instance's [OpenAPI documentation](/docs/rest-api/overview#openapi-documentation).
+`saveApp` is an upsert: omit `id` when creating and include it when updating. The `appNetworkPolicy` field is required on write: pass an object to replace the app's policy and rules, or `null` to remove it. Obtain the complete app request schema from your instance's [OpenAPI documentation](/docs/rest-api/overview#openapi-documentation).
+
+<Callout>
+**Network policy rules target apps by ID**
+Each rule references a target via `targetAppId` and carries a `port` and `protocol` (`TCP` or `UDP`). The older `ingressNetworkPolicy`, `egressNetworkPolicy`, `networkPolicyMode`, and `appPorts` fields have been removed. When reading an app, rules are returned under `appNetworkPolicy.rules` with nested target details.
+</Callout>
 
 ## Deployments and logs
 

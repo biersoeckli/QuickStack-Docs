@@ -1,56 +1,77 @@
 ---
 sidebar_position: 3
 title: "Internal Networking"
-description: "Internal container ports and service-to-service communication between apps in the same QuickStack project."
-keywords: ["QuickStack networking", "internal port", "container port", "service communication", "internal hostname"]
+description: "How apps and databases in the same QuickStack project communicate over internal Kubernetes service hostnames."
+keywords: ["QuickStack networking", "service communication", "internal hostname", "service discovery", "svc"]
 ---
 
-## Internal container port
+Apps and databases in a QuickStack project can talk to each other over internal Kubernetes service hostnames. This traffic stays inside the cluster and is not publicly reachable unless you also add a [domain](/docs/how-to/networking/domains). Because ports are now defined through network policy rules, this page explains how the two work together.
 
-The internal container port is the port on which your application listens for incoming traffic inside the project. QuickStack uses this port for:
-- Routing external traffic from a domain to the correct container port.
-- Enabling service-to-service communication between apps in the same project.
+## Internal service hostnames
 
-**Default:** Usually `80` or `3000` depending on the application image.
-
-### Changing the port
-
-1. Open your app and go to the **Domains** tab.
-2. Locate the **Internal Port** section.
-3. Click the edit icon and enter the new port number.
-4. Click **Save**, then **Deploy**.
-
-<Callout type="warn">
-**Redeployment required**
-Changing the internal port requires a redeployment to take effect.
-</Callout>
-
-## Service-to-service communication
-
-Apps within the same project communicate using internal hostnames. These hostnames are only routable within the project's network namespace — they are not publicly accessible unless you explicitly add a domain.
-
-### Finding internal hostnames
-
-Open the target app's **Domains** tab → scroll to **Internal Hostnames**. You'll see entries like:
+Every app and database gets an internal DNS name that resolves only inside the cluster:
 
 ```
-svc-app-xyz
+svc-<app-id>.<project-id>.svc.cluster.local
+```
+
+With a specific port:
+
+```
+svc-<app-id>.<project-id>.svc.cluster.local:5432
+```
+
+QuickStack builds the Kubernetes Service and its ports from the app's **Domains** and its **network policy rules** — there is no separate internal-port setting.
+
+## Opening a port for internal traffic
+
+A port becomes reachable inside the cluster when an **ingress network policy rule** targets it on the receiving app.
+
+1. Open the **receiving** app and go to **Domains & Networking** → **Network Policy**.
+2. Enable **Network Policies** if it is off.
+3. Under **Ingress rules**, click **Add ingress rule**.
+4. Select the calling app as **Source** and enter the port the receiving app listens on.
+5. Click **Add rule**, then **Save & Apply Changes**.
+
+The service now exposes that port internally.
+
+<Callout>
+**You usually don't add both sides**
+Network policies are mirrored: adding an egress rule on the calling app creates the matching ingress rule on the target, and vice versa. The counterpart is only written when the other app has network policies enabled and you have write access to it. Review the result in the [network graph](/docs/how-to/networking/project-network-graph).
+</Callout>
+
+## Copy a connection string
+
+Instead of typing hostnames by hand, copy the exact internal URL from the rule:
+
+1. Open the app that holds the rule (either side of the connection).
+2. In the rule table, click the row's action menu → **Copy internal hostname**.
+3. Paste it into the consuming app's environment variables.
+
+The copied value looks like:
+
+```
+http://svc-<app-id>.<project-id>.svc.cluster.local:5432
 ```
 
 ### Example connection strings
 
 ```
 # PostgreSQL
-DATABASE_URL=postgres://user:password@svc-app-xyz:5432/database
+DATABASE_URL=postgres://user:password@svc-app-abc.<project-id>.svc.cluster.local:5432/database
 
 # Redis
-REDIS_URL=redis://svc-app-abc:6379
+REDIS_URL=redis://svc-app-def.<project-id>.svc.cluster.local:6379
 
 # Internal HTTP service
-API_BASE_URL=http://svc-app-def:3000
+API_BASE_URL=http://svc-app-ghi.<project-id>.svc.cluster.local:3000
 ```
 
 Set these as [environment variables](/docs/how-to/deployments/redeploy-and-rollbacks#environment-variables) in your app, then deploy.
+
+## Cross-project access
+
+Internal hostnames are scoped to a project. To connect workloads across projects, pick the other project in the rule dialog when you add an ingress or egress rule. Cross-project targets appear as dashed edges in the network graph.
 
 ## Common use cases
 
@@ -58,8 +79,17 @@ Set these as [environment variables](/docs/how-to/deployments/redeploy-and-rollb
 - Microservice architectures — backend services that should not be publicly accessible
 - Sidecar apps (e.g. a proxy or cache layer)
 
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Connection refused between apps | Confirm an ingress rule exists on the receiving app for the port it listens on |
+| Name does not resolve | Verify you copied the full hostname, including the project ID |
+| Works after redeploy only | Confirm you clicked **Save & Apply Changes** on the network policy; policies apply without a redeploy |
+
 ## Related
 
-- [Custom domains](/docs/how-to/networking/domains)
 - [Network policies](/docs/how-to/networking/network-policies)
+- [Project network graph](/docs/how-to/networking/project-network-graph)
+- [Custom domains](/docs/how-to/networking/domains)
 - [Ports & endpoints reference](/docs/reference/ports-and-endpoints)

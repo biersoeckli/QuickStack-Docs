@@ -40,23 +40,27 @@ The endpoint accepts any HTTP POST request. No authentication beyond the secret 
 
 ## Internal service hostnames
 
-Apps in the same QuickStack project communicate using internal Kubernetes service hostnames:
+Apps and databases in the same QuickStack project communicate using internal Kubernetes service hostnames:
 
 ```
-svc-<app-id>
+svc-<app-id>.<project-id>.svc.cluster.local
 ```
 
-The exact hostname is shown in the app's **Domains** tab → **Internal Hostnames** section.
+Paste a ready-to-use URL by opening an app's **Domains & Networking** tab → **Network Policy**, then choosing **Copy internal hostname** from a rule row. The copied value includes the protocol and port, for example:
+
+```
+http://svc-app-abc123.<project-id>.svc.cluster.local:5432
+```
 
 **Example connection strings:**
 
 ```
-postgres://user:pass@svc-app-abc123:5432/mydb
-redis://svc-app-def456:6379
-http://svc-app-ghi789:3000
+postgres://user:pass@svc-app-abc123.<project-id>.svc.cluster.local:5432/mydb
+redis://svc-app-def456.<project-id>.svc.cluster.local:6379
+http://svc-app-ghi789.<project-id>.svc.cluster.local:3000
 ```
 
-Internal hostnames are **only routable within the same project**. They are not accessible from outside QuickStack.
+Internal hostnames are **only routable within the same project** unless you add a cross-project [network policy rule](/docs/how-to/networking/network-policies). They are not accessible from outside QuickStack.
 
 ## QuickStack.me domain pattern
 

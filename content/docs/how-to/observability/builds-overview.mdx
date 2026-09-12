@@ -19,6 +19,8 @@ The table automatically refreshes every 10 seconds while the page is open.
 
 Click **Show Logs** on any row (where a deployment ID is available) to open the build log overlay. This is the same log viewer available from within each app's **Overview** tab.
 
+Build logs include the **queue init container** output, so you can see when a build is waiting for a free slot as well as the actual build output. How many builds run at once is controlled by [Max Parallel Builds](/docs/how-to/admin/build-container-settings#max-parallel-builds).
+
 ## Stopping a running build
 
 For builds in `RUNNING` or `PENDING` state, a **Stop Build** button appears if you have **Write** access for that app. Stopping a build removes the underlying Kubernetes job immediately.

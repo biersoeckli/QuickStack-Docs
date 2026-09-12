@@ -4,6 +4,7 @@
     "quickstack-me",
     "internal-networking",
     "network-policies",
+    "project-network-graph",
     "basic-auth",
     "node-ports"
   ]

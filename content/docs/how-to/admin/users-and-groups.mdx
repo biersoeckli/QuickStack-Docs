@@ -13,7 +13,7 @@ QuickStack's access control is organized into **Users**, **Groups**, and **Permi
 
 ## Accessing user management
 
-Go to **Settings** → **Users & Groups**.
+Go to **Settings** → **Users & Groups**. The page has three tabs: **Users**, **Groups**, and **SSO Providers**.
 
 ## Managing users
 
@@ -24,6 +24,8 @@ Go to **Settings** → **Users & Groups**.
 3. Click **Save**.
 
 <img src="/img/docs/manage-quickstack-cluster/user-management/create-user.png" alt="Create User Dialog" />
+
+The **OAuth Providers** column shows which external identity providers a user has linked. See [Single Sign-On](/docs/how-to/admin/single-sign-on).
 
 ### Edit or delete a user
 
@@ -78,3 +80,9 @@ Enable **Set permissions per App** for a project to override project-level setti
 - No project permission → no access to any apps in that project.
 - Project-level permission → same permission for all apps.
 - Per-app permission → overrides the project-level setting for specific apps.
+
+## Single sign-on (SSO)
+
+QuickStack can authenticate users through an external identity provider such as OIDC, Google, Entra ID, or GitHub. Configure providers in the **SSO Providers** tab; each provider has its own **Default Group** for new users.
+
+See [Single Sign-On](/docs/how-to/admin/single-sign-on) for setup, redirect URLs, and account linking.

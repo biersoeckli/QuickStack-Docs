@@ -1,0 +1,85 @@
+---
+sidebar_position: 5
+title: "Cluster Add-ons"
+description: "Install, update, and remove optional cluster components such as Longhorn and CertManager from the QuickStack UI."
+keywords: ["QuickStack add-ons", "Longhorn", "CertManager", "cert-manager", "cluster component", "upgrade", "storage", "TLS"]
+---
+
+QuickStack can install and keep optional cluster components up to date. They are managed from **QuickStack Settings** → **Updates & Add-Ons** → **Cluster Add-ons** and are only visible to administrators.
+
+{/* SCREENSHOT: Cluster Add-ons section on the Updates & Add-Ons tab | cluster-add-ons-overview.png */}
+<img src="/img/docs/admin/cluster-add-ons/cluster-add-ons-overview.png" alt="Cluster Add-ons cards" />
+
+## Available add-ons
+
+| Add-on | Purpose | Removable |
+|--------|---------|-----------|
+| **Longhorn** | Distributed block storage across cluster nodes (the `longhorn` storage class) | No |
+| **CertManager** | Automated TLS certificate issuance; enables HTTPS for apps in QuickStack | Yes |
+
+<Callout>
+**Availability depends on your release channel**
+The set of add-ons shown can differ between the stable and canary channels. Some add-ons are only offered on the canary channel.
+</Callout>
+
+## Understanding add-on status
+
+Each add-on card shows a status badge and, when known, the installed version:
+
+| Status | Meaning |
+|--------|---------|
+| **Not installed** | The add-on is not present in the cluster |
+| **Installing** | Resources are being applied |
+| **Installed** | The add-on is ready |
+| **Updating** | An update is in progress |
+| **Uninstalling** | The add-on is being removed |
+| **Error** | The last operation failed; the card shows a message |
+
+Operations run one at a time. While an add-on is installing, updating, or uninstalling, its buttons are disabled.
+
+## Install an add-on
+
+1. Open **QuickStack Settings** → **Updates & Add-Ons**.
+2. Find the add-on and click **Install**.
+3. Confirm the dialog. QuickStack applies the add-on's Kubernetes resources.
+
+When the status turns **Installed**, the version is shown on the card.
+
+## Update an add-on
+
+1. When a newer version is available, the card shows **Next Version Available**.
+2. Click **Update to `<version>`** and confirm.
+
+QuickStack updates an add-on one release at a time, to the immediately next version.
+
+<Callout type="warn">
+**Before updating Longhorn**
+- All critical data has been backed up
+- Volume backups are configured and recent
+- No critical workloads are running that cannot tolerate brief interruptions
+- You have reviewed the Longhorn release notes for breaking changes
+- Volume engines are upgraded automatically according to your Longhorn settings
+</Callout>
+
+## Remove an add-on
+
+Add-ons that support removal show a **Remove** action in the card's overflow menu. Removing an add-on deletes its Kubernetes resources from the cluster and cannot be undone.
+
+<Callout type="info">
+**Longhorn cannot be removed through QuickStack.** This prevents accidental removal of a storage layer that may hold application data.
+</Callout>
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Status stays on **Installing** or **Updating** | Wait for the cluster to finish; open the card message for the pod that is still starting |
+| Card shows **Error** | Read the message on the card and check the add-on's namespace for failing pods |
+| No update is offered | You are already on the newest version offered for your release channel |
+| Add-on not listed | It may only be available on the canary channel; enable the canary channel to see it |
+
+## Related
+
+- [Updates & maintenance](/docs/how-to/admin/updates-and-maintenance)
+- [Volumes](/docs/how-to/storage/volumes)
+- [Custom domains](/docs/how-to/networking/domains)
