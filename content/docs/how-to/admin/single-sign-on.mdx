@@ -28,7 +28,6 @@ QuickStack supports **single sign-on (SSO)** through an external identity provid
 2. Click **Add SSO Provider**.
 3. Fill in the dialog:
 
-{/* SCREENSHOT: Add SSO Provider dialog | add-sso-provider-dialog.png */}
 <img src="/img/docs/admin/sso/add-sso-provider-dialog.png" alt="Add SSO Provider dialog" />
 
 | Field | Description |
@@ -58,7 +57,6 @@ https://<your-quickstack-host>/api/auth/callback/<provider-id>
 
 You can copy it again at any time from the **SSO Providers** table using the copy icon on the provider's row.
 
-{/* SCREENSHOT: Redirect URL dialog after creating a provider | redirect-url-dialog.png */}
 <img src="/img/docs/admin/sso/redirect-url-dialog.png" alt="SSO redirect URL dialog" />
 
 <Callout type="warn">
@@ -70,7 +68,6 @@ QuickStack links an SSO login to an existing account when the email address matc
 
 Once at least one provider is enabled, the login page shows an **or continue with** separator and a button per provider:
 
-{/* SCREENSHOT: Login page with SSO buttons | login-sso-buttons.png */}
 <img src="/img/docs/admin/sso/login-sso-buttons.png" alt="Login page with SSO buttons" />
 
 Clicking a button redirects to the provider and back to QuickStack.
@@ -83,9 +80,6 @@ Clicking a button redirects to the provider and back to QuickStack.
 - SSO-only users have no local password and cannot sign in with email/password.
 
 Administrators can see which providers a user is linked to in the **OAuth Providers** column of the **Users** table.
-
-{/* SCREENSHOT: Users table with OAuth Providers column | users-oauth-providers-column.png */}
-<img src="/img/docs/admin/sso/users-oauth-providers-column.png" alt="OAuth Providers column in the users table" />
 
 ## Manage or remove providers
 

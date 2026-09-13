@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: "Networking"
+title: "Networking & Policies"
 description: "How apps and databases communicate inside a project, and how to control traffic with network policies."
 keywords: ["QuickStack networking", "internal hostname", "service discovery", "network policies", "ingress", "egress", "firewall", "isolation"]
 ---
@@ -11,13 +11,8 @@ QuickStack networking has two parts that work together:
 - **Network policies** — which traffic is actually allowed.
 
 <Callout>
-**By default, all apps in a project can communicate with each other and with the internet.** Network policies only change that behaviour once you enable them on an app.
+**By default, apps are not allowed to talk to each other** you have to explicitly allow connections between apps and the internet using network policies. This is a security feature that prevents accidental exposure of internal services.
 </Callout>
-
-## What you need
-
-- An app with a configured source that you can deploy.
-- **Write** permission for the app to change and apply policies.
 
 ## Where to find it
 
@@ -56,50 +51,7 @@ The service now exposes that port internally.
 
 <Callout>
 **You usually don't add both sides**
-Network policies are mirrored: adding an egress rule on the calling app creates the matching ingress rule on the target, and vice versa. The counterpart is only written when the other app has network policies enabled and you have write access to it. Review the result in the [network graph](/docs/how-to/networking/project-network-graph).
-</Callout>
-
-## Copy a connection string
-
-Instead of typing hostnames by hand, copy the exact internal URL from the rule:
-
-1. Open the app that holds the rule (either side of the connection).
-2. In the rule table, click the row's action menu → **Copy internal hostname**.
-3. Paste it into the consuming app's environment variables.
-
-{/* SCREENSHOT: Rule row action menu with Copy internal hostname | rule-row-actions.png */}
-<img src="/img/docs/managing-apps/network-policies/rule-row-actions.png" alt="Rule row action menu" />
-
-The copied value includes the protocol and port, for example:
-
-```
-http://svc-<app-id>.<project-id>.svc.cluster.local:5432
-```
-
-### Example connection strings
-
-```
-# PostgreSQL
-DATABASE_URL=postgres://user:password@svc-app-abc.<project-id>.svc.cluster.local:5432/database
-
-# Redis
-REDIS_URL=redis://svc-app-def.<project-id>.svc.cluster.local:6379
-
-# Internal HTTP service
-API_BASE_URL=http://svc-app-ghi.<project-id>.svc.cluster.local:3000
-```
-
-Set these as [environment variables](/docs/how-to/deployments/redeploy-and-rollbacks#environment-variables) in your app, then deploy.
-
-## Enable network policies
-
-1. Toggle **Network Policies** on. The rule editors appear.
-2. Add **Ingress rules** and **Egress rules** as needed (see below).
-3. Click **Save & Apply Changes** and confirm.
-
-<Callout type="warn">
-**Policies apply immediately**
-Saving a network policy reconciles Kubernetes policies for this app and every app it connects to right away. You do not need to redeploy the app.
+Network policies are mirrored: adding an egress rule on the calling app creates the matching ingress rule on the target, and vice versa. The counterpart is only written when the other app has network policies enabled and you have write access to it. Review the result in the [project network graph](#project-network-graph).
 </Callout>
 
 ## Ingress rules — who can access this app?
@@ -141,19 +93,6 @@ When the target is a managed database, QuickStack pre-fills the standard port an
 - **On** — the app may open outbound connections to public addresses.
 - **Off** — outbound traffic is restricted to the workloads you explicitly allow.
 
-## Rules that QuickStack always adds
-
-Some traffic is always permitted so the platform keeps working. These rules are managed for you and are not shown in the editor:
-
-| Direction | Traffic |
-|-----------|---------|
-| Ingress + Egress | Replicas of the same app talking to each other |
-| Egress | DNS lookups to the cluster DNS service (TCP/UDP 53) |
-| Ingress | Traefik, when the app has a domain |
-| Ingress | Backup jobs and database-tool containers |
-| Egress | The public internet, only when **Internet Access** is on |
-| Ingress | Node Ports, when configured |
-
 ## Connections are kept in sync
 
 Network policies are bidirectional. When you add an ingress or egress rule between two apps, QuickStack creates the matching counterpart rule on the other side. Deleting a rule removes its counterpart too, so you only configure a connection from one side.
@@ -167,7 +106,7 @@ Linking to an app you can only read fails with an authorization error, because Q
 
 ## Cross-project access
 
-Internal hostnames are scoped to a project. To connect workloads across projects, pick the other project in the rule dialog when you add an ingress or egress rule. Cross-project targets appear as dashed edges in the network graph.
+To connect workloads across projects, pick the other project in the rule dialog when you add an ingress or egress rule. Cross-project targets appear as dashed edges in the network graph.
 
 ## View the connections as a graph
 
@@ -177,20 +116,57 @@ The Network Policy card has a **Rules / Network Graph** toggle. The graph center
 - Dashed edges for workloads in other projects.
 - An **Internet** node for outbound access and the app's configured domains.
 
-To see the whole project at once and create connections by dragging, use the **Graph** tab on the project overview. See [Project Network Graph](/docs/how-to/networking/project-network-graph).
+To see the whole project at once and create connections by dragging, use the [project network graph](#project-network-graph).
 
-## If an app becomes unreachable
+## Project network graph
 
-When an app has network policies enabled but no domain and no ingress rule, QuickStack shows a **No inbound traffic configured** warning on the app page. Add a domain or an ingress rule to accept traffic again.
+The project network graph turns the apps and databases in a project into a canvas. It visualizes the policy connections described above and lets you create or remove them without switching between app pages.
 
-{/* SCREENSHOT: No inbound traffic configured warning | no-inbound-warning.png */}
-<img src="/img/docs/managing-apps/network-policies/no-inbound-warning.png" alt="No inbound traffic configured warning" />
+<img src="/img/docs/managing-apps/network-policies/project-graph-overview.png" alt="Project network graph overview" />
 
-## Common use cases
+### Read the graph
 
-- Connecting apps to databases (most common)
-- Microservice architectures — backend services that should not be publicly accessible
-- Sidecar apps (e.g. a proxy or cache layer)
+| Element | Meaning |
+|---------|---------|
+| **App node** | An application, with its live pod status |
+| **Database node** | A managed database (MariaDB, PostgreSQL, MongoDB, Redis) |
+| **Internet node** | Access to the public internet |
+| **Solid edge** | A complete, active connection |
+| **Dashed edge** | An incomplete or cross-project connection |
+| **Arrowheads** | The allowed direction of traffic |
+| **Edge label** | The port and protocol |
+
+The legend above the canvas explains the colors for connections within the project, connections to other projects, and internet access.
+
+### Create or remove a connection
+
+1. Hover the **source** app node. A connection handle appears on its right edge.
+2. Drag from that handle onto the **target** node's left handle.
+3. In the **Add egress rule** dialog, confirm the **Port** and **Protocol**, then click **Add rule**.
+4. Click **Save & Apply** and confirm.
+
+QuickStack creates the matching ingress rule on the target automatically.
+
+            <video
+                className="bg-white"
+                muted
+                loop
+                autoPlay
+                preload="metadata"
+            >
+                <source src="/img/docs/managing-apps/network-policies/quick-manual-network-policies.webm" type="video/webm" />
+                Your browser does not support embedded videos.
+            </video>
+
+<Callout>
+**Permissions**
+You can only start a connection from an app you have write access to, and only between apps in the same project. Cross-project targets can be selected inside the rule dialog.
+</Callout>
+
+To remove a connection, right-click its edge and choose **Delete connection**. This deletes the underlying network policy rules on both sides.
+
+{/* SCREENSHOT: Edge context menu with Delete connection | project-graph-edge-menu.png */}
+<img src="/img/docs/managing-apps/network-policies/project-graph-edge-menu.png" alt="Edge context menu" />
 
 ## Troubleshooting
 
@@ -203,6 +179,10 @@ When an app has network policies enabled but no domain and no ingress rule, Quic
 | Name does not resolve | Verify you copied the full hostname, including the project ID |
 | Policy doesn't seem to apply | Open the rule card and confirm there are no unsaved changes; then click **Save & Apply Changes** |
 | A rule can't be created | You need write access to the app or database you are referencing |
+| Can't drag a graph connection | You need write access to the source app; verify that its node is not read-only |
+| Graph changes disappear after refresh | Click **Save & Apply** before leaving |
+| Node positions don't stick | You need project write access to save layout changes |
+| Graph is empty | The project has no apps, or none has network policies enabled yet |
 
 <Callout>
 **Migration from presets**
@@ -211,7 +191,6 @@ Older QuickStack versions used fixed policy templates (Allow All, Internet Only,
 
 ## Related
 
-- [Project network graph](/docs/how-to/networking/project-network-graph)
 - [Custom domains](/docs/how-to/networking/domains)
 - [Node ports](/docs/how-to/networking/node-ports)
 - [Basic auth](/docs/how-to/networking/basic-auth)

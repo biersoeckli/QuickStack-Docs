@@ -24,6 +24,11 @@ const config = {
         destination: '/docs/how-to/networking',
         permanent: true,
       },
+      {
+        source: '/docs/how-to/networking/project-network-graph',
+        destination: '/docs/how-to/networking#project-network-graph',
+        permanent: true,
+      },
     ];
   },
   async rewrites() {

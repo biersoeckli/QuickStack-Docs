@@ -40,13 +40,6 @@ Use `http://host:port` for S3-compatible servers that do not serve TLS, such as 
 | **Use AWS Signature Version 4 (v4auth)** | On | Sign requests with AWS Signature v4. Turn off only for providers that require the legacy signature |
 | **Force path-style addressing (forcepathstyle)** | Off | Use `endpoint/bucket` instead of `bucket.endpoint`. Required by some S3-compatible providers |
 
-{/* SCREENSHOT: S3 target dialog with Advanced Options | advanced-options.png */}
-<img src="/img/docs/backups/s3-targets/advanced-options.png" alt="S3 target Advanced Options" />
-
-<Callout>
-These options are also applied to [database backup](/docs/how-to/backups/database-backups) jobs, so path-style and non-v4 providers work for database dumps too.
-</Callout>
-
 <Callout type="error">
 **Credentials**
 Store Access Key and Secret Key securely. Rotate credentials regularly. The IAM policy needs: `s3:PutObject`, `s3:GetObject`, `s3:DeleteObject`, `s3:ListBucket`.

@@ -17,7 +17,6 @@ Go to **Settings** → **QuickStack Server** → **Builds** tab.
 
 When more builds are triggered than the limit allows, the extra builds wait in **PENDING** state and start as slots free up, in queue order.
 
-{/* SCREENSHOT: Build Container Settings with Max Parallel Builds | max-parallel-builds.png */}
 <img src="/img/docs/admin/build-container-settings/max-parallel-builds.png" alt="Max Parallel Builds field" />
 
 <Callout type="warn">
@@ -50,9 +49,5 @@ When **Build Node** is set to **k3s native**, you can configure per-build-contai
 
 <Callout type="warn">
 **Set reservations for predictable scheduling**
-If no CPU and/or memory reservation is configured, Kubernetes may schedule build containers on already-overloaded nodes.
+If no CPU and/or memory reservation for your apps is configured, Kubernetes may schedule build containers on already-overloaded nodes.
 </Callout>
-
-## Saving changes
-
-Click **Save** after adjusting settings. New builds will immediately use the updated configuration; builds already running are not affected.
