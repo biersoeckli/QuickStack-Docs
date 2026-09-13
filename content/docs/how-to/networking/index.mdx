@@ -119,26 +119,9 @@ When the target is a managed database, QuickStack pre-fills the standard port an
 
 **Internet Access** is a separate egress switch: **on** lets the app open outbound connections to public addresses, **off** restricts it to the workloads you explicitly allow.
 
-### Graph view for a single app
-
-The Network Policy card has a **Rules / Network Graph** toggle. The graph centers on the current app, with ingress sources on the left, egress targets on the right, and an **Internet** node.
-
 ### Copy an internal hostname
 
 To connect another app to this one, open the rule's action menu and choose **Copy internal hostname**. See [Internal service hostnames](#internal-service-hostnames).
-
-## What QuickStack allows automatically
-
-Some traffic is always permitted so the platform keeps working. These rules are managed for you and are not shown in the editor:
-
-| Direction | Traffic |
-|-----------|---------|
-| Ingress + Egress | Replicas of the same app talking to each other |
-| Egress | DNS lookups to the cluster DNS service (TCP/UDP 53) |
-| Ingress | Traefik, when the app has a domain |
-| Ingress | Backup jobs and database-tool containers |
-| Egress | The public internet, only when **Internet Access** is on |
-| Ingress | Node Ports, when configured |
 
 ## Connections are kept in sync
 
