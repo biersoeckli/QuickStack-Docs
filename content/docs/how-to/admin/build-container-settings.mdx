@@ -11,6 +11,19 @@ Build Container Settings let you control where Docker image builds run in your c
 
 Go to **Settings** → **QuickStack Server** → **Builds** tab.
 
+## Max Parallel Builds
+
+**Max Parallel Builds** controls how many Git builds may run at the same time. It accepts a value from `1` to `20` and defaults to `1`.
+
+When more builds are triggered than the limit allows, the extra builds wait in **PENDING** state and start as slots free up, in queue order.
+
+<img src="/img/docs/admin/build-container-settings/max-parallel-builds.png" alt="Max Parallel Builds field" />
+
+<Callout type="warn">
+**Higher values need more resources**
+Each concurrent build runs its own container. On a small cluster, raising this value can compete with your running apps for CPU and memory.
+</Callout>
+
 ## Build Node
 
 The **Build Node** dropdown determines which cluster node schedules build containers.
@@ -36,9 +49,5 @@ When **Build Node** is set to **k3s native**, you can configure per-build-contai
 
 <Callout type="warn">
 **Set reservations for predictable scheduling**
-If no CPU and/or memory reservation is configured, Kubernetes may schedule build containers on already-overloaded nodes.
+If no CPU and/or memory reservation for your apps is configured, Kubernetes may schedule build containers on already-overloaded nodes.
 </Callout>
-
-## Saving changes
-
-Click **Save** after adjusting settings. New builds will immediately use the updated configuration; builds already running are not affected.

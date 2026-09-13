@@ -2,8 +2,10 @@
   "pages": [
     "two-factor-auth",
     "users-and-groups",
+    "single-sign-on",
     "cluster-monitoring",
     "updates-and-maintenance",
+    "cluster-add-ons",
     "cluster-nodes",
     "build-container-settings",
     "password-reset"

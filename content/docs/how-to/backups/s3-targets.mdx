@@ -15,13 +15,30 @@ All QuickStack backup destinations are S3-compatible buckets. Configure at least
 | Field | Description |
 |-------|-------------|
 | **Name** | A label for this target (anything descriptive) |
-| **Bucket Name** | Your S3 bucket name |
-| **Endpoint** | S3-compatible endpoint URL (e.g. `s3.amazonaws.com`, `s3.eu-central-1.amazonaws.com`, your MinIO URL) |
-| **Region** | Bucket region (e.g. `eu-central-1`) |
-| **Access Key ID** | IAM/service account key with bucket permissions |
-| **Secret Key** | Corresponding secret |
+| **S3 Endpoint** | S3-compatible endpoint URL (e.g. `s3.amazonaws.com`, `s3.eu-central-1.amazonaws.com`, `https://minio.example.com:9000`) |
+| **S3 Region** | Bucket region (e.g. `eu-central-1`) |
+| **S3 Bucket Name** | Your S3 bucket name |
+| **S3 Access Key** | IAM/service account key with bucket permissions |
+| **S3 Secret Key** | Corresponding secret |
 
 3. Click **Save**.
+
+### Endpoint protocol and port
+
+The endpoint keeps the scheme and port you enter:
+
+- `https://s3.example.com` — HTTPS on port 443
+- `http://minio.internal:9000` — plain HTTP on port 9000
+- `s3.amazonaws.com` — QuickStack assumes HTTPS
+
+Use `http://host:port` for S3-compatible servers that do not serve TLS, such as a self-hosted MinIO instance during local development.
+
+### Advanced Options
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| **Use AWS Signature Version 4 (v4auth)** | On | Sign requests with AWS Signature v4. Turn off only for providers that require the legacy signature |
+| **Force path-style addressing (forcepathstyle)** | Off | Use `endpoint/bucket` instead of `bucket.endpoint`. Required by some S3-compatible providers |
 
 <Callout type="error">
 **Credentials**

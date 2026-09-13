@@ -11,7 +11,7 @@ When a deployment is triggered, QuickStack streams **Kubernetes events** (pod sc
 
 <img  src="/img/docs/observability/logs-and-terminal/qs-build-job.png" alt="QuickStack Log Viewer" />
 
-Access deployment logs from the **Overview** tab by clicking **Show Logs** next to a deployment entry, or from the global [Builds](/docs/how-to/deployments/builds-overview) page.
+Access deployment logs from the **Overview** tab by clicking **Show Logs** next to a deployment entry, or from the global [Builds](/docs/how-to/observability/builds-overview) page.
 
 ## Live App logs
 
@@ -22,6 +22,14 @@ The **Logs** from running apps are streamed to the app page in QuickStack. Start
 3. If your app runs multiple replicas, use the pod dropdown to select which pod to tail.
 
 <img  src="/img/docs/managing-apps/monitoring-and-debugging/logs-example.png" alt="QuickStack Log Viewer" />
+
+<Callout>
+The log viewer keeps the most recent **1000 lines**. Older lines are dropped as new ones stream in, so it is safe to leave open.
+</Callout>
+
+## QuickStack system logs (admin only)
+
+Logs for the QuickStack system pod itself are available to **administrators only**, from **Settings** → **QuickStack Server** → **Maintenance** → **Open QuickStack Logs**. Non-admin users cannot stream the QuickStack system logs.
 
 ## Interactive terminal
 

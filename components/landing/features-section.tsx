@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
-import { GitBranch, SquareActivity, Server, Lock } from 'lucide-react';
+import { GitBranch, SquareActivity, Server, Lock, ArrowDown } from 'lucide-react';
 import { Eyebrow, StatusDot } from './shared';
 import { Reveal } from './reveal';
+import { ScrollLink } from './scroll-link';
 
 export const pillars = [
   {
@@ -439,6 +440,18 @@ function NetworkPolicies() {
   );
 }
 
+function ViewAllFeatures() {
+  return (
+    <ScrollLink
+      href="#all-features"
+      className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-muted-foreground"
+    >
+      View all features
+      <ArrowDown className="h-4 w-4" />
+    </ScrollLink>
+  );
+}
+
 export function FeaturesSection() {
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
@@ -533,6 +546,10 @@ export function FeaturesSection() {
             <NetworkPolicies />
           </FeatureCard>
         </Reveal>
+      </div>
+
+      <div className="mt-10 flex justify-center">
+        <ViewAllFeatures />
       </div>
     </section>
   );

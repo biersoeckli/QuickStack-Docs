@@ -6,6 +6,7 @@ import { FeaturesSection } from '@/components/landing/features-section';
 import { HowItWorksSection } from '@/components/landing/how-it-works-section';
 import { ScreenshotsSection } from '@/components/landing/screenshots-section';
 import { UseCasesSection } from '@/components/landing/use-cases-section';
+import { AllFeaturesSection } from '@/components/landing/all-features-section';
 import { TechStackSection } from '@/components/landing/tech-stack-section';
 import { FaqSection } from '@/components/landing/faq-section';
 import { FinalCtaSection } from '@/components/landing/final-cta-section';
@@ -38,6 +39,7 @@ export default function HomePage() {
       <HowItWorksSection />
       <ScreenshotsSection />
       <UseCasesSection />
+      <AllFeaturesSection />
       <TechStackSection theme={theme} />
       <FaqSection />
       <FinalCtaSection />

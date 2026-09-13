@@ -14,6 +14,21 @@ const config = {
         destination: '/docs',
         permanent: true,
       },
+      {
+        source: '/docs/how-to/networking/internal-networking',
+        destination: '/docs/how-to/networking',
+        permanent: true,
+      },
+      {
+        source: '/docs/how-to/networking/network-policies',
+        destination: '/docs/how-to/networking',
+        permanent: true,
+      },
+      {
+        source: '/docs/how-to/networking/project-network-graph',
+        destination: '/docs/how-to/networking#project-network-graph',
+        permanent: true,
+      },
     ];
   },
   async rewrites() {
