@@ -62,18 +62,18 @@ export const featureGroups: FeatureGroup[] = [
       {
         title: 'Ready-to-run apps',
         description:
-          'Nextcloud, Vaultwarden, Gitea/Forgejo, Ghost, n8n and more — no manual Compose files.',
+          'Nextcloud, Gitea/Forgejo, n8n and more — no manual Compose files.',
       },
       {
         title: '5 databases on tap',
         description:
           'Postgres, MySQL, MariaDB, MongoDB, Redis, provisioned in seconds.',
       },
-      {
+      /*{
         title: 'AI agent sandboxes as templates',
         description:
           'Claude Code, opencode, Gemini CLI, GitHub Copilot CLI, ready to sandbox and run.',
-      },
+      },*/
     ],
   },
   {
@@ -202,7 +202,7 @@ export const featureGroups: FeatureGroup[] = [
           'Control who can create, read, write, or delete apps per project.',
       },
       {
-        title: 'Per-app / per-agent permissions',
+        title: 'Per-app permissions',
         description:
           'Grant access down to a single workload, not just a whole project.',
       },
@@ -212,7 +212,7 @@ export const featureGroups: FeatureGroup[] = [
           'Google, GitHub, Azure AD/Entra, or any generic OIDC provider.',
       },
       {
-        title: '2FA and support',
+        title: '2FA support',
         description: 'Beyond just a password.',
       },
       {
@@ -296,9 +296,8 @@ export function AllFeaturesSection() {
           Every feature you need, built in.
         </h2>
         <p className="mt-5 text-muted-foreground">
-          Ten areas across the whole product — from your first deploy to
-          runtime control, storage, networking, team access and AI agent
-          sandboxes.
+          Ten areas across the whole product. From your first deploy to
+          runtime control, storage, networking and team access.
         </p>
       </div>
 
