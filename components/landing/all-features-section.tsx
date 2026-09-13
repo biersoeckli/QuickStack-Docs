@@ -221,7 +221,7 @@ export const featureGroups: FeatureGroup[] = [
       },
     ],
   },
-  {
+  /*{
     icon: Bot,
     title: 'AI agent sandboxes (experimental)',
     items: [
@@ -250,7 +250,7 @@ export const featureGroups: FeatureGroup[] = [
           'Same deny-by-default model: an agent only reaches the apps you explicitly allow.',
       },
     ],
-  },
+  },*/
   {
     icon: Server,
     title: 'Infrastructure you fully own',
