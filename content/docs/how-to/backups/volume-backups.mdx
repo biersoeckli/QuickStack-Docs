@@ -24,6 +24,8 @@ Volume backup schedules run periodically and upload a snapshot of your app's per
 | **Retention** | Number of backups to keep; oldest deleted when exceeded | `7` |
 | **Volume** | Which volume to back up | select from list |
 | **Backup Location** | Which S3 target to use | select from list |
+| **Backup before deployment** | Run this backup automatically before a deployment is applied (see below) | off |
+| **Fail silently on deployment** | Continue the deployment even if this backup fails | off |
 
 4. Click **Save**.
 
@@ -44,6 +46,33 @@ Common patterns:
 To test a schedule immediately, click the **play** icon next to the schedule in the table.
 </Callout>
 
+## Back up before deployment
+
+Enabling **Backup before deployment** turns a schedule into a safety net for deployments. Before QuickStack applies a deployment, it runs every matching schedule first:
+
+1. Open the app's backup schedule (via **Storage** → **Backup Schedules**, or the app's **Backups** tab in the project canvas).
+2. Turn on **Backup before deployment**.
+3. Optionally turn on **Fail silently on deployment**.
+4. Click **Save**.
+
+%%SCREENSHOT%%
+
+### Which backups run
+
+The pre-deployment backup covers the app being deployed **and** every app directly connected to it through a [network policy](/docs/how-to/networking) (one hop in either direction, within the same project). This means deploying an app also protects the data of the databases and services it talks to.
+
+Backups run one after another before the deployment starts. Their progress is written to the deployment log.
+
+### If a backup fails
+
+- **Fail silently off** _(default)_ — a failed backup **aborts the deployment**. The app keeps running the previous version, so you do not deploy on top of unbacked-up data.
+- **Fail silently on** — QuickStack logs the failure and continues with the deployment.
+
+<Callout type="warn">
+**A failing pre-deployment backup blocks deploys**
+If deployments stop with "Deployment aborted because an automatic pre-deployment backup failed", fix the S3 target or volume backup, or enable **Fail silently on deployment** if you want to proceed anyway.
+</Callout>
+
 ## Monitoring
 
 Navigate to **Backups** in the main menu to see:
@@ -57,4 +86,5 @@ Navigate to **Backups** in the main menu to see:
 |---------|-----|
 | Schedule not running | Verify cron expression; check server time is correct |
 | Upload fails | Confirm S3 credentials; verify bucket exists with read/write/delete permissions |
+| Deploy aborts with a pre-deployment backup error | Fix the failing S3 target/backup, or enable **Fail silently on deployment** |
 | Backup is unexpectedly large | Check for leftover temp files inside the volume path |

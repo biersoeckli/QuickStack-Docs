@@ -34,7 +34,7 @@ https://<quickstack-domain-or-ip>/api/v1/webhook/deploy?id=<webhook-id>
 ```
 
 - `<quickstack-domain-or-ip>` — the domain or IP you use to access the QuickStack UI (must be reachable from your Git provider or CI system)
-- `<webhook-id>` — unique ID generated per app; shown in the app's Overview tab after enabling webhooks
+- `<webhook-id>` — unique ID generated per app; shown in the app's **Deployments** tab (drawer) or **Overview** tab (classic view) after enabling webhooks
 
 The endpoint accepts any HTTP POST request. No authentication beyond the secret ID is used.
 
@@ -74,6 +74,6 @@ Where `<hex-ip>` is your server's public IPv4 address converted to 8-character h
 
 ## Let's Encrypt
 
-QuickStack uses Let's Encrypt to provision TLS certificates for custom domains and quickstack.me subdomains. To enable automatic certificate provisioning, set an email address in **Settings** → **QuickStack Server** → **Networking / Traefik**.
+QuickStack uses Let's Encrypt to provision TLS certificates for custom domains and quickstack.me subdomains. To enable automatic certificate provisioning, set an email address in **Settings** → **Platform** → **Network & Domains**.
 
 Let's Encrypt rate limits: 50 certificates per registered domain per week. [See LE docs](https://letsencrypt.org/docs/rate-limits/) if you hit limits.

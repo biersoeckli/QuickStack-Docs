@@ -17,7 +17,7 @@ keywords: ["QuickStack Docker Image Deployment", "QuickStack Docker Image Source
 
 <img  src="/img/docs/managing-apps/creating-apps/create-app-dialog.png" alt="QuickStack Create App Dialog" />
 
-3. In **App Settings** → **General**, set **Source type** to **Docker Image**.
+3. Connect the source: in the app drawer open **Settings** → **Source** (or the **General** tab in the classic view) and set the source type to **Docker Container Image**.
 4. Enter the full image name including tag (e.g. `nginx:latest` or `username/app-name:v1.2`).
 
 <img  src="/img/docs/managing-apps/creating-apps/enter-docker-image.png" alt="QuickStack Docker Image settings" />
@@ -35,7 +35,7 @@ Changes to app configuration (image name, env vars, ports, storage) are not appl
 
 ## Step 3: Verify
 
-1. Open the **Overview** tab — check that the status indicator is green.
+1. Open the app's **Deployments** tab (in the project canvas drawer) or the **Overview** tab (classic view) — check that the status indicator is green.
 2. Click **Show Logs** to confirm the container started correctly.
 
 <img  src="/img/docs/managing-apps/creating-apps/deployment-overview.png" alt="QuickStack Deployment Overview" />
@@ -48,7 +48,7 @@ Changes to app configuration (image name, env vars, ports, storage) are not appl
 |---------|-----|
 | Deploy fails | Check deployment logs; verify registry is reachable and image name/tag is correct |
 | Container not reachable | Ensure **App Port** in the **Domains & Networking** tab matches the port the container listens on |
-| Private registry auth fails | Confirm registry credentials are entered correctly in General settings |
+| Private registry auth fails | Confirm registry credentials are entered correctly in the source settings |
 
 ## Next steps
 

@@ -1,0 +1,150 @@
+---
+sidebar_position: 1
+title: "Project Canvas & App Drawer"
+description: "Use the project canvas to see apps, databases, and network connections at a glance, and manage every app from its details drawer."
+keywords: ["QuickStack project canvas", "network graph", "app drawer", "deployments", "app settings", "lifecycle"]
+---
+
+Every project has two views, and you can switch between them at any time:
+
+- **Network graph** (canvas) — a visual map of the apps, databases, agent sandboxes, and the connections between them.
+- **Table** — a classic list of the project's apps.
+
+The canvas is the default view and the fastest way to inspect and operate on an app without leaving the project.
+
+## Switch between canvas and table
+
+1. Open a project.
+2. Use the **Network graph** and **Table** icons in the header to switch.
+
+QuickStack remembers your choice, and you can share a link with `?tab=graph` or `?tab=table`.
+
+<Callout>
+**Right-click to create**
+Right-click an empty spot on the canvas to create an **Empty App**, an app from a **Template**, or a **Database** in this project.
+</Callout>
+
+## Read the canvas
+
+| Element | Meaning |
+|---------|---------|
+| **App node** | An application, with its live build and pod status |
+| **Database node** | A managed database (PostgreSQL, MariaDB, MongoDB, Redis) |
+| **Agent node** | An AI agent sandbox |
+| **Internet node** | Access to the public internet |
+| **Solid edge** | A complete, active connection |
+| **Dashed edge** | An incomplete or cross-project connection |
+| **Arrowheads** | The allowed direction of traffic |
+
+The **Legend** popover explains the node states (**Complete**, **Incomplete**, **Other project**, **Internet**).
+
+Drag nodes to reposition them — the layout is saved per project. Click **Reset** to restore the automatic layout.
+
+See [Networking & Policies](/docs/how-to/networking) for how to create and remove connections.
+
+%%SCREENSHOT%%
+
+## Open the app drawer
+
+Click any app, database, or agent node to open the **details drawer** on the right. The drawer is the main place to inspect and configure a workload.
+
+- Selecting a node highlights its connections and dims the rest of the canvas.
+- The drawer can be deep-linked with `?drawerAppId=<id>&drawerTab=<tab>`.
+
+If an app has no source connected yet, the drawer shows the **Connect App Source** flow instead of the tabs and actions.
+
+### Tabs
+
+| Tab | What it shows |
+|-----|---------------|
+| **Deployments** | Latest deployments, build status, logs, rollback, and webhook settings (default tab) |
+| **DB Access** | Database credentials and DB tools — databases only |
+| **Logs** | Live application logs and the interactive terminal |
+| **Stats** | CPU and memory usage for the running pods |
+| **Backups** | Backup history for the app's volume schedules — only if the app has volumes |
+| **Settings** | Source, deployment, environment, networking, storage, and advanced configuration |
+
+### Deployments
+
+The **Deployments** tab lists recent deployments as cards. Each card shows a status badge (for example **Building**, **Deploying**, **Deployed**, **Error**) and, for Git apps, the commit message and short hash.
+
+- Click **Open Terminal** on a card to stream its build and deployment logs.
+- While a build runs, use **Stop Build** to cancel it.
+- Use **Rollback to this deployment** to redeploy an earlier commit (Git apps only). Rollbacks are marked with a purple **Rollback** badge.
+
+Click **Configure Webhooks** to open the webhook settings for the app. See [Webhooks & auto-deploy](/docs/how-to/deployments/webhooks-auto-deploy).
+
+%%SCREENSHOT%%
+
+### DB Access (databases only)
+
+For managed databases, this tab provides:
+
+- **Database Access** — one-click launchers for **DbGate**, **phpMyAdmin** (MySQL/MariaDB), and **pgAdmin** (PostgreSQL).
+- **Database Credentials** — copyable **Database Name**, **Username**, **Password**, **Internal Hostname**, **Internal Port**, and **Internal Connection URL**.
+
+See [Database tools](/docs/how-to/databases/db-tools) for details.
+
+### Logs and Stats
+
+- **Logs** streams the running container logs with pod selection, a fullscreen mode, and an interactive **Terminal** (write access required).
+- **Stats** shows live CPU and memory usage, refreshed every 10 seconds.
+
+### Backups
+
+If the app has volumes, the **Backups** tab lists its backup schedules. Click a schedule to open a nested drawer with its individual backups (**Created** and **Size**), or configure a new schedule. See [Volume Backups](/docs/how-to/backups/volume-backups).
+
+### Settings
+
+The **Settings** tab groups all app configuration into sections:
+
+| Section | What you can change |
+|---------|---------------------|
+| **Source** | Git/container source, branch, credentials, build method, Dockerfile path, framework configuration |
+| **Deployment** | Rate limits and advanced container settings (nested **Advanced settings** drawer) |
+| **Environment** | Environment variables and build arguments (nested **Environment variables** drawer) |
+| **Networking** | Domains, node ports, and network policies (nested **Network policies** drawer) |
+| **Storage** | Volumes and file mounts |
+| **Advanced** | Basic auth and health checks (nested **Health checks** drawer) |
+
+Changes are saved immediately but only take effect after you click **Deploy**.
+
+## Status and lifecycle actions
+
+The drawer header shows the live status of the workload and the actions you can perform:
+
+| Action | Description |
+|--------|-------------|
+| **Deploy** | Build (for Git sources) and apply the current configuration |
+| **Rebuild** | Rebuild the current Git commit — Git-source apps only |
+| **Start** | Start a stopped app by restoring its replica count |
+| **Stop** | Stop the app by scaling its replicas to zero |
+| **Open domain** | Open the app in a new browser tab; if it has several domains, pick one from the list |
+
+Actions are only available if you have **write** access to the app, and each button is enabled only when the current status allows it.
+
+## Right-click menus
+
+### App node
+
+Right-click an app node to act without opening the drawer:
+
+- **Deploy** — **Deploy**, **Rebuild**, **Start**, **Stop**
+- **View Deployments**, **View Logs**, **View Backups**, **View Settings**
+- **Enable / Disable Egress Internet Access**
+- **Delete App** — permanently deletes the app and its data
+
+### Connection
+
+Right-click a connection to **Delete connection**, which removes the network policy rules on both sides.
+
+## Classic app view
+
+The **Table** view still opens the classic app detail page, with **Overview**, **Credentials**, **General**, **Environment**, **Domains & Networking**, **Storage**, and **Advanced** tabs. Use it when you want the historical, single-page layout; the canvas drawer covers most day-to-day operations.
+
+## Related
+
+- [Networking & Policies](/docs/how-to/networking)
+- [Deploy & Redeploy](/docs/how-to/deployments/redeploy-and-rollbacks)
+- [Builds overview](/docs/how-to/observability/builds-overview)
+- [Logs & terminal](/docs/how-to/observability/logs-and-terminal)

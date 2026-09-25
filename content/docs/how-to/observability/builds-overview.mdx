@@ -15,9 +15,17 @@ Click **Builds** in the left sidebar.
 
 The table automatically refreshes every 10 seconds while the page is open.
 
+## Live build status
+
+Build states are streamed in real time, so you can follow a deployment without refreshing:
+
+- On the [project canvas](/docs/how-to/project-canvas), each app node shows its build state — **Not built**, **Pending**, **Building**, or the finished result. Apps that are building are highlighted on the canvas.
+- The **Deployments** tab in the app drawer updates as the build and rollout progress.
+- Changes triggered from another browser or by a webhook appear automatically.
+
 ## Viewing build logs
 
-Click **Show Logs** on any row (where a deployment ID is available) to open the build log overlay. This is the same log viewer available from within each app's **Overview** tab.
+Click **Show Logs** on any row (where a deployment ID is available) to open the build log overlay. This is the same log viewer available from an app's **Deployments** tab.
 
 Build logs include the **queue init container** output, so you can see when a build is waiting for a free slot as well as the actual build output. How many builds run at once is controlled by [Max Parallel Builds](/docs/how-to/admin/build-container-settings#max-parallel-builds).
 

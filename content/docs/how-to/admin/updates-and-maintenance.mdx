@@ -11,7 +11,7 @@ QuickStack checks for new versions automatically and allows in-UI updates withou
 
 ### Check and install an update
 
-1. Go to **QuickStack Settings** → **Updates & Add-Ons**.
+1. Go to **Settings** → **Platform** → **Updates & Add-Ons**.
 2. View your installed version and the latest available version.
 3. When an update is available, click **Update QuickStack**.
 4. QuickStack installs the new version and restarts. The dashboard is temporarily unavailable during restart.
@@ -28,7 +28,7 @@ Canary builds may be unstable. Not recommended for production.
 
 Docker images, build logs, and temp files accumulate over time. QuickStack provides cleanup tools:
 
-1. Go to **QuickStack Settings** → **Maintenance**.
+1. Go to **Settings** → **Platform** → **Operations & Maintenance**.
 2. Available actions:
 
 | Action | What it does |
@@ -49,7 +49,7 @@ Upgrade the underlying k3s Kubernetes distribution from the UI.
 
 ### Install the System Upgrade Controller (first time)
 
-1. Go to **QuickStack Settings** → **Updates & Add-Ons**.
+1. Go to **Settings** → **Platform** → **Updates & Add-Ons**.
 2. In **K3s Cluster Upgrades**, click **Install Controller** if not already installed.
 
 ### Perform the upgrade
@@ -76,7 +76,7 @@ QuickStack keeps you on a chosen minor-version channel (e.g. `v1.32`). Moving be
 
 ## Cluster Add-ons
 
-Optional cluster components — such as Longhorn (distributed storage) and CertManager (TLS certificates) — are installed and updated from **QuickStack Settings** → **Updates & Add-Ons** → **Cluster Add-ons**.
+Optional cluster components — such as Longhorn (distributed storage) and CertManager (TLS certificates) — are installed and updated from **Settings** → **Platform** → **Updates & Add-Ons** → **Cluster Add-ons**.
 
 Each add-on card shows its status, installed version, and the next available version. Depending on the add-on you can **Install**, **Update**, or **Remove** it. Updates show a warning with the items to check first (for example, recent backups before a Longhorn update).
 
@@ -84,7 +84,7 @@ See [Cluster Add-ons](/docs/how-to/admin/cluster-add-ons) for the full workflow.
 
 ## Troubleshooting QuickStack itself
 
-From **QuickStack Settings** → **Maintenance** (or **Updates & Add-Ons**):
+From **Settings** → **Platform** → **Operations & Maintenance** (or **Updates & Add-Ons**):
 
 - **Open QuickStack Logs** — view live logs of the QuickStack system container. This is admin-only; QuickStack system logs are not available to non-admin users.
 - **Force Update Registry** — restarts the internal container registry if image builds are failing.

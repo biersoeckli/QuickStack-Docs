@@ -1,16 +1,65 @@
 ---
 sidebar_position: 3
 title: "Build Methods"
-description: "Choose between Railpack (zero-config, auto-detect) and Dockerfile build methods for Git-based apps in QuickStack."
-keywords: ["QuickStack build method", "Railpack", "Dockerfile", "buildpack", "auto-detect", "build configuration"]
+description: "Choose between Framework presets, Railpack (zero-config, auto-detect) and Dockerfile build methods for Git-based apps in QuickStack."
+keywords: ["QuickStack build method", "Framework", "Railpack", "Dockerfile", "buildpack", "auto-detect", "build arguments", "build configuration"]
 ---
 
-When deploying an app from a Git repository, QuickStack supports two build methods:
+When deploying an app from a Git repository, QuickStack supports three build methods:
 
 | Method | Requires Dockerfile | Best for |
 |--------|--------------------|-----------------------|
+| **Framework** | No | Popular JavaScript frameworks where QuickStack knows the build and run commands |
 | **Railpack** | No | Apps in supported languages where you want zero-config builds |
 | **Dockerfile** | Yes | Full control over the build; custom base images; unsupported stacks |
+
+## Framework
+
+The **Framework** method uses opinionated presets for the most common JavaScript frameworks. You pick your framework and QuickStack pre-fills the install, build, and run commands, so you get a working build without writing a Dockerfile or configuring Railpack manually.
+
+Framework builds run on [Railpack](#railpack) under the hood with your commands passed explicitly.
+
+### Supported frameworks
+
+| Preset | Type | Default port |
+|--------|------|--------------|
+| **Next.js** | Server | `3000` |
+| **Nuxt** | Server | `3000` |
+| **SvelteKit** | Server | `3000` |
+| **React** | Static | `80` |
+| **Angular** | Static | `80` |
+| **Astro** | Static | `80` |
+
+- **Server presets** run a Node process that listens on the framework's default port.
+- **Static presets** produce a static output directory which QuickStack serves for you. They have no run command.
+
+### When to use Framework
+
+- Your app uses one of the supported frameworks.
+- You want a working build with sensible defaults and the option to tweak individual commands.
+- You would rather not rely on Railpack's automatic detection.
+
+### Configure a framework build
+
+During the app source wizard, choose **Framework**, then select your framework. QuickStack opens the preset configuration:
+
+| Field | Description |
+|-------|-------------|
+| **Build Command** | Command that builds the app (required), e.g. `npm run build` |
+| **Run Command** | Command that starts the server. Leave empty to serve the static output |
+| **Root Directory** | Directory that contains the app inside the repository, e.g. `./` or `./apps/web` |
+| **Output Directory** | Directory containing the build output for static presets, e.g. `dist` or `.next` |
+| **Install Command** | _(under Build details)_ Dependency install command, e.g. `npm install --force` |
+| **Node Version** | _(under Build details)_ Node version used for the build, e.g. `lts` or `22` |
+
+%%SCREENSHOT%%
+
+You can change the framework and its commands at any time from the app's **Settings** → **Source** section (or **General** in the classic app view) → the framework configuration card. Click **Save**, then **Deploy** to apply the changes.
+
+<Callout>
+**Static vs server presets**
+Presets with a run command (Next.js, Nuxt, SvelteKit) start a Node server. Presets without one (React, Angular, Astro) build to a static output directory that QuickStack serves automatically — no server process is started.
+</Callout>
 
 ## Railpack
 
@@ -29,18 +78,38 @@ The Dockerfile method uses [BuildKit](https://docs.docker.com/build/buildkit/) t
 
 ### When to use Dockerfile
 
-- Your stack is not supported by Railpack.
+- Your stack is not supported by Railpack or the Framework presets.
 - You need a custom base image or multi-stage build.
 - You require precise control over the build environment.
 - You are migrating an existing app that already has a Dockerfile.
 
+### Build arguments
+
+For Dockerfile builds you can pass `ARG` values to the build. Open the app's **Environment** tab and fill in **Build Arguments**, one `NAME=VALUE` per line — the same format as environment variables.
+
+```
+VITE_API_URL=https://api.example.com
+NPM_TOKEN=my-build-token
+```
+
+Build arguments are passed to BuildKit as `--build-arg` values. They apply only while building the image and apply on the **next build**.
+
+<Callout type="warn">
+**Build arguments are not secrets**
+Build arguments are stored in plain text and are visible in the build environment. Do not put passwords or long-lived secrets in them — use [environment variables](/docs/how-to/deployments/redeploy-and-rollbacks#environment-variables) for runtime secrets.
+</Callout>
+
+Build arguments are only available for **apps** that build with a **Dockerfile**. The field is disabled for Railpack and Framework builds and for managed databases.
+
 ## Switching between methods
 
-You can switch build methods at any time by editing the app's General settings and redeploying. There is no data loss when switching — environment variables, volumes, and domains are unaffected.
+You can switch build methods at any time by editing the app's source and redeploying. There is no data loss when switching — environment variables, volumes, and domains are unaffected.
 
 ## Troubleshooting
 
 | Problem | Action |
 |---------|--------|
-| Railpack build fails with "unsupported" | Check whether your stack is listed at [docs.railpack.io](https://docs.railpack.io); switch to the Dockerfile method if not |
+| Railpack build fails with "unsupported" | Check whether your stack is listed at [docs.railpack.io](https://docs.railpack.io); switch to the Framework or Dockerfile method if not |
 | Dockerfile not found | Ensure the path is relative to repo root and the file exists on the configured branch |
+| Framework build fails | Check the **Build Command** and **Node Version**; verify the **Root Directory** points at the app inside the repo |
+| Build argument has no effect | Confirm the build method is **Dockerfile** and that the `Dockerfile` declares a matching `ARG` |

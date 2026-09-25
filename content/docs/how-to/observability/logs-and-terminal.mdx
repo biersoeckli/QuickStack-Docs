@@ -11,14 +11,14 @@ When a deployment is triggered, QuickStack streams **Kubernetes events** (pod sc
 
 <img  src="/img/docs/observability/logs-and-terminal/qs-build-job.png" alt="QuickStack Log Viewer" />
 
-Access deployment logs from the **Overview** tab by clicking **Show Logs** next to a deployment entry, or from the global [Builds](/docs/how-to/observability/builds-overview) page.
+Access deployment logs from the app's **Deployments** tab by clicking **Open Terminal** on a deployment, or from the global [Builds](/docs/how-to/observability/builds-overview) page.
 
 ## Live App logs
 
 The **Logs** from running apps are streamed to the app page in QuickStack. Start here when troubleshooting.
 
 1. Open your app.
-2. Go to the **Overview** tab.
+2. Go to the **Logs** tab (in the project canvas drawer) or the **Overview** tab (classic view).
 3. If your app runs multiple replicas, use the pod dropdown to select which pod to tail.
 
 <img  src="/img/docs/managing-apps/monitoring-and-debugging/logs-example.png" alt="QuickStack Log Viewer" />
@@ -29,7 +29,7 @@ The log viewer keeps the most recent **1000 lines**. Older lines are dropped as 
 
 ## QuickStack system logs (admin only)
 
-Logs for the QuickStack system pod itself are available to **administrators only**, from **Settings** → **QuickStack Server** → **Maintenance** → **Open QuickStack Logs**. Non-admin users cannot stream the QuickStack system logs.
+Logs for the QuickStack system pod itself are available to **administrators only**, from **Settings** → **Platform** → **Operations & Maintenance** → **Open QuickStack Logs**. Non-admin users cannot stream the QuickStack system logs.
 
 ## Interactive terminal
 
@@ -37,7 +37,7 @@ The **Terminal** opens a shell session directly inside a running container from 
 
 ### Opening a terminal session
 
-1. Open your app, go to the **Overview** tab.
+1. Open your app and go to the **Logs** tab (or the **Overview** tab in the classic view).
 2. In the **Logs** card, click **Terminal** next to the pod selector.
 
 <Callout>
