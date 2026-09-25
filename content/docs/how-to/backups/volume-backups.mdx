@@ -14,7 +14,7 @@ Volume backup schedules run periodically and upload a snapshot of your app's per
 
 ## Configure a volume backup schedule
 
-1. Open the app and go to the **Storage** tab.
+1. Open the app in the **Project Canvas** and go to **Settings → Storage**.
 2. Scroll to **Backup Schedules** and click **Add Backup Schedule**.
 3. Configure:
 
@@ -29,7 +29,7 @@ Volume backup schedules run periodically and upload a snapshot of your app's per
 
 4. Click **Save**.
 
-<img  src="/img/docs/backups/backup-schedules-table.png" alt="Backup Schedules" />
+%%SCREENSHOT%%
 
 <Callout>
 **Cron expressions**
@@ -50,7 +50,7 @@ To test a schedule immediately, click the **play** icon next to the schedule in 
 
 Enabling **Backup before deployment** turns a schedule into a safety net for deployments. Before QuickStack applies a deployment, it runs every matching schedule first:
 
-1. Open the app's backup schedule (via **Storage** → **Backup Schedules**, or the app's **Backups** tab in the project canvas).
+1. Open the app's backup schedule in the **Project Canvas** (app **Backups** tab, or **Settings → Storage** → **Backup Schedules**).
 2. Turn on **Backup before deployment**.
 3. Optionally turn on **Fail silently on deployment**.
 4. Click **Save**.

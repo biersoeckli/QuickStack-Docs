@@ -1,20 +1,20 @@
 ---
 sidebar_position: 1
 title: "Project Canvas & App Drawer"
-description: "Use the project canvas to see apps, databases, and network connections at a glance, and manage every app from its details drawer."
+description: "Use the Project Canvas to see apps, databases, and connections at a glance, and create, configure, deploy, and monitor every app from its details drawer."
 keywords: ["QuickStack project canvas", "network graph", "app drawer", "deployments", "app settings", "lifecycle"]
 ---
 
-Every project has two views, and you can switch between them at any time:
+The **Project Canvas** is the main view for creating, configuring, and operating on apps. Every project opens in the Project Canvas, which offers two views:
 
-- **Network graph** (canvas) — a visual map of the apps, databases, agent sandboxes, and the connections between them.
-- **Table** — a classic list of the project's apps.
+- **Network graph** — a visual map of the apps, databases, agent sandboxes, and the connections between them.
+- **Table** — a simple list of the project's apps.
 
-The canvas is the default view and the fastest way to inspect and operate on an app without leaving the project.
+The Project Canvas is the default and the fastest way to inspect and operate on an app without leaving the project.
 
-## Switch between canvas and table
+## Switch between graph and table
 
-1. Open a project.
+1. Open a project (the Project Canvas opens by default).
 2. Use the **Network graph** and **Table** icons in the header to switch.
 
 QuickStack remembers your choice, and you can share a link with `?tab=graph` or `?tab=table`.
@@ -22,6 +22,20 @@ QuickStack remembers your choice, and you can share a link with `?tab=graph` or 
 <Callout>
 **Right-click to create**
 Right-click an empty spot on the canvas to create an **Empty App**, an app from a **Template**, or a **Database** in this project.
+</Callout>
+
+## Create and connect apps
+
+1. Click **Create App**, or right-click an empty spot on the canvas, and choose **Empty App**, **Template**, or **Database**.
+2. Give the app a name. It appears as a node and its **details drawer** opens.
+3. If the app has no source yet, click **Connect App Source** in the drawer and follow the [source wizard](/docs/tutorials/first-app-from-git). The source, branch, and build method live under **Settings → Source**.
+4. Review and adjust the app's settings in the drawer, then click **Deploy** in the drawer header.
+
+%%SCREENSHOT%%
+
+<Callout>
+**Everything happens in the drawer**
+Creating, editing, deploying, and monitoring an app all happen from the Project Canvas and its drawer.
 </Callout>
 
 ## Read the canvas
@@ -107,6 +121,8 @@ The **Settings** tab groups all app configuration into sections:
 | **Storage** | Volumes and file mounts |
 | **Advanced** | Basic auth and health checks (nested **Health checks** drawer) |
 
+%%SCREENSHOT%%
+
 Changes are saved immediately but only take effect after you click **Deploy**.
 
 ## Status and lifecycle actions
@@ -137,10 +153,6 @@ Right-click an app node to act without opening the drawer:
 ### Connection
 
 Right-click a connection to **Delete connection**, which removes the network policy rules on both sides.
-
-## Classic app view
-
-The **Table** view still opens the classic app detail page, with **Overview**, **Credentials**, **General**, **Environment**, **Domains & Networking**, **Storage**, and **Advanced** tabs. Use it when you want the historical, single-page layout; the canvas drawer covers most day-to-day operations.
 
 ## Related
 

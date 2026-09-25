@@ -34,7 +34,7 @@ https://<quickstack-domain-or-ip>/api/v1/webhook/deploy?id=<webhook-id>
 ```
 
 - `<quickstack-domain-or-ip>` — the domain or IP you use to access the QuickStack UI (must be reachable from your Git provider or CI system)
-- `<webhook-id>` — unique ID generated per app; shown in the app's **Deployments** tab (drawer) or **Overview** tab (classic view) after enabling webhooks
+- `<webhook-id>` — unique ID generated per app; shown in the app's **Deployments** tab after enabling webhooks
 
 The endpoint accepts any HTTP POST request. No authentication beyond the secret ID is used.
 
@@ -46,7 +46,7 @@ Apps and databases in the same QuickStack project communicate using internal Kub
 svc-<app-id>.<project-id>.svc.cluster.local
 ```
 
-Paste a ready-to-use URL by opening an app's **Domains & Networking** tab → **Network Policy**, then choosing **Copy internal hostname** from a rule row. The copied value includes the protocol and port, for example:
+Paste a ready-to-use URL by opening an app in the **Project Canvas**, going to **Settings → Networking** → **Network Policy**, then choosing **Copy internal hostname** from a rule row. The copied value includes the protocol and port, for example:
 
 ```
 http://svc-app-abc123.<project-id>.svc.cluster.local:5432

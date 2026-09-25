@@ -43,7 +43,7 @@ For Git-source apps, QuickStack can redeploy the code from an earlier commit.
 
 QuickStack reapplies the image that was built for that commit. If that image is no longer in the internal registry, it rebuilds the commit first. Rollback deployments are marked with a purple **Rollback** badge in the deployment list.
 
-<img src="/img/docs/managing-apps/deployments/rollback-deployment.png" alt="Rollback action and badge in the deployments table" />
+%%SCREENSHOT%%
 
 <Callout type="warn">
 **Rollback replaces the running version**
@@ -61,7 +61,7 @@ Environment variables are key-value pairs injected at runtime. They are stored i
 
 ### Editing env vars
 
-1. Open your app and go to the **Environment** tab.
+1. Open the app in the **Project Canvas** and go to **Settings → Environment**.
 2. Edit variables in the text area, one `KEY=VALUE` per line.
 3. Click **Save**.
 4. Click **Deploy** for changes to take effect.
@@ -92,11 +92,11 @@ DATABASE_URL=postgres://user:pass@svc-app-xyz.<project-id>.svc.cluster.local:543
 REDIS_URL=redis://svc-app-abc.<project-id>.svc.cluster.local:6379
 ```
 
-Copy the exact value from the app's **Domains & Networking** tab → **Network Policy** → rule actions → **Copy internal hostname**. See [Networking](/docs/how-to/networking) for details.
+Copy the exact value from the app's **Settings → Networking** → **Network Policy** → rule actions → **Copy internal hostname**. See [Networking](/docs/how-to/networking) for details.
 
 ### Build arguments
 
-On the same **Environment** tab you can also set **Build Arguments** for Dockerfile builds. They are passed to the image build only, are not available at runtime, and are not secret. See [Build arguments](/docs/how-to/deployments/build-methods#build-arguments).
+On the same **Settings → Environment** section you can also set **Build Arguments** for Dockerfile builds. They are passed to the image build only, are not available at runtime, and are not secret. See [Build arguments](/docs/how-to/deployments/build-methods#build-arguments).
 
 ## Advanced: force-pull latest image tag
 

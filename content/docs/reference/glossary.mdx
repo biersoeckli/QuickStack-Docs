@@ -10,7 +10,7 @@ QuickStack-specific terms and the key underlying technologies.
 ---
 
 ## Application (App)
-A container workload managed by QuickStack. An app belongs to a project and can be sourced from a Git repository (built with BuildKit) or a Docker image.
+A container workload managed by QuickStack. An app belongs to a project and can be sourced from a Git repository (built with the Framework preset, Railpack, or a Dockerfile) or a Docker image. Apps are managed from the [Project Canvas](/docs/how-to/project-canvas).
 
 ## Basic Authentication
 HTTP-level username/password protection implemented via a Traefik middleware. Authentication happens at the ingress level before requests reach the app container. See [Basic Auth](/docs/how-to/networking/basic-auth).
@@ -69,8 +69,11 @@ A Kubernetes resource that controls ingress and egress traffic for a pod. In Qui
 ## Project
 A logical grouping of apps and databases in QuickStack. All apps in a project share a network namespace and can communicate via internal hostnames.
 
+## Project Canvas
+The main view of a project. It is a network graph where every app and database is a node and connections are edges. Selecting a node opens a details drawer for creating, configuring, deploying, and monitoring the app. See [Project Canvas](/docs/how-to/project-canvas).
+
 ## Project Network Graph
-An interactive canvas on a project's **Apps** page that visualizes and edits the network connections between apps and databases. See [Networking & Policies](/docs/how-to/networking).
+The visual graph view inside the [Project Canvas](/docs/how-to/project-canvas) that shows and edits the network connections between apps and databases. See [Networking & Policies](/docs/how-to/networking).
 
 ## QuickStack.me Domain
 A built-in "magic" domain that automatically resolves to your server's public IP, providing instant HTTPS without DNS configuration. See [QuickStack.me](/docs/how-to/networking/quickstack-me).
