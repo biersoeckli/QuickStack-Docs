@@ -22,10 +22,59 @@ This page explains what runs where and what happens when you click **Deploy**. F
 
 Technologies not bundled by QuickStack can be added as [cluster add-ons](/docs/how-to/admin/cluster-add-ons) (Longhorn, cert-manager, and, on the canary channel, the Kubernetes Agent Sandbox and gVisor).
 
+### How the pieces fit together
+
+```mermaid
+flowchart TB
+  user["Browser / REST API client"]
+
+  subgraph server["Linux server (k3s)"]
+    traefik["Traefik<br/>Ingress + Let's Encrypt"]
+    qs["QuickStack control plane<br/>Web UI + API + SQLite"]
+    buildkit["BuildKit"]
+    registry["Internal registry"]
+    app["App pods"]
+    db["Database pods"]
+    agent["Agent Sandboxes"]
+  end
+
+  volume["Persistent volumes<br/>local-path or Longhorn"]
+  s3["S3-compatible bucket"]
+
+  user -->|"HTTP / HTTPS"| traefik
+  user -->|"port 30000"| qs
+  traefik --> app
+  traefik --> db
+  traefik --> agent
+  qs --> buildkit
+  buildkit --> registry
+  registry --> app
+  app --- volume
+  db --- volume
+  agent --- volume
+  qs -->|"system backups"| s3
+  app -->|"volume / DB backups"| s3
+```
+
 ## Cluster topology
 
 - **Single node** (default): one server runs the k3s control plane, QuickStack, and all workloads. Volumes use the `local-path` storage class.
 - **Multi node**: the first server is the **master node**; additional servers join as **worker nodes**. QuickStack schedules workloads across nodes and Longhorn replicates volumes. See [Cluster Nodes](/docs/how-to/admin/cluster-nodes).
+
+```mermaid
+flowchart LR
+  subgraph single["Single node (default)"]
+    master1["master node<br/>control plane + QuickStack + workloads"]
+  end
+
+  subgraph multi["Multi node"]
+    master2["master node"]
+    worker1["worker node"]
+    worker2["worker node"]
+    master2 --- worker1
+    master2 --- worker2
+  end
+```
 
 ## What happens when you deploy
 
@@ -33,6 +82,22 @@ Technologies not bundled by QuickStack can be added as [cluster add-ons](/docs/h
 2. **Backup** — any volume backup schedule marked **Backup before deployment** runs first. See [Volume Backups](/docs/how-to/backups/volume-backups#back-up-before-deployment).
 3. **Apply configuration** — staged settings (environment variables, volumes, domains, network policies, health checks, resource limits) are written to the workload.
 4. **Roll out** — QuickStack creates or updates a Kubernetes Deployment and performs a rolling update: new pods start, and old pods terminate once the new ones are ready.
+
+```mermaid
+flowchart LR
+  trigger["Deploy<br/>UI, webhook, or API"] --> prebackup["Pre-deployment backups"]
+  prebackup --> clone["Clone configured branch"]
+  clone --> build["Build image<br/>Framework, Railpack, or Dockerfile"]
+  build --> push["Push to internal registry"]
+  push --> apply["Apply staged config<br/>env, volumes, domains, policies"]
+  apply --> rollout["Rolling update<br/>new pods become ready"]
+  rollout --> live["Live"]
+```
+
+<Callout>
+**Image sources skip the build steps**
+Apps that use a Docker image or a template pull the image directly instead of cloning and building. The backup, apply-config, and rollout steps are identical.
+</Callout>
 
 <Callout>
 **Configuration is staged until you deploy**
