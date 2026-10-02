@@ -1,11 +1,11 @@
 ---
 sidebar_position: 2
 title: "LLM Gateway"
-description: "Connect QuickStack AI agents to a LiteLLM-compatible gateway for centralized model access and API keys."
+description: "Connect QuickStack Agent Sandboxes to a LiteLLM-compatible gateway for centralized model access and API keys."
 keywords: ["QuickStack LLM gateway", "LiteLLM", "model alias", "AI models", "admin key"]
 ---
 
-An **LLM Gateway** is a LiteLLM-compatible endpoint that QuickStack agents use to reach language models. Centralizing access in a gateway means you manage model credentials in one place instead of distributing provider API keys to every sandbox.
+An **LLM Gateway** is a LiteLLM-compatible endpoint that QuickStack Agent Sandboxes use to reach language models. Centralizing access in a gateway means you manage model credentials in one place instead of distributing provider API keys to every Agent Sandbox.
 
 <Callout type="warn">
 **Experimental / canary**
@@ -37,17 +37,17 @@ If you do not have a gateway yet, QuickStack can deploy one for you:
 
 You can also deploy **LiteLLM** from the [template catalog](/docs/how-to/templates).
 
-## Use a gateway in an agent
+## Use a gateway in an Agent Sandbox
 
-When creating or editing an agent, choose the **LLM Gateway** and a **Model Alias** in the agent's model configuration. The alias identifies which model the gateway should route to.
+When creating or editing an Agent, choose the **LLM Gateway** and a **Model Alias** in the Agent's model configuration. The alias identifies which model the gateway should route to.
 
 <Callout>
 **Model aliases**
-Agent templates receive the gateway URL and alias as environment variables, so the harness in the sandbox talks only to the gateway. Available model aliases come from the gateway's LiteLLM configuration.
+Agent templates receive the gateway URL and alias as environment variables, so the harness in the Agent Sandbox talks only to the gateway. Available model aliases come from the gateway's LiteLLM configuration.
 </Callout>
 
 ## Related
 
-- [AI Agents & Sandboxes](/docs/how-to/agents)
+- [AI Agents](/docs/how-to/agents)
 - [App & Database Templates](/docs/how-to/templates)
 - [REST API overview](/docs/rest-api/overview)

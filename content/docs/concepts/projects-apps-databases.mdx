@@ -9,7 +9,7 @@ This page describes the building blocks you work with in QuickStack. When you ar
 
 ## Projects
 
-A **project** is a logical grouping of workloads. Every app, database, and agent belongs to exactly one project.
+A **project** is a logical grouping of workloads. Every app, database, and Agent Sandbox belongs to exactly one project.
 
 - All workloads in a project share a Kubernetes namespace and can reach each other over [internal hostnames](/docs/how-to/networking#internal-service-hostnames) once a [network policy](/docs/how-to/networking) rule allows it.
 - Access control is granted per project, optionally down to a single app. See [Users & Groups](/docs/how-to/admin/users-and-groups).
@@ -52,7 +52,7 @@ Each app has runtime properties that are applied at deploy time:
 
 The **Project Canvas** is the default view of a project. It has two modes:
 
-- **Network graph** — apps, databases, and agents as nodes, with their connections as edges. You can create, connect, and monitor workloads here.
+- **Network graph** — apps, databases, and Agent Sandboxes as nodes, with their connections as edges. You can create, connect, and monitor workloads here.
 - **Table** — a flat list of the project's apps.
 
 Selecting a node opens its **details drawer** with deployment history, logs, stats, backups, and all settings.

@@ -10,13 +10,13 @@ QuickStack-specific terms and the key underlying technologies.
 ---
 
 ## Agent
-A long-lived, isolated container workspace managed by QuickStack for AI-assisted work. Agents live in agent-type projects and run as sandboxes. See [AI Agents](/docs/how-to/agents).
+The deployable definition of an AI-assisted workspace managed by QuickStack. An Agent belongs to an agent-type project and is the template from which Agent Sandboxes are started. See [AI Agents](/docs/how-to/agents).
 
 ## Agent Sandbox
-A running instance of an agent. You can start, stop, and open several sandboxes per agent, including Warm Pool instances. See [AI Agents](/docs/how-to/agents#sandboxes).
+A running instance of an Agent — the workload that runs in the cluster. You can start, stop, and open several Agent Sandboxes per Agent, including Warm Pool instances. See [AI Agents](/docs/how-to/agents#sandboxes).
 
 ## Agent Template
-A predefined agent configuration including its CLI harness and startup steps. QuickStack ships templates such as OpenCode Web, Gemini CLI, and Claude Code CLI.
+A predefined Agent configuration including its CLI harness and startup steps. QuickStack ships templates such as OpenCode Web, Gemini CLI, and Claude Code CLI.
 
 ## Application (App)
 A container workload managed by QuickStack. An app belongs to a project and can be sourced from a Git repository (built with the Framework preset, Railpack, or a Dockerfile), a Docker image, or a [template](/docs/how-to/templates). Apps are managed from the [Project Canvas](/docs/how-to/project-canvas).
@@ -79,7 +79,7 @@ A lightweight Kubernetes distribution. QuickStack runs on k3s. [k3s.io](https://
 Free TLS certificate authority. QuickStack uses Let's Encrypt to provision HTTPS certificates for custom domains and quickstack.me subdomains automatically.
 
 ## LLM Gateway
-A LiteLLM-compatible endpoint that QuickStack agents use to reach language models with centralized credentials. Configured under **Settings → Integrations → LLM Gateways**. See [LLM Gateway](/docs/how-to/agents/llm-gateway).
+A LiteLLM-compatible endpoint that QuickStack Agent Sandboxes use to reach language models with centralized credentials. Configured under **Settings → Integrations → LLM Gateways**. See [LLM Gateway](/docs/how-to/agents/llm-gateway).
 
 ## Longhorn
 Distributed block storage for Kubernetes. Used as the `longhorn` storage class for volumes in multi-node clusters. Required when volumes must survive node failure. [longhorn.io](https://longhorn.io/)
@@ -94,7 +94,7 @@ The maximum RAM a container can use. Exceeding this causes the container to be t
 Guaranteed amount of RAM Kubernetes ensures is always available to a container. Maps to the Kubernetes `requests.memory` field.
 
 ## Model Alias
-The identifier an agent uses to select a model through its LLM Gateway. See [LLM Gateway](/docs/how-to/agents/llm-gateway).
+The identifier an Agent Sandbox uses to select a model through its LLM Gateway. See [LLM Gateway](/docs/how-to/agents/llm-gateway).
 
 ## Network Policy
 A Kubernetes resource that controls ingress and egress traffic for a pod. In QuickStack, policies are made of explicit per-app ingress and egress rules, plus an internet-access switch. See [Networking](/docs/how-to/networking).
@@ -103,7 +103,7 @@ A Kubernetes resource that controls ingress and egress traffic for a pod. In Qui
 A logical grouping of apps and databases in QuickStack. All workloads in a project share a network namespace and can communicate via internal hostnames. A project is typed as **App** or **Agent** at creation.
 
 ## Project Canvas
-The main view of a project. It is a network graph where every app, database, and agent is a node and connections are edges. Selecting a node opens a details drawer for creating, configuring, deploying, and monitoring the workload. See [Project Canvas](/docs/how-to/project-canvas).
+The main view of a project. It is a network graph where every app, database, and Agent Sandbox is a node and connections are edges. Selecting a node opens a details drawer for creating, configuring, deploying, and monitoring the workload. See [Project Canvas](/docs/how-to/project-canvas).
 
 ## Project Network Graph
 The visual graph view inside the [Project Canvas](/docs/how-to/project-canvas) that shows and edits the network connections between apps and databases. See [Networking & Policies](/docs/how-to/networking).
