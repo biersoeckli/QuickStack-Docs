@@ -24,8 +24,7 @@ export function SearchToggle({
       type="button"
       className={cn(
         buttonVariants({
-         // size,
-         // color,
+          variant: 'ghost',
         }),
         props.className,
       )}

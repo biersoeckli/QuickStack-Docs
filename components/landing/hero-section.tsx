@@ -2,52 +2,38 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Github, Copy, Check, ArrowRight } from 'lucide-react';
+import { Github, ArrowRight } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Eyebrow, StatusDot } from './shared';
-
-const installCommand = 'curl -sfL https://get.quickstack.dev/setup.sh | sh -';
 
 interface HeroSectionProps {
   theme: 'light' | 'dark';
 }
 
 export function HeroSection({ theme }: HeroSectionProps) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(installCommand);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  };
+  const [isVideoReady, setIsVideoReady] = useState(false);
 
   return (
-    <section className="relative mx-auto w-full max-w-7xl px-4 pt-20 pb-24 md:pt-32 md:pb-32">
+    <section className="relative mx-auto w-full max-w-7xl px-4 pt-20 pb-16 md:pt-24 md:pb-24">
       <div className="flex flex-col items-center text-center">
-        <Eyebrow className="mb-8 justify-center">
-          <StatusDot className="text-emerald-500" pulse />
-          Self-hosted PaaS · Open source
+        <Eyebrow className="mb-4 justify-center font-semibold rounded-full border bg-primary/10 px-3 py-1.5 text-primary darK:bg-primary/20 dark:text-primary">
+          Self-hosted PaaS
         </Eyebrow>
 
-        <h1 className="max-w-4xl text-5xl font-semibold leading-[0.98] tracking-tighter text-foreground sm:text-6xl md:text-7xl">
-          Run <span className="text-primary">any app</span> on your own servers.
+        <h1 className="max-w-4xl text-5xl font-semibold leading-[1.07] tracking-tighter text-foreground sm:text-6xl md:text-7xl">
+          Run your apps.<br /> Own the infrastructure.
         </h1>
 
         <p className="mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">
-          Deploy databases or apps from Git or any container registry. QuickStack
-          provides all you need from a single UI running on your own
-          infrastructure.
+          Deploy apps and databases from Git or any container registry. QuickStack handles networking, HTTPS, storage, monitoring and backups on your own servers.
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
           <Link
             href="/docs/tutorials/installation"
-            className="inline-flex h-11 items-center gap-2 rounded-lg bg-foreground px-6 text-sm font-medium text-background transition-colors hover:bg-foreground/85"
+            className="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-medium text-background transition-colors hover:bg-primary/85"
           >
-            Get Started
+            Install QuickStack
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
@@ -60,43 +46,39 @@ export function HeroSection({ theme }: HeroSectionProps) {
           </Link>
         </div>
 
-        {/* Install terminal */}
-        <div className="mt-14 w-full max-w-xl text-left">
-          <div className="overflow-hidden rounded-xl border border-border bg-card shadow-none">
-            <div className="flex items-center justify-between border-b border-border bg-muted/40 px-4 py-2.5">
-              <div className="flex items-center gap-1.5">
-                <span className="size-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700" />
-                <span className="size-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700" />
-                <span className="size-2.5 rounded-full bg-neutral-300 dark:bg-neutral-700" />
-              </div>
-              <span className="font-mono text-[11px] text-muted-foreground">
-                install.sh
+        <div className="mt-14 w-full max-w-6xl text-left sm:mt-16">
+          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_24px_80px_-32px_rgb(0_0_0_/_0.35)]">
+            <div className="flex items-center gap-1.5 border-b border-border bg-muted/50 px-4 py-3">
+              <span className="size-2.5 rounded-full bg-red-400/80" />
+              <span className="size-2.5 rounded-full bg-amber-400/80" />
+              <span className="size-2.5 rounded-full bg-emerald-400/80" />
+              <span className="ml-2 font-mono text-[11px] text-muted-foreground">
+                QuickStack
               </span>
-              <button
-                onClick={handleCopy}
-                className="flex items-center gap-1.5 rounded-md px-2 py-1 font-mono text-[11px] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-                aria-label="Copy installation command"
-              >
-                {copied ? (
-                  <Check className="h-3.5 w-3.5 text-emerald-500" />
-                ) : (
-                  <Copy className="h-3.5 w-3.5" />
-                )}
-                {copied ? 'Copied' : 'Copy'}
-              </button>
             </div>
-            <div className="flex items-center gap-2 px-4 py-4">
-              <span className="select-none font-mono text-sm text-muted-foreground">
-                $
-              </span>
-              <code className="font-mono text-sm text-foreground break-all">
-                {installCommand}
-              </code>
+            <div className="relative aspect-[923/505] w-full bg-muted">
+              {!isVideoReady && (
+                <Skeleton
+                  className="absolute inset-0 size-full rounded-none"
+                  aria-label="Loading product demonstration"
+                />
+              )}
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                onCanPlay={() => setIsVideoReady(true)}
+                className={`block size-full object-contain transition-opacity duration-300 ${
+                  isVideoReady ? 'opacity-100' : 'opacity-0'
+                }`}
+                aria-label="QuickStack product demonstration"
+              >
+                <source src="/videos/quickstack_v1_demo_4k.mp4" type="video/mp4" />
+              </video>
             </div>
           </div>
-          <p className="mt-3 text-center font-mono text-[11px] text-muted-foreground">
-            Fresh Linux server · Min 2 CPU · 4 GB RAM · 40 GB disk
-          </p>
         </div>
       </div>
     </section>
