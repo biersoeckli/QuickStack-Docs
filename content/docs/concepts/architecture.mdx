@@ -35,7 +35,7 @@ flowchart TB
     registry["Internal registry"]
     app["App pods"]
     db["Database pods"]
-    agent["Sandbox Instances"]
+    sandbox["Sandbox Instances"]
   end
 
   volume["Persistent volumes<br/>local-path or Longhorn"]
@@ -45,13 +45,13 @@ flowchart TB
   user -->|"port 30000"| qs
   traefik --> app
   traefik --> db
-  traefik --> agent
+  traefik --> sandbox
   qs --> buildkit
   buildkit --> registry
   registry --> app
   app --- volume
   db --- volume
-  agent --- volume
+  sandbox --- volume
   qs -->|"system backups"| s3
   app -->|"volume / DB backups"| s3
 ```

@@ -9,7 +9,7 @@ An **LLM Gateway** is a LiteLLM-compatible endpoint that QuickStack Sandbox Inst
 
 <Callout type="warn">
 **Experimental / canary**
-LLM gateways are part of the experimental agent feature and are only visible when the canary channel is enabled.
+LLM gateways are part of the experimental Agent Sandbox feature and are only visible when the canary channel is enabled.
 </Callout>
 
 ## Add an LLM gateway
@@ -37,13 +37,13 @@ If you do not have a gateway yet, QuickStack can deploy one for you:
 
 You can also deploy **LiteLLM** from the [template catalog](/docs/how-to/templates).
 
-## Use a gateway with an Agent
+## Use a gateway with an Agent Sandbox
 
-When creating or editing an Agent, choose the **LLM Gateway** and a **Model Alias** in the Agent's model configuration. The alias identifies which model the gateway should route to.
+When creating or editing an Agent Sandbox, choose the **LLM Gateway** and a **Model Alias** in its model configuration. The alias identifies which model the gateway should route to.
 
 <Callout>
 **Model aliases**
-Agent templates receive the gateway URL and alias as environment variables, so the harness in each Sandbox Instance talks only to the gateway. Available model aliases come from the gateway's LiteLLM configuration.
+Templates receive the gateway URL and alias as environment variables, so the harness in each Sandbox Instance talks only to the gateway. Available model aliases come from the gateway's LiteLLM configuration.
 </Callout>
 
 ## Related

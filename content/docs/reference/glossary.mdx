@@ -9,17 +9,11 @@ QuickStack-specific terms and the key underlying technologies.
 
 ---
 
-## Agent
-The deployable definition of an AI-assisted workspace managed by QuickStack. An Agent belongs to an agent-type project and is the template from which Agent Sandboxes are started. See [Agent Sandbox](/docs/how-to/agents).
-
 ## Agent Sandbox
-The workload created from an Agent. You can start, stop, and open several Sandbox Instances of an Agent Sandbox, including Warm Pool instances. See [Agent Sandbox](/docs/how-to/agents#sandbox-instances).
+The deployable AI workload managed by QuickStack. An Agent Sandbox belongs to a project; each running instance is a Sandbox Instance. You can start, stop, and open several Sandbox Instances of an Agent Sandbox, including Warm Pool instances. See [Agent Sandbox](/docs/how-to/agents).
 
-## Sandbox Instance
-A running instance of an Agent Sandbox. Each **Start New Sandbox** action creates one. See [Agent Sandbox](/docs/how-to/agents#sandbox-instances).
-
-## Agent Template
-A predefined Agent configuration including its CLI harness and startup steps. QuickStack ships templates such as OpenCode Web, Gemini CLI, and Claude Code CLI.
+## Agent Sandbox Template
+A predefined Agent Sandbox configuration including its CLI harness and startup steps. QuickStack ships templates such as OpenCode Web, Gemini CLI, and Claude Code CLI.
 
 ## Application (App)
 A container workload managed by QuickStack. An app belongs to a project and can be sourced from a Git repository (built with the Framework preset, Railpack, or a Dockerfile), a Docker image, or a [template](/docs/how-to/templates). Apps are managed from the [Project Canvas](/docs/how-to/project-canvas).
@@ -129,6 +123,9 @@ The Kubernetes `RuntimeClass` a Sandbox Instance runs under: the k3s default run
 ## S3 Target
 An S3-compatible bucket configured in QuickStack as a backup destination. See [S3 Targets](/docs/how-to/backups/s3-targets).
 
+## Sandbox Instance
+A running instance of an Agent Sandbox. Each **Start New Sandbox** action creates one. See [Agent Sandbox](/docs/how-to/agents#sandbox-instances).
+
 ## Shared Volume
 A ReadWriteMany volume that multiple apps in the same project can mount. See [Shared Volumes](/docs/how-to/storage/shared-volumes).
 
@@ -147,7 +144,7 @@ A snapshot of the QuickStack SQLite database (`data.db`) containing all configur
 A Kubernetes controller that manages automated k3s upgrades across cluster nodes.
 
 ## Template
-See [App Template](/docs/how-to/templates) and [Agent Template](/docs/how-to/agents#agent-templates).
+See [App Template](/docs/how-to/templates) and [Agent Sandbox Template](/docs/how-to/agents#agent-sandbox-templates).
 
 ## TOTP
 Time-based One-Time Password. A standard algorithm used by authenticator apps (Google Authenticator, Bitwarden, etc.) to generate 6-digit codes that change every 30 seconds. Used for QuickStack 2FA.
