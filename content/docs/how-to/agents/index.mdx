@@ -1,11 +1,11 @@
 ---
 sidebar_position: 1
 title: "AI Agents"
-description: "Run long-lived AI agents as isolated Agent Sandboxes in QuickStack."
+description: "Run long-lived AI agents as isolated Sandbox Instances in QuickStack."
 keywords: ["QuickStack agents", "agent sandbox", "Claude Code", "OpenCode", "Gemini CLI", "Copilot CLI", "warm pool", "gVisor"]
 ---
 
-QuickStack runs **AI agents** as first-class workloads. An **Agent** is a long-lived, isolated workspace definition; each running instance is an **Agent Sandbox**. Agent Sandboxes live in agent-type projects and use the same networking, storage, and logs as apps.
+QuickStack runs **AI agents** as first-class workloads. An **Agent** is a long-lived, isolated workspace definition; the workload it creates is an **Agent Sandbox**, and each running instance is a **Sandbox Instance**. Agent Sandboxes live in agent-type projects and use the same networking, storage, and logs as apps.
 
 <Callout type="warn">
 **Experimental / canary**
@@ -17,7 +17,7 @@ AI agents depend on the **Kubernetes Agent Sandbox** add-on, which is only visib
 1. Enable the canary channel in **Settings → Platform → Updates & Add-Ons**.
 2. Install the **Kubernetes Agent Sandbox** add-on. See [Cluster Add-ons](/docs/how-to/admin/cluster-add-ons).
 3. Optional: install the **gVisor** add-on if you want a stronger runtime isolation profile.
-4. Optional but recommended: configure an [LLM Gateway](/docs/how-to/agents/llm-gateway) so Agent Sandboxes can reach models without scattering API keys.
+4. Optional but recommended: configure an [LLM Gateway](/docs/how-to/agents/llm-gateway) so Sandbox Instances can reach models without scattering API keys.
 
 Once the add-on is ready, **Agent** becomes available as a project type and in the sidebar.
 
@@ -42,19 +42,19 @@ QuickStack ships six Agent templates:
 | **Claude Code CLI** | Terminal |
 | **DeepSeek Harness CLI** | Terminal |
 
-Templates install the corresponding CLI into the Agent's volume at first start and run it inside the Agent Sandbox.
+Templates install the corresponding CLI into the Agent's volume at first start and run it inside the Sandbox Instance.
 
-## Sandboxes
+## Sandbox Instances
 
-An agent can have multiple sandboxes. Open the agent and use the **Agent Sandboxes** card:
+An Agent Sandbox can have multiple running instances. Open the Agent and use the **Agent Sandboxes** card:
 
-- **Start New Sandbox** creates a new instance.
-- Each sandbox row shows its **Sandbox Name**, **Status**, and **Created** time.
+- **Start New Sandbox** creates a new Sandbox Instance.
+- Each row shows a Sandbox Instance with its **Sandbox Name**, **Status**, and **Created** time.
 - Actions: **View Logs**, **Open Agent UI** (when the template provides one), **Open Files**, **Open Terminal**, and **Stop Sandbox**.
 
 <Callout>
 **Warm pools**
-**Warm Pool Replicas** (0–10) in the Agent's **Container Configuration** keeps pre-warmed Agent Sandboxes ready so a new Agent Sandbox starts instantly instead of cold-booting a container. Higher values consume more cluster resources.
+**Warm Pool Replicas** (0–10) in the Agent's **Container Configuration** keeps pre-warmed Sandbox Instances ready so a new Sandbox Instance starts instantly instead of cold-booting a container. Higher values consume more cluster resources.
 </Callout>
 
 ## Runtime isolation
@@ -64,9 +64,9 @@ The **Runtime Class** setting in the Agent's container configuration chooses the
 - **K3s default runtime** — standard container isolation.
 - **gVisor** — a sandboxed runtime with a stronger isolation boundary, available after installing the gVisor add-on.
 
-## Managing Agent Sandboxes
+## Managing Sandbox Instances
 
-Agent Sandboxes support the same operational tooling as apps: logs, an interactive terminal, file access, volumes, and internal networking. Agents can also be managed through the [REST API](/docs/rest-api/overview).
+Sandbox Instances support the same operational tooling as apps: logs, an interactive terminal, file access, volumes, and internal networking. Agents can also be managed through the [REST API](/docs/rest-api/overview).
 
 ## Related
 
