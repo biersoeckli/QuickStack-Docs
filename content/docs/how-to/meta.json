@@ -1,6 +1,7 @@
 {
   "title": "How To",
   "pages": [
+    "project-canvas",
     "deployments",
     "networking",
     "storage",

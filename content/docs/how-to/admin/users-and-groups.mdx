@@ -13,7 +13,7 @@ QuickStack's access control is organized into **Users**, **Groups**, and **Permi
 
 ## Accessing user management
 
-Go to **Settings** → **Users & Groups**. The page has three tabs: **Users**, **Groups**, and **SSO Providers**.
+Go to **Settings** → **Users & Groups**. The page has two tabs: **Users** and **Groups**. SSO providers are managed separately under **Settings** → **SSO Providers**.
 
 ## Managing users
 
@@ -22,8 +22,6 @@ Go to **Settings** → **Users & Groups**. The page has three tabs: **Users**, *
 1. Click **Create User**.
 2. Enter: **Email** (used for login), **Password**, **Group**.
 3. Click **Save**.
-
-<img src="/img/docs/manage-quickstack-cluster/user-management/create-user.png" alt="Create User Dialog" />
 
 The **OAuth Providers** column shows which external identity providers a user has linked. See [Single Sign-On](/docs/how-to/admin/single-sign-on).
 
@@ -50,8 +48,6 @@ A built-in **Admin** group with full access exists and cannot be deleted or modi
 2. Enter a **Group Name** (e.g. `Developers`, `Viewers`).
 3. Configure project permissions (see below).
 4. Click **Save**.
-
-<img src="/img/docs/manage-quickstack-cluster/user-management/create-group-screenshot.png" alt="Create Group" />
 
 <Callout type="error">
 **Group deletion warning**
@@ -83,6 +79,6 @@ Enable **Set permissions per App** for a project to override project-level setti
 
 ## Single sign-on (SSO)
 
-QuickStack can authenticate users through an external identity provider such as OIDC, Google, Entra ID, or GitHub. Configure providers in the **SSO Providers** tab; each provider has its own **Default Group** for new users.
+QuickStack can authenticate users through an external identity provider such as OIDC, Google, Entra ID, or GitHub. Configure providers under **Settings** → **SSO Providers**; each provider has its own **Default Group** for new users.
 
 See [Single Sign-On](/docs/how-to/admin/single-sign-on) for setup, redirect URLs, and account linking.

@@ -20,14 +20,14 @@ All backup destinations are **S3-compatible buckets**. You configure one or more
 
 Backups run on a **cron schedule** you define per volume or database. QuickStack automatically keeps the most recent N backups (configurable retention) and deletes older ones when the limit is exceeded.
 
+A volume backup schedule can also be marked **Backup before deployment**, so it runs automatically before a deployment is applied — including for apps connected to the deployed app through a network policy. See [Back up before deployment](/docs/how-to/backups/volume-backups#back-up-before-deployment).
+
 ## Where to find backups
 
 - Navigate to **Backups** in the main menu to see all configured schedules with:
   - Last run time and status (success/failure)
   - Backup size and storage location
   - Manual trigger button
-
-<img  src="/img/docs/backups/backups-overview.png" alt="Backups Overview" />
 
 ## Setup checklist
 

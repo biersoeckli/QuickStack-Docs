@@ -13,49 +13,10 @@ QuickStack allows you to scale your applications and improve availability by set
   * **Single Node Cluster:** A single node cluster is a QuickStack installation on a single server. This is the default setup when you install QuickStack for the first time.
   * **Multi Node Cluster:** A multi-node cluster is a QuickStack installation that spans multiple servers. Each server in the cluster is responsible for running a part of the applications you deploy. It is recommended to use a private network for the communication between the servers.
 
-<table style={{
-    marginBottom: '20px',
-    marginLeft: '30px',
-    width: '100%'
-}}>
-
-<tr>
-<td style={{
-    textAlign: 'center',
-    fontWeight: 'bold'
-}}>
-
-Single Node Cluster
-</td>
-<td style={{
-    textAlign: 'center',
-    fontWeight: 'bold'
-}}>
-
-Multi Node Cluster
-</td>
-</tr>
-
-<tr>
-<td>
-
-<img  src="/img/docs/getting-started/cluster/single-node.png" alt="Single Node Cluster" />
-
-</td>
-<td>
-
-<img  src="/img/docs/getting-started/cluster/multi-node-cluster.png" alt="Multi Node Cluster" />
-
-</td>
-</tr>
-</table>
-
 ## Viewing cluster nodes
 
-1. Go to **QuickStack Settings** → **Cluster**.
+1. Go to **Settings** → **Platform** → **Cluster**.
 2. All nodes and their status are listed.
-
-<img src="/img/docs/getting-started/cluster/cluster-overview-one-node.png" alt="Cluster Nodes Overview" />
 
 Each node shows:
 - **Name** — hostname or identifier
@@ -73,11 +34,9 @@ Each node shows:
 
 ### Step 1: Get the join command
 
-1. Go to **QuickStack Settings** → **Cluster**.
+1. Go to **Settings** → **Platform** → **Cluster**.
 2. Click **Add Cluster Node**.
 3. Copy the displayed command.
-
-<img src="/img/docs/getting-started/cluster/cluster-add-node.png" alt="Add Cluster Node Dialog" />
 
 The command looks like:
 ```bash
@@ -107,7 +66,7 @@ curl -sfL https://get.quickstack.dev/setup-worker.sh | K3S_URL=https://192.168.1
 
 ### Step 4: Verify
 
-Return to **QuickStack Settings** → **Cluster**. The new node appears within a few minutes. Verify all status indicators are green.
+Return to **Settings** → **Platform** → **Cluster**. The new node appears within a few minutes. Verify all status indicators are green.
 
 ## Manage node scheduling
 

@@ -19,20 +19,11 @@ QuickStack provides pre-configured templates for popular databases. Templates se
 
 ### 1. Create the database
 
-1. Open your project and click **Create App** → **Database**.
-
-<img  src="/img/docs/managing-databases/deploying-databases/create-database.png" alt="Create Database" />
-
+1. Open your project's **Project Canvas** and click **Create App** → **Database**, or right-click an empty spot on the canvas and choose **Create Database**.
 2. Select the database type.
-
-<img  src="/img/docs/managing-databases/deploying-databases/select-database-type.png" alt="Select Database Type" />
-
 3. Configure the instance:
    - **App Name** — a unique name (e.g. `my-postgres-db`)
    - **Password** — use the generate button for a strong random password
-
-<img  src="/img/docs/managing-databases/deploying-databases/configure-settings.png" alt="Configure Database settings" />
-
 4. Click **Create**. QuickStack provisions the volume, deploys the container, and configures internal networking.
 
 ## Connecting to your database
@@ -41,15 +32,13 @@ QuickStack provides pre-configured templates for popular databases. Templates se
 
 Other apps in the same project connect via the **service hostname**:
 
-- **Hostname:** `svc-<app-id>.<project-id>.svc.cluster.local` (copy the exact value from the app's **Domains & Networking** → **Network Policy** rule actions → **Copy internal hostname**)
+- **Hostname:** `svc-<app-id>.<project-id>.svc.cluster.local` (copy the exact value from the database's **Settings → Networking** → **Network Policy** rule actions → **Copy internal hostname**)
 - **Port:** standard port for the engine (PostgreSQL: `5432`, MySQL/MariaDB: `3306`, MongoDB: `27017`, Redis: `6379`)
-- **Credentials:** shown in the **Credentials** tab
-
-<img  src="/img/docs/managing-databases/deploying-databases/database-credentials.png" alt="Database Credentials" />
+- **Credentials:** shown in the **DB Access** tab in the app drawer
 
 <Callout>
 **Allow the connection first**
-Database templates restrict internet egress and use explicit network policy rules. Add an ingress rule for the calling app on the database's **Domains & Networking** tab (or an egress rule on the app) before connecting. See [Networking](/docs/how-to/networking).
+Database templates restrict internet egress and use explicit network policy rules. Add an ingress rule for the calling app on the database's **Settings → Networking** section (or an egress rule on the app) before connecting. See [Networking](/docs/how-to/networking).
 </Callout>
 
 <Callout>
@@ -59,7 +48,7 @@ Copying credential values requires your QuickStack instance to be served over HT
 
 ### External access (not recommended)
 
-By default, databases are not exposed to the internet. If you need local access for development, you can assign a public domain in the **Domains & Networking** tab.
+By default, databases are not exposed to the internet. If you need local access for development, you can assign a public domain in the database's **Settings → Networking** section.
 
 <Callout type="error">
 **Security Warning**

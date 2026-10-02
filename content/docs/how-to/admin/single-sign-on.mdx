@@ -20,15 +20,13 @@ QuickStack supports **single sign-on (SSO)** through an external identity provid
 
 - You need the **admin** role.
 - Access to your identity provider's admin console to register an application.
-- A publicly reachable QuickStack hostname (configured in **Settings** → **QuickStack Server** → **General**). SSO callbacks use this hostname.
+- A publicly reachable QuickStack hostname (configured in **Settings** → **Platform** → **Network & Domains**). SSO callbacks use this hostname.
 
 ## Add an SSO provider
 
-1. Go to **Settings** → **Users & Groups** → **SSO Providers**.
+1. Go to **Settings** → **SSO Providers**.
 2. Click **Add SSO Provider**.
 3. Fill in the dialog:
-
-<img src="/img/docs/admin/sso/add-sso-provider-dialog.png" alt="Add SSO Provider dialog" />
 
 | Field | Description |
 |-------|-------------|
@@ -57,8 +55,6 @@ https://<your-quickstack-host>/api/auth/callback/<provider-id>
 
 You can copy it again at any time from the **SSO Providers** table using the copy icon on the provider's row.
 
-<img src="/img/docs/admin/sso/redirect-url-dialog.png" alt="SSO redirect URL dialog" />
-
 <Callout type="warn">
 **Email must be verified by the provider**
 QuickStack links an SSO login to an existing account when the email address matches. Only enable providers that verify email ownership. A provider that lets users set an arbitrary email could otherwise be used to take over an existing account.
@@ -67,8 +63,6 @@ QuickStack links an SSO login to an existing account when the email address matc
 ## What users see
 
 Once at least one provider is enabled, the login page shows an **or continue with** separator and a button per provider:
-
-<img src="/img/docs/admin/sso/login-sso-buttons.png" alt="Login page with SSO buttons" />
 
 Clicking a button redirects to the provider and back to QuickStack.
 
@@ -83,7 +77,7 @@ Administrators can see which providers a user is linked to in the **OAuth Provid
 
 ## Manage or remove providers
 
-In **Settings** → **Users & Groups** → **SSO Providers** you can:
+In **Settings** → **SSO Providers** you can:
 
 - **Disable** a provider (edit it and turn **Enabled** off) so it no longer appears on the login page.
 - **Edit** a provider to change its name, credentials, or default group.
@@ -96,7 +90,7 @@ In **Settings** → **Users & Groups** → **SSO Providers** you can:
 | "Redirect URI mismatch" from the provider | Register the exact callback URL shown in QuickStack, including scheme and provider ID |
 | Login button missing | The provider is disabled, or no provider is configured |
 | Entra ID user has no email address | QuickStack falls back to `preferred_username` / `upn`; ensure those claims are enabled for the app |
-| SSO works on one hostname but not another | Set the correct public QuickStack hostname in **Settings** → **QuickStack Server** → **General** |
+| SSO works on one hostname but not another | Set the correct public QuickStack hostname in **Settings** → **Platform** → **Network & Domains** |
 | User lands in the wrong group | Set the provider's **Default Group**, or assign the group manually in the Users table |
 
 ## Related

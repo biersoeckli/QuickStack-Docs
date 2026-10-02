@@ -35,6 +35,11 @@ export const featureGroups: FeatureGroup[] = [
           'Connect a public/private repo (HTTPS or SSH) or pull straight from any registry, private ones included.',
       },
       {
+        title: 'Framework presets',
+        description:
+          'Ship Next.js, Nuxt, SvelteKit, React, Angular or Astro with pre-filled build and run commands.',
+      },
+      {
         title: 'Zero-config builds',
         description:
           'Railpack auto-detects your stack and builds it. No Dockerfile required.',
