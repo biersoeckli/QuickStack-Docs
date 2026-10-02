@@ -11,6 +11,7 @@ export const gitConfig = {
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
+      transparentMode: 'top',
       title: (
         <div className="flex items-center gap-2">
           <img 

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { GitBranch, SquareActivity, Server, Lock, ArrowDown } from 'lucide-react';
 import { Eyebrow, StatusDot } from './shared';
@@ -85,6 +86,15 @@ const members = [
   { name: 'alex@acme.io', role: 'Owner', auth: '2FA' },
   { name: 'sam@acme.io', role: 'Admin', auth: 'SSO' },
   { name: 'dev@acme.io', role: 'Member', auth: '—' },
+];
+
+const frameworks = [
+  { name: 'Angular', src: '/img/framework-logos/angular.png' },
+  { name: 'Next.js', src: '/img/framework-logos/nextjs.svg' },
+  { name: 'Astro', src: '/img/framework-logos/astro.svg' },
+  { name: 'Nuxt', src: '/img/framework-logos/nuxt.svg' },
+  { name: 'React', src: '/img/framework-logos/react.svg' },
+  { name: 'SvelteKit', src: '/img/framework-logos/sveltekit.png' },
 ];
 
 function FeatureCard({
@@ -399,43 +409,36 @@ function BackupsList() {
   );
 }
 
-function NodeChip({ children, active = false }: { children: string; active?: boolean }) {
+function FrameworkBuild() {
   return (
-    <span
-      className={
-        active
-          ? 'rounded-md border border-foreground/25 bg-background px-2.5 py-1 font-mono text-[11px] text-foreground'
-          : 'rounded-md border border-border bg-background px-2.5 py-1 font-mono text-[11px] text-foreground'
-      }
-    >
-      {children}
-    </span>
-  );
-}
-
-function FlowLink({ label }: { label: string }) {
-  return (
-    <span className="flex items-center gap-1 font-mono text-[10px] text-emerald-600 dark:text-emerald-400">
-      <span className="h-px w-5 bg-emerald-500" />
-      {label}
-    </span>
-  );
-}
-
-function NetworkPolicies() {
-  return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-4 px-4 py-4">
-      <div className="flex items-center gap-2">
-        <NodeChip>internet</NodeChip>
-        <FlowLink label=":443" />
-        <NodeChip active>app</NodeChip>
-        <FlowLink label="allow" />
-        <NodeChip>postgres</NodeChip>
+    <div className="flex flex-1 flex-col justify-center gap-2.5 px-4 py-4">
+      <div className="grid w-full grid-cols-3 gap-2.5">
+        {frameworks.map((framework) => (
+          <div
+            key={framework.name}
+            className="flex flex-col items-center justify-center gap-2 rounded-lg border border-border bg-background px-2 py-3 transition-colors group-hover:border-foreground/15"
+          >
+            <Image
+              src={framework.src}
+              alt={`${framework.name} logo`}
+              width={32}
+              height={32}
+              className="size-8 object-contain"
+            />
+            <span className="font-mono text-[10px] text-muted-foreground">
+              {framework.name}
+            </span>
+          </div>
+        ))}
       </div>
-
-      <p className="font-mono text-[10px] text-muted-foreground">
-        egress denied by default
-      </p>
+      <div className="flex items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-background px-3 py-2 text-center">
+        <span className="text-[11px] text-muted-foreground">
+          Not using one of these frameworks? provide a
+        </span>
+        <span className="rounded border border-border px-1.5 py-0.5 font-mono text-[10px] text-foreground">
+          Dockerfile
+        </span>
+      </div>
     </div>
   );
 }
@@ -479,11 +482,11 @@ export function FeaturesSection() {
 
         <Reveal delay={80} className="flex md:col-span-5">
           <FeatureCard
-            eyebrow="Operate"
-            title="Montioring"
-            description="Live CPU, RAM and disk metrics per app, with health checks and restart policies."
+            eyebrow="Deploy"
+            title="Framework Build"
+            description="Deploy Angular, Next.js, Astro, Nuxt, React or SvelteKit in a few clicks or bring your own Dockerfile."
           >
-            <MonitoringChart />
+            <FrameworkBuild />
           </FeatureCard>
         </Reveal>
 
@@ -509,11 +512,11 @@ export function FeaturesSection() {
 
         <Reveal delay={140} className="flex md:col-span-6">
           <FeatureCard
-            eyebrow="Scale"
-            title="Grow into a cluster"
-            description="Add nodes anytime. Longhorn provides shared storage and load balancing across the cluster."
+            eyebrow="Operate"
+            title="Montioring"
+            description="Live CPU, RAM and disk metrics per app, with health checks and restart policies."
           >
-            <ClusterNodes />
+            <MonitoringChart />
           </FeatureCard>
         </Reveal>
 
@@ -539,11 +542,11 @@ export function FeaturesSection() {
 
         <Reveal delay={140} className="flex md:col-span-5">
           <FeatureCard
-            eyebrow="Networking"
-            title="Network policies"
-            description="Define ingress and egress rules to isolate services and control what can talk to what."
+            eyebrow="Scale"
+            title="Grow into a cluster"
+            description="Add nodes anytime. Longhorn provides shared storage and load balancing across the cluster."
           >
-            <NetworkPolicies />
+            <ClusterNodes />
           </FeatureCard>
         </Reveal>
       </div>

@@ -27,11 +27,11 @@ export const navItemVariants = cva('[&_svg]:size-4', {
     variant: {
       main: 'inline-flex items-center gap-1 p-2 text-fd-muted-foreground transition-colors hover:text-fd-accent-foreground data-[active=true]:text-fd-primary',
       button: buttonVariants({
-        //color: 'secondary',
+        variant: 'ghost',
         className: 'gap-1.5',
       }),
       icon: buttonVariants({
-        //color: 'ghost',
+        variant: 'ghost',
         size: 'icon',
       }),
     },
@@ -99,7 +99,7 @@ export function Header({
               className={cn(
                 buttonVariants({
                   size: 'icon',
-                  //color: 'ghost',
+                  variant: 'ghost',
                   className: 'group [&_svg]:size-5.5',
                 }),
               )}
@@ -161,9 +161,9 @@ function HeaderNavigationMenu({
       <header id="nd-nav" {...props} className={cn('sticky h-14 top-0 z-40', props.className)}>
         <div
           className={cn(
-            'backdrop-blur-lg border-b transition-colors *:mx-auto *:max-w-(--fd-layout-width)',
+            'transition-[background-color,border-color,backdrop-filter] *:mx-auto *:max-w-(--fd-layout-width)',
             value.length > 0 && 'max-lg:shadow-lg max-lg:rounded-b-2xl',
-            (!isTransparent || value.length > 0) && 'bg-fd-background/80',
+            (!isTransparent || value.length > 0) && 'border-b bg-fd-background/80 backdrop-blur-lg',
           )}
         >
           <NavigationMenuList className="flex h-14 w-full items-center px-4" asChild>
@@ -296,10 +296,10 @@ function MobileNavigationMenuLinkItem({
             main: 'inline-flex items-center gap-2 py-1.5 transition-colors hover:text-fd-popover-foreground/50 data-[active=true]:font-medium data-[active=true]:text-fd-primary [&_svg]:size-4',
             icon: buttonVariants({
               size: 'icon',
-              //color: 'ghost',
+              variant: 'ghost',
             }),
             button: buttonVariants({
-              //color: 'secondary',
+              variant: 'ghost',
               className: 'gap-1.5 [&_svg]:size-4',
             }),
           }[item.type ?? 'main'],
