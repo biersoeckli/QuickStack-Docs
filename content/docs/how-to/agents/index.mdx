@@ -1,15 +1,15 @@
 ---
 sidebar_position: 1
-title: "AI Agents"
-description: "Run long-lived AI agents as isolated Sandbox Instances in QuickStack."
+title: "Agent Sandbox"
+description: "Run Agent Sandboxes and their Sandbox Instances in QuickStack."
 keywords: ["QuickStack agents", "agent sandbox", "Claude Code", "OpenCode", "Gemini CLI", "Copilot CLI", "warm pool", "gVisor"]
 ---
 
-QuickStack runs **AI agents** as first-class workloads. An **Agent** is a long-lived, isolated workspace definition; the workload it creates is an **Agent Sandbox**, and each running instance is a **Sandbox Instance**. Agent Sandboxes live in agent-type projects and use the same networking, storage, and logs as apps.
+An **Agent** is a long-lived, isolated workspace definition. From an Agent, QuickStack creates an **Agent Sandbox** workload, and each running instance is a **Sandbox Instance**. Agent Sandboxes live in agent-type projects and use the same networking, storage, and logs as apps.
 
 <Callout type="warn">
 **Experimental / canary**
-AI agents depend on the **Kubernetes Agent Sandbox** add-on, which is only visible when the **Canary Channel** is enabled. Treat agents as experimental until they reach the stable channel.
+Agent Sandboxes depend on the **Kubernetes Agent Sandbox** add-on, which is only visible when the **Canary Channel** is enabled. Treat Agent Sandboxes as experimental until they reach the stable channel.
 </Callout>
 
 ## Prerequisites

@@ -10,13 +10,13 @@ QuickStack-specific terms and the key underlying technologies.
 ---
 
 ## Agent
-The deployable definition of an AI-assisted workspace managed by QuickStack. An Agent belongs to an agent-type project and is the template from which Agent Sandboxes are started. See [AI Agents](/docs/how-to/agents).
+The deployable definition of an AI-assisted workspace managed by QuickStack. An Agent belongs to an agent-type project and is the template from which Agent Sandboxes are started. See [Agent Sandbox](/docs/how-to/agents).
 
 ## Agent Sandbox
-The workload created from an Agent. You can start, stop, and open several Sandbox Instances of an Agent Sandbox, including Warm Pool instances. See [AI Agents](/docs/how-to/agents#sandbox-instances).
+The workload created from an Agent. You can start, stop, and open several Sandbox Instances of an Agent Sandbox, including Warm Pool instances. See [Agent Sandbox](/docs/how-to/agents#sandbox-instances).
 
 ## Sandbox Instance
-A running instance of an Agent Sandbox. Each **Start New Sandbox** action creates one. See [AI Agents](/docs/how-to/agents#sandbox-instances).
+A running instance of an Agent Sandbox. Each **Start New Sandbox** action creates one. See [Agent Sandbox](/docs/how-to/agents#sandbox-instances).
 
 ## Agent Template
 A predefined Agent configuration including its CLI harness and startup steps. QuickStack ships templates such as OpenCode Web, Gemini CLI, and Claude Code CLI.
@@ -124,7 +124,7 @@ An instance of an application running in the cluster. Multiple replicas provide 
 Redeploying a Git-source app from an earlier commit. QuickStack reuses the built image for that commit or rebuilds it. See [Deploy & Redeploy](/docs/how-to/deployments/redeploy-and-rollbacks#rollback-to-a-previous-deployment).
 
 ## Runtime Class
-The Kubernetes `RuntimeClass` a Sandbox Instance runs under: the k3s default runtime, or gVisor when installed. See [AI Agents](/docs/how-to/agents#runtime-isolation).
+The Kubernetes `RuntimeClass` a Sandbox Instance runs under: the k3s default runtime, or gVisor when installed. See [Agent Sandbox](/docs/how-to/agents#runtime-isolation).
 
 ## S3 Target
 An S3-compatible bucket configured in QuickStack as a backup destination. See [S3 Targets](/docs/how-to/backups/s3-targets).
@@ -162,7 +162,7 @@ An extra security layer requiring a TOTP code from an authenticator app in addit
 Persistent storage mounted into a container. Data on a volume survives container restarts and redeployments. See [Volumes](/docs/how-to/storage/volumes).
 
 ## Warm Pool Replicas
-The number of pre-warmed Sandbox Instances QuickStack keeps ready so a new Sandbox Instance starts instantly. Configurable from 0 to 10. See [AI Agents](/docs/how-to/agents).
+The number of pre-warmed Sandbox Instances QuickStack keeps ready so a new Sandbox Instance starts instantly. Configurable from 0 to 10. See [Agent Sandbox](/docs/how-to/agents).
 
 ## Webhook
 A URL that triggers a QuickStack deployment when called via HTTP POST. Used for CI/CD automation. See [Webhooks](/docs/how-to/deployments/webhooks-auto-deploy).
