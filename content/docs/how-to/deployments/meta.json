@@ -2,6 +2,7 @@
   "pages": [
     "redeploy-and-rollbacks",
     "build-methods",
-    "webhooks-auto-deploy"
+    "webhooks-auto-deploy",
+    "container-configuration"
   ]
 }

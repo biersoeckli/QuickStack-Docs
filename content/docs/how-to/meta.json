@@ -2,12 +2,15 @@
   "title": "How To",
   "pages": [
     "project-canvas",
+    "templates",
     "deployments",
+    "scaling",
     "networking",
     "storage",
     "observability",
     "databases",
     "backups",
+    "agents",
     "admin"
   ]
 }

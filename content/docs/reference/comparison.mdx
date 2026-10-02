@@ -1,0 +1,67 @@
+---
+sidebar_position: 1
+title: "Why QuickStack?"
+description: "How QuickStack compares to managed cloud platforms like Vercel and Heroku, and to other self-hosted PaaS tools like Coolify, Dokploy, and Easypanel."
+keywords: ["QuickStack vs Vercel", "QuickStack vs Heroku", "QuickStack vs Coolify", "QuickStack vs Dokploy", "QuickStack vs Easypanel", "self-hosted PaaS comparison"]
+---
+
+This page helps you decide whether QuickStack fits your situation. It is an orientation guide, not a feature-by-feature marketing comparison — verify current capabilities of other tools yourself.
+
+## QuickStack in one sentence
+
+QuickStack is a free, open-source, self-hosted PaaS that deploys containerized apps and databases onto a k3s cluster through a web UI, with automatic HTTPS, storage, backups, monitoring, and team access.
+
+## vs. managed platforms (Vercel, Netlify, Railway, Heroku)
+
+| Dimension | Managed platforms | QuickStack |
+|-----------|-------------------|------------|
+| **Cost model** | Usage-based; can spike unpredictably | Fixed cost of the server(s) you rent |
+| **Data location** | Vendor infrastructure | Your own servers, your jurisdiction |
+| **Scaling model** | Serverless functions or managed containers | Long-running Kubernetes pods |
+| **Lock-in** | Platform-specific config | Standard Docker images and Kubernetes primitives |
+| **Operations** | Fully managed | You own updates and the host |
+| **Feature parity** | Strong edge/CDN and preview tooling | Strong self-hosting, networking, and data control |
+
+**Choose a managed platform when** you want zero server maintenance, global edge delivery, or generous free tiers.
+
+**Choose QuickStack when** you want predictable costs, full data ownership, and standard containers on infrastructure you control.
+
+## vs. other self-hosted PaaS tools (Coolify, Dokploy, Easypanel)
+
+All three are capable self-hosted options. The main architectural difference is the underlying orchestrator:
+
+| Dimension | QuickStack | Compose-based self-hosted PaaS |
+|-----------|------------|-------------------------------|
+| **Orchestrator** | Kubernetes (k3s) | Docker / Docker Compose, often Docker Swarm |
+| **Multi-node** | First-class cluster with worker nodes | Varies; often single-node focused |
+| **Storage** | Longhorn distributed block storage | Host volumes / bind mounts |
+| **Networking** | Deny-by-default Kubernetes network policies | Proxy-level routing, varies |
+| **Primitives** | Deployments, services, ingresses, probes, jobs | Containers and Compose services |
+| **Complexity** | More concepts, more capability | Simpler mental model |
+
+**Choose QuickStack when** you want Kubernetes-grade scheduling, replication, and isolation without writing manifests, and expect to grow from one server to a cluster.
+
+**Choose a Compose-based tool when** a single server and a simpler underlying model are enough, or your workloads map directly to Compose files.
+
+## vs. running Kubernetes yourself
+
+QuickStack runs on k3s but hides the operational surface: no manifests, Helm charts, or `kubectl` needed. You still get deployments, rolling updates, services, ingress, persistent volumes, and probes. If you want full control over manifests and admission policies, running Kubernetes directly may suit you better.
+
+## What QuickStack gives you out of the box
+
+- Deploy from Git (HTTPS or SSH) or any container registry.
+- Zero-config builds with Railpack, framework presets, or your own Dockerfile.
+- One-click [app and database templates](/docs/how-to/templates).
+- Automatic HTTPS via Let's Encrypt and custom domains.
+- [Deny-by-default networking](/docs/how-to/networking) between workloads.
+- Persistent volumes, [shared volumes](/docs/how-to/storage/shared-volumes), and a [file browser](/docs/how-to/storage/file-browser).
+- Scheduled [backups](/docs/how-to/backups/overview) to S3-compatible storage.
+- [Users, groups, and per-app permissions](/docs/how-to/admin/users-and-groups), plus SSO and 2FA.
+- A [REST API](/docs/rest-api/overview) and JS/TS SDK for automation.
+
+## Related
+
+- [Architecture](/docs/concepts/architecture)
+- [Security Model](/docs/concepts/security-model)
+- [Sizing & Costs](/docs/reference/sizing-and-costs)
+- [Installation](/docs/tutorials/installation)

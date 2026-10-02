@@ -1,0 +1,69 @@
+---
+sidebar_position: 2
+title: "Projects, Apps & Databases"
+description: "Understand the QuickStack object model: projects, apps, databases, agents, sources, deployment state, and where each setting lives."
+keywords: ["QuickStack project", "app", "database", "agent", "project canvas", "source", "deploy", "object model"]
+---
+
+This page describes the building blocks you work with in QuickStack. When you are new, read this alongside the [Project Canvas](/docs/how-to/project-canvas) guide.
+
+## Projects
+
+A **project** is a logical grouping of workloads. Every app, database, and agent belongs to exactly one project.
+
+- All workloads in a project share a Kubernetes namespace and can reach each other over [internal hostnames](/docs/how-to/networking#internal-service-hostnames) once a [network policy](/docs/how-to/networking) rule allows it.
+- Access control is granted per project, optionally down to a single app. See [Users & Groups](/docs/how-to/admin/users-and-groups).
+- A project has a **type**, chosen at creation and not changeable afterwards:
+  - **App** — for applications and databases.
+  - **Agent** — for AI agent sandboxes. This type only appears when the Kubernetes Agent Sandbox add-on is installed. See [AI Agents](/docs/how-to/agents).
+
+## Apps
+
+An **app** is a container workload. It is defined by a **source** and a set of settings:
+
+| Source type | What it is | When to use |
+|-------------|------------|-------------|
+| **Git HTTPS** | Clone a public repo, or a private repo with a username + personal access token | Most repositories |
+| **Git SSH** | Clone a private repo using a per-app deploy key | Private repos without tokens |
+| **Docker Container Image** | Pull a pre-built image from any registry | Prebuilt images, third-party software |
+| **Template** | A predefined app with image, env vars, volumes, and networking | One-click software. See [App & Database Templates](/docs/how-to/templates) |
+
+Git sources build with a [build method](/docs/how-to/deployments/build-methods) (Framework preset, Railpack, or Dockerfile). Image and template sources pull existing images.
+
+A database is a special app whose source is a managed database image. Templates for PostgreSQL, MySQL, MariaDB, MongoDB, and Redis set up storage and credentials for you.
+
+## Settings are staged until you deploy
+
+Every configuration change — source, environment variables, storage, domains, network policies, health checks, replicas, resource limits — is saved to the QuickStack database immediately but does **not** affect the running workload until you click **Deploy**.
+
+This lets you batch changes and apply them in one rollout. For details, see [Deploy & Redeploy](/docs/how-to/deployments/redeploy-and-rollbacks).
+
+## Runtime properties
+
+Each app has runtime properties that are applied at deploy time:
+
+- **Replica count** — how many instances run. See [Scaling & Resource Limits](/docs/how-to/scaling).
+- **CPU and memory reservations and limits** — per pod. See [Scaling & Resource Limits](/docs/how-to/scaling).
+- **Health checks** — startup, readiness, and liveness probes. See [Health Checks](/docs/how-to/observability/health-checks).
+- **Volumes** — persistent storage. See [Volumes](/docs/how-to/storage/volumes).
+- **Domains** — public HTTP(S) entry points. See [Custom Domains](/docs/how-to/networking/domains).
+
+## The Project Canvas
+
+The **Project Canvas** is the default view of a project. It has two modes:
+
+- **Network graph** — apps, databases, and agents as nodes, with their connections as edges. You can create, connect, and monitor workloads here.
+- **Table** — a flat list of the project's apps.
+
+Selecting a node opens its **details drawer** with deployment history, logs, stats, backups, and all settings.
+
+## Lifecycle actions
+
+From the drawer header or an app's right-click menu you can **Deploy**, **Rebuild**, **Start**, **Stop**, open the app's domain, and **Delete** it. See [Project Canvas & App Drawer](/docs/how-to/project-canvas) for the full reference.
+
+## Related
+
+- [Architecture](/docs/concepts/architecture)
+- [Project Canvas & App Drawer](/docs/how-to/project-canvas)
+- [App & Database Templates](/docs/how-to/templates)
+- [Security Model](/docs/concepts/security-model)

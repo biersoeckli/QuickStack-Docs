@@ -513,7 +513,7 @@ export function FeaturesSection() {
         <Reveal delay={140} className="flex md:col-span-6">
           <FeatureCard
             eyebrow="Operate"
-            title="Montioring"
+            title="Monitoring"
             description="Live CPU, RAM and disk metrics per app, with health checks and restart policies."
           >
             <MonitoringChart />

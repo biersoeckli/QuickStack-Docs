@@ -1,0 +1,44 @@
+---
+sidebar_position: 4
+title: "File Browser"
+description: "Browse and download files in a QuickStack volume without shelling into a container."
+keywords: ["QuickStack file browser", "volume file browser", "download volume", "download files", "filebrowser"]
+---
+
+QuickStack can launch a temporary **File Browser** for any volume so you can inspect and download files from the web UI, without opening a terminal.
+
+## Open the file browser
+
+1. Open the app in the **Project Canvas** and go to **Settings → Storage**.
+2. In the **Volumes** card, click the folder icon (**View content of Volume**).
+3. Confirm the **Open File Browser** dialog. The app must be stopped first, so click **Stop App and Open File Browser**.
+4. When the **File Browser Ready** dialog appears, note the generated credentials and click **Open File Browser**.
+
+The File Browser opens in a new tab. Sign in with username `quickstack` and the generated password shown in the dialog.
+
+<Callout type="warn">
+**The app is stopped while browsing**
+QuickStack temporarily scales the app to zero to mount the volume safely. Remember to start or redeploy the app when you are finished.
+</Callout>
+
+## Download volume content
+
+To download an archive of a whole volume without opening the file browser:
+
+1. Open the app and go to **Settings → Storage**.
+2. In the **Volumes** card, click the download icon (**Download volume content**).
+3. Confirm **Download Volume Data** and click **Download**.
+
+The volume is packaged as a ZIP file. The app must be running.
+
+## Limitations
+
+- The folder and download buttons are hidden for [shared volume](/docs/how-to/storage/shared-volumes) mounts and for users without write access.
+- File Browser runs as a separate temporary pod using `filebrowser/filebrowser:v2.31.2`; it is not part of the app's own container.
+
+## Related
+
+- [Volumes](/docs/how-to/storage/volumes)
+- [File Mounts](/docs/how-to/storage/file-mounts)
+- [Shared Volumes](/docs/how-to/storage/shared-volumes)
+- [Download & Restore backups](/docs/how-to/backups/download-and-restore)

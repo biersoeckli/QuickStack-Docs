@@ -1,0 +1,67 @@
+---
+sidebar_position: 6
+title: "Download & Restore"
+description: "Download QuickStack volume, database, and system backups, and restore the QuickStack configuration."
+keywords: ["QuickStack restore", "download backup", "disaster recovery", "system restore", "volume backup download"]
+---
+
+This page covers how to get data back out of QuickStack backups. For configuration, see the individual backup guides.
+
+## Download a scheduled backup
+
+Volume and database backups are stored in your [S3 target](/docs/how-to/backups/s3-targets). You can download them from inside QuickStack:
+
+1. Open **Backups** in the main menu.
+2. Find the schedule and open its backups detail dialog.
+3. Use the download icon on a backup row to download the archive.
+
+You can also download a backup file from the S3 bucket directly with any S3 client.
+
+## Download a live volume
+
+To snapshot the current contents of a running app's volume:
+
+1. Open the app in the **Project Canvas** and go to **Settings → Storage**.
+2. In the **Volumes** card, click the download icon (**Download volume content**).
+3. Confirm **Download Volume Data** and click **Download**.
+
+The volume is packaged as a ZIP archive. This is a one-off export, not a scheduled backup. See [File Browser](/docs/how-to/storage/file-browser) for browsing a volume interactively.
+
+## Restore a volume or database
+
+<Callout type="warn">
+**No in-UI restore for volume and database backups yet**
+Volume and database backups can be downloaded, but QuickStack does not currently provide a button to restore them into a volume or database. Plan your recovery around the downloaded dump files.
+</Callout>
+
+Recovery options depend on the workload:
+
+- **Databases:** the backup is a compressed dump (`pg_dump`, `mariadb-dump`, or `mongodump`). Restore it with the matching tool against the database's internal hostname and port. Connect from another app in the same project once a network policy rule allows it.
+- **Volumes:** the backup is an archive of the volume contents. It can be extracted into a volume through a workload that mounts the same volume.
+
+## Restore a system backup
+
+The QuickStack configuration database **can** be restored from the UI. A system backup captures projects, users, app definitions, and settings.
+
+1. Go to **Settings → Platform → Storage & Backups**.
+2. Click **View & Restore Backups**.
+3. Under **Upload and Restore Backup**, select a `.tar.gz` or `.tgz` system backup file.
+4. Confirm **Restore System Backup** by clicking **Restore Backup**.
+
+<Callout type="error">
+**Restoring replaces all configuration**
+A system restore replaces the entire QuickStack configuration — projects, users, environment variables, and settings. Download a fresh system backup before restoring, and restart QuickStack afterwards as prompted. See [System Backups](/docs/how-to/backups/system-backups) for the full warning.
+</Callout>
+
+## Recovery checklist
+
+1. Keep at least one recent [system backup](/docs/how-to/backups/system-backups) outside the cluster.
+2. Configure [volume](/docs/how-to/backups/volume-backups) and [database](/docs/how-to/backups/database-backups) backup schedules for critical workloads.
+3. Periodically download a backup and verify that it opens and restores on a non-production instance.
+
+## Related
+
+- [Backups Overview](/docs/how-to/backups/overview)
+- [System Backups](/docs/how-to/backups/system-backups)
+- [File Browser](/docs/how-to/storage/file-browser)
+- [Networking & Policies](/docs/how-to/networking)

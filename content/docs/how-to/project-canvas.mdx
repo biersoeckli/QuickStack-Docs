@@ -28,7 +28,7 @@ Right-click an empty spot on the canvas to create an **Empty App**, an app from 
 
 1. Click **Create App**, or right-click an empty spot on the canvas, and choose **Empty App**, **Template**, or **Database**.
 2. Give the app a name. It appears as a node and its **details drawer** opens.
-3. If the app has no source yet, click **Connect App Source** in the drawer and follow the [source wizard](/docs/tutorials/first-app-from-git). The source, branch, and build method live under **Settings → Source**.
+3. If the app has no source yet, click **Connect App Source** in the drawer and follow the [source wizard](/docs/tutorials/first-app-from-git). The source, branch, and build method live under **Settings → Source**. To start from a template instead, see [App & Database Templates](/docs/how-to/templates).
 4. Review and adjust the app's settings in the drawer, then click **Deploy** in the drawer header.
 
 <Callout>
@@ -42,7 +42,7 @@ Creating, editing, deploying, and monitoring an app all happen from the Project 
 |---------|---------|
 | **App node** | An application, with its live build and pod status |
 | **Database node** | A managed database (PostgreSQL, MariaDB, MongoDB, Redis) |
-| **Agent node** | An AI agent sandbox |
+| **Agent node** | An AI agent sandbox (see [AI Agents](/docs/how-to/agents)) |
 | **Internet node** | Access to the public internet |
 | **Solid edge** | A complete, active connection |
 | **Dashed edge** | An incomplete or cross-project connection |
@@ -109,10 +109,10 @@ The **Settings** tab groups all app configuration into sections:
 | Section | What you can change |
 |---------|---------------------|
 | **Source** | Git/container source, branch, credentials, build method, Dockerfile path, framework configuration |
-| **Deployment** | Rate limits and advanced container settings (nested **Advanced settings** drawer) |
+| **Deployment** | [Container Rate Limits](/docs/how-to/scaling) (replicas, CPU, memory) and [advanced container settings](/docs/how-to/deployments/container-configuration) |
 | **Environment** | Environment variables and build arguments (nested **Environment variables** drawer) |
 | **Networking** | Domains, node ports, and network policies (nested **Network policies** drawer) |
-| **Storage** | Volumes and file mounts |
+| **Storage** | [Volumes](/docs/how-to/storage/volumes), [shared volumes](/docs/how-to/storage/shared-volumes), and [file mounts](/docs/how-to/storage/file-mounts) |
 | **Advanced** | Basic auth and health checks (nested **Health checks** drawer) |
 
 Changes are saved immediately but only take effect after you click **Deploy**.
@@ -148,7 +148,10 @@ Right-click a connection to **Delete connection**, which removes the network pol
 
 ## Related
 
+- [App & Database Templates](/docs/how-to/templates)
+- [Scaling & Resource Limits](/docs/how-to/scaling)
 - [Networking & Policies](/docs/how-to/networking)
 - [Deploy & Redeploy](/docs/how-to/deployments/redeploy-and-rollbacks)
 - [Builds overview](/docs/how-to/observability/builds-overview)
 - [Logs & terminal](/docs/how-to/observability/logs-and-terminal)
+- [AI Agents](/docs/how-to/agents)

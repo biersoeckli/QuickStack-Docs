@@ -57,7 +57,7 @@ content/docs/
    }
    ```
 
-4. Run `npm run dev` and verify the page renders correctly at `http://localhost:3000/docs/…`.
+4. Run `bun dev` and verify the page renders correctly at `http://localhost:3000/docs/…`.
 
 ### Adding images
 

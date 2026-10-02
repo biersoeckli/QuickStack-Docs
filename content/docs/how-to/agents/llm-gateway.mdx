@@ -1,0 +1,53 @@
+---
+sidebar_position: 2
+title: "LLM Gateway"
+description: "Connect QuickStack AI agents to a LiteLLM-compatible gateway for centralized model access and API keys."
+keywords: ["QuickStack LLM gateway", "LiteLLM", "model alias", "AI models", "admin key"]
+---
+
+An **LLM Gateway** is a LiteLLM-compatible endpoint that QuickStack agents use to reach language models. Centralizing access in a gateway means you manage model credentials in one place instead of distributing provider API keys to every sandbox.
+
+<Callout type="warn">
+**Experimental / canary**
+LLM gateways are part of the experimental agent feature and are only visible when the canary channel is enabled.
+</Callout>
+
+## Add an LLM gateway
+
+1. Go to **Settings → Integrations → LLM Gateways**.
+2. Click **Add LLM Gateway**.
+3. Fill in:
+
+   | Field | Description |
+   |-------|-------------|
+   | **Name** | A label for the gateway |
+   | **LiteLLM Base URL** | The gateway endpoint, e.g. `https://litellm.example.com` |
+   | **LiteLLM Admin Key** | The admin key used to manage models on the gateway |
+
+4. Click **Save**.
+5. Click **Test Connection** to verify QuickStack can reach the gateway.
+
+## Deploy a LiteLLM instance
+
+If you do not have a gateway yet, QuickStack can deploy one for you:
+
+1. In the LLM Gateway dialog, choose **Deploy new LiteLLM instance**.
+2. Select an **Existing Project** or create a **New Project** (the default project name is `LiteLLM`).
+3. QuickStack deploys LiteLLM together with its PostgreSQL and Redis dependencies and wires up the connection.
+
+You can also deploy **LiteLLM** from the [template catalog](/docs/how-to/templates).
+
+## Use a gateway in an agent
+
+When creating or editing an agent, choose the **LLM Gateway** and a **Model Alias** in the agent's model configuration. The alias identifies which model the gateway should route to.
+
+<Callout>
+**Model aliases**
+Agent templates receive the gateway URL and alias as environment variables, so the harness in the sandbox talks only to the gateway. Available model aliases come from the gateway's LiteLLM configuration.
+</Callout>
+
+## Related
+
+- [AI Agents & Sandboxes](/docs/how-to/agents)
+- [App & Database Templates](/docs/how-to/templates)
+- [REST API overview](/docs/rest-api/overview)

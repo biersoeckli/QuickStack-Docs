@@ -2,6 +2,7 @@
   "pages": [
     "index",
     "tutorials",
+    "concepts",
     "how-to",
     "rest-api",
     "reference"

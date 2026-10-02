@@ -4,6 +4,7 @@
     "s3-targets",
     "volume-backups",
     "database-backups",
+    "download-and-restore",
     "system-backups"
   ]
 }

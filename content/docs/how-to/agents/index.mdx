@@ -1,0 +1,76 @@
+---
+sidebar_position: 1
+title: "AI Agents & Sandboxes"
+description: "Run long-lived AI coding agents as isolated sandbox workloads in QuickStack."
+keywords: ["QuickStack agents", "agent sandbox", "Claude Code", "OpenCode", "Gemini CLI", "Copilot CLI", "warm pool", "gVisor"]
+---
+
+QuickStack can run **AI agents** as first-class workloads. An agent is a long-lived, isolated container workspace for AI-assisted work; each running instance is called a **sandbox**. Agents live in their own project type and use the same networking, storage, and logs as apps.
+
+<Callout type="warn">
+**Experimental / canary**
+AI agents depend on the **Kubernetes Agent Sandbox** add-on, which is only visible when the **Canary Channel** is enabled. Treat agents as experimental until they reach the stable channel.
+</Callout>
+
+## Prerequisites
+
+1. Enable the canary channel in **Settings → Platform → Updates & Add-Ons**.
+2. Install the **Kubernetes Agent Sandbox** add-on. See [Cluster Add-ons](/docs/how-to/admin/cluster-add-ons).
+3. Optional: install the **gVisor** add-on if you want a stronger runtime isolation profile.
+4. Optional but recommended: configure an [LLM Gateway](/docs/how-to/agents/llm-gateway) so agents can reach models without scattering API keys.
+
+Once the add-on is ready, **Agent** becomes available as a project type and in the sidebar.
+
+## Create an agent
+
+1. Create a project of type **Agent**.
+2. In the project, click **Create Agent** (or start from **Create Agent from Template**).
+3. Give it a name and choose its **LLM Gateway** and **Model Alias**.
+4. Review the agent's configuration tabs: **Source**, **Prompt**, **Container**, **Storage**, **Networking**, and **Secrets**.
+5. Click **Deploy**.
+
+## Agent templates
+
+QuickStack ships six agent templates:
+
+| Template | Interface |
+|----------|-----------|
+| **OpenCode Web** | Browser UI (port `4096`) |
+| **OpenCode CLI** | Terminal |
+| **Gemini CLI** | Terminal |
+| **GitHub Copilot CLI** | Terminal |
+| **Claude Code CLI** | Terminal |
+| **DeepSeek Harness CLI** | Terminal |
+
+Templates install the corresponding CLI into the agent's volume at first start and run it inside the sandbox.
+
+## Sandboxes
+
+An agent can have multiple sandboxes. Open the agent and use the **Agent Sandboxes** card:
+
+- **Start New Sandbox** creates a new instance.
+- Each sandbox row shows its **Sandbox Name**, **Status**, and **Created** time.
+- Actions: **View Logs**, **Open Agent UI** (when the template provides one), **Open Files**, **Open Terminal**, and **Stop Sandbox**.
+
+<Callout>
+**Warm pools**
+**Warm Pool Replicas** (0–10) in the agent's **Container Configuration** keeps pre-warmed sandboxes ready so a new agent starts instantly instead of cold-booting a container. Higher values consume more cluster resources.
+</Callout>
+
+## Runtime isolation
+
+The **Runtime Class** setting in the agent's container configuration chooses the Kubernetes `RuntimeClass`:
+
+- **K3s default runtime** — standard container isolation.
+- **gVisor** — a sandboxed runtime with a stronger isolation boundary, available after installing the gVisor add-on.
+
+## Managing agents
+
+Agents support the same operational tooling as apps: logs, an interactive terminal, file access, volumes, and internal networking. They can also be managed through the [REST API](/docs/rest-api/overview).
+
+## Related
+
+- [LLM Gateway](/docs/how-to/agents/llm-gateway)
+- [Cluster Add-ons](/docs/how-to/admin/cluster-add-ons)
+- [Project Canvas & App Drawer](/docs/how-to/project-canvas)
+- [Networking & Policies](/docs/how-to/networking)
