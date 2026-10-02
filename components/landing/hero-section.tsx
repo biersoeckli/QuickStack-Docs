@@ -75,7 +75,7 @@ export function HeroSection({ theme }: HeroSectionProps) {
                 }`}
                 aria-label="QuickStack product demonstration"
               >
-                <source src="/videos/quickstack_v1_demo_4k.mp4" type="video/mp4" />
+                <source src="/videos/quickstack_v1_demo_4k_2.mp4" type="video/mp4" />
               </video>
             </div>
           </div>
