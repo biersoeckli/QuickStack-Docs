@@ -13,6 +13,15 @@ When deploying an app from a Git repository, QuickStack supports three build met
 | **Railpack** | No | Apps in supported languages where you want zero-config builds |
 | **Dockerfile** | Yes | Full control over the build; custom base images; unsupported stacks |
 
+```mermaid
+flowchart TD
+  start["Git repository"] --> q1{"Provide a Dockerfile?"}
+  q1 -->|"Yes"| dockerfile["Dockerfile<br/>full control over the build"]
+  q1 -->|"No"| q2{"One of the supported JS frameworks?"}
+  q2 -->|"Next.js, Nuxt, SvelteKit,<br/>React, Angular, Astro"| framework["Framework preset<br/>pre-filled build and run commands"]
+  q2 -->|"No"| railpack["Railpack<br/>zero-config auto-detect"]
+```
+
 ## Framework
 
 The **Framework** method uses opinionated presets for the most common JavaScript frameworks. You pick your framework and QuickStack pre-fills the install, build, and run commands, so you get a working build without writing a Dockerfile or configuring Railpack manually.
