@@ -43,8 +43,6 @@ For Git-source apps, QuickStack can redeploy the code from an earlier commit.
 
 QuickStack reapplies the image that was built for that commit. If that image is no longer in the internal registry, it rebuilds the commit first. Rollback deployments are marked with a purple **Rollback** badge in the deployment list.
 
-%%SCREENSHOT%%
-
 <Callout type="warn">
 **Rollback replaces the running version**
 Rolling back redeploys the app at the selected commit. Any configuration staged since then is applied as well. Make sure the target commit is the one you want to run.

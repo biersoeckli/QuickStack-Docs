@@ -16,8 +16,6 @@ For injecting read-only config files, see [File Mounts](/docs/how-to/storage/fil
 1. Open the app in the **Project Canvas** and go to **Settings → Storage**.
 2. Click **Add Volume**.
 
-%%SCREENSHOT%%
-
 3. Fill in the fields:
    - **Mount Path** — path inside the container (e.g. `/data`, `/app/uploads`)
    - **Size in MB** — storage to allocate. You can increase but **not decrease** after creation.
@@ -25,8 +23,6 @@ For injecting read-only config files, see [File Mounts](/docs/how-to/storage/fil
    - **Access Mode** — see below.
    - **Node Affinity** _(optional)_ — pin the volume to a specific node.
 4. Click **Save**, then **Deploy**.
-
-%%SCREENSHOT%%
 
 <Callout>
 **Deploy required**
@@ -62,8 +58,6 @@ If your app runs with more than one replica **and** instances write to a shared 
 - **Resize** — increase only; you cannot reduce a volume's size.
 - **Change mount path** — allowed, requires a redeploy.
 - **Delete** — permanently destroys all data on the volume. There is no undo. Back up first.
-
-%%SCREENSHOT%%
 
 ## Troubleshooting
 

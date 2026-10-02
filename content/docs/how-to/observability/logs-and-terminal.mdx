@@ -9,8 +9,6 @@ keywords: ["QuickStack logs", "terminal", "debugging", "monitoring", "live logs"
 
 When a deployment is triggered, QuickStack streams **Kubernetes events** (pod scheduling, image pulls, container starts and stops) directly into the deployment log alongside the build output. This provides additional context when a deployment is slow or fails — for example, you can see whether a pod is waiting for image pull or failing readiness probes (health check).
 
-%%SCREENSHOT%%
-
 Access deployment logs from the app's **Deployments** tab by clicking **Open Terminal** on a deployment, or from the global [Builds](/docs/how-to/observability/builds-overview) page.
 
 ## Live App logs
@@ -20,8 +18,6 @@ The **Logs** from running apps are streamed to the app's **Logs** tab in the Pro
 1. Open the app in the **Project Canvas**.
 2. Go to the **Logs** tab in the **Project Canvas** drawer.
 3. If your app runs multiple replicas, use the pod dropdown to select which pod to tail.
-
-%%SCREENSHOT%%
 
 <Callout>
 The log viewer keeps the most recent **1000 lines**. Older lines are dropped as new ones stream in, so it is safe to leave open.
@@ -44,13 +40,9 @@ The **Terminal** opens a shell session directly inside a running container from 
 The Terminal button is only visible if you have **Write** permissions for the application.
 </Callout>
 
-%%SCREENSHOT%%
-
 3. Choose your shell:
    - **Start sh** — available on almost all Linux containers (including Alpine)
    - **Start bash** — richer experience; requires `bash` to be installed in the image
-
-%%SCREENSHOT%%
 
 4. To end the session, click **Disconnect Session** or close the dialog.
 

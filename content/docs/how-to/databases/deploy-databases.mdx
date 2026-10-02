@@ -20,19 +20,10 @@ QuickStack provides pre-configured templates for popular databases. Templates se
 ### 1. Create the database
 
 1. Open your project's **Project Canvas** and click **Create App** → **Database**, or right-click an empty spot on the canvas and choose **Create Database**.
-
-%%SCREENSHOT%%
-
 2. Select the database type.
-
-%%SCREENSHOT%%
-
 3. Configure the instance:
    - **App Name** — a unique name (e.g. `my-postgres-db`)
    - **Password** — use the generate button for a strong random password
-
-%%SCREENSHOT%%
-
 4. Click **Create**. QuickStack provisions the volume, deploys the container, and configures internal networking.
 
 ## Connecting to your database
@@ -44,8 +35,6 @@ Other apps in the same project connect via the **service hostname**:
 - **Hostname:** `svc-<app-id>.<project-id>.svc.cluster.local` (copy the exact value from the database's **Settings → Networking** → **Network Policy** rule actions → **Copy internal hostname**)
 - **Port:** standard port for the engine (PostgreSQL: `5432`, MySQL/MariaDB: `3306`, MongoDB: `27017`, Redis: `6379`)
 - **Credentials:** shown in the **DB Access** tab in the app drawer
-
-%%SCREENSHOT%%
 
 <Callout>
 **Allow the connection first**

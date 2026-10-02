@@ -17,8 +17,6 @@ Go to **Settings** → **Platform** → **Builds**.
 
 When more builds are triggered than the limit allows, the extra builds wait in **PENDING** state and start as slots free up, in queue order.
 
-%%SCREENSHOT%%
-
 <Callout type="warn">
 **Higher values need more resources**
 Each concurrent build runs its own container. On a small cluster, raising this value can compete with your running apps for CPU and memory.
@@ -37,8 +35,6 @@ The **Build Node** dropdown determines which cluster node schedules build contai
 ## Resource limits (k3s native only)
 
 When **Build Node** is set to **k3s native**, you can configure per-build-container resource constraints:
-
-%%SCREENSHOT%%
 
 | Field | Unit | Description |
 |-------|------|-------------|

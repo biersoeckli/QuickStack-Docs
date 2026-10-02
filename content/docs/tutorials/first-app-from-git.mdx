@@ -24,15 +24,10 @@ All app management happens in the **Project Canvas**, the visual project view wh
 1. On the dashboard, click **Create Project** and give it a name.
 2. Open the project (the **Project Canvas** opens by default), click **Create App** → **Empty App**, and give your app a name. You can also right-click an empty spot on the canvas.
 
-%%SCREENSHOT%%
-
 ## Step 2: Configure the app source
 
 1. The app's **details drawer** is now open on the Project Canvas. To connect a source, click **Connect App Source**.
-%%SCREENSHOT%%
-
 2. Next you have to choose the source type. QuickStack supports Git HTTPS, Git SSH, and Docker Container Image sources.
-%%SCREENSHOT%%
 
 **Differences between source types:**
 
@@ -45,22 +40,13 @@ All app management happens in the **Project Canvas**, the visual project view wh
 ### Option A — Git HTTPS
 
 4. Enter the HTTPS clone URL (e.g. `https://github.com/org/repo.git`). For private repos, enter your **Git Username** and a **Personal Access Token** with `read` access on the repository.
-%%SCREENSHOT%%
-
 5. QuickStack attempts to load the available branches. Select a branch from the list.
-%%SCREENSHOT%%
-
 6. Choose the build method:
 - **Framework** — select one of the supported JavaScript frameworks; QuickStack pre-fills the commands. Review them and adjust if needed.
 - **Railpack** — auto-detects your language and framework; no Dockerfile needed.
 - **Dockerfile** — uses a `Dockerfile` you provide in your repository. This is more flexible but requires a valid `Dockerfile` in the repo.
-%%SCREENSHOT%%
-
 7. When Dockerfile is chosen, QuickStack auto-detects the Dockerfile location. Confirm or adjust the **Dockerfile Path** if needed (relative to repo root, e.g. `./Dockerfile`).
-%%SCREENSHOT%%
-
 8. Review the summary and click **Save & Deploy** to start the deployment of your app.
-%%SCREENSHOT%%
 
 ### Option B — Git SSH
 
@@ -70,22 +56,13 @@ All app management happens in the **Project Canvas**, the visual project view wh
    - **GitHub:** Repository → Settings → Deploy keys → Add deploy key
    - **GitLab:** Repository → Settings → Repository → Deploy keys
    - **Bitbucket:** Repository → Repository settings → Access keys
-%%SCREENSHOT%%
-
-5. QuickStack attempts to load the available branches. Select a branch from the list.
-%%SCREENSHOT%%
-
-6. Choose the build method:
+7. QuickStack attempts to load the available branches. Select a branch from the list.
+8. Choose the build method:
 - **Framework** — select one of the supported JavaScript frameworks; QuickStack pre-fills the commands. Review them and adjust if needed.
 - **Railpack** — auto-detects your language and framework; no Dockerfile needed.
 - **Dockerfile** — uses a `Dockerfile` you provide in your repository. This is more flexible but requires a valid `Dockerfile` in the repo.
-%%SCREENSHOT%%
-
-7. When Dockerfile is chosen, QuickStack auto-detects the Dockerfile location. Confirm or adjust the **Dockerfile Path** if needed (relative to repo root, e.g. `./Dockerfile`).
-%%SCREENSHOT%%
-
-8. Review the summary and click **Save & Deploy** to start the deployment of your app.
-%%SCREENSHOT%%
+9. When Dockerfile is chosen, QuickStack auto-detects the Dockerfile location. Confirm or adjust the **Dockerfile Path** if needed (relative to repo root, e.g. `./Dockerfile`).
+10. Review the summary and click **Save & Deploy** to start the deployment of your app.
 
 
 <Callout>
@@ -103,10 +80,6 @@ Any configuration change — Git source, env vars, storage, domains — only tak
 
 1. Open the **Deployments** tab — status turns green when the app is running.
 2. Click **Open Terminal** on the current deployment to inspect build and startup output in real time.
-
-%%SCREENSHOT%%
-
-%%SCREENSHOT%%
 
 ## Troubleshooting
 
