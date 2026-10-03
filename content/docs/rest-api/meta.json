@@ -3,7 +3,6 @@
   "pages": [
     "overview",
     "authentication",
-    "javascript-typescript-sdk",
-    "mcp-server"
+    "javascript-typescript-sdk"
   ]
 }
