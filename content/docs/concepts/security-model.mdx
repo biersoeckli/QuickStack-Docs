@@ -49,11 +49,6 @@ Credentials are sent as Base64 on every request. Always use HTTPS, and keep appl
 
 QuickStack is fully self-hosted. Application data, volumes, backups, and the configuration database stay on infrastructure you control. There is no third-party analytics or tracking SDK in the product.
 
-<Callout>
-**Update check**
-QuickStack contacts `get.quickstack.dev` to check for new versions. This request includes a randomly generated instance ID (`qsInstanceId`) and has no built-in opt-out toggle. No application, project, or user data is sent. If outbound access to `get.quickstack.dev` is blocked, QuickStack still runs; only the in-UI update check is affected.
-</Callout>
-
 **Current limitations** relevant to compliance reviews:
 
 - No user audit log (login history, change history) is implemented. Deployment and build logs are available per workload.
