@@ -49,6 +49,11 @@ export const featureGroups: FeatureGroup[] = [
         description: 'Full control when you need it, custom path supported.',
       },
       {
+        title: 'Build arguments',
+        description:
+          'Pass build-time ARG values to Dockerfile builds without baking them into the image.',
+      },
+      {
         title: 'Instant Rollback',
         description:
           'Revert to a previous version of your app with a single click.',
@@ -166,6 +171,16 @@ export const featureGroups: FeatureGroup[] = [
         description: 'Streamed in the UI.',
       },
       {
+        title: 'Live deploy status',
+        description:
+          'Follow build and pod status as it streams, per app and across the project canvas.',
+      },
+      {
+        title: 'Visual project canvas',
+        description:
+          'See every app, database and connection on one graph, and start, stop, deploy or inspect each node from its drawer.',
+      },
+      {
         title: 'Live CPU/RAM metrics',
         description: 'Per app, in real time.',
       },
@@ -184,6 +199,11 @@ export const featureGroups: FeatureGroup[] = [
         title: 'Scheduled volume backups to S3',
         description:
           'Any S3-compatible target, cron schedule, configurable retention.',
+      },
+      {
+        title: 'Backup before deployment',
+        description:
+          'Automatically snapshot an app and its connected volumes before a deploy, with fail-safe options.',
       },
       {
         title: 'Native database dump backups',
@@ -274,6 +294,11 @@ export const featureGroups: FeatureGroup[] = [
         title: 'Self-updating',
         description:
           'Update QuickStack from inside the UI, stable or canary channel.',
+      },
+      {
+        title: 'Cluster add-ons',
+        description:
+          'Install, update and remove Longhorn and cert-manager from the UI, with version info.',
       },
       {
         title: 'Runs on real Kubernetes (k3s)',
