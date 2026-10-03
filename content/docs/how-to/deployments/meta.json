@@ -3,6 +3,7 @@
     "redeploy-and-rollbacks",
     "build-methods",
     "webhooks-auto-deploy",
-    "container-configuration"
+    "container-configuration",
+    "scaling"
   ]
 }

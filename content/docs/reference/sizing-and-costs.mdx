@@ -32,7 +32,7 @@ Use these rules of thumb, then verify with [Cluster Monitoring](/docs/how-to/adm
 | **Several apps plus databases** | 4 vCPU / 8 GB gives comfortable headroom |
 | **Build-heavy Git workloads** | More CPU helps; raise **Max Parallel Builds** only after adding resources. See [Build Container Settings](/docs/how-to/admin/build-container-settings) |
 | **Databases with real data** | Add RAM for the database engine cache, and reserve storage generously |
-| **Many concurrent users** | Add [worker nodes](/docs/how-to/admin/cluster-nodes) and set [reservations](/docs/how-to/scaling) |
+| **Many concurrent users** | Add [worker nodes](/docs/how-to/admin/cluster-nodes) and set [reservations](/docs/how-to/deployments/scaling) |
 
 <Callout type="warn">
 **Builds are the peak load**
