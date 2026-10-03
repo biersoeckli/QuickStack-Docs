@@ -44,7 +44,8 @@ flowchart TB
   s3["S3-compatible bucket"]
 
   user -->|"HTTP / HTTPS"| traefik
-  user -->|"port 30000"| qs
+  user -->|"port 30000<br/>(initial setup)"| qs
+  traefik -->|"control panel domain"| qs
   traefik --> app
   traefik --> db
   traefik --> sandbox
@@ -113,7 +114,7 @@ Editing settings only changes the stored configuration. Clicking **Deploy** is w
 - **External HTTP(S) traffic** enters through Traefik on ports `80`/`443` and is routed to an app by its [domain](/docs/how-to/networking/domains).
 - **Internal traffic** between workloads uses Kubernetes service hostnames of the form `svc-<app-id>.<project-id>.svc.cluster.local` and is deny-by-default. See [Networking & Policies](/docs/how-to/networking).
 - **Non-HTTP traffic** can be exposed directly on cluster nodes with [Node Ports](/docs/how-to/networking/node-ports).
-- The QuickStack UI itself is served on port `30000` until you assign it a domain.
+- The QuickStack control panel is served on port `30000` for the initial setup. Once you assign it a domain, Traefik serves it with a Let's Encrypt certificate instead, and port `30000` is only needed for the initial configuration.
 
 See [Ports & Endpoints](/docs/reference/ports-and-endpoints) for the full list.
 
