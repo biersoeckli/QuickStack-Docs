@@ -43,3 +43,7 @@ Then pass `quickstack.openapi.json` to an OpenAPI-compatible generator of your c
 <Callout type="info">
 For JavaScript and TypeScript, you can also use the official [QuickStack SDK](/docs/rest-api/javascript-typescript-sdk), which provides typed methods generated from the QuickStack API.
 </Callout>
+
+<Callout type="warn">
+**Canary:** QuickStack can also expose a remote [MCP Server](/docs/mcp-server) generated from this REST API, so AI clients such as Claude Code, Codex and GitHub Copilot can call operations with a REST API key. It is a canary feature and can return secrets in plaintext.
+</Callout>

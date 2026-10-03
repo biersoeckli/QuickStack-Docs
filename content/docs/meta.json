@@ -1,6 +1,7 @@
 {
   "pages": [
     "index",
+    "mcp-server",
     "tutorials",
     "concepts",
     "how-to",

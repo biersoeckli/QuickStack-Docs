@@ -1,0 +1,140 @@
+---
+sidebar_position: 0
+title: "MCP Server (Canary)"
+description: "Connect AI clients such as Claude Code, Codex and GitHub Copilot to QuickStack through the remote Model Context Protocol server."
+keywords: ["QuickStack MCP", "Model Context Protocol", "MCP server", "Claude Code", "Codex", "GitHub Copilot", "canary"]
+---
+
+<Callout type="warn">
+**Canary feature.** The MCP server is still in active development and is only available on the [canary channel](#enable-the-mcp-server). Tool arguments and results are passed to the AI host and model. Only connect trusted clients, and do not rely on it in production yet.
+</Callout>
+
+The remote MCP server exposes QuickStack as a [Model Context Protocol](https://modelcontextprotocol.io) endpoint under your QuickStack origin. AI clients such as Claude Code, Codex and GitHub Copilot can then read and change QuickStack state through the existing REST API.
+
+The server is generated from the QuickStack REST API: it introspects the REST routes and their schemas, so operations stay in sync with the API and new REST routes appear automatically. Authentication reuses the [REST API key](/docs/rest-api/authentication) you already use.
+
+## Available tools
+
+Instead of one tool per REST endpoint, the server exposes a small, fixed set of generic tools:
+
+| Tool | Read-only | Purpose |
+|------|-----------|---------|
+| `search_operations` | Yes | Discover operations and fetch their schemas on demand. |
+| `execute_read_operation` | Yes | Run a read-only operation by `operationId`, with `pathParams` and `query`. |
+| `execute_operation` | No | Run a mutating operation by `operationId`, with `pathParams`, `query` and `body`. |
+
+`search_operations` accepts an optional free-text `search` term and a `detail` level (`name`, `summary`, or `full`). Each result reports `readOnly` and which tool to call, so a client can discover an operation cheaply and only pull in the full input/output schema when it needs it.
+
+Because execution goes through the same API layer as the REST API, validation, authorization, error handling and business logic behave exactly as they do for REST. Operations without a JSON response or with a non-JSON request body—such as binary file read/write on agent sandboxes—are excluded from the catalog and return an error instead.
+
+## Security
+
+<Callout type="error">
+The MCP server is built on top of the REST API, so read operations can return secrets in plaintext—including app environment variables, build arguments, Git tokens, container registry credentials and app basic-auth passwords. Write operations can send the same values. Only connect trusted AI clients and use a REST API key from a user with the minimum required permissions.
+</Callout>
+
+- The endpoint authenticates with a REST API key and runs with the permissions of its owning user, exactly like the REST API.
+- Tool arguments and results are passed to the AI host and model.
+- The API key is never included in tool results, errors, or logs.
+- The endpoint is stateless and follows the MCP Streamable HTTP transport.
+
+## Enable the MCP server
+
+The MCP server is gated behind the canary channel and requires administrator access.
+
+1. Open **Settings** → **Platform** → **Updates & Add-Ons** and turn on **Canary Channel**. Confirm the warning.
+2. Open **Settings** → **Developer** → **MCP Server**. This page only appears when the canary channel is on.
+3. Turn on **Enable the MCP server at /api/mcp**.
+4. Create a REST API key in **Settings** → **Account & Access** → **API Keys** and copy it.
+
+The endpoint is served at:
+
+```
+https://<your-quickstack-host>/api/mcp
+```
+
+## Connect a client
+
+Send the REST API key as a bearer token (`Authorization: Bearer <key>`). The client sets the MCP protocol headers itself.
+
+### Claude Code
+
+Add the server to `.mcp.json` in your project root, or to your user configuration:
+
+```json
+{
+  "mcpServers": {
+    "quickstack": {
+      "type": "http",
+      "url": "https://<your-quickstack-host>/api/mcp",
+      "headers": { "Authorization": "Bearer <YOUR_REST_API_KEY>" }
+    }
+  }
+}
+```
+
+Or add it with the CLI:
+
+```bash
+claude mcp add --transport http quickstack https://<your-quickstack-host>/api/mcp \
+  --header "Authorization: Bearer <YOUR_REST_API_KEY>"
+```
+
+### Codex
+
+Add a Streamable HTTP server to `~/.codex/config.toml` and export the key:
+
+```toml
+[mcp_servers.quickstack]
+url = "https://<your-quickstack-host>/api/mcp"
+bearer_token_env_var = "QUICKSTACK_API_KEY"
+```
+
+```bash
+export QUICKSTACK_API_KEY="<YOUR_REST_API_KEY>"
+```
+
+To embed a static header instead (not recommended in shared repositories):
+
+```toml
+[mcp_servers.quickstack]
+url = "https://<your-quickstack-host>/api/mcp"
+http_headers = { Authorization = "Bearer <YOUR_REST_API_KEY>" }
+```
+
+### GitHub Copilot
+
+Add the server to `.vscode/mcp.json`. VS Code prompts for the key through the input variable:
+
+```json
+{
+  "servers": {
+    "quickstack": {
+      "type": "http",
+      "url": "https://<your-quickstack-host>/api/mcp",
+      "headers": { "Authorization": "Bearer ${input:quickstack-api-key}" }
+    }
+  }
+}
+```
+
+VS Code also reads a portable `.mcp.json` at the workspace root, which uses the same `mcpServers` shape as Claude Code.
+
+### Generic MCP client
+
+Any MCP Streamable HTTP client can call the endpoint directly:
+
+```
+POST https://<your-quickstack-host>/api/mcp
+Content-Type: application/json
+Accept: application/json, text/event-stream
+Authorization: Bearer <YOUR_REST_API_KEY>
+
+{"jsonrpc":"2.0","id":1,"method":"tools/list"}
+```
+
+Call `search_operations` first to discover operation ids and their schemas, then call `execute_read_operation` or `execute_operation` with `pathParams`, `query` and `body`.
+
+## Disable the MCP server
+
+Turn off **Enable the MCP server at /api/mcp** in **Settings** → **Developer** → **MCP Server**. When the MCP server or the canary channel is disabled, the endpoint returns JSON-RPC error `-32002` (`MCP server is disabled.`) with HTTP status `404`. A missing or invalid REST API key returns JSON-RPC error `-32001` (`Unauthorized`) with HTTP status `401`.
