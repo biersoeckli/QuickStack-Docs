@@ -1,5 +1,5 @@
 ---
-sidebar_position: 0
+sidebar_position: 4
 title: "MCP Server (Canary)"
 description: "Connect AI clients such as Claude Code, Codex and GitHub Copilot to QuickStack through the remote Model Context Protocol server."
 keywords: ["QuickStack MCP", "Model Context Protocol", "MCP server", "Claude Code", "Codex", "GitHub Copilot", "canary"]
@@ -9,9 +9,9 @@ keywords: ["QuickStack MCP", "Model Context Protocol", "MCP server", "Claude Cod
 **Canary feature.** The MCP server is still in active development and is only available on the [canary channel](#enable-the-mcp-server). Tool arguments and results are passed to the AI host and model. Only connect trusted clients, and do not rely on it in production yet.
 </Callout>
 
-The remote MCP server exposes QuickStack as a [Model Context Protocol](https://modelcontextprotocol.io) endpoint under your QuickStack origin. AI clients such as Claude Code, Codex and GitHub Copilot can then read and change QuickStack state through the existing REST API.
+The remote MCP server exposes QuickStack as a [Model Context Protocol](https://modelcontextprotocol.io) endpoint under your QuickStack origin. AI clients such as Claude Code, Codex and GitHub Copilot can then read and change QuickStack state.
 
-The server is generated from the QuickStack REST API: it introspects the REST routes and their schemas, so operations stay in sync with the API and new REST routes appear automatically. Authentication reuses the [REST API key](/docs/rest-api/authentication) you already use.
+Authentication reuses the [REST API key](/docs/rest-api/authentication) you already use.
 
 ## Available tools
 
