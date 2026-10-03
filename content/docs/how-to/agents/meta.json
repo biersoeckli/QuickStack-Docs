@@ -1,5 +1,5 @@
 {
-  "title": "Agent Sandbox",
+  "title": "Agent Sandbox (canary)",
   "pages": [
     "index",
     "llm-gateway"
