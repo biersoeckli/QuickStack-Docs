@@ -1,8 +1,8 @@
 ---
 sidebar_position: 1
 title: "Architecture"
-description: "How QuickStack works under the hood: k3s, Traefik, Longhorn, BuildKit, the internal registry, and the deploy pipeline."
-keywords: ["QuickStack architecture", "k3s", "Traefik", "Longhorn", "BuildKit", "registry", "SQLite", "control plane"]
+description: "How QuickStack works under the hood: k3s, Traefik, Longhorn, BuildKit, Railpack, the internal registry, and the deploy pipeline."
+keywords: ["QuickStack architecture", "k3s", "Traefik", "Longhorn", "BuildKit", "Railpack", "registry", "SQLite", "control plane"]
 ---
 
 QuickStack is a control plane that turns a Linux server into a self-hosted platform. It runs on [k3s](https://k3s.io/), a lightweight Kubernetes distribution, and exposes a web UI on top of Kubernetes primitives. You never have to write manifests or run `kubectl` for day-to-day work.
@@ -17,7 +17,8 @@ This page explains what runs where and what happens when you click **Deploy**. F
 | **k3s** | The Kubernetes distribution that schedules apps, databases, and build jobs. |
 | **Traefik** | The reverse proxy and ingress controller. Terminates HTTP/HTTPS and provisions Let's Encrypt certificates. |
 | **Longhorn** | Distributed block storage for volumes in multi-node clusters. Single-node installs use `local-path` by default. |
-| **BuildKit** | Builds Docker images from Git sources. |
+| **BuildKit** | The image builder that executes builds from Git sources. |
+| **Railpack** | The zero-config builder QuickStack uses for Framework and Railpack builds; it detects the language and framework and produces an image via BuildKit. [railpack.com](https://railpack.com/) |
 | **Internal registry** | Stores images built from Git so deployments can pull them by immutable commit tag. |
 
 Technologies not bundled by QuickStack can be added as [cluster add-ons](/docs/how-to/admin/cluster-add-ons) (Longhorn, cert-manager, and, on the canary channel, the Kubernetes Agent Sandbox and gVisor).
@@ -32,6 +33,7 @@ flowchart TB
     traefik["Traefik<br/>Ingress + Let's Encrypt"]
     qs["QuickStack control plane<br/>Web UI + API + SQLite"]
     buildkit["BuildKit"]
+    railpack["Railpack"]
     registry["Internal registry"]
     app["App pods"]
     db["Database pods"]
@@ -47,6 +49,8 @@ flowchart TB
   traefik --> db
   traefik --> sandbox
   qs --> buildkit
+  qs --> railpack
+  railpack --> buildkit
   buildkit --> registry
   registry --> app
   app --- volume
@@ -78,7 +82,7 @@ flowchart LR
 
 ## What happens when you deploy
 
-1. **Build** (Git sources only) — QuickStack clones the configured branch, builds an image with BuildKit using the selected [build method](/docs/how-to/deployments/build-methods), and pushes it to the internal registry. Each build is tagged with the short commit hash and a moving `latest` tag.
+1. **Build** (Git sources only) — QuickStack clones the configured branch, builds an image with the selected [build method](/docs/how-to/deployments/build-methods) (Framework and Railpack builds run on Railpack, which uses BuildKit), and pushes it to the internal registry. Each build is tagged with the short commit hash and a moving `latest` tag.
 2. **Backup** — any volume backup schedule marked **Backup before deployment** runs first. See [Volume Backups](/docs/how-to/backups/volume-backups#back-up-before-deployment).
 3. **Apply configuration** — staged settings (environment variables, volumes, domains, network policies, health checks, resource limits) are written to the workload.
 4. **Roll out** — QuickStack creates or updates a Kubernetes Deployment and performs a rolling update: new pods start, and old pods terminate once the new ones are ready.
