@@ -22,6 +22,24 @@ Backups run on a **cron schedule** you define per volume or database. QuickStack
 
 A volume backup schedule can also be marked **Backup before deployment**, so it runs automatically before a deployment is applied — including for apps connected to the deployed app through a network policy. See [Back up before deployment](/docs/how-to/backups/volume-backups#back-up-before-deployment).
 
+```mermaid
+flowchart LR
+  subgraph sources["Backup sources"]
+    vol["App volumes"]
+    db["Managed databases"]
+    cfg["QuickStack configuration"]
+  end
+
+  s3["S3-compatible target"]
+
+  vol -->|"volume backup schedule"| s3
+  db -->|"database backup schedule"| s3
+  cfg -->|"system backup"| s3
+
+  deploy["Deploy"] -->|"Backup before deployment<br/>(app + directly connected apps)"| vol
+  deploy -->|"Backup before deployment"| db
+```
+
 ## Where to find backups
 
 - Navigate to **Backups** in the main menu to see all configured schedules with:
@@ -35,6 +53,7 @@ A volume backup schedule can also be marked **Backup before deployment**, so it 
 2. [Set up volume backup schedules](/docs/how-to/backups/volume-backups) for each app with persistent storage
 3. [Set up database backup schedules](/docs/how-to/backups/database-backups) for managed databases
 4. [Configure system backups](/docs/how-to/backups/system-backups) for QuickStack configuration
+5. Know how to [download and restore](/docs/how-to/backups/download-and-restore) a backup before you need it
 
 ## Troubleshooting
 

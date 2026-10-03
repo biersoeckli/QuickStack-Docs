@@ -3,24 +3,31 @@ import { Eyebrow } from './shared';
 export const useCases = [
   {
     number: '01',
-    title: 'Small teams that want a Heroku-like DX',
+    title: 'Agencies & small teams',
     description:
-      'Push-to-deploy, automatic HTTPS, env vars, logs and backups — on infrastructure you control, without anyone learning cluster management.',
-    tags: ['Team access', 'Permissions', 'Backups'],
+      'Give everyone a shared platform with per-project and per-app permissions. Ship staging and production for each client and hand over a clean dashboard.',
+    tags: ['Users & groups', 'Per-app access', 'Multi-server'],
   },
   {
     number: '02',
-    title: 'DevOps engineers who want control',
+    title: 'Self-hosters & automation builders',
     description:
-      'Comfortable with servers but tired of gluing together Traefik, Compose and shell scripts. QuickStack is a structured platform you can extend — with clusters when you scale.',
-    tags: ['Multi-node cluster', 'Network policies', 'Registry support'],
+      'Deploy WordPress, n8n, Nextcloud, Gitea and databases from templates, with automatic TLS and a network graph that shows what talks to what — no terminal required.',
+    tags: ['Templates', 'Auto SSL', 'Web UI'],
   },
   {
     number: '03',
-    title: 'Indie developers & side projects',
+    title: 'Indie hackers & solo builders',
     description:
-      'You have a VPS and want to ship without cloud PaaS prices or managing Kubernetes by hand. QuickStack gives you deploy-from-Git without the lock-in or monthly bill.',
-    tags: ['Single server', 'Git deploy', 'Low cost'],
+      'Run a portfolio of apps and databases on one VPS. Git-push deploys, automatic HTTPS and backups — at a fixed server cost, no per-request surprises.',
+    tags: ['Git deploy', 'Low cost', 'Backups'],
+  },
+  {
+    number: '04',
+    title: 'Regulated teams that need data ownership',
+    description:
+      'Keep applications, databases and backups on infrastructure you control, in your jurisdiction — with SSO, 2FA and per-project access for compliance reviews.',
+    tags: ['Self-hosted', 'Data ownership', 'SSO'],
   },
 ];
 
@@ -34,7 +41,7 @@ export function UseCasesSection() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
         {useCases.map((uc) => (
           <div key={uc.number} className="flex flex-col bg-card p-7">
             <span className="font-mono text-sm text-muted-foreground">

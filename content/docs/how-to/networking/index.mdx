@@ -11,6 +11,22 @@ Network policies decide which apps and databases in a project may communicate, a
 **By default, apps cannot talk to each other or reach the internet.** You allow traffic by creating connections explicitly. This is a security feature that prevents accidental exposure of internal services.
 </Callout>
 
+```mermaid
+flowchart LR
+  internet["Internet"]
+
+  subgraph project["Project"]
+    appA["App A"]
+    appB["App B"]
+    db["PostgreSQL"]
+  end
+
+  appA <-->|"TCP 5432<br/>ingress + egress rule"| db
+  appA -->|"Internet Access on"| internet
+  appA -.->|"no rule → blocked"| appB
+  internet -.->|"denied by default"| appA
+```
+
 There are two ways to change policies:
 
 1. **Project Canvas** — the recommended, visual way to connect and disconnect apps across a project.

@@ -1,0 +1,72 @@
+---
+sidebar_position: 1
+title: "Why QuickStack?"
+description: "How QuickStack compares to managed cloud platforms like Vercel and Heroku, and to other self-hosted PaaS tools like Coolify, Dokploy, and Easypanel."
+keywords: ["QuickStack vs Vercel", "QuickStack vs Heroku", "QuickStack vs Coolify", "QuickStack vs Dokploy", "QuickStack vs Easypanel", "self-hosted PaaS comparison"]
+---
+
+This page compares QuickStack's capabilities with managed cloud platforms and other self-hosted PaaS tools. It describes what each approach does and highlights where QuickStack goes further.
+
+## QuickStack in one sentence
+
+QuickStack is a free, open-source, self-hosted PaaS that deploys containerized apps and databases onto a k3s cluster through a web UI, with automatic HTTPS, storage, backups, monitoring, and team access.
+
+## vs. managed platforms (Vercel, Netlify, Railway, Heroku)
+
+| Dimension | Managed platforms | QuickStack |
+|-----------|-------------------|------------|
+| **Cost model** | Usage-based; can spike unpredictably | Fixed cost of the server(s) you rent |
+| **Data location** | Vendor infrastructure | Your own servers, your jurisdiction |
+| **Scaling model** | Serverless functions or managed containers | Long-running Kubernetes pods |
+| **Lock-in** | Platform-specific config | Standard Docker images and Kubernetes primitives |
+| **Operations** | Fully managed | You own updates and the host |
+| **Feature focus** | Edge/CDN and preview tooling | Self-hosting, networking, and data control |
+
+### Where QuickStack goes further
+
+- **Predictable costs** — you pay for the server you rent, not per request, bandwidth, or function invocation.
+- **Data ownership** — apps, databases, and backups stay on servers you choose, in your jurisdiction.
+- **No lock-in** — standard Docker images and Kubernetes primitives, so workloads can move.
+- **Self-hosting without the overhead** — Git deploys, TLS, backups, monitoring, and team access in one UI.
+
+## vs. other self-hosted PaaS tools (Coolify, Dokploy, Easypanel)
+
+The main architectural difference is the underlying orchestrator:
+
+| Dimension | QuickStack | Compose-based self-hosted PaaS |
+|-----------|------------|-------------------------------|
+| **Orchestrator** | Kubernetes (k3s) | Docker / Docker Compose, often Docker Swarm |
+| **Multi-node** | First-class cluster with worker nodes | Varies; often single-node focused |
+| **Storage** | Longhorn distributed block storage | Host volumes / bind mounts |
+| **Networking** | Deny-by-default Kubernetes network policies | Proxy-level routing, varies |
+| **Primitives** | Deployments, services, ingresses, probes, jobs | Containers and Compose services |
+
+### Where QuickStack goes further
+
+- **Kubernetes-grade operations** — rolling updates, self-healing, and probes without writing manifests.
+- **First-class multi-node clusters** — add worker nodes with Longhorn replicated storage for failover.
+- **Deny-by-default isolation** — per-app and cross-project network policies as a first-class feature.
+- **Built-in operations tooling** — database tools, scheduled backups, file browser, and cluster monitoring in one UI.
+
+## vs. running Kubernetes yourself
+
+QuickStack runs on k3s but hides the operational surface: no manifests, Helm charts, or `kubectl` needed. You still get deployments, rolling updates, services, ingress, persistent volumes, and probes — with a web UI, automatic HTTPS, backups, and team access on top.
+
+## What QuickStack gives you out of the box
+
+- Deploy from Git (HTTPS or SSH) or any container registry.
+- Zero-config builds with Railpack, framework presets, or your own Dockerfile.
+- One-click [app and database templates](/docs/how-to/templates).
+- Automatic HTTPS via Let's Encrypt and custom domains.
+- [Deny-by-default networking](/docs/how-to/networking) between workloads.
+- Persistent volumes, [shared volumes](/docs/how-to/storage/shared-volumes), and a [file browser](/docs/how-to/storage/file-browser).
+- Scheduled [backups](/docs/how-to/backups/overview) to S3-compatible storage.
+- [Users, groups, and per-app permissions](/docs/how-to/admin/users-and-groups), plus SSO and 2FA.
+- A [REST API](/docs/rest-api/overview) and JS/TS SDK for automation.
+
+## Related
+
+- [Architecture](/docs/concepts/architecture)
+- [Security Model](/docs/concepts/security-model)
+- [Sizing & Costs](/docs/reference/sizing-and-costs)
+- [Installation](/docs/tutorials/installation)

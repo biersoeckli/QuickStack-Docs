@@ -66,6 +66,26 @@ Once at least one provider is enabled, the login page shows an **or continue wit
 
 Clicking a button redirects to the provider and back to QuickStack.
 
+```mermaid
+sequenceDiagram
+  actor User
+  participant QS as QuickStack
+  participant IdP as Identity provider
+
+  User->>QS: Click Continue with …
+  QS->>IdP: Redirect with client ID and callback URL
+  IdP->>User: Sign-in and consent
+  IdP->>QS: Callback with authorization code
+  QS->>IdP: Exchange code for tokens
+  IdP-->>QS: ID token including email
+  alt Email matches an existing account
+    QS->>QS: Link the login to that account
+  else First-time user
+    QS->>QS: Create the user with the default group
+  end
+  QS-->>User: Redirect to the QuickStack UI
+```
+
 ## Accounts and groups
 
 - A first-time SSO user is created automatically.

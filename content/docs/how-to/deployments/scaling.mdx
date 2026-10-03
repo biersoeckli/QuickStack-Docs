@@ -1,0 +1,69 @@
+---
+sidebar_position: 5
+title: "Scaling & Resource Limits"
+description: "Set replica count, CPU and memory reservations and limits per app in QuickStack."
+keywords: ["QuickStack replicas", "scaling", "resource limits", "CPU limit", "memory limit", "requests", "rolling update", "zero downtime"]
+---
+
+QuickStack lets you scale an app horizontally and constrain its resource usage from the **Container Rate Limits** section. All of these settings live under the app's **Settings → Deployment** and are applied on the next **Deploy**.
+
+## Container Rate Limits
+
+Open the app in the **Project Canvas**, go to **Settings → Deployment**, and find **Container Rate Limits**. It contains:
+
+| Field | Unit | Meaning |
+|-------|------|---------|
+| **Replica Count** | count | Number of pod instances. Hidden for database-type apps. |
+| **Memory Limit** | MB | Hard ceiling on memory. The container is killed if it exceeds this value. |
+| **Memory Reservation** | MB | Memory Kubernetes guarantees to reserve for scheduling. |
+| **CPU Limit** | mCPU | Hard ceiling on CPU. `1000` mCPU = 1 vCPU. |
+| **CPU Reservation** | mCPU | CPU Kubernetes reserves for scheduling. |
+
+**Reservation** maps to Kubernetes `requests`; **Limit** maps to Kubernetes `limits`. Leave a field empty for no limit. The reservation fields offer a one-click suggested value based on the app's current usage.
+
+Click **Save**. The toast **Rate Limits Saved** confirms the values are stored — click **Deploy** to apply them.
+
+<Callout type="warn">
+**Reservations matter for scheduling**
+Without reservations, Kubernetes may place pods on already-overloaded nodes. Setting realistic reservations keeps builds and apps from competing for the same resources.
+</Callout>
+
+## Replicas
+
+**Replica Count** controls how many copies of the app run. Kubernetes load-balances traffic across them through the app's service.
+
+- Minimum is `1`.
+- If any attached volume uses **ReadWriteOnce (RWO)**, the replica count is forced to `1`, because a single-node volume cannot be mounted by multiple pods. Use **ReadWriteMany (RWX)** if you need replicas with shared storage. See [Volumes](/docs/how-to/storage/volumes#access-modes).
+- To "stop" an app without deleting it, use **Stop** in the drawer header, which scales replicas to zero. **Start** restores the previous count.
+
+## Rolling updates and zero downtime
+
+QuickStack chooses the update strategy based on the app's storage:
+
+- **No volumes, or all volumes are RWX:** a rolling update is used (`maxSurge: 1`, `maxUnavailable: 0`). A new pod must become ready before an old one is removed.
+- **At least one RWO volume:** the pod is recreated, which causes a brief interruption.
+
+For a rolling update to be truly zero-downtime, configure a [readiness health check](/docs/how-to/observability/health-checks). Without one, Kubernetes may route traffic to a pod before the app is serving.
+
+## What is not supported
+
+QuickStack currently has **no horizontal autoscaling** based on CPU or memory, and no time-based scaling. Scaling is manual via **Replica Count**.
+
+Global limits for build containers are configured separately under **Settings → Platform → Builds**. See [Build Container Settings](/docs/how-to/admin/build-container-settings).
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Replica Count is locked to 1 | An attached volume uses RWO; recreate the volume with RWX if the app supports shared storage |
+| Changes have no effect | Click **Deploy**; saving alone does not update the running pods |
+| App is OOMKilled | Raise **Memory Limit** or reduce the app's memory usage |
+| App is throttled under load | Raise **CPU Limit**, or increase **Replica Count** |
+| Pods stuck pending after adding replicas | The cluster lacks free resources; add nodes or lower reservations. See [Cluster Nodes](/docs/how-to/admin/cluster-nodes) |
+
+## Related
+
+- [Scaling & Resource Limits — Build Container Settings](/docs/how-to/admin/build-container-settings)
+- [Volumes](/docs/how-to/storage/volumes)
+- [Health Checks](/docs/how-to/observability/health-checks)
+- [Cluster Monitoring](/docs/how-to/admin/cluster-monitoring)

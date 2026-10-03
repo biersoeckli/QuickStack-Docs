@@ -19,7 +19,18 @@ QuickStack is a Free, open-source, self-hosted PaaS alternative to Vercel, Netli
 | Install QuickStack on a fresh server | [Installation tutorial](/docs/tutorials/installation) |
 | Deploy your first app from Git | [First app from Git](/docs/tutorials/first-app-from-git) |
 | Deploy a Docker image | [First app from image](/docs/tutorials/first-app-from-image) |
+| Deploy software in one click | [App & database templates](/docs/how-to/templates) |
 | Expose an app on a domain with HTTPS | [Expose an app](/docs/tutorials/expose-app) |
+
+---
+
+## Understand the platform
+
+New to self-hosting, or coming from a managed platform? Start with the concepts:
+
+- **[Architecture](/docs/concepts/architecture)** — what runs where and what happens when you deploy.
+- **[Projects, Apps & Databases](/docs/concepts/projects-apps-databases)** — the QuickStack object model.
+- **[Security Model](/docs/concepts/security-model)** — isolation, access control, TLS, and data residency.
 
 ---
 
@@ -27,20 +38,32 @@ QuickStack is a Free, open-source, self-hosted PaaS alternative to Vercel, Netli
 
 Task-focused docs for daily operations:
 
-- **Project Canvas** — [create, configure, deploy & monitor apps](/docs/how-to/project-canvas)
-- **Deployments** — [redeploy & rollback](/docs/how-to/deployments/redeploy-and-rollbacks) · [build methods](/docs/how-to/deployments/build-methods) · [webhooks / auto-deploy](/docs/how-to/deployments/webhooks-auto-deploy)
-- **Networking** — [custom domains](/docs/how-to/networking/domains) · [quickstack.me](/docs/how-to/networking/quickstack-me) · [networking & policies](/docs/how-to/networking) · [basic auth](/docs/how-to/networking/basic-auth)
-- **Storage** — [volumes](/docs/how-to/storage/volumes) · [file mounts](/docs/how-to/storage/file-mounts)
+- **[Project Canvas](/docs/how-to/project-canvas)** — create, configure, deploy & monitor workloads.
+- **[Templates](/docs/how-to/templates)** — one-click apps and databases.
+- **Deployments** — [redeploy & rollback](/docs/how-to/deployments/redeploy-and-rollbacks) · [build methods](/docs/how-to/deployments/build-methods) · [webhooks / auto-deploy](/docs/how-to/deployments/webhooks-auto-deploy) · [container configuration](/docs/how-to/deployments/container-configuration) · [scaling & resource limits](/docs/how-to/deployments/scaling)
+- **Networking** — [custom domains](/docs/how-to/networking/domains) · [quickstack.me](/docs/how-to/networking/quickstack-me) · [networking & policies](/docs/how-to/networking) · [node ports](/docs/how-to/networking/node-ports) · [basic auth](/docs/how-to/networking/basic-auth)
+- **Storage** — [volumes](/docs/how-to/storage/volumes) · [shared volumes](/docs/how-to/storage/shared-volumes) · [file browser](/docs/how-to/storage/file-browser) · [file mounts](/docs/how-to/storage/file-mounts)
 - **Observability** — [logs & terminal](/docs/how-to/observability/logs-and-terminal) · [builds overview](/docs/how-to/observability/builds-overview) · [health checks](/docs/how-to/observability/health-checks)
 - **Databases** — [deploy databases](/docs/how-to/databases/deploy-databases) · [DB tools (DbGate, pgAdmin)](/docs/how-to/databases/db-tools)
-- **Backups** — [overview](/docs/how-to/backups/overview) · [S3 targets](/docs/how-to/backups/s3-targets) · [volume backups](/docs/how-to/backups/volume-backups) · [database backups](/docs/how-to/backups/database-backups) · [system backups](/docs/how-to/backups/system-backups)
+- **Backups** — [overview](/docs/how-to/backups/overview) · [S3 targets](/docs/how-to/backups/s3-targets) · [volume backups](/docs/how-to/backups/volume-backups) · [database backups](/docs/how-to/backups/database-backups) · [download & restore](/docs/how-to/backups/download-and-restore) · [system backups](/docs/how-to/backups/system-backups)
+- **[Agent Sandbox](/docs/how-to/agents)** — run Sandbox Instances (canary).
 - **Admin** — [updates & maintenance](/docs/how-to/admin/updates-and-maintenance) · [cluster add-ons](/docs/how-to/admin/cluster-add-ons) · [cluster monitoring](/docs/how-to/admin/cluster-monitoring) · [users & groups](/docs/how-to/admin/users-and-groups) · [single sign-on](/docs/how-to/admin/single-sign-on) · [2FA](/docs/how-to/admin/two-factor-auth) · [cluster nodes](/docs/how-to/admin/cluster-nodes) · [password reset](/docs/how-to/admin/password-reset)
+
+---
+
+## Automation & reference
+
+- **[REST API](/docs/rest-api/overview)** — automate projects and app workloads, plus the [JavaScript/TypeScript SDK](/docs/rest-api/javascript-typescript-sdk).
+- **[MCP Server (Canary)](/docs/mcp-server)** — connect AI clients to QuickStack over the Model Context Protocol.
+- **[Why QuickStack?](/docs/reference/comparison)** — how it compares to managed and self-hosted alternatives.
+- **[Sizing & Costs](/docs/reference/sizing-and-costs)** — choose the right server.
+- **[Ports & Endpoints](/docs/reference/ports-and-endpoints)** · **[Glossary](/docs/reference/glossary)**
 
 ---
 
 ## Architecture in one paragraph
 
-QuickStack installs as a single pod on a k3s master node. It stores its state in a SQLite database (`data.db`). When you click **Deploy**, QuickStack uses BuildKit to build your image (for Git-source apps), pushes it to the built-in registry, then creates or updates a Kubernetes Deployment. Traefik handles ingress routing and automatic TLS via Let's Encrypt. Longhorn provides distributed block storage for multi-node clusters. Everything app-related (projects, envs, volumes, domains, users) lives in the SQLite DB and is backed up separately from your app volumes.
+QuickStack installs as a single pod on a k3s master node. It stores its state in a SQLite database (`data.db`). When you click **Deploy**, QuickStack uses BuildKit to build your image (for Git-source apps), pushes it to the built-in registry, then creates or updates a Kubernetes Deployment. Traefik handles ingress routing and automatic TLS via Let's Encrypt. Longhorn provides distributed block storage for multi-node clusters. Everything app-related (projects, envs, volumes, domains, users) lives in the SQLite DB and is backed up separately from your app volumes. Read the full [architecture overview](/docs/concepts/architecture).
 
 ---
 

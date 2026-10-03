@@ -1,0 +1,59 @@
+---
+sidebar_position: 4
+title: "Container Configuration"
+description: "Override the container command and arguments and configure the security context for a QuickStack app."
+keywords: ["QuickStack container command", "arguments", "entrypoint", "CMD", "security context", "run as user", "privileged"]
+---
+
+The **Container Configuration** section on an app's **Settings → Deployment → Advanced container settings** lets you override how the container starts and which Linux security context it runs with. These settings apply to apps that run a container image; most templates and images work without changing them.
+
+## Command and arguments
+
+| Field | Overrides | Example |
+|-------|-----------|---------|
+| **Command** | The image's `ENTRYPOINT` | `node` |
+| **Arguments** | The image's `CMD` | `server.js` |
+
+Both fields are repeatable lists — click **Add Command** or **Add Argument** for each token. Use them when:
+
+- The image has no default command.
+- You want to run a specific binary or script.
+- You need to pass extra flags without building a custom image.
+
+Leave both empty to use the image defaults.
+
+## Security context
+
+| Field | Description |
+|-------|-------------|
+| **Run As User** | UID the container process runs as. |
+| **Run As Group** | GID the container process runs as. |
+| **FS Group** | Group applied to mounted volumes so the process can read and write them. Often needed for volumes owned by another user. |
+| **Privileged Mode** | Runs the container with elevated privileges. |
+
+<Callout type="error">
+**Privileged Mode weakens isolation**
+Only enable **Privileged Mode** when an image requires it. It gives the container broad access to the host and should not be used for ordinary web apps.
+</Callout>
+
+Saving changes stores them; click **Deploy** to apply them to the running container.
+
+<Callout>
+**Build-time vs runtime**
+The **Command** and **Arguments** here control the running container. Build-time `ARG` values are configured separately under **Settings → Environment** → **Build Arguments**. See [Build Methods](/docs/how-to/deployments/build-methods#build-arguments).
+</Callout>
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Container exits immediately after override | Verify the command and arguments are valid for the image and available on `PATH` |
+| App cannot write to a volume | Set **FS Group** to a group that can write the mounted path, or check volume permissions |
+| Changes have no effect | Click **Deploy** after saving |
+
+## Related
+
+- [Build Methods](/docs/how-to/deployments/build-methods)
+- [Deploy & Redeploy](/docs/how-to/deployments/redeploy-and-rollbacks)
+- [Volumes](/docs/how-to/storage/volumes)
+- [Scaling & Resource Limits](/docs/how-to/deployments/scaling)

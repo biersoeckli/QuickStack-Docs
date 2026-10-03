@@ -6,6 +6,7 @@ const techStack = [
   { name: 'k3s', logo: '/img/tech-stack/k3s-logo.svg', url: 'https://k3s.io/', darkMode: false },
   { name: 'Longhorn', logo: '/img/tech-stack/longhorn-logo.png', logoDark: '/img/tech-stack/longhorn-logo-light.png', url: 'https://longhorn.io/', darkMode: true },
   { name: 'Buildkit', logo: '/img/tech-stack/buildkit-logo.png', url: 'https://github.com/moby/buildkit', darkMode: false },
+  { name: 'Railpack', logo: '/img/tech-stack/railpack-logo.svg', url: 'https://railpack.com', darkMode: false },
   { name: 'Registry', logo: '/img/tech-stack/registry-logo.png', url: 'https://github.com/distribution/distribution', darkMode: false },
 ];
 
@@ -25,7 +26,7 @@ export function TechStackSection({ theme }: TechStackSectionProps) {
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             QuickStack orchestrates Kubernetes primitives so you don’t have to.
             It runs on k3s, routes with Traefik, stores volumes with Longhorn and
-            builds images with BuildKit.
+            builds images with BuildKit and Railpack.
           </p>
         </div>
 

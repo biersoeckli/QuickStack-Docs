@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 title: "Glossary"
 description: "Glossary of QuickStack-specific terms and the key underlying technologies."
 keywords: ["QuickStack Glossary", "terminology", "k3s", "Traefik", "Longhorn", "BuildKit"]
@@ -9,8 +9,17 @@ QuickStack-specific terms and the key underlying technologies.
 
 ---
 
+## Agent Sandbox
+The deployable AI workload managed by QuickStack. An Agent Sandbox belongs to a project; each running instance is a Sandbox Instance. You can start, stop, and open several Sandbox Instances of an Agent Sandbox, including Warm Pool instances. See [Agent Sandbox](/docs/how-to/agents).
+
+## Agent Sandbox Template
+A predefined Agent Sandbox configuration including its CLI harness and startup steps. QuickStack ships templates such as OpenCode Web, Gemini CLI, and Claude Code CLI.
+
 ## Application (App)
-A container workload managed by QuickStack. An app belongs to a project and can be sourced from a Git repository (built with the Framework preset, Railpack, or a Dockerfile) or a Docker image. Apps are managed from the [Project Canvas](/docs/how-to/project-canvas).
+A container workload managed by QuickStack. An app belongs to a project and can be sourced from a Git repository (built with the Framework preset, Railpack, or a Dockerfile), a Docker image, or a [template](/docs/how-to/templates). Apps are managed from the [Project Canvas](/docs/how-to/project-canvas).
+
+## App Template
+A predefined app (for example Nextcloud, n8n, or WordPress) that ships with an image, environment variables, storage, and networking. See [App & Database Templates](/docs/how-to/templates).
 
 ## Basic Authentication
 HTTP-level username/password protection implemented via a Traefik middleware. Authentication happens at the ingress level before requests reach the app container. See [Basic Auth](/docs/how-to/networking/basic-auth).
@@ -25,7 +34,10 @@ A Kubernetes controller for automated TLS certificate management. Installable as
 A group of servers (nodes) that work together as a single Kubernetes environment. See [Cluster Nodes](/docs/how-to/admin/cluster-nodes).
 
 ## Cluster Add-on
-An optional cluster component that QuickStack can install, update, and in some cases remove, such as Longhorn or CertManager. See [Cluster Add-ons](/docs/how-to/admin/cluster-add-ons).
+An optional cluster component that QuickStack can install, update, and in some cases remove, such as Longhorn, cert-manager, the Kubernetes Agent Sandbox, or gVisor. See [Cluster Add-ons](/docs/how-to/admin/cluster-add-ons).
+
+## Container Rate Limits
+The app settings that control **Replica Count**, **Memory Limit**, **Memory Reservation**, **CPU Limit**, and **CPU Reservation**, found on the app's **General** tab. See [Scaling & Resource Limits](/docs/how-to/deployments/scaling).
 
 ## Cordon
 Kubernetes operation that marks a node as non-schedulable — new pods are not placed there, but existing ones keep running.
@@ -33,14 +45,26 @@ Kubernetes operation that marks a node as non-schedulable — new pods are not p
 ## CPU Limit
 The maximum CPU a container can use, measured in millicores (m). 1000m = 1 full CPU core.
 
+## CPU Reservation
+The CPU a container is guaranteed for scheduling, measured in millicores. Maps to the Kubernetes `requests.cpu` field.
+
 ## Deploy
-In QuickStack, clicking **Deploy** applies all staged configuration changes to the running container. Config edits by themselves do not update the running app. See [Redeploy](/docs/how-to/deployments/redeploy-and-rollbacks).
+In QuickStack, clicking **Deploy** applies all staged configuration changes to the running workload. Config edits by themselves do not update the running app. See [Redeploy](/docs/how-to/deployments/redeploy-and-rollbacks).
 
 ## Domain
 A DNS hostname that routes public traffic to an app via Traefik. See [Custom Domains](/docs/how-to/networking/domains).
 
+## File Browser
+A temporary web UI QuickStack can launch to browse and download the contents of a volume. See [File Browser](/docs/how-to/storage/file-browser).
+
 ## File Mount
 A read-only file injected into a container at a specified path. Content is stored in the QuickStack database. See [File Mounts](/docs/how-to/storage/file-mounts).
+
+## gVisor
+An optional sandboxed container runtime available as a cluster add-on and selectable as a **Runtime Class** for Sandbox Instances for stronger isolation.
+
+## Instance ID
+A randomly generated identifier (`qsInstanceId`) that QuickStack sends with its update check to `get.quickstack.dev`. It contains no project or user data. See [Security Model](/docs/concepts/security-model).
 
 ## Internal Hostname / Service Name
 The `svc-<app-id>.<project-id>.svc.cluster.local` hostname used for service-to-service communication within a project. QuickStack builds the underlying service and its ports from the app's domains and network policy rules. See [Networking](/docs/how-to/networking).
@@ -50,6 +74,9 @@ A lightweight Kubernetes distribution. QuickStack runs on k3s. [k3s.io](https://
 
 ## Let's Encrypt
 Free TLS certificate authority. QuickStack uses Let's Encrypt to provision HTTPS certificates for custom domains and quickstack.me subdomains automatically.
+
+## LLM Gateway
+A LiteLLM-compatible endpoint that QuickStack Sandbox Instances use to reach language models with centralized credentials. Configured under **Settings → Integrations → LLM Gateways**. See [LLM Gateway](/docs/how-to/agents/llm-gateway).
 
 ## Longhorn
 Distributed block storage for Kubernetes. Used as the `longhorn` storage class for volumes in multi-node clusters. Required when volumes must survive node failure. [longhorn.io](https://longhorn.io/)
@@ -61,16 +88,19 @@ The primary server in a k3s cluster that runs the Kubernetes control plane and t
 The maximum RAM a container can use. Exceeding this causes the container to be terminated (OOMKilled).
 
 ## Memory Reservation
-Guaranteed amount of RAM Kubernetes ensures is always available to a container.
+Guaranteed amount of RAM Kubernetes ensures is always available to a container. Maps to the Kubernetes `requests.memory` field.
+
+## Model Alias
+The identifier a Sandbox Instance uses to select a model through its LLM Gateway. See [LLM Gateway](/docs/how-to/agents/llm-gateway).
 
 ## Network Policy
 A Kubernetes resource that controls ingress and egress traffic for a pod. In QuickStack, policies are made of explicit per-app ingress and egress rules, plus an internet-access switch. See [Networking](/docs/how-to/networking).
 
 ## Project
-A logical grouping of apps and databases in QuickStack. All apps in a project share a network namespace and can communicate via internal hostnames.
+A logical grouping of apps and databases in QuickStack. All workloads in a project share a network namespace and can communicate via internal hostnames. A project is typed as **App** or **Agent** at creation.
 
 ## Project Canvas
-The main view of a project. It is a network graph where every app and database is a node and connections are edges. Selecting a node opens a details drawer for creating, configuring, deploying, and monitoring the app. See [Project Canvas](/docs/how-to/project-canvas).
+The main view of a project. It is a network graph where every app, database, and Agent Sandbox is a node and connections are edges. Selecting a node opens a details drawer for creating, configuring, deploying, and monitoring the workload. See [Project Canvas](/docs/how-to/project-canvas).
 
 ## Project Network Graph
 The visual graph view inside the [Project Canvas](/docs/how-to/project-canvas) that shows and edits the network connections between apps and databases. See [Networking & Policies](/docs/how-to/networking).
@@ -82,13 +112,22 @@ A built-in "magic" domain that automatically resolves to your server's public IP
 A Docker registry bundled with QuickStack for storing built images. Images built from Git repositories are pushed here before deployment. [Docker Hub registry image](https://hub.docker.com/_/registry)
 
 ## Replica
-An instance of an application running in the cluster. Multiple replicas provide horizontal scaling and availability.
+An instance of an application running in the cluster. Multiple replicas provide horizontal scaling and availability. See [Scaling & Resource Limits](/docs/how-to/deployments/scaling).
 
 ## Rollback
 Redeploying a Git-source app from an earlier commit. QuickStack reuses the built image for that commit or rebuilds it. See [Deploy & Redeploy](/docs/how-to/deployments/redeploy-and-rollbacks#rollback-to-a-previous-deployment).
 
+## Runtime Class
+The Kubernetes `RuntimeClass` a Sandbox Instance runs under: the k3s default runtime, or gVisor when installed. See [Agent Sandbox](/docs/how-to/agents#runtime-isolation).
+
 ## S3 Target
 An S3-compatible bucket configured in QuickStack as a backup destination. See [S3 Targets](/docs/how-to/backups/s3-targets).
+
+## Sandbox Instance
+A running instance of an Agent Sandbox. Each **Start New Sandbox** action creates one. See [Agent Sandbox](/docs/how-to/agents#sandbox-instances).
+
+## Shared Volume
+A ReadWriteMany volume that multiple apps in the same project can mount. See [Shared Volumes](/docs/how-to/storage/shared-volumes).
 
 ## Single Sign-On (SSO)
 Authentication through an external identity provider such as OIDC, Google, Entra ID, or GitHub. Admins configure providers in **Settings** → **SSO Providers**. See [Single Sign-On](/docs/how-to/admin/single-sign-on).
@@ -104,6 +143,9 @@ A snapshot of the QuickStack SQLite database (`data.db`) containing all configur
 ## System Upgrade Controller
 A Kubernetes controller that manages automated k3s upgrades across cluster nodes.
 
+## Template
+See [App Template](/docs/how-to/templates) and [Agent Sandbox Template](/docs/how-to/agents#agent-sandbox-templates).
+
 ## TOTP
 Time-based One-Time Password. A standard algorithm used by authenticator apps (Google Authenticator, Bitwarden, etc.) to generate 6-digit codes that change every 30 seconds. Used for QuickStack 2FA.
 
@@ -115,6 +157,9 @@ An extra security layer requiring a TOTP code from an authenticator app in addit
 
 ## Volume
 Persistent storage mounted into a container. Data on a volume survives container restarts and redeployments. See [Volumes](/docs/how-to/storage/volumes).
+
+## Warm Pool Replicas
+The number of pre-warmed Sandbox Instances QuickStack keeps ready so a new Sandbox Instance starts instantly. Configurable from 0 to 10. See [Agent Sandbox](/docs/how-to/agents).
 
 ## Webhook
 A URL that triggers a QuickStack deployment when called via HTTP POST. Used for CI/CD automation. See [Webhooks](/docs/how-to/deployments/webhooks-auto-deploy).

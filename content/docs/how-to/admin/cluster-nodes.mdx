@@ -13,6 +13,35 @@ QuickStack allows you to scale your applications and improve availability by set
   * **Single Node Cluster:** A single node cluster is a QuickStack installation on a single server. This is the default setup when you install QuickStack for the first time.
   * **Multi Node Cluster:** A multi-node cluster is a QuickStack installation that spans multiple servers. Each server in the cluster is responsible for running a part of the applications you deploy. It is recommended to use a private network for the communication between the servers.
 
+### Single node
+
+A single server runs the k3s control plane, QuickStack, and all workloads. This is the default installation.
+
+```mermaid
+flowchart TB
+  internet["Internet"]
+  internet -->|"ports 80 / 443 / 30000"| server["Single server<br/>k3s control plane + QuickStack + all workloads"]
+```
+
+### Multi node
+
+The master node keeps the public IP, while the worker nodes join it over a private network. Each server runs part of the workloads.
+
+```mermaid
+flowchart TB
+  internet["Internet"]
+
+  subgraph private["Private network"]
+    master["Master node<br/>k3s control plane + QuickStack"]
+    worker1["Worker node"]
+    worker2["Worker node"]
+    master ---|"k3s · TCP 6443"| worker1
+    master ---|"k3s · TCP 6443"| worker2
+  end
+
+  internet -->|"ports 80 / 443 / 30000"| master
+```
+
 ## Viewing cluster nodes
 
 1. Go to **Settings** → **Platform** → **Cluster**.

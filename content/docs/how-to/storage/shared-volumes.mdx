@@ -1,0 +1,51 @@
+---
+sidebar_position: 3
+title: "Shared Volumes"
+description: "Share a persistent volume between multiple apps in the same QuickStack project."
+keywords: ["QuickStack shared volume", "ReadWriteMany", "RWX", "mount volume", "multiple apps"]
+---
+
+A shared volume lets several apps in the same project mount the same persistent storage. This is useful when two workloads must read and write the same files, for example an app and a companion service.
+
+<Callout>
+**Same project only**
+Shared volumes can only be attached to apps in the **same project** as the volume's owning app.
+</Callout>
+
+## Requirements
+
+A volume can be shared only when:
+
+- Its access mode is **ReadWriteMany (RWX)**.
+- Its storage class is not `local-path`.
+- It is not itself already a shared mount.
+
+If your volume does not meet these requirements, edit it in **Settings → Storage → Volumes**. Access mode cannot be changed after creation, so an RWO or `local-path` volume must be recreated. See [Volumes](/docs/how-to/storage/volumes#access-modes).
+
+## Allow other apps to attach a volume
+
+1. Open the app that owns the volume in the **Project Canvas** and go to **Settings → Storage**.
+2. In the **Volumes** card, edit the volume.
+3. Enable **Allow other apps to attach this volume**.
+4. Click **Save**, then **Deploy**.
+
+## Attach a shared volume to another app
+
+1. Open the other app and go to **Settings → Storage**.
+2. Click **Add Shared Volume**.
+3. In the **Mount Shared Volume** dialog:
+   - **Select Shared Volume** — pick the volume from the list (shown as `<App name> - <mount path> (<size> MB)`).
+   - **Mount Path in This Container** — where to mount it in this app.
+4. Click **Mount Shared Volume**, then **Deploy**.
+
+The size, access mode, and storage class are inherited from the source volume and shown as read-only.
+
+## Detach a shared volume
+
+Open the app, go to **Settings → Storage**, and remove the shared mount with **Detach Volume**. The data remains on the source volume.
+
+## Related
+
+- [Volumes](/docs/how-to/storage/volumes)
+- [File Browser](/docs/how-to/storage/file-browser)
+- [Networking & Policies](/docs/how-to/networking) — connecting apps to each other

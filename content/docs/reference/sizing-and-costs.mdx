@@ -1,0 +1,69 @@
+---
+sidebar_position: 2
+title: "Sizing & Costs"
+description: "Choose server size for QuickStack based on the number of apps, databases, and nodes."
+keywords: ["QuickStack sizing", "server requirements", "VPS", "RAM", "CPU", "cost", "capacity planning"]
+---
+
+QuickStack runs on hardware you choose, so cost and capacity depend on the server(s) you rent. This page gives practical guidance for a successful setup.
+
+## Minimum requirements
+
+A fresh installation needs at least:
+
+- **2 CPU cores**
+- **4 GB RAM**
+- **40 GB disk**
+- A supported OS (Ubuntu 24.04+ or Debian 13+) with a public IPv4 and sudo access
+
+See [Installation](/docs/tutorials/installation) for the exact steps.
+
+## What the platform itself consumes
+
+QuickStack runs as a pod on k3s. The control plane, Traefik, and the internal registry use part of the server's resources before any app runs. On a small node, budget roughly 0.5–1 GB of RAM for the platform itself and leave headroom for build jobs, which are the most resource-hungry operation.
+
+## Planning by workload
+
+Use these rules of thumb, then verify with [Cluster Monitoring](/docs/how-to/admin/cluster-monitoring):
+
+| Situation | Guidance |
+|-----------|----------|
+| **A few small apps** (static sites, APIs) | 2 vCPU / 4 GB is a fine start |
+| **Several apps plus databases** | 4 vCPU / 8 GB gives comfortable headroom |
+| **Build-heavy Git workloads** | More CPU helps; raise **Max Parallel Builds** only after adding resources. See [Build Container Settings](/docs/how-to/admin/build-container-settings) |
+| **Databases with real data** | Add RAM for the database engine cache, and reserve storage generously |
+| **Many concurrent users** | Add [worker nodes](/docs/how-to/admin/cluster-nodes) and set [reservations](/docs/how-to/deployments/scaling) |
+
+<Callout type="warn">
+**Builds are the peak load**
+A Git build spawns a build container that can temporarily use significant CPU and memory. On small servers, keep **Max Parallel Builds** low so builds do not starve running apps.
+</Callout>
+
+## Storage
+
+- Application data lives in volumes. Volume size is set when the volume is created and **can only be increased**, so start with room to grow.
+- Single-node installs use the `local-path` storage class, which is fast but not replicated.
+- Multi-node installs use [Longhorn](/docs/concepts/architecture#components), which **replicates** data across nodes. Plan for the replication factor when sizing disks.
+- Keep disk usage below ~80%; above 90% deployments and backups can fail. See [Cluster Monitoring](/docs/how-to/admin/cluster-monitoring).
+
+## High availability
+
+- Use an **odd number of control-plane nodes** (1, 3, 5) for quorum.
+- Use the `longhorn` storage class for volumes that must survive a node failure.
+- Keep 20–30% capacity free for failover. See [Cluster Nodes](/docs/how-to/admin/cluster-nodes).
+
+## Cost
+
+Because QuickStack is free and open source, your cost is the server bill plus any S3 storage for backups. You can start on a small VPS from a provider such as Hetzner, Hostinger, Vultr, Contabo, Linode, or DigitalOcean, and add nodes later without re-architecting.
+
+<Callout>
+**Predictable by design**
+Unlike usage-based cloud platforms, adding apps does not change your bill. Cost is driven by the servers you rent.
+</Callout>
+
+## Related
+
+- [Installation](/docs/tutorials/installation)
+- [Why QuickStack?](/docs/reference/comparison)
+- [Cluster Nodes](/docs/how-to/admin/cluster-nodes)
+- [Cluster Monitoring](/docs/how-to/admin/cluster-monitoring)
