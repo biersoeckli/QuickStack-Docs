@@ -40,6 +40,8 @@ flowchart TB
   end
 
   internet -->|"ports 80 / 443 / 30000"| master
+  internet -->|"ports 80 / 443 / 30000"| worker1
+  internet -->|"ports 80 / 443 / 30000"| worker2
 ```
 
 ## Viewing cluster nodes
