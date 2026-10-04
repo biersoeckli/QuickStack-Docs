@@ -36,8 +36,10 @@ Volume and database backups can be downloaded, but QuickStack does not currently
 
 Recovery options depend on the workload:
 
-- **Databases:** the backup is a compressed dump (`pg_dump`, `mariadb-dump`, or `mongodump`). Restore it with the matching tool against the database's internal hostname and port. Connect from another app in the same project once a network policy rule allows it.
-- **Volumes:** the backup is an archive of the volume contents. It can be extracted into a volume through a workload that mounts the same volume.
+- **Volumes:** the backup is an archive of the volume contents. Use the built-in [File Browser](/docs/how-to/storage/file-browser) to upload the archive into the target volume and extract it there. The app is stopped while the volume is mounted, so start or redeploy it afterwards.
+- **PostgreSQL databases:** the backup is a compressed `pg_dump`. Restore it with QuickStack's built-in [pgAdmin tool](/docs/how-to/databases/db-tools), which connects to the database pre-configured.
+- **MariaDB / MySQL databases:** the backup is a compressed `mariadb-dump`. Import it with the built-in [phpMyAdmin or DbGate tool](/docs/how-to/databases/db-tools).
+- **MongoDB databases:** the backup is a `mongodump`. Restore it with the built-in [DbGate tool](/docs/how-to/databases/db-tools).
 
 ## Restore a system backup
 
