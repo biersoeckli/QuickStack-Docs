@@ -24,20 +24,29 @@ A volume backup schedule can also be marked **Backup before deployment**, so it 
 
 ```mermaid
 flowchart LR
-  subgraph sources["Backup sources"]
-    vol["App volumes"]
-    db["Managed databases"]
-    cfg["QuickStack configuration"]
+  subgraph triggers["Triggers"]
+    cron["Cron schedule"]
+    deploy["Deploy"]
+  end
+
+  subgraph backups["Backup schedules"]
+    vol["Volume backup"]
+    db["Database backup"]
+    cfg["System backup"]
   end
 
   s3["S3-compatible target"]
 
-  vol -->|"volume backup schedule"| s3
-  db -->|"database backup schedule"| s3
-  cfg -->|"system backup"| s3
+  cron --> vol
+  cron --> db
+  cron --> cfg
 
-  deploy["Deploy"] -->|"Backup before deployment<br/>(app + directly connected apps)"| vol
-  deploy -->|"Backup before deployment"| db
+  deploy -.->|"Backup before deployment<br/>(app + connected apps)"| vol
+  deploy -.->|"Backup before deployment"| db
+
+  vol --> s3
+  db --> s3
+  cfg --> s3
 ```
 
 ## Where to find backups
