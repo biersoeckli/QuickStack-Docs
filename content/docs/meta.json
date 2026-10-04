@@ -1,11 +1,14 @@
 {
   "pages": [
+    "---Docs---",
     "index",
     "tutorials",
     "concepts",
     "how-to",
+    "---API---",
     "rest-api",
     "mcp-server",
+    "---Reference---",
     "reference"
   ]
 }

@@ -1,5 +1,6 @@
 {
   "title": "How To",
+  "icon": "Wrench",
   "pages": [
     "project-canvas",
     "templates",

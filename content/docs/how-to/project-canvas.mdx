@@ -7,26 +7,19 @@ keywords: ["QuickStack project canvas", "network graph", "app drawer", "deployme
 
 The **Project Canvas** is the main view for creating, configuring, and operating on apps. Every project opens in the Project Canvas, which offers two views:
 
+<img src="/img/docs/project-canva-and-app-drawer/project-canva.png" alt="Project Canvas network graph showing an app connected to PostgreSQL, Redis, and the internet" />
+
 - **Network graph** — a visual map of the apps, databases, Agent Sandboxes, and the connections between them.
 - **Table** — a simple list of the project's apps.
 
 The Project Canvas is the default and the fastest way to inspect and operate on an app without leaving the project.
 
-## Switch between graph and table
-
-1. Open a project (the Project Canvas opens by default).
-2. Use the **Network graph** and **Table** icons in the header to switch.
-
-QuickStack remembers your choice, and you can share a link with `?tab=graph` or `?tab=table`.
-
-<Callout>
-**Right-click to create**
-Right-click an empty spot on the canvas to create an **Empty App**, an app from a **Template**, or a **Database** in this project.
-</Callout>
-
 ## Create and connect apps
 
+
 1. Click **Create App**, or right-click an empty spot on the canvas, and choose **Empty App**, **Template**, or **Database**.
+<img src="/img/docs/project-canva-and-app-drawer/project-canva-create-app-on-canva.png" alt="Project Canvas context menu with options to create an empty app, an app from a template, or a database" />
+
 2. Give the app a name. It appears as a node and its **details drawer** opens.
 3. If the app has no source yet, click **Connect App Source** in the drawer and follow the [source wizard](/docs/tutorials/first-app-from-git). The source, branch, and build method live under **Settings → Source**. To start from a template instead, see [App & Database Templates](/docs/how-to/templates).
 4. Review and adjust the app's settings in the drawer, then click **Deploy** in the drawer header.
@@ -60,6 +53,8 @@ Click any app, database, or Agent Sandbox node to open the **details drawer** on
 
 - Selecting a node highlights its connections and dims the rest of the canvas.
 - The drawer can be deep-linked with `?drawerAppId=<id>&drawerTab=<tab>`.
+
+<img src="/img/docs/project-canva-and-app-drawer/app-drawer.png" alt="App details drawer showing deployment history for a selected app" />
 
 If an app has no source connected yet, the drawer shows the **Connect App Source** flow instead of the tabs and actions.
 
