@@ -1,0 +1,72 @@
+---
+sidebar_position: 3
+title: "Security Model"
+description: "How QuickStack isolates workloads and controls access: deny-by-default networking, RBAC, authentication, TLS, and data residency."
+keywords: ["QuickStack security", "network policy", "RBAC", "SSO", "2FA", "data residency", "telemetry", "privacy"]
+---
+
+This page summarizes the security model so operators and compliance reviewers can see what is controlled where.
+
+## Network isolation
+
+**Apps cannot talk to each other or to the internet by default.** Traffic is allowed only through explicit network policy rules that you create, which makes QuickStack secure by default.
+
+- Ingress and egress rules are per app and per port, with `TCP` or `UDP`.
+- Rules are bidirectional: adding a rule from one side creates the matching rule on the other.
+- Each app has a separate **Internet Access** egress switch.
+- Databases created from templates deny internet access automatically.
+
+See [Networking & Policies](/docs/how-to/networking) for the full model.
+
+## Access control
+
+QuickStack organizes access with **users**, **groups**, and **permissions**:
+
+- Permissions are granted **per project**, with optional per-app overrides.
+- Permission levels are **Read Apps**, **Write Apps**, **Create Apps**, and **Delete Apps**.
+- The built-in **Admin** group has full access and cannot be modified.
+- API keys inherit the permissions of the user that created them.
+
+See [Users & Groups](/docs/how-to/admin/users-and-groups).
+
+## Authentication
+
+- **Local accounts** — email and password.
+- **Two-factor authentication (TOTP)** — per account. See [2FA](/docs/how-to/admin/two-factor-auth).
+- **Single sign-on** — OIDC, Google, Microsoft Entra ID, and GitHub. SSO can link to existing accounts by verified email. See [Single Sign-On](/docs/how-to/admin/single-sign-on).
+- **REST API keys** — scoped to a user, with optional expiry. See [Authentication](/docs/rest-api/authentication).
+
+## Transport and certificates
+
+Traefik terminates TLS for apps and the QuickStack UI and provisions Let's Encrypt certificates automatically. HTTP Basic Authentication can add a password prompt in front of any app at the proxy level. See [Custom Domains](/docs/how-to/networking/domains) and [Basic Authentication](/docs/how-to/networking/basic-auth).
+
+<Callout type="warn">
+**Basic Auth is not a replacement for application auth**
+Credentials are sent as Base64 on every request. Always use HTTPS, and keep application-level authentication for sensitive data.
+</Callout>
+
+## Data residency and privacy
+
+QuickStack is fully self-hosted. Application data, volumes, backups, and the configuration database stay on infrastructure you control. There is no third-party analytics or tracking SDK in the product.
+
+**Current limitations** relevant to compliance reviews:
+
+- No user audit log (login history, change history) is implemented. Deployment and build logs are available per workload.
+- There is no built-in real-time telemetry or alerting integration.
+
+## Backup and recovery
+
+- **Volume and database backups** go to S3-compatible storage you configure. See [Backups Overview](/docs/how-to/backups/overview).
+- **System backups** capture the QuickStack configuration (projects, users, secrets) and can be downloaded and restored from the UI. See [System Backups](/docs/how-to/backups/system-backups).
+- Volume and database backups can be downloaded but currently have no in-UI restore action. See [Download & Restore](/docs/how-to/backups/download-and-restore).
+
+## License and source
+
+QuickStack is open source under the GPL-3.0 license. The source is on [GitHub](https://github.com/biersoeckli/QuickStack); you can audit it, self-host it, and migrate away at any time.
+
+## Related
+
+- [Architecture](/docs/concepts/architecture)
+- [Networking & Policies](/docs/how-to/networking)
+- [Users & Groups](/docs/how-to/admin/users-and-groups)
+- [Download & Restore](/docs/how-to/backups/download-and-restore)

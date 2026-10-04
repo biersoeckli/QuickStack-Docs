@@ -1,0 +1,87 @@
+---
+sidebar_position: 2
+title: "App & Database Templates"
+description: "Deploy one-click apps and databases from QuickStack templates: WordPress, Nextcloud, n8n, Gitea, LiteLLM, PostgreSQL, and more."
+keywords: ["QuickStack templates", "one-click apps", "Nextcloud", "n8n", "Gitea", "WordPress", "Open WebUI", "PostgreSQL", "deploy template"]
+---
+
+Templates are predefined applications and databases you can deploy in a few clicks. A template ships with a container image, environment variables, persistent storage, and the internal networking rules it needs, so you do not have to assemble a Docker Compose file yourself.
+
+For apps where you control the source code, image, or Dockerfile, use a regular [application](/docs/concepts/projects-apps-databases#apps) instead.
+
+## Create an app from a template
+
+You can start from the toolbar or from the network graph:
+
+- **Toolbar:** click **Create App** → **Template**.
+- **Network graph:** right-click an empty spot on the canvas and choose **Create App from Template**.
+
+Databases have their own entry: **Create App** → **Database**, or right-click → **Create Database**. See [Deploy Databases](/docs/how-to/databases/deploy-databases) for the database workflow.
+
+The **Create App from Template** dialog lists the available templates with their icon, name, description, and an **App** or **Database** badge. Use **Search templates...** to filter the list.
+
+## Review and create
+
+Selecting a template opens a setup dialog titled `Create App "<template>"`:
+
+1. Rename the app if needed in **App Name**.
+2. Fill in the template's input fields. Common examples are **Container Image**, database credentials, admin username/password, and timezone. Fields marked *If left empty, a random value will be generated.* are filled with a secure random value when left blank.
+3. Review the **Selected template** panel, then click **Create app**.
+
+Ports, volumes, file mounts, and static environment variables are prefilled by the template and are not shown in the create dialog. You can change them afterward through the app's normal settings.
+
+<Callout>
+**Deploy after creating**
+Creating the app does not start it. Open the app and click **Deploy** to build or pull the image and start the workload.
+</Callout>
+
+## Application templates
+
+| Template | Description | Bundled services |
+|----------|-------------|------------------|
+| **WordPress** | Publishing platform and CMS | MariaDB |
+| **n8n** | Workflow automation | — |
+| **Nextcloud** | File sync, share, and collaboration | — |
+| **MinIO** | S3-compatible object storage | — |
+| **Uptime Kuma** | Uptime and service monitoring | — |
+| **Gitea** | Lightweight self-hosted Git service | — |
+| **Docmost** | Collaborative documentation and wiki | PostgreSQL, Redis |
+| **NGINX** | Web server and reverse proxy | — |
+| **Adminer** | Database administration UI | — |
+| **draw.io** | Diagram editor | — |
+| **Duplicati** | Backup client | — |
+| **Open WebUI** | Web UI for local LLMs | Ollama |
+| **Apache Tika** | Content extraction toolkit | — |
+| **Libredesk** | Customer support desk | PostgreSQL, Redis |
+| **Chisel Tunnel** | TCP/UDP tunneling over HTTP | — |
+| **LiteLLM** | LLM gateway / proxy | PostgreSQL, Redis |
+
+Templates that bundle several services create all of them as separate apps in the same project and wire up the internal network rules and connection environment variables automatically.
+
+## Database templates
+
+| Template | Default image | Default port | Default volume |
+|----------|---------------|--------------|----------------|
+| **PostgreSQL** | `postgres:18-alpine` | `5432` | 300 MB |
+| **MySQL** | `mysql:9` | `3306` | 500 MB |
+| **MariaDB** | `mariadb:11` | `3306` | 400 MB |
+| **MongoDB** | `mongo:7` | `27017` | 500 MB |
+| **Redis** | `redis:8-alpine` | `6379` | 200 MB |
+
+Database templates deny internet access by default and store credentials as environment variables. See [Deploy Databases](/docs/how-to/databases/deploy-databases) for connecting apps and accessing credentials.
+
+## Editing a deployed template
+
+A template is only a starting point. After creation, every app is a normal QuickStack app: change the image or source, environment variables, domains, storage, replicas, and resource limits, then redeploy.
+
+<Callout type="warn">
+**Do not change generated database environment variables**
+For database apps created from templates, leave the automatically generated credentials (`POSTGRES_PASSWORD`, `MYSQL_ROOT_PASSWORD`, and similar) untouched unless you also update every app that connects to it.
+</Callout>
+
+## Related
+
+- [Deploy Databases](/docs/how-to/databases/deploy-databases)
+- [Project Canvas & App Drawer](/docs/how-to/project-canvas)
+- [Networking & Policies](/docs/how-to/networking)
+- [Database Tools](/docs/how-to/databases/db-tools)

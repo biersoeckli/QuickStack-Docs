@@ -63,29 +63,6 @@ export function HowItWorksSection() {
           </div>
         ))}
       </div>
-
-      {/* Video demo */}
-      <div className="mx-auto mt-6 max-w-[1000px] overflow-hidden rounded-2xl border border-border bg-card">
-        <div className="flex items-center justify-between border-b border-border px-5 py-3">
-          <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
-            Demo
-          </span>
-          <span className="font-mono text-[11px] text-muted-foreground">
-            02:14
-          </span>
-        </div>
-        <div className="aspect-video w-full bg-black">
-          <iframe
-            width="100%"
-            height="100%"
-            src="https://www.youtube.com/embed/koqGZ2ChHvw?si=44prf579KAtnBlpO"
-            title="QuickStack Installation Demo"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          />
-        </div>
-      </div>
     </section>
   );
 }
