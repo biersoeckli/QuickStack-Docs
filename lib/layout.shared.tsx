@@ -11,16 +11,16 @@ export const gitConfig = {
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
-      transparentMode: 'top',
+      transparentMode: 'top', 
       title: (
         <div className="flex items-center gap-2">
           <img 
-            src="/img/quickstack-icon-dark.svg" 
+            src="/img/quickstack-icon.svg" 
             alt="QuickStack" 
             className="w-6 h-6 dark:hidden"
           />
           <img 
-            src="/img/quickstack-icon-light.svg" 
+            src="/img/quickstack-icon-dark.svg" 
             alt="QuickStack" 
             className="w-6 h-6 hidden dark:block"
           />

@@ -318,20 +318,21 @@ export function AllFeaturesSection() {
   return (
     <section
       id="all-features"
-      className="mx-auto w-full max-w-7xl scroll-mt-20 px-4 py-24 md:py-32"
+      className="scroll-mt-20 border-y border-border bg-muted/30"
     >
-      <div className="mb-16 max-w-2xl">
+      <div className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
+        <div className="mb-16 max-w-2xl">
         <Eyebrow className="mb-5">All features</Eyebrow>
         <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
           Every feature you need, built in.
         </h2>
         <p className="mt-5 text-muted-foreground">
-          Ten areas across the whole product. From your first deploy to
+          Different areas, one product. From your first deploy to
           runtime control, storage, networking and team access.
         </p>
-      </div>
+        </div>
 
-      <div className="space-y-10 md:space-y-12">
+        <div className="space-y-10 md:space-y-12">
         {featureGroups.map((group) => (
           <div key={group.title} className="grid gap-5 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-3">
@@ -362,6 +363,7 @@ export function AllFeaturesSection() {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </section>
   );

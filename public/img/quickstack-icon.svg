@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" viewBox="226 256.5 796 840.5">
-  <title id="title">QuickStack icon — dark mode</title>
+  <title id="title">QuickStack icon — light mode</title>
   <defs>
     <linearGradient id="turquoise" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#00D6C9"/>
       <stop offset="1" stop-color="#00BFAF"/>
     </linearGradient>
     <linearGradient id="charcoal" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="white"/>
-      <stop offset="1" stop-color="white"/>
+      <stop offset="0" stop-color="#404B57"/>
+      <stop offset="1" stop-color="#28333F"/>
     </linearGradient>
   </defs>
   <!-- Bottom layer -->

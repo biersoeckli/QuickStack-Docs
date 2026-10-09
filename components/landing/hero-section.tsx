@@ -25,7 +25,7 @@ export function HeroSection({ theme }: HeroSectionProps) {
         </h1>
 
         <p className="mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">
-          Deploy apps and databases from Git or any container registry. QuickStack handles networking, HTTPS, storage, monitoring and backups on your own servers.
+          Deploy apps and databases from Git or any container registry. QuickStack handles networking, HTTPS, storage, monitoring, backups and more on your own servers. No vendor lock-in.
         </p>
 
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
@@ -70,9 +70,8 @@ export function HeroSection({ theme }: HeroSectionProps) {
                 playsInline
                 preload="metadata"
                 onCanPlay={() => setIsVideoReady(true)}
-                className={`block size-full object-contain transition-opacity duration-300 ${
-                  isVideoReady ? 'opacity-100' : 'opacity-0'
-                }`}
+                className={`block size-full object-contain transition-opacity duration-300 ${isVideoReady ? 'opacity-100' : 'opacity-0'
+                  }`}
                 aria-label="QuickStack product demonstration"
               >
                 <source src="/videos/quickstack_v1_demo_4k_2.mp4" type="video/mp4" />

@@ -26,8 +26,9 @@ export const howItWorksSteps = [
 
 export function HowItWorksSection() {
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
-      <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+    <section className="border-y border-border bg-muted/30">
+      <div className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
+        <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div className="max-w-xl">
           <Eyebrow className="mb-5">How it works</Eyebrow>
           <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
@@ -41,9 +42,9 @@ export function HowItWorksSection() {
           Installation guide
           <ArrowRight className="h-4 w-4" />
         </Link>
-      </div>
+        </div>
 
-      <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
         {howItWorksSteps.map((step) => (
           <div key={step.number} className="bg-card p-7">
             <span className="font-mono text-sm text-muted-foreground">
@@ -62,6 +63,7 @@ export function HowItWorksSection() {
             )}
           </div>
         ))}
+        </div>
       </div>
     </section>
   );

@@ -38,8 +38,9 @@ export const faqs = [
 
 export function FaqSection() {
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
-      <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
+    <section className="border-y border-border bg-muted/30">
+      <div className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
         <div className="md:col-span-4">
           <Eyebrow className="mb-5">FAQ</Eyebrow>
           <h2 className="text-3xl font-semibold leading-tight tracking-tighter text-foreground md:text-4xl">
@@ -60,6 +61,7 @@ export function FaqSection() {
               </AccordionItem>
             ))}
           </Accordion>
+        </div>
         </div>
       </div>
     </section>
