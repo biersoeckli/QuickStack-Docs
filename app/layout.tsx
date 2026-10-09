@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     url: "/",
     title: 'QuickStack | Self-host any app on your own infrastructure',
     description: 'Self-hosted platform for running production applications on your own infrastructure. It handles app and database deployments, networking, HTTPS, storage, monitoring, backups and more. No vendor lock-in.',
-    images: [{ url: "/og", width: 1200, height: 630 }],
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
     siteName: 'QuickStack',
   },
   twitter: {
     card: "summary_large_image",
     title: 'QuickStack | Self-host any app on your own infrastructure',
     description: 'Self-hosted platform for running production applications on your own infrastructure. It handles app and database deployments, networking, HTTPS, storage, monitoring, backups and more. No vendor lock-in.',
-    images: ["/og"],
+    images: ["/og.png"],
   },
   icons: [
     { rel: "icon", url: "/img/quickstack-icon.png" },
