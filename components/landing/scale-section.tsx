@@ -32,7 +32,7 @@ export function ScaleSection() {
           </h2>
           <p className="mt-5 text-base leading-relaxed text-muted-foreground md:text-lg">
             Begin on the server you have today. When workloads grow, join worker
-            nodes to the same cluster — without moving apps, rebuilding volumes,
+            nodes to the same cluster without moving apps, rebuilding volumes,
             or changing how your team deploys.
           </p>
           <div className="mt-8 gap-3 sm:grid-cols-2 hidden lg:grid">
