@@ -1,4 +1,6 @@
 import { ImageResponse } from '@takumi-rs/image-response';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
 
 export const revalidate = false;
 
@@ -6,8 +8,9 @@ const title = 'Self-host any app on your own infrastructure';
 const description =
   'Free, self-hosted platform. Simple deployments from your repo. Use auto-deploy, a Dockerfile, or container image.';
 
-export function GET(request: Request) {
-  const logo = new URL('/img/quickstack-icon.svg', request.url).toString();
+export async function GET() {
+  const svg = await readFile(path.join(process.cwd(), 'public/img/quickstack-icon.svg'));
+  const logo = `data:image/svg+xml;base64,${svg.toString('base64')}`;
 
   return new ImageResponse(
     <div
