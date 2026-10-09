@@ -1,0 +1,9 @@
+{
+  "title": "Concepts",
+  "icon": "Lightbulb",
+  "pages": [
+    "architecture",
+    "projects-apps-databases",
+    "security-model"
+  ]
+}

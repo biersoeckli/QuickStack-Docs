@@ -9,19 +9,15 @@ keywords: ["QuickStack logs", "terminal", "debugging", "monitoring", "live logs"
 
 When a deployment is triggered, QuickStack streams **Kubernetes events** (pod scheduling, image pulls, container starts and stops) directly into the deployment log alongside the build output. This provides additional context when a deployment is slow or fails — for example, you can see whether a pod is waiting for image pull or failing readiness probes (health check).
 
-<img  src="/img/docs/observability/logs-and-terminal/qs-build-job.png" alt="QuickStack Log Viewer" />
-
-Access deployment logs from the **Overview** tab by clicking **Show Logs** next to a deployment entry, or from the global [Builds](/docs/how-to/observability/builds-overview) page.
+Access deployment logs from the app's **Deployments** tab by clicking **Open Terminal** on a deployment, or from the global [Builds](/docs/how-to/observability/builds-overview) page.
 
 ## Live App logs
 
-The **Logs** from running apps are streamed to the app page in QuickStack. Start here when troubleshooting.
+The **Logs** from running apps are streamed to the app's **Logs** tab in the Project Canvas. Start here when troubleshooting.
 
-1. Open your app.
-2. Go to the **Overview** tab.
+1. Open the app in the **Project Canvas**.
+2. Go to the **Logs** tab in the **Project Canvas** drawer.
 3. If your app runs multiple replicas, use the pod dropdown to select which pod to tail.
-
-<img  src="/img/docs/managing-apps/monitoring-and-debugging/logs-example.png" alt="QuickStack Log Viewer" />
 
 <Callout>
 The log viewer keeps the most recent **1000 lines**. Older lines are dropped as new ones stream in, so it is safe to leave open.
@@ -29,7 +25,7 @@ The log viewer keeps the most recent **1000 lines**. Older lines are dropped as 
 
 ## QuickStack system logs (admin only)
 
-Logs for the QuickStack system pod itself are available to **administrators only**, from **Settings** → **QuickStack Server** → **Maintenance** → **Open QuickStack Logs**. Non-admin users cannot stream the QuickStack system logs.
+Logs for the QuickStack system pod itself are available to **administrators only**, from **Settings** → **Platform** → **Operations & Maintenance** → **Open QuickStack Logs**. Non-admin users cannot stream the QuickStack system logs.
 
 ## Interactive terminal
 
@@ -37,20 +33,16 @@ The **Terminal** opens a shell session directly inside a running container from 
 
 ### Opening a terminal session
 
-1. Open your app, go to the **Overview** tab.
+1. Open the app in the **Project Canvas** and go to the **Logs** tab.
 2. In the **Logs** card, click **Terminal** next to the pod selector.
 
 <Callout>
 The Terminal button is only visible if you have **Write** permissions for the application.
 </Callout>
 
-<img  src="/img/docs/managing-apps/monitoring-and-debugging/select-terminal.png" alt="Launch Terminal" />
-
 3. Choose your shell:
    - **Start sh** — available on almost all Linux containers (including Alpine)
    - **Start bash** — richer experience; requires `bash` to be installed in the image
-
-<img  src="/img/docs/managing-apps/monitoring-and-debugging/terminal-example.png" alt="Terminal Session" />
 
 4. To end the session, click **Disconnect Session** or close the dialog.
 

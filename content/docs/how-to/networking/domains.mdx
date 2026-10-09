@@ -24,7 +24,7 @@ DNS propagation can take a few minutes to several hours. Verify resolution befor
 
 ## QuickStack UI steps
 
-1. Open the app and click the **Domains & Networking** tab.
+1. Open the app in the **Project Canvas** and go to **Settings → Networking**.
 2. Click **Add Domain** to open the Edit Domain dialog.
 3. Fill in the fields:
    - **Hostname** — the domain or subdomain (e.g. `app.example.com`)
@@ -33,12 +33,8 @@ DNS propagation can take a few minutes to several hours. Verify resolution befor
    - **Redirect HTTP to HTTPS** — when enabled, all HTTP traffic is redirected to HTTPS (requires **Use HTTPS**)
 4. Click **Save**.
 
-<img  src="/img/docs/managing-apps/creating-apps/domains-overview.png" alt="QuickStack Domains Tab" />
-
-<img  src="/img/docs/managing-apps/domains/edit-domains.png" alt="QuickStack Edit Domain Dialog" />
-
 <Callout>
-**The Domains & Networking tab also holds**
+**The Networking section also holds**
 [Node Ports](/docs/how-to/networking/node-ports) for non-HTTP traffic, and [networking & network policies](/docs/how-to/networking) for controlling which workloads may reach the app.
 </Callout>
 
@@ -54,7 +50,7 @@ Domain changes are not applied until you click **Deploy**. The app must be redep
 |---------|--------|
 | Domain does not resolve | Wait for DNS propagation; verify A record points to the correct server IP |
 | Domain resolves but app not reachable | Check that **App Port** matches the port your container actually listens on |
-| HTTPS certificate fails | Ensure Let's Encrypt email is configured in **Settings** → **QuickStack Server** → **Networking / Traefik** |
+| HTTPS certificate fails | Ensure Let's Encrypt email is configured in **Settings** → **Platform** → **Network & Domains** |
 | Still not working | Open an issue on [GitHub](https://github.com/biersoeckli/quickstack/issues) |
 
 ## Related

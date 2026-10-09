@@ -34,8 +34,8 @@ export function FooterSection({ theme }: FooterSectionProps) {
               <Image
                 src={
                   theme === 'light'
-                    ? '/img/quickstack-icon-dark.svg'
-                    : '/img/quickstack-icon-light.svg'
+                    ? '/img/quickstack-icon.svg'
+                    : '/img/quickstack-icon-dark.svg'
                 }
                 alt="QuickStack"
                 width={28}

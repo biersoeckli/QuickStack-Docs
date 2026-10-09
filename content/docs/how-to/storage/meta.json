@@ -1,6 +1,8 @@
 {
   "pages": [
     "volumes",
+    "shared-volumes",
+    "file-browser",
     "file-mounts"
   ]
 }

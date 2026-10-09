@@ -7,29 +7,35 @@ keywords: ["QuickStack Git Deployment", "QuickStack Git Source", "QuickStack Git
 
 QuickStack clones your repo, builds a Docker image, and runs it as a container. Every time you click **Deploy**, the current configuration is applied.
 
-QuickStack supports two [build methods](/docs/how-to/deployments/build-methods):
+QuickStack supports three [build methods](/docs/how-to/deployments/build-methods):
+- **Framework** — pick a preset for Next.js, React, Angular, Nuxt, Astro, or SvelteKit; QuickStack pre-fills the build and run commands.
 - **Railpack** — auto-detects your language and framework; no Dockerfile needed.
 - **Dockerfile** — uses a `Dockerfile` you provide in your repository.
 
 ## Prerequisites
 
 - QuickStack installed ([installation guide](/docs/tutorials/installation))
-- A Git repository with a valid `Dockerfile`
+- A Git repository. For the Dockerfile method, it must contain a valid `Dockerfile`.
 
 ## Step 1: Create project and app
 
-1. On the dashboard, click **Create Project** and give it a name.
-2. Open the project, click **Create App** → **Empty App**, give your app a name.
+All app management happens in the **Project Canvas**, the visual project view where each app is a node. Selecting a node opens its **details drawer**.
 
-<img  src="/img/docs/managing-apps/creating-apps/create-app-dialog.png" alt="QuickStack Create App Dialog" />
+1. On the dashboard, click **Create Project** and give it a name.
+2. Open the project (the **Project Canvas** opens by default), click **Create App** → **Empty App**, and give your app a name. You can also right-click an empty spot on the canvas.
+
+<img  src="/img/docs/tutorials/first-app-from-git/create-app-on-canva.png" alt="Create app on Project Canvas" />
 
 ## Step 2: Configure the app source
 
-1. Now you have to connect your app to an app source. To start, click on "Connect App Source".
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/choose-app-source.png" alt="QuickStack Choose App Source" />
+
+
+1. The app's **details drawer** is now open on the Project Canvas. To connect a source, click **Connect App Source**.
+
+<img  src="/img/docs/tutorials/first-app-from-git/drawer-from-new-app.png" alt="App details drawer from new app" />
+
 
 2. Next you have to choose the source type. QuickStack supports Git HTTPS, Git SSH, and Docker Container Image sources.
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/choose-git-source.png" alt="QuickStack Choose Git Source" />
 
 **Differences between source types:**
 
@@ -42,21 +48,13 @@ QuickStack supports two [build methods](/docs/how-to/deployments/build-methods):
 ### Option A — Git HTTPS
 
 4. Enter the HTTPS clone URL (e.g. `https://github.com/org/repo.git`). For private repos, enter your **Git Username** and a **Personal Access Token** with `read` access on the repository.
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/enter-git-https-location.png" alt="QuickStack Enter Git HTTPS Location" />
-
 5. QuickStack attempts to load the available branches. Select a branch from the list.
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/choose-git-branch.png" alt="QuickStack Choose Git Branch" />
-
 6. Choose the build method:
+- **Framework** — select one of the supported JavaScript frameworks; QuickStack pre-fills the commands. Review them and adjust if needed.
 - **Railpack** — auto-detects your language and framework; no Dockerfile needed.
 - **Dockerfile** — uses a `Dockerfile` you provide in your repository. This is more flexible but requires a valid `Dockerfile` in the repo.
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/choose-build-method.png" alt="QuickStack Choose Build Method" />
-
 7. When Dockerfile is chosen, QuickStack auto-detects the Dockerfile location. Confirm or adjust the **Dockerfile Path** if needed (relative to repo root, e.g. `./Dockerfile`).
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/set-dockerfile-location.png" alt="QuickStack Set Dockerfile Location" />
-
 8. Review the summary and click **Save & Deploy** to start the deployment of your app.
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/git-https-summary.png" alt="QuickStack Git HTTPS Summary" />
 
 ### Option B — Git SSH
 
@@ -66,21 +64,13 @@ QuickStack supports two [build methods](/docs/how-to/deployments/build-methods):
    - **GitHub:** Repository → Settings → Deploy keys → Add deploy key
    - **GitLab:** Repository → Settings → Repository → Deploy keys
    - **Bitbucket:** Repository → Repository settings → Access keys
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/enter-git-ssh-location.png" alt="QuickStack Enter Git SSH Location" />
-
-5. QuickStack attempts to load the available branches. Select a branch from the list.
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/choose-git-branch.png" alt="QuickStack Choose Git Branch" />
-
-6. Choose the build method:
+7. QuickStack attempts to load the available branches. Select a branch from the list.
+8. Choose the build method:
+- **Framework** — select one of the supported JavaScript frameworks; QuickStack pre-fills the commands. Review them and adjust if needed.
 - **Railpack** — auto-detects your language and framework; no Dockerfile needed.
 - **Dockerfile** — uses a `Dockerfile` you provide in your repository. This is more flexible but requires a valid `Dockerfile` in the repo.
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/choose-build-method.png" alt="QuickStack Choose Build Method" />
-
-7. When Dockerfile is chosen, QuickStack auto-detects the Dockerfile location. Confirm or adjust the **Dockerfile Path** if needed (relative to repo root, e.g. `./Dockerfile`).
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/set-dockerfile-location.png" alt="QuickStack Set Dockerfile Location" />
-
-8. Review the summary and click **Save & Deploy** to start the deployment of your app.
-<img className='max-w-2xl w-full'  src="/img/docs/tutorials/first-app-from-git/git-ssh-summary.png" alt="QuickStack Git SSH Summary" />
+9. When Dockerfile is chosen, QuickStack auto-detects the Dockerfile location. Confirm or adjust the **Dockerfile Path** if needed (relative to repo root, e.g. `./Dockerfile`).
+10. Review the summary and click **Save & Deploy** to start the deployment of your app.
 
 
 <Callout>
@@ -96,23 +86,20 @@ Any configuration change — Git source, env vars, storage, domains — only tak
 
 ## Step 4: Verify
 
-1. Open the **Overview** tab — status turns green when the app is running.
-2. Click **Show Logs** on the current deployment to inspect build and startup output in real time.
-
-<img  src="/img/docs/managing-apps/creating-apps/deployment-overview.png" alt="QuickStack Deployment Overview" />
-
-<img  src="/img/docs/managing-apps/creating-apps/deployment-logs.png" alt="QuickStack Deployment Logs" />
+1. Open the **Deployments** tab — status turns green when the app is running.
+2. Click **Open Terminal** on the current deployment to inspect build and startup output in real time.
 
 ## Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
 | Build fails | Check deployment logs for build errors |
-| Railpack build fails | Verify your language/framework is [supported by Railpack](https://railpack.io); switch to the Dockerfile method if needed |
+| Railpack build fails | Verify your language/framework is [supported by Railpack](https://railpack.io); switch to the Framework or Dockerfile method if needed |
+| Framework build fails | Check the **Build Command** and **Root Directory**; try setting a specific **Node Version** |
 | Dockerfile not found | Verify the path is relative to repo root (e.g. `./Dockerfile`) |
 | SSH clone fails | Confirm the deploy key is added to the repository with read access |
 | Branches not loading | Verify the URL is correct; for private repos check credentials or deploy key |
-| App not reachable after deploy | Add a domain in the **Domains & Networking** tab with the correct internal container port |
+| App not reachable after deploy | Add a domain in **Settings → Networking** with the correct internal container port |
 
 ## Next steps
 

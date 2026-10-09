@@ -1,4 +1,5 @@
 {
+  "icon": "Rocket",
   "pages": [
     "installation",
     "first-app-from-git",

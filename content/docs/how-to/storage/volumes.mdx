@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Volumes"
-description: "Configure persistent storage volumes for your QuickStack applications: storage classes, access modes, node affinity, and gotchas."
+description: "Configure persistent storage volumes for your QuickStack applications: storage classes, access modes, and gotchas."
 keywords: ["QuickStack volumes", "persistent storage", "Longhorn", "local-path", "RWO", "RWX"]
 ---
 
@@ -13,24 +13,19 @@ For injecting read-only config files, see [File Mounts](/docs/how-to/storage/fil
 
 ## Configure a volume
 
-1. Open your app and go to the **Storage** tab.
+1. Open the app in the **Project Canvas** and go to **Settings → Storage**.
 2. Click **Add Volume**.
-
-<img  src="/img/docs/managing-apps/storage/storage-tab-empty.png" alt="QuickStack Storage Tab" />
 
 3. Fill in the fields:
    - **Mount Path** — path inside the container (e.g. `/data`, `/app/uploads`)
    - **Size in MB** — storage to allocate. You can increase but **not decrease** after creation.
    - **Storage Class** — `local-path` for single-node; `longhorn` for multi-node clusters.
    - **Access Mode** — see below.
-   - **Node Affinity** _(optional)_ — pin the volume to a specific node.
 4. Click **Save**, then **Deploy**.
-
-<img  src="/img/docs/managing-apps/storage/create-volume.png" alt="Create Volume Dialog" />
 
 <Callout>
 **Deploy required**
-Click **Deploy** after adding or modifying a volume for changes to take effect.
+Click **Deploy** in the app drawer header after adding or modifying a volume for changes to take effect.
 </Callout>
 
 ## Access modes
@@ -63,19 +58,19 @@ If your app runs with more than one replica **and** instances write to a shared 
 - **Change mount path** — allowed, requires a redeploy.
 - **Delete** — permanently destroys all data on the volume. There is no undo. Back up first.
 
-<img  src="/img/docs/managing-apps/storage/storage-tab.png" alt="Storage Tab with volumes" />
-
 ## Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
 | App can't write to volume | Verify mount path matches app config; check container file permissions |
-| Volume not mounting | If node affinity is set, verify the target node is online and has free disk space |
+| Volume not mounting | Verify the target node is online and has free disk space |
 | Wrong access mode | Delete and recreate with the correct mode (backup data first — it will be lost) |
 | Multi-replica app failing | Confirm you're using RWX, not RWO, for shared write paths |
 
 ## Related
 
+- [Shared volumes](/docs/how-to/storage/shared-volumes) — mount one volume in several apps
+- [File browser](/docs/how-to/storage/file-browser) — browse and download volume contents
 - [File mounts](/docs/how-to/storage/file-mounts)
 - [Volume backup schedules](/docs/how-to/backups/volume-backups)
 - [Cluster node management](/docs/how-to/admin/cluster-nodes) (node affinity)

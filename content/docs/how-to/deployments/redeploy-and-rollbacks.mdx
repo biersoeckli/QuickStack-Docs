@@ -11,10 +11,11 @@ This is intentional: you can batch multiple config changes and apply them all at
 
 ## What "Deploy" does
 
-1. For Git-source apps: pulls the latest commit from the configured branch, then builds a new Docker image using the configured [build method](/docs/how-to/deployments/build-methods) (Railpack or Dockerfile), and pushes it to the internal registry.
+1. For Git-source apps: pulls the latest commit from the configured branch, then builds a new Docker image using the configured [build method](/docs/how-to/deployments/build-methods) (Framework, Railpack or Dockerfile), and pushes it to the internal registry.
 2. For Docker image apps: pulls the specified image tag from the configured registry.
-3. Applies all staged config changes (env vars, volumes, domains, network policies, health checks, etc.).
-4. Performs a rolling update: new pods are started, old pods are terminated once the new ones are healthy.
+3. Runs any volume backups that are configured with [Backup before deployment](/docs/how-to/backups/volume-backups#back-up-before-deployment).
+4. Applies all staged config changes (env vars, volumes, domains, network policies, health checks, etc.).
+5. Performs a rolling update: new pods are started, old pods are terminated once the new ones are healthy.
 
 <Callout>
 **No zero-downtime guarantee without health checks**
@@ -23,7 +24,7 @@ Without a configured [health check](/docs/how-to/observability/health-checks), K
 
 ## Deployment history
 
-The **Overview** tab shows a history of recent deployments. For Git-source apps, each entry displays the **git commit message** of the commit that triggered the build, making it easy to track which code change corresponds to each deployment.
+The app's **Deployments** tab shows a history of recent deployments. For Git-source apps, each entry displays the **git commit message** of the commit that triggered the build, making it easy to track which code change corresponds to each deployment.
 
 Kubernetes events (pod scheduling, image pull, container start/stop) are streamed directly into the deployment log, providing richer context when diagnosing a failed or slow deployment.
 
@@ -36,13 +37,11 @@ If multiple builds are triggered at the same time, they queue in **PENDING** sta
 
 For Git-source apps, QuickStack can redeploy the code from an earlier commit.
 
-1. Open the app's **Overview** tab and find it in the **Deployments** table.
+1. Open the app's **Deployments** tab and find the deployment in the list.
 2. On an eligible deployment, open the actions menu and choose **Rollback to this deployment**.
 3. Confirm the short commit hash in the dialog.
 
 QuickStack reapplies the image that was built for that commit. If that image is no longer in the internal registry, it rebuilds the commit first. Rollback deployments are marked with a purple **Rollback** badge in the deployment list.
-
-<img src="/img/docs/managing-apps/deployments/rollback-deployment.png" alt="Rollback action and badge in the deployments table" />
 
 <Callout type="warn">
 **Rollback replaces the running version**
@@ -60,7 +59,7 @@ Environment variables are key-value pairs injected at runtime. They are stored i
 
 ### Editing env vars
 
-1. Open your app and go to the **Environment** tab.
+1. Open the app in the **Project Canvas** and go to **Settings → Environment**.
 2. Edit variables in the text area, one `KEY=VALUE` per line.
 3. Click **Save**.
 4. Click **Deploy** for changes to take effect.
@@ -91,7 +90,11 @@ DATABASE_URL=postgres://user:pass@svc-app-xyz.<project-id>.svc.cluster.local:543
 REDIS_URL=redis://svc-app-abc.<project-id>.svc.cluster.local:6379
 ```
 
-Copy the exact value from the app's **Domains & Networking** tab → **Network Policy** → rule actions → **Copy internal hostname**. See [Networking](/docs/how-to/networking) for details.
+Copy the exact value from the app's **Settings → Networking** → **Network Policy** → rule actions → **Copy internal hostname**. See [Networking](/docs/how-to/networking) for details.
+
+### Build arguments
+
+On the same **Settings → Environment** section you can also set **Build Arguments** for Dockerfile builds. They are passed to the image build only, are not available at runtime, and are not secret. See [Build arguments](/docs/how-to/deployments/build-methods#build-arguments).
 
 ## Advanced: force-pull latest image tag
 

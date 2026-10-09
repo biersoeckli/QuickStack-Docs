@@ -1,7 +1,9 @@
 {
   "title": "Reference",
+  "icon": "BookOpen",
   "pages": [
-    "ui-navigation-map",
+    "comparison",
+    "sizing-and-costs",
     "ports-and-endpoints",
     "glossary"
   ]

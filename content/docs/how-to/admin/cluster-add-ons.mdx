@@ -1,17 +1,31 @@
 ---
 sidebar_position: 5
 title: "Cluster Add-ons"
-description: "Install, update, and remove cluster components such as Longhorn and CertManager from the QuickStack UI."
-keywords: ["QuickStack add-ons", "Longhorn", "CertManager", "cert-manager", "cluster component", "upgrade", "storage", "TLS"]
+description: "Install, update, and remove cluster components such as Longhorn, cert-manager, the Kubernetes Agent Sandbox, and gVisor from the QuickStack UI."
+keywords: ["QuickStack add-ons", "Longhorn", "CertManager", "cert-manager", "Kubernetes Agent Sandbox", "gVisor", "cluster component"]
 ---
 
-QuickStack can install and keep cluster components up to date. They are managed from **QuickStack Settings** → **Updates & Add-Ons** → **Cluster Add-ons** and are only visible to administrators.
+QuickStack can install and keep cluster components up to date. They are managed from **Settings** → **Platform** → **Updates & Add-Ons** → **Cluster Add-ons** and are only visible to administrators.
 
-<img src="/img/docs/admin/cluster-add-ons/cluster-add-ons-overview.png" alt="Cluster Add-ons cards" />
+Each add-on card shows its status, installed version, and the next available version. Depending on the add-on you can **Install**, **Update**, or **Remove** it. Updates show a warning with the items to check first (for example, recent backups before a Longhorn update). See [Updates & Maintenance](/docs/how-to/admin/updates-and-maintenance) for the workflow.
 
 ## Available add-ons
 
-| Add-on | Purpose | 
+| Add-on | Purpose |
 |--------|---------|
 | **Longhorn** | Distributed block storage across cluster nodes (the `longhorn` storage class) |
-| **CertManager** | Automated TLS certificate issuance; enables HTTPS for apps in QuickStack | 
+| **CertManager** | Automated TLS certificate issuance; enables HTTPS for apps in QuickStack |
+| **Kubernetes Agent Sandbox** | Installs the agent sandbox components so QuickStack can run [Agent Sandboxes and their Sandbox Instances](/docs/how-to/agents) |
+| **gVisor** | Provides an optional sandboxed runtime that Sandbox Instances can select as their [Runtime Class](/docs/how-to/agents#runtime-isolation) |
+
+<Callout type="warn">
+**Canary-only add-ons**
+The **Kubernetes Agent Sandbox** and **gVisor** add-ons are experimental and only appear when the **Canary Channel** is enabled under **Settings** → **Platform** → **Updates & Add-Ons**. See [Updates & Maintenance](/docs/how-to/admin/updates-and-maintenance#canary-channel).
+</Callout>
+
+## Related
+
+- [Updates & Maintenance](/docs/how-to/admin/updates-and-maintenance)
+- [Cluster Nodes](/docs/how-to/admin/cluster-nodes)
+- [Agent Sandbox](/docs/how-to/agents)
+- [Volumes](/docs/how-to/storage/volumes)

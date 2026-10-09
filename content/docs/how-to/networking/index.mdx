@@ -11,20 +11,34 @@ Network policies decide which apps and databases in a project may communicate, a
 **By default, apps cannot talk to each other or reach the internet.** You allow traffic by creating connections explicitly. This is a security feature that prevents accidental exposure of internal services.
 </Callout>
 
+```mermaid
+flowchart LR
+  internet["Internet"]
+
+  subgraph project["Project"]
+    appA["App A"]
+    appB["App B"]
+    db["PostgreSQL"]
+  end
+
+  appA <-->|"TCP 5432<br/>ingress + egress rule"| db
+  appA -->|"Internet Access on"| internet
+  appA -.->|"no rule → blocked"| appB
+  internet -.->|"denied by default"| appA
+```
+
 There are two ways to change policies:
 
-1. **Project network graph** — the recommended, visual way to connect and disconnect apps across a project.
-2. **App page → Domains & Networking** — fine-grained editing of a single app's rules.
+1. **Project Canvas** — the recommended, visual way to connect and disconnect apps across a project.
+2. **App drawer → Settings → Networking** — fine-grained editing of a single app's rules.
 
-## Change policies with the network graph (recommended)
+## Change policies in the Project Canvas (recommended)
 
-The network graph visualizes every connection in a project and lets you edit them without switching between app pages.
+The Project Canvas visualizes every connection in a project and lets you edit them without switching between apps.
 
-1. Open a project and click the **Network graph** icon next to the **Table** icon.
+1. Open a project and open its **Project Canvas** (the **Network graph** icon next to the **Table** icon).
 2. Create, remove, or toggle connections as described below.
 3. Click **Save & Apply** and confirm. Policies take effect immediately — no redeploy needed.
-
-<img src="/img/docs/managing-apps/network-policies/project-graph-overview.png" alt="Project network graph overview" />
 
 ### Read the graph
 
@@ -47,17 +61,6 @@ The network graph visualizes every connection in a project and lets you edit the
 
 QuickStack creates the matching ingress rule on the target automatically. To connect across projects, pick the other project inside the rule dialog.
 
-<video
-    className="bg-white"
-    muted
-    loop
-    autoPlay
-    preload="metadata"
->
-    <source src="/img/docs/managing-apps/network-policies/quick-manual-network-policies.webm" type="video/webm" />
-    Your browser does not support embedded videos.
-</video>
-
 <Callout>
 **Permissions**
 You can only start a connection from an app you have write access to. Cross-project targets can be selected inside the rule dialog.
@@ -67,8 +70,6 @@ You can only start a connection from an app you have write access to. Cross-proj
 
 Right-click an edge and choose **Delete connection**. This removes the underlying network policy rules on both sides.
 
-<img src="/img/docs/managing-apps/network-policies/project-graph-edge-menu.png" alt="Edge context menu" />
-
 ### Toggle internet access
 
 Right-click an app node and choose **Enable / Disable Egress Internet Access**.
@@ -77,16 +78,14 @@ Right-click an app node and choose **Enable / Disable Egress Internet Access**.
 
 Drag nodes to reposition them. The layout is saved per project on the server, so it is shared across browsers. **Reset** restores the automatic layout.
 
-## Edit policies on the app page
+## Edit policies in the app drawer
 
-For precise control over a single app, edit its rules on the **Domains & Networking** tab.
+For precise control over a single app, edit its rules in the app's drawer.
 
-1. Open the app and go to **Domains & Networking** → **Network Policy**.
+1. Open the app in the **Project Canvas** and go to **Settings → Networking** → **Network Policy**.
 2. Toggle **Network Policies** on.
 3. Add **Ingress rules** (who can access this app) and **Egress rules** (where this app can connect).
 4. Click **Save & Apply Changes** and confirm.
-
-<img src="/img/docs/managing-apps/network-policies/network-policy-card.png" alt="Network Policy card on the Domains & Networking tab" />
 
 ### Ingress rules — who can access this app?
 
@@ -101,8 +100,6 @@ For precise control over a single app, edit its rules on the **Domains & Network
 | **Protocol** | `TCP` or `UDP` |
 
 3. Click **Add rule**.
-
-<img src="/img/docs/managing-apps/network-policies/add-ingress-rule-dialog.png" alt="Add ingress rule dialog" />
 
 ### Egress rules — where can this app connect?
 

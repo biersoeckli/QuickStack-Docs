@@ -35,6 +35,11 @@ export const featureGroups: FeatureGroup[] = [
           'Connect a public/private repo (HTTPS or SSH) or pull straight from any registry, private ones included.',
       },
       {
+        title: 'Framework presets',
+        description:
+          'Ship Next.js, Nuxt, SvelteKit, React, Angular or Astro with pre-filled build and run commands.',
+      },
+      {
         title: 'Zero-config builds',
         description:
           'Railpack auto-detects your stack and builds it. No Dockerfile required.',
@@ -42,6 +47,11 @@ export const featureGroups: FeatureGroup[] = [
       {
         title: 'Bring your own Dockerfile',
         description: 'Full control when you need it, custom path supported.',
+      },
+      {
+        title: 'Build arguments',
+        description:
+          'Pass build-time ARG values to Dockerfile builds without baking them into the image.',
       },
       {
         title: 'Instant Rollback',
@@ -161,6 +171,16 @@ export const featureGroups: FeatureGroup[] = [
         description: 'Streamed in the UI.',
       },
       {
+        title: 'Live deploy status',
+        description:
+          'Follow build and pod status as it streams, per app and across the project canvas.',
+      },
+      {
+        title: 'Visual project canvas',
+        description:
+          'See every app, database and connection on one graph, and start, stop, deploy or inspect each node from its drawer.',
+      },
+      {
         title: 'Live CPU/RAM metrics',
         description: 'Per app, in real time.',
       },
@@ -179,6 +199,11 @@ export const featureGroups: FeatureGroup[] = [
         title: 'Scheduled volume backups to S3',
         description:
           'Any S3-compatible target, cron schedule, configurable retention.',
+      },
+      {
+        title: 'Backup before deployment',
+        description:
+          'Automatically snapshot an app and its connected volumes before a deploy, with fail-safe options.',
       },
       {
         title: 'Native database dump backups',
@@ -271,6 +296,11 @@ export const featureGroups: FeatureGroup[] = [
           'Update QuickStack from inside the UI, stable or canary channel.',
       },
       {
+        title: 'Cluster add-ons',
+        description:
+          'Install, update and remove Longhorn and cert-manager from the UI, with version info.',
+      },
+      {
         title: 'Runs on real Kubernetes (k3s)',
         description:
           'Scheduling, services, ingress, PVs, jobs, and probes — proven primitives, not a custom orchestrator.',
@@ -288,20 +318,21 @@ export function AllFeaturesSection() {
   return (
     <section
       id="all-features"
-      className="mx-auto w-full max-w-7xl scroll-mt-20 px-4 py-24 md:py-32"
+      className="scroll-mt-20 border-y border-border bg-muted/30"
     >
-      <div className="mb-16 max-w-2xl">
+      <div className="mx-auto w-full max-w-7xl px-4 py-24 md:py-32">
+        <div className="mb-16 max-w-2xl">
         <Eyebrow className="mb-5">All features</Eyebrow>
         <h2 className="text-4xl font-semibold leading-[1.02] tracking-tighter text-foreground md:text-5xl">
           Every feature you need, built in.
         </h2>
         <p className="mt-5 text-muted-foreground">
-          Ten areas across the whole product. From your first deploy to
+          Different areas, one product. From your first deploy to
           runtime control, storage, networking and team access.
         </p>
-      </div>
+        </div>
 
-      <div className="space-y-10 md:space-y-12">
+        <div className="space-y-10 md:space-y-12">
         {featureGroups.map((group) => (
           <div key={group.title} className="grid gap-5 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-3">
@@ -332,6 +363,7 @@ export function AllFeaturesSection() {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </section>
   );

@@ -29,12 +29,10 @@ Attempts a TCP connection to a specified port. Success = healthy.
 
 ## Configuring health checks
 
-1. Open your app and go to the **Advanced** tab.
+1. Open the app in the **Project Canvas** and go to **Settings → Advanced**.
 2. Scroll to **Health Check Settings**.
 3. Toggle **Enable Health Check**.
 4. Select **HTTP Probe** or **TCP Probe**.
-
-<img  src="/img/docs/managing-apps/health-check/health-check-http.png" alt="Health Check Settings" />
 
 ### HTTP parameters
 
@@ -97,6 +95,6 @@ Example: 15s interval × 3 failures = 45 seconds to mark unhealthy.
 - Check logs for startup errors.
 
 **Debugging:**
-1. Open the app's **Overview** tab and look for probe failure events.
+1. Open the app's **Deployments** tab and look for probe failure events in the deployment log.
 2. Check logs for connection errors or exceptions during health checks.
 3. Verify port numbers and HTTP paths match your app's configuration.

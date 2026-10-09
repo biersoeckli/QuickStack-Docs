@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react';
 import { HeroSection } from '@/components/landing/hero-section';
 import { FeaturesSection } from '@/components/landing/features-section';
+import { ScaleSection } from '@/components/landing/scale-section';
+import { OwnershipSection } from '@/components/landing/ownership-section';
+import { LifecycleSection } from '@/components/landing/lifecycle-section';
 import { HowItWorksSection } from '@/components/landing/how-it-works-section';
 import { ScreenshotsSection } from '@/components/landing/screenshots-section';
 import { UseCasesSection } from '@/components/landing/use-cases-section';
@@ -36,8 +39,11 @@ export default function HomePage() {
     <div className="flex flex-col bg-neutral-50 dark:bg-background">
       <HeroSection theme={theme} />
       <FeaturesSection />
-      <HowItWorksSection />
       <ScreenshotsSection />
+      <LifecycleSection />
+      <OwnershipSection />
+      <ScaleSection />
+      <HowItWorksSection />
       <UseCasesSection />
       <AllFeaturesSection />
       <TechStackSection theme={theme} />

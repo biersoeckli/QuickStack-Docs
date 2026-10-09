@@ -32,13 +32,13 @@ DNS can take minutes to hours to propagate. You can verify with `dig app.example
 
 QuickStack provisions TLS certificates via Let's Encrypt. You need to give it a contact email once:
 
-1. Go to **Settings** → **QuickStack Server** → **Networking / Traefik**.
+1. Go to **Settings** → **Platform** → **Network & Domains**.
 2. Set the **Let's Encrypt Email** field.
 3. Save.
 
 ## Step 3: Add domain in QuickStack
 
-1. Open your app and go to the **Domains & Networking** tab.
+1. Open the app in the **Project Canvas** and go to **Settings → Networking**.
 2. Click **Add Domain**.
 3. Fill in:
    - **Hostname** — `app.example.com`
@@ -47,18 +47,13 @@ QuickStack provisions TLS certificates via Let's Encrypt. You need to give it a 
    - **Redirect HTTP to HTTPS** — enable (recommended)
 4. Click **Save**.
 
-<img  src="/img/docs/managing-apps/domains/edit-domains.png" alt="QuickStack Edit Domain Dialog" />
-
-<img  src="/img/docs/managing-apps/creating-apps/domains-overview.png" alt="QuickStack Domains Tab" />
-
-
 ## Step 4: Deploy to apply
 
 <Callout>
 Domain changes are not active until you click **Deploy**. The app must be redeployed for the new domain to take effect.
 </Callout>
 
-Click **Deploy** in the top-right corner of the app page.
+Click **Deploy** in the app drawer header.
 
 ## Verify
 
@@ -74,7 +69,7 @@ It can take a few seconds/minutes for Traefik to provision the certificate after
 |---------|--------|
 | Domain does not resolve | Wait for DNS propagation; verify A record |
 | App not reachable | Check that **App Port** matches the container's listening port |
-| HTTPS certificate fails | Confirm Let's Encrypt email is set in Settings → Networking / Traefik |
+| HTTPS certificate fails | Confirm Let's Encrypt email is set in Settings → Platform → Network & Domains |
 | App still shows HTTP | Verify "Redirect HTTP to HTTPS" is enabled and you redeployed |
 
 ## For more detail

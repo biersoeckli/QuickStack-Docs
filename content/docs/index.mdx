@@ -2,24 +2,54 @@
 sidebar_position: 0
 slug: /
 title: "QuickStack Docs"
-description: "QuickStack is a simple Web UI to manage your Linux server and deploy your containerized applications."
-keywords: ["QuickStack", "documentation", "self-hosting", "PaaS", "Kubernetes"]
+icon: House
+description: "QuickStack is a free, open-source, self-hosted PaaS for deploying apps, and databases on any server infrastructure, manages domains via Traefik, SSL Certificates, provides backups, monitoring, and more."
+keywords: ["QuickStack", "documentation", "self-hosting", "PaaS", "Kubernetes", "Heroku alternative", "Vercel alternative", "Railway alternative", "vendor lock-in", "data sovereignty"]
 ---
 
-QuickStack is a Free, open-source, self-hosted PaaS alternative to Vercel, Netlify, Railway and Heroku. It provides a web UI that deploys your apps and databases on any server infrastructure, manages domains via Traefik, and provides backups, monitoring, and more.
+import { Box, Download, Braces, Bot, GitBranch, Globe2, LayoutTemplate, Database } from 'lucide-react';
 
-**Under the hood:** [k3s](https://k3s.io/) · [Traefik](https://traefik.io/) · [Longhorn](https://longhorn.io/) · [BuildKit](https://github.com/moby/buildkit) · [registry](https://hub.docker.com/_/registry)
 
----
+Choose the path that fits what you want to deploy first.
 
-## Start here
-
-| Goal | Link |
-|------|------|
-| Install QuickStack on a fresh server | [Installation tutorial](/docs/tutorials/installation) |
-| Deploy your first app from Git | [First app from Git](/docs/tutorials/first-app-from-git) |
-| Deploy a Docker image | [First app from image](/docs/tutorials/first-app-from-image) |
-| Expose an app on a domain with HTTPS | [Expose an app](/docs/tutorials/expose-app) |
+<Cards className="grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
+  <Card
+    icon={<Download />}
+    title="Install QuickStack"
+    description="Set up QuickStack on a fresh server in one command."
+    href="/docs/tutorials/installation"
+  />
+  <Card
+    icon={<GitBranch />}
+    title="Deploy from Git"
+    description="Build and deploy your first application from a Git repository."
+    href="/docs/tutorials/first-app-from-git"
+  />
+  <Card
+    icon={<Box />}
+    title="Deploy a Docker image"
+    description="Run an existing image from a container registry."
+    href="/docs/tutorials/first-app-from-image"
+  />
+  <Card
+    icon={<Database />}
+    title="Deploy a Database"
+    description="Instant deploy Postgres, MySQL, MongoDB or Redis."
+    href="/docs/how-to/databases/deploy-databases"
+  />
+  <Card
+    icon={<Braces />}
+    title="REST API & SDK"
+    description="Automate QuickStack with the REST API."
+    href="/docs/rest-api/overview"
+  />
+  <Card
+    icon={<Bot />}
+    title="MCP Server (Canary)"
+    description="Connect AI clients to QuickStack over the Model Context Protocol."
+    href="/docs/mcp-server"
+  />
+</Cards>
 
 ---
 
@@ -27,19 +57,57 @@ QuickStack is a Free, open-source, self-hosted PaaS alternative to Vercel, Netli
 
 Task-focused docs for daily operations:
 
-- **Deployments** — [redeploy & rollback](/docs/how-to/deployments/redeploy-and-rollbacks) · [webhooks / auto-deploy](/docs/how-to/deployments/webhooks-auto-deploy)
-- **Networking** — [custom domains](/docs/how-to/networking/domains) · [quickstack.me](/docs/how-to/networking/quickstack-me) · [networking, policies & project graph](/docs/how-to/networking) · [basic auth](/docs/how-to/networking/basic-auth)
-- **Storage** — [volumes](/docs/how-to/storage/volumes) · [file mounts](/docs/how-to/storage/file-mounts)
+- **[Project Canvas](/docs/how-to/project-canvas)** — create, configure, deploy & monitor workloads.
+- **[Templates](/docs/how-to/templates)** — one-click apps and databases.
+- **Deployments** — [redeploy & rollback](/docs/how-to/deployments/redeploy-and-rollbacks) · [build methods](/docs/how-to/deployments/build-methods) · [webhooks / auto-deploy](/docs/how-to/deployments/webhooks-auto-deploy) · [container configuration](/docs/how-to/deployments/container-configuration) · [scaling & resource limits](/docs/how-to/deployments/scaling)
+- **Networking** — [custom domains](/docs/how-to/networking/domains) · [quickstack.me](/docs/how-to/networking/quickstack-me) · [networking & policies](/docs/how-to/networking) · [node ports](/docs/how-to/networking/node-ports) · [basic auth](/docs/how-to/networking/basic-auth)
+- **Storage** — [volumes](/docs/how-to/storage/volumes) · [shared volumes](/docs/how-to/storage/shared-volumes) · [file browser](/docs/how-to/storage/file-browser) · [file mounts](/docs/how-to/storage/file-mounts)
 - **Observability** — [logs & terminal](/docs/how-to/observability/logs-and-terminal) · [builds overview](/docs/how-to/observability/builds-overview) · [health checks](/docs/how-to/observability/health-checks)
 - **Databases** — [deploy databases](/docs/how-to/databases/deploy-databases) · [DB tools (DbGate, pgAdmin)](/docs/how-to/databases/db-tools)
-- **Backups** — [overview](/docs/how-to/backups/overview) · [S3 targets](/docs/how-to/backups/s3-targets) · [volume backups](/docs/how-to/backups/volume-backups) · [database backups](/docs/how-to/backups/database-backups) · [system backups](/docs/how-to/backups/system-backups)
+- **Backups** — [overview](/docs/how-to/backups/overview) · [S3 targets](/docs/how-to/backups/s3-targets) · [volume backups](/docs/how-to/backups/volume-backups) · [database backups](/docs/how-to/backups/database-backups) · [download & restore](/docs/how-to/backups/download-and-restore) · [system backups](/docs/how-to/backups/system-backups)
+- **[Agent Sandbox](/docs/how-to/agents)** — run Sandbox Instances (canary).
 - **Admin** — [updates & maintenance](/docs/how-to/admin/updates-and-maintenance) · [cluster add-ons](/docs/how-to/admin/cluster-add-ons) · [cluster monitoring](/docs/how-to/admin/cluster-monitoring) · [users & groups](/docs/how-to/admin/users-and-groups) · [single sign-on](/docs/how-to/admin/single-sign-on) · [2FA](/docs/how-to/admin/two-factor-auth) · [cluster nodes](/docs/how-to/admin/cluster-nodes) · [password reset](/docs/how-to/admin/password-reset)
+
+---
+
+## Understand the platform
+
+New to self-hosting, or coming from a managed platform? Start with the concepts:
+
+- **[Architecture](/docs/concepts/architecture)** — what runs where and what happens when you deploy.
+- **[Projects, Apps & Databases](/docs/concepts/projects-apps-databases)** — the QuickStack object model.
+- **[Security Model](/docs/concepts/security-model)** — isolation, access control, TLS, and data residency.
+
+---
+
+## Automation & reference
+
+- **[REST API](/docs/rest-api/overview)** — automate projects and app workloads, plus the [JavaScript/TypeScript SDK](/docs/rest-api/javascript-typescript-sdk).
+- **[MCP Server (Canary)](/docs/mcp-server)** — connect AI clients to QuickStack over the Model Context Protocol.
+- **[Why QuickStack?](/docs/reference/comparison)** — how it compares to managed and self-hosted alternatives.
+- **[Sizing & Costs](/docs/reference/sizing-and-costs)** — choose the right server.
+- **[Ports & Endpoints](/docs/reference/ports-and-endpoints)** · **[Glossary](/docs/reference/glossary)**
+
+---
+
+## Built for teams that need more control
+
+| If you are… | QuickStack gives you… |
+|---|---|
+| **Outgrowing a single VPS** | A k3s cluster that can grow with worker nodes, plus Longhorn storage for multi-node volumes. Start small without choosing a dead end. |
+| **An agency or team hosting separate customer workloads** | Projects, per-app permissions, and deny-by-default network policies to make isolation explicit. |
+| **Working under privacy or compliance requirements** | Your application data, volumes, backups, and configuration stay on infrastructure and in the jurisdiction you choose. Use users, groups, SSO, 2FA, and scoped API keys to control access. |
+| **Building with AI agents** | Experimental Agent Sandboxes with templates, warm pools, optional gVisor isolation, and LiteLLM-compatible gateways. |
+
+QuickStack is GPL-3.0 open source: audit it, run it yourself, and move your workloads using standard Docker images and Kubernetes primitives. Read [why QuickStack](/docs/reference/comparison) or the full [security model](/docs/concepts/security-model).
 
 ---
 
 ## Architecture in one paragraph
 
-QuickStack installs as a single pod on a k3s master node. It stores its state in a SQLite database (`data.db`). When you click **Deploy**, QuickStack uses BuildKit to build your image (for Git-source apps), pushes it to the built-in registry, then creates or updates a Kubernetes Deployment. Traefik handles ingress routing and automatic TLS via Let's Encrypt. Longhorn provides distributed block storage for multi-node clusters. Everything app-related (projects, envs, volumes, domains, users) lives in the SQLite DB and is backed up separately from your app volumes.
+QuickStack gives you the deployment experience of Vercel, Netlify, Railway, or Heroku on infrastructure you control. Push from Git or deploy a container image; QuickStack builds and runs it, handles custom domains and automatic HTTPS, and keeps backups, storage, and team access in one place. Your workloads use standard containers and Kubernetes primitives, not a proprietary runtime, so you stay free to move. Start on one server and add nodes with Longhorn storage when you need more capacity. Read the full [architecture overview](/docs/concepts/architecture).
+
+**Under the hood:** [k3s](https://k3s.io/) · [Traefik](https://traefik.io/) · [Longhorn](https://longhorn.io/) · [BuildKit](https://github.com/moby/buildkit) · [registry](https://hub.docker.com/_/registry) · [railpack](https://railpack.com)
 
 ---
 
@@ -52,13 +120,6 @@ The motivation was simple: deploying and managing applications on your own serve
 What began as an academic exercise grew into a fully-featured tool. Today, QuickStack automates the full application lifecycle: building images from Git, deploying, SSL certificates, managing volumes and backups. All through a single web UI.
 
 The project remains open-source and community-driven. We believe that self-hosting should be accessible to everyone, not just those with deep DevOps knowledge.
-
-## Who is QuickStack For?
-
-*   **Developers:** Who want to quickly deploy and manage applications without having to worry about server administration.
-*   **Small Teams and Startups:** Seeking a cost-effective and easy-to-use deployment solution.
-*   **System administrators:** Who want to manage their infrastructure through a user friendly interface.
-*   **Anyone** wanting an easy way to deploy applications on their own servers.
 
 ## Community and Support
 
